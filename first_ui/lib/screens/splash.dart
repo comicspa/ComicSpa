@@ -1,5 +1,10 @@
+import 'dart:io';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
+
+import 'package:first_ui/models/preset.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -8,8 +13,22 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   startTime() async {
-    var _duration = new Duration(seconds: 2);
-    return new Timer(_duration, navigationPage);
+    //var _duration = new Duration(seconds: 2);
+    //return new Timer(_duration, navigationPage);
+
+
+    HttpClient client = new HttpClient();
+    client.getUrl(Uri.parse('${Preset.storageServerBaseURL}/preset.txt')).then((HttpClientRequest request) {
+      return request.close();
+    }).then((HttpClientResponse response) {
+      response.transform(utf8.decoder).listen((contents){
+
+          Preset.fromJson(contents);
+          navigationPage();
+      });
+    });
+
+
   }
 
   void navigationPage() {
