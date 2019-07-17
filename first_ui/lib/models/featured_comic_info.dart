@@ -1,9 +1,7 @@
 
-class FeaturedComicInfo
+import 'package:first_ui/models/comic_info.dart';
+
+class FeaturedComicInfo extends ComicInfo
 {
-  int _id;
-  String _thumbnailURL;
-
-
 
 }
