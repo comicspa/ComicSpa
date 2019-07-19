@@ -102,7 +102,7 @@ class _TestHomeState extends State<TestHome> {
             child: ListView.builder(
               physics: ClampingScrollPhysics(),
               shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
+              scrollDirection: Axis.vertical,
               itemCount: 15,
               itemBuilder: (BuildContext context, int index) => Card(
                 child: Center(
@@ -114,18 +114,6 @@ class _TestHomeState extends State<TestHome> {
                 ),
               ),
             ),
-          ),
-          Card(
-            child: ListTile(
-                title: Text('Motivation $int'), subtitle: Text('재미는?')),
-          ),
-          Card(
-            child: ListTile(
-                title: Text('Motivation $int'), subtitle: Text('흠...')),
-          ),
-          Card(
-            child:
-                ListTile(title: Text('Motivation $int'), subtitle: Text('메롱~')),
           ),
         ],
       ),

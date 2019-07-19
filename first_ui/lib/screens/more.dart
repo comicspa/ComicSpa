@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:first_ui/screens/hot_creator_card_future.dart';
 
 class MoreScreen extends StatefulWidget {
   @override
@@ -8,9 +9,8 @@ class MoreScreen extends StatefulWidget {
 class _MoreScreenState extends State<MoreScreen> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('More menus'),
-    );
+    return FutureBuildHotCreators(); // Todo currently this screen is used for testing futurebuilder
+//      child: Text('More menus'),
   }
 }
 
