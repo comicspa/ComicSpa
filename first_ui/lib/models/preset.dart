@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 
 enum e_comic_genre
@@ -9,7 +10,7 @@ enum e_comic_genre
 }
 
 
-typedef void onPresetFetchDone();
+typedef void OnPresetFetchDone();
 
 
 
@@ -72,10 +73,54 @@ class Preset
         fromJson(contents);
         onPresetFetchDone();
 
-
       });
     });
 
+  }
+
+
+  static Future<Uint8List> getBytesFromFile(String filePathFullName) async
+  {
+    File file = new File(filePathFullName);
+    if(null == file)
+    {
+      print('null == file');
+      return null;
+    }
+
+    Uint8List readFileBytes = await file.readAsBytes();
+    return readFileBytes;
+  }
+
+
+  static Future<ByteBuffer> getByteBufferFromFile(String filePathFullName) async
+  {
+    File file = new File(filePathFullName);
+    if(null == file)
+    {
+      print('null == file');
+      return null;
+    }
+
+    Uint8List readFileBytes = await file.readAsBytes();
+    ByteBuffer  readFileByteBuffer = readFileBytes.buffer;
+    return readFileByteBuffer;
+  }
+
+  static Future<ByteData> getByteDataFromFile(String filePathFullName) async
+  {
+    File file = new File(filePathFullName);
+    if(null == file)
+    {
+      print('null == file');
+      return null;
+    }
+
+    Uint8List readFileBytes = await file.readAsBytes();
+    ByteBuffer  readFileByteBuffer = readFileBytes.buffer;
+    ByteData byteData = ByteData.view(readFileByteBuffer);
+
+    return byteData;
   }
 
 }
