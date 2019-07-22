@@ -3,7 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 
-import 'package:first_ui/models/preset.dart';
+import 'package:first_ui/models/global_common.dart';
 import 'package:first_ui/packets/packet_common.dart';
 import 'package:first_ui/packets/packet_utility.dart';
 import 'package:first_ui/packets/packet_s2c_upload_file.dart';
@@ -36,7 +36,7 @@ class PacketC2SUploadFile extends PacketCommon
   void fetchBytes(onPacketUploadFileFetchDone) async
   {
     ///////////////////////////////////////////////////////////////////////////////////////
-    Socket socket = await Preset.createServiceSocket();
+    Socket socket = await GlobalCommon.createServiceSocket();
     print('connected');
 
     // listen to the received data event stream
@@ -61,7 +61,7 @@ class PacketC2SUploadFile extends PacketCommon
     List<int> fileNameStringEncodedList = PacketUtility.readyWriteStringToByteBuffer(_fileFullName);
 
     this.size = 4 + 2 + 4 + 4 + (4 + fileNameStringEncodedList.length * 4) + (4 + lengthInBytes);
-    print('packetSize : $this.size');
+    print('packetSize : ${this.size}');
 
     var sendPacket = Uint8List(this.size);
     var sendByteData = ByteData.view(sendPacket.buffer);

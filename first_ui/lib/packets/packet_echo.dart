@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:convert';
 
-import 'package:first_ui/models/preset.dart';
+import 'package:first_ui/models/global_common.dart';
 import 'package:first_ui/packets/packet_common.dart';
 import 'package:first_ui/packets/packet_utility.dart';
 
@@ -37,7 +37,7 @@ class PacketEcho extends PacketCommon
   void fetchBytes(onPacketEchoFetchDone) async
   {
     ///////////////////////////////////////////////////////////////////////////////////////
-    Socket socket = await Preset.createServiceSocket();
+    Socket socket = await GlobalCommon.createServiceSocket();
     print('connected');
 
     // listen to the received data event stream
