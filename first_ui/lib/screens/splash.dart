@@ -7,13 +7,13 @@ import 'dart:async';
 import 'package:first_ui/models/preset.dart';
 import 'package:first_ui/models/featured_comic_info.dart';
 
+
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => new _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
 
   void _presetFetchDone()
   {
