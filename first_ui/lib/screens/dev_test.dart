@@ -16,19 +16,16 @@ class _DevTestState extends State<DevTest> {
     super.initState();
 
     //checkPermissionGetMultiFilePath();
+    //Navigator.push(context,MaterialPageRoute(builder: (context) => WebtoonView()),);
 
   }
 
 
-//  void initState() {
-//
-//    super.initState();
-//    Timer(Duration(seconds: 3), () => HomeScreen());
-//  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+          /*
         body: Stack(
           fit: StackFit.expand,
           children: <Widget>[
@@ -68,6 +65,153 @@ class _DevTestState extends State<DevTest> {
               ],
             )
           ],
-        ));
+        )
+        */
+
+
+      body: CustomScrollView(
+        slivers: <Widget>[
+
+
+          SliverPadding(
+            padding: EdgeInsets.all(16.20),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  Card(
+                    child: Text('SignUp'),
+
+
+
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                  Card(
+                    child: Text('data'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+
+        ],
+      ),
+
+
+
+
+
+
+    );
+
+
+
   }
 }

@@ -6,6 +6,7 @@ import 'package:first_ui/screens/testhome.dart';
 import 'package:flutter/services.dart';
 
 
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => new _HomeScreenState();
@@ -83,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen>
           Tab(text: 'Library', icon: Icon(Icons.collections_bookmark)),
           Tab(text: 'Creator', icon: Icon(Icons.palette)),
           Tab(text: 'Serach', icon: Icon(Icons.search)),
-          Tab(text: 'More', icon: Icon(Icons.menu)),
+          //Tab(text: 'More', icon: Icon(Icons.menu)),
         ],
       ),
     );
