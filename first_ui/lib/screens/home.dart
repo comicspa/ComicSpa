@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen>
   void initState() {
     super.initState();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-      statusBarColor: Color(0xFF5986E1),
+      statusBarColor: Color(0xff202a30),  // Colors.blueGrey //Color(0xFF5986E1),
     ));
     controller = TabController(length: 4, initialIndex: 0, vsync: this);
   }
@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen>
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.black87, // Color(0xFF5986E1),
+        backgroundColor: Color(0xff202a30), //Colors.black87, // Color(0xFF5986E1),
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
