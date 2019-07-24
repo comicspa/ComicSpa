@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:first_ui/models/preset.dart';
-import 'package:first_ui/models/featured_comic_info.dart';
+
 
 
 class SplashScreen extends StatefulWidget {
@@ -28,7 +28,11 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigationPage() {
-    Navigator.of(context).pushReplacementNamed('/HomeScreen');
+    int switchPage = 0;
+    if(0 == switchPage)
+      Navigator.of(context).pushReplacementNamed('/HomeScreen');
+    else
+      Navigator.of(context).pushReplacementNamed('/DevTest');
   }
 
   @override
