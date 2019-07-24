@@ -27,22 +27,25 @@ class _LibraryScreenState extends State<LibraryScreen> {
                   Tab(text: "Continue")
                 ]),
           ),
+          //TODO 로그인 여부에 따른 내용 분기 ??? 어떻게 하지?
           Expanded(
             child: Container(
               child: TabBarView(children: [
                 Container(
+                  // Recent 내용 보여주는 컨테이너
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
+                        Padding(padding: EdgeInsets.only(top: 30.0)),
                         Container(
-                            padding: EdgeInsets.only(top: 20),
+                            padding: EdgeInsets.only(top: 0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Container(
-                                  child: Image.asset('images/batman.jpg',
-                                      scale: 4),
+                                  child: Image.asset('images/catHouse.jpg',
+                                      scale: 5),
                                 ),
                                 Container(
                                   child: Text('test'),
@@ -52,39 +55,262 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                 ),
                               ],
                             )),
-                        Card(
-                          child: ListTile(
-                              title: Text('Motivation $int'),
-                              subtitle: Text('재미없음')),
-                        ),
-                        Card(
-                          child: ListTile(
-                              title: Text('Motivation $int'),
-                              subtitle: Text('재미는?')),
-                        ),
-                        Card(
-                          child: ListTile(
-                              title: Text('Motivation $int'),
-                              subtitle: Text('흠...')),
-                        ),
-                        Card(
-                          child: ListTile(
-                              title: Text('Motivation $int'),
-                              subtitle: Text('메롱~')),
-                        ),
+                        Container(
+                            child: Row(children: <Widget>[
+                          Expanded(child: Divider()),
+                        ])),
+                        Container(
+                            padding: EdgeInsets.only(top: 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  child: Image.asset('images/dragonBall.jpg',
+                                      scale: 5),
+                                ),
+                                Container(
+                                  child: Text('제목'),
+                                ),
+                                Container(
+                                  child: Text('작가'),
+                                ),
+                              ],
+                            )),
+                        Container(
+                            child: Row(children: <Widget>[
+                          Expanded(child: Divider()),
+                        ])),
+                        Container(
+                            padding: EdgeInsets.only(top: 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  child: Image.asset('images/batman.jpg',
+                                      scale: 5),
+                                ),
+                                Container(
+                                  child: Text('test'),
+                                ),
+                                Container(
+                                  child: Text('ㅅㄷㄴㅅ'),
+                                ),
+                              ],
+                            )),
                       ],
                     ),
                   ),
-                ),
+                ), // Recent 내용 보여주는 컨테이너
                 Container(
-                  child: Text('Check Out Body'),
-                ),
+                  // Check out 내용 보여주는 컨테이너
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Padding(padding: EdgeInsets.only(top: 30.0)),
+                        Container(
+                            padding: EdgeInsets.only(top: 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  child: Image.asset('images/batman.jpg',
+                                      scale: 5),
+                                ),
+                                Container(
+                                  child: Text('test'),
+                                ),
+                                Container(
+                                  child: Text('ㅅㄷㄴㅅ'),
+                                ),
+                              ],
+                            )),
+                        Container(
+                            child: Row(children: <Widget>[
+                          Expanded(child: Divider()),
+                        ])),
+                        Container(
+                            padding: EdgeInsets.only(top: 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  child: Image.asset('images/catHouse.jpg',
+                                      scale: 5),
+                                ),
+                                Container(
+                                  child: Text('test'),
+                                ),
+                                Container(
+                                  child: Text('ㅅㄷㄴㅅ'),
+                                ),
+                              ],
+                            )),
+                        Container(
+                            child: Row(children: <Widget>[
+                          Expanded(child: Divider()),
+                        ])),
+                        Container(
+                            padding: EdgeInsets.only(top: 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  child: Image.asset('images/onepunchman.jpg',
+                                      scale: 5),
+                                ),
+                                Container(
+                                  child: Text('test'),
+                                ),
+                                Container(
+                                  child: Text('ㅅㄷㄴㅅ'),
+                                ),
+                              ],
+                            )),
+                      ],
+                    ),
+                  ),
+                ), // Check out 내용 보여주는 컨테이너,
                 Container(
-                  child: Text('Owned Body'),
-                ),
+                  // Owned 내용 보여주는 컨테이너
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Padding(padding: EdgeInsets.only(top: 30.0)),
+                        Container(
+                            padding: EdgeInsets.only(top: 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  child: Image.asset('images/onepunchman.jpg',
+                                      scale: 5),
+                                ),
+                                Container(
+                                  child: Text('test'),
+                                ),
+                                Container(
+                                  child: Text('ㅅㄷㄴㅅ'),
+                                ),
+                              ],
+                            )),
+                        Container(
+                            child: Row(children: <Widget>[
+                          Expanded(child: Divider()),
+                        ])),
+                        Container(
+                            padding: EdgeInsets.only(top: 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  child: Image.asset('images/catHouse.jpg',
+                                      scale: 5),
+                                ),
+                                Container(
+                                  child: Text('test'),
+                                ),
+                                Container(
+                                  child: Text('ㅅㄷㄴㅅ'),
+                                ),
+                              ],
+                            )),
+                        Container(
+                            child: Row(children: <Widget>[
+                          Expanded(child: Divider()),
+                        ])),
+                        Container(
+                            padding: EdgeInsets.only(top: 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  child: Image.asset('images/batman.jpg',
+                                      scale: 5),
+                                ),
+                                Container(
+                                  child: Text('test'),
+                                ),
+                                Container(
+                                  child: Text('ㅅㄷㄴㅅ'),
+                                ),
+                              ],
+                            )),
+                      ],
+                    ),
+                  ),
+                ), // Owned 내용 보여주는 컨테이너,
                 Container(
-                  child: Text('Continue'),
-                )
+                  // Continue 내용 보여주는 컨테이너
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Padding(padding: EdgeInsets.only(top: 30.0)),
+                        Container(
+                            padding: EdgeInsets.only(top: 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  child: Image.asset('images/onepunchman.jpg',
+                                      scale: 5),
+                                ),
+                                Container(
+                                  child: Text('test'),
+                                ),
+                                Container(
+                                  child: Text('ㅅㄷㄴㅅ'),
+                                ),
+                              ],
+                            )),
+                        Container(
+                            child: Row(children: <Widget>[
+                          Expanded(child: Divider()),
+                        ])),
+                        Container(
+                            padding: EdgeInsets.only(top: 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  child: Image.asset('images/batman.jpg',
+                                      scale: 5),
+                                ),
+                                Container(
+                                  child: Text('test'),
+                                ),
+                                Container(
+                                  child: Text('ㅅㄷㄴㅅ'),
+                                ),
+                              ],
+                            )),
+                        Container(
+                            child: Row(children: <Widget>[
+                          Expanded(child: Divider()),
+                        ])),
+                        Container(
+                            padding: EdgeInsets.only(top: 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  child: Image.asset('images/catHouse.jpg',
+                                      scale: 5),
+                                ),
+                                Container(
+                                  child: Text('test'),
+                                ),
+                                Container(
+                                  child: Text('ㅅㄷㄴㅅ'),
+                                ),
+                              ],
+                            )),
+                      ],
+                    ),
+                  ),
+                ), // Continue 내용 보여주는 컨테이너
               ]),
             ),
           )
