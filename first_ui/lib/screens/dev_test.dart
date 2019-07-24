@@ -1,9 +1,5 @@
 
 
-import 'package:permission_handler/permission_handler.dart';
-import 'package:file_picker/file_picker.dart';
-
-
 import 'package:flutter/material.dart';
 
 
@@ -19,44 +15,9 @@ class _DevTestState extends State<DevTest> {
   void initState() {
     super.initState();
 
-
-    checkRequestPermissions();
-
-  }
-
-
-  Future<bool> checkRequestPermissions() async
-  {
-    Map<PermissionGroup, PermissionStatus> permissions;
-    PermissionStatus permissionStatus = await PermissionHandler().checkPermissionStatus(PermissionGroup.storage);
-    switch(permissionStatus)
-    {
-      case PermissionStatus.denied:
-      case PermissionStatus.disabled:
-        {
-          permissions = await PermissionHandler().requestPermissions([PermissionGroup.storage]);
-          permissionStatus = permissions[PermissionGroup.storage];
-          print(permissionStatus.toString());
-
-          switch(permissionStatus) {
-            case PermissionStatus.denied:
-            case PermissionStatus.disabled:
-              return false;
-          }
-        }
-        break;
-
-    }
-    return true;
+    //checkPermissionGetMultiFilePath();
 
   }
-
-  Future<Map<String,String>> getMultiFilePath() async
-  {
-    Map<String,String> filePathsMap = await FilePicker.getMultiFilePath(type:FileType.IMAGE);
-    return filePathsMap;
-  }
-
 
 
 //  void initState() {
