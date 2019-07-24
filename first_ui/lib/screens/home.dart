@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen>
         unselectedLabelColor: Colors.grey,
         controller: controller,
         tabs: <Widget>[
-          Tab(text: 'Home', icon: Icon(Icons.home)),
+          Tab(text: 'Home', icon: Icon(Icons.trending_up)),
           Tab(text: 'Library', icon: Icon(Icons.collections_bookmark)),
           Tab(text: 'Creator', icon: Icon(Icons.palette)),
           Tab(text: 'More', icon: Icon(Icons.menu)),

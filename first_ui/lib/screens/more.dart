@@ -10,7 +10,9 @@ class _MoreScreenState extends State<MoreScreen> {
   @override
   Widget build(BuildContext context) {
     return FutureBuildHotCreators(); // Todo currently this screen is used for testing futurebuilder
+//    return Container(
 //      child: Text('More menus'),
+//    );
   }
 }
 
