@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
+import 'package:first_ui/models/global_common.dart';
 
 enum e_comic_genre
 {
@@ -16,26 +16,16 @@ typedef void OnPresetFetchDone();
 
 class Preset
 {
-  static final String _serviceServerBaseURL = 'http://221.165.42.119:9000';
-  static final String _storageServerBaseURL = 'http://221.165.42.119/ComicSpa';
 
   static String _version = '1.0.0.0';
   static String _faqURL = 'https://www.google.co.kr';
   static String _privacyPolicyURL = 'https://www.google.co.kr';
   static String _termsOfUseURL = 'https://www.google.co.kr';
 
-  static String get serviceServerBaseURL => _serviceServerBaseURL;
-  static String get storageServerBaseURL => _storageServerBaseURL;
   static String get version => _version;
   static String get faqURL => _faqURL;
   static String get privacyPolicyURL => _privacyPolicyURL;
   static String get termsOfUseURL => _termsOfUseURL;
-
-
-  static Future<Socket> createServiceSocket()
-  {
-    return Socket.connect('221.165.42.119', 9000);
-  }
 
   static void fromJson(String presetJsonString)
   {
@@ -64,7 +54,7 @@ class Preset
     //return new Timer(_duration, navigationPage);
 
     HttpClient client = new HttpClient();
-    client.getUrl(Uri.parse('${Preset.storageServerBaseURL}/preset.txt')).then((
+    client.getUrl(Uri.parse('${GlobalCommon.storageServerBaseURL}/preset.txt')).then((
         HttpClientRequest request) {
       return request.close();
     }).then((HttpClientResponse response) {
@@ -76,51 +66,6 @@ class Preset
       });
     });
 
-  }
-
-
-  static Future<Uint8List> getBytesFromFile(String filePathFullName) async
-  {
-    File file = new File(filePathFullName);
-    if(null == file)
-    {
-      print('null == file');
-      return null;
-    }
-
-    Uint8List readFileBytes = await file.readAsBytes();
-    return readFileBytes;
-  }
-
-
-  static Future<ByteBuffer> getByteBufferFromFile(String filePathFullName) async
-  {
-    File file = new File(filePathFullName);
-    if(null == file)
-    {
-      print('null == file');
-      return null;
-    }
-
-    Uint8List readFileBytes = await file.readAsBytes();
-    ByteBuffer  readFileByteBuffer = readFileBytes.buffer;
-    return readFileByteBuffer;
-  }
-
-  static Future<ByteData> getByteDataFromFile(String filePathFullName) async
-  {
-    File file = new File(filePathFullName);
-    if(null == file)
-    {
-      print('null == file');
-      return null;
-    }
-
-    Uint8List readFileBytes = await file.readAsBytes();
-    ByteBuffer  readFileByteBuffer = readFileBytes.buffer;
-    ByteData byteData = ByteData.view(readFileByteBuffer);
-
-    return byteData;
   }
 
 }
