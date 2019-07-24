@@ -4,8 +4,7 @@ import 'package:first_ui/screens/more.dart';
 import 'package:first_ui/screens/creator.dart';
 import 'package:first_ui/screens/testhome.dart';
 import 'package:flutter/services.dart';
-//import 'package:first_ui/screens/creatorTest.dart';
-//import 'package:first_ui/screens/creator_with_sliver.dart';
+
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -30,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen>
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Color(0xFF5986E1),
+        backgroundColor: Colors.black87, // Color(0xFF5986E1),
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -80,9 +79,10 @@ class _HomeScreenState extends State<HomeScreen>
         unselectedLabelColor: Colors.grey,
         controller: controller,
         tabs: <Widget>[
-          Tab(text: 'Home', icon: Icon(Icons.trending_up)),
+          Tab(text: 'Trend', icon: Icon(Icons.trending_up)), //Todo replace home with hot(=trending) need to update icon image
           Tab(text: 'Library', icon: Icon(Icons.collections_bookmark)),
           Tab(text: 'Creator', icon: Icon(Icons.palette)),
+          Tab(text: 'Serach', icon: Icon(Icons.search)),
           Tab(text: 'More', icon: Icon(Icons.menu)),
         ],
       ),
