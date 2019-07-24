@@ -9,16 +9,10 @@ class DevTest extends StatefulWidget {
 
 class _DevTestState extends State<DevTest> {
 
-  void navigationPage() {
-   // Navigator.of(context).pushReplacementNamed(routeName)
-   // Navigator.of(context).
-  }
 
   @override
   void initState() {
     super.initState();
-
-    navigationPage();
   }
 
 //  void initState() {
