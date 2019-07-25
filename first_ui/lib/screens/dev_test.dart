@@ -79,11 +79,44 @@ class _DevTestState extends State<DevTest> {
               delegate: SliverChildListDelegate(
                 [
                   Card(
-                    child: Text('SignUp'),
+                    child: new InkWell(
+                      onTap: () {
+                        print("SignUp Tapped");
+                      },
+                      child: Container(
+
+                        width: 100.0,
+                        height: 50.0,
+                        color:Color.fromARGB(255, 128, 128, 128),
+
+                        child:Text("SignUp",),
+
+                      ),
 
 
-
+                    ),
                   ),
+
+
+                  Card(
+                    child: new InkWell(
+                      onTap: () {
+                        print("Withdrawal Tapped");
+                      },
+                      child: Container(
+
+                        width: 100.0,
+                        height: 50.0,
+                        color:Color.fromARGB(255, 255, 255, 0),
+
+                        child:Text("Withdrawal",),
+
+                      ),
+
+
+                    ),
+                  ),
+
                   Card(
                     child: Text('data'),
                   ),

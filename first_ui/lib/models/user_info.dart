@@ -4,36 +4,34 @@
 
 class UserInfo
 {
-    final int serviceProviderType;
-    final String nickName;
-    final int comi;
+    static String _id;
+    static String _creatorId;
+    static int _serviceProviderType;
+    static int _comi;
 
-    UserInfo({this.serviceProviderType,this.nickName,this.comi});
+    static String get id => _id;
+    static String get creatorId => _creatorId;
+    static int get serviceProviderType => _serviceProviderType;
+    static int get comi => _comi;
 
-    factory UserInfo.fromJson(Map<String,dynamic> userInfoMap)
+    static set id(String id)
     {
-        return UserInfo(
-            serviceProviderType: userInfoMap['service_provider_type'],
-            nickName: userInfoMap['nick_name'],
-            comi: userInfoMap['comi']
-        );
-
+        _id = id;
     }
 
-
-    /*
-    static Future<UserInfo> fetchUser() async
+    static set createId(String createId)
     {
-        final response = await http.get('https://1');
-        if (response.statusCode == 200) {
-
-            final userMap = json.decode(response.body);
-            return UserInfo.fromJson(userMap);
-        }
-        throw Exception('failure');
+        createId = createId;
     }
-    */
 
+    static set serviceProviderType(int serviceProviderType)
+    {
+        _serviceProviderType = serviceProviderType;
+    }
 
+    static set comi(int comi)
+    {
+        _comi = comi;
+    }
 
 }
