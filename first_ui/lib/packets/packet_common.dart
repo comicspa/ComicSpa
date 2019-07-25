@@ -1,4 +1,4 @@
-
+import 'dart:typed_data';
 
 
 enum e_packet_type
@@ -11,8 +11,23 @@ enum e_packet_type
   c2s_upload_file,
   s2c_upload_file,
 
+  c2s_signup,
+  s2c_signup,
+
+  c2s_withdrawal,
+  s2c_withdrawal,
+
   c2s_login,
   s2c_login,
+
+  c2s_logout,
+  s2c_logout,
+
+  c2s_register_creator,
+  s2c_register_creator,
+
+  c2s_unregister_creator,
+  s2c_unregister_creator,
 }
 
 
@@ -20,19 +35,47 @@ enum e_packet_type
 
 class PacketCommon
 {
-  e_packet_type _type = e_packet_type.none;
-  int _size;
+  static Endian _endian = Endian.little;
 
-  e_packet_type get type => _type;
+  static Endian get endian => _endian;
+  static set endian(Endian endian)
+  {
+    _endian = endian;
+  }
+
+  int _size = 4+2;
+  e_packet_type _type = e_packet_type.none;
+
   int get size => _size;
+  e_packet_type get type => _type;
+
+  Uint8List _packet;
+  var byteData;
+  int _currentOffset;
+
+  Uint8List get packet => _packet;
+  int get currentOffset => _currentOffset;
+
+  set packet(Uint8List packet)
+  {
+    _packet = packet;
+  }
+
+  set currentOffset(int currentOffset)
+  {
+    _currentOffset = currentOffset;
+  }
+
+
+  set size(int size)
+  {
+    _size = size;
+  }
 
   set type(e_packet_type type)
   {
     _type = type;
   }
 
-  set size(int size)
-  {
-    _size = size;
-  }
+
 }
