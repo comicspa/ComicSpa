@@ -12,7 +12,6 @@ class PacketBytes extends PacketCommon
   var sendByteData;
   int _currentOffset;
 
-
   Uint8List get sendPacket => _sendPacket;
   int get currentOffset => _currentOffset;
 
