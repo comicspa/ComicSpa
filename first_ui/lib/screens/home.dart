@@ -3,7 +3,8 @@ import 'package:first_ui/screens/library.dart';
 import 'package:first_ui/screens/more.dart';
 import 'package:first_ui/screens/creator.dart';
 import 'package:first_ui/screens/testhome.dart';
-import 'package:flutter/services.dart';
+import 'package:first_ui/screens/Trend.dart';
+//import 'package:flutter/services.dart';
 
 
 
@@ -19,10 +20,11 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-      statusBarColor: Color(0xff202a30),  // Colors.blueGrey //Color(0xFF5986E1),
-    ));
-    controller = TabController(length: 4, initialIndex: 0, vsync: this);
+
+//    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+//      statusBarColor: Color(0xff202a30),  // Colors.blueGrey //Color(0xFF5986E1),
+//    ));
+    controller = TabController(length: 5, initialIndex: 0, vsync: this);
   }
 
   @override
@@ -69,6 +71,7 @@ class _HomeScreenState extends State<HomeScreen>
           TestHome(),
           LibraryScreen(),
           CreatorScreen(),
+          Trend(),
           MoreScreen(),
         ],
       ),
@@ -83,6 +86,7 @@ class _HomeScreenState extends State<HomeScreen>
           Tab(text: 'Trend', icon: Icon(Icons.trending_up)), //Todo replace home with hot(=trending) need to update icon image
           Tab(text: 'Library', icon: Icon(Icons.collections_bookmark)),
           Tab(text: 'Creator', icon: Icon(Icons.palette)),
+          Tab(text: 'Trend', icon: Icon(Icons.trending_up)),
           Tab(text: 'Serach', icon: Icon(Icons.search)),
           //Tab(text: 'More', icon: Icon(Icons.menu)),
         ],
