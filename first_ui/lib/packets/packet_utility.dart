@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/services.dart';
@@ -28,6 +27,12 @@ class PacketUtility
     return currentOffset;
   }
 
+  static int getStringTotalLength(List<int> writeStringEncodedList)
+  {
+    //size + length
+    return 4 + writeStringEncodedList.length * 4;
+  }
+
 
   static Map<int,String> readStringFromByteBuffer(var byteDataBuffer,int currentOffset,Endian endian)
   {
@@ -48,7 +53,7 @@ class PacketUtility
     return result;
   }
 
-  static int writeImageToByteBuffer(var byteDataBuffer,ByteData imageByteData,int currentOffset,List<int> writeStringEncodedList,Endian endian)
+  static int writeImageToByteBuffer(var byteDataBuffer,ByteData imageByteData,int currentOffset,Endian endian)
   {
     int lengthInBytes = imageByteData.lengthInBytes;
     print('writeImageToByteBuffer - lengthInBytes : $lengthInBytes');
@@ -63,6 +68,12 @@ class PacketUtility
     }
 
     return currentOffset;
+  }
+
+
+  static int getImageTotalLength(ByteData imageByteData)
+  {
+    return 4 + imageByteData.lengthInBytes;
   }
 
 

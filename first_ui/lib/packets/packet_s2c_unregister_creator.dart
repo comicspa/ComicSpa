@@ -4,11 +4,11 @@ import 'package:first_ui/packets/packet_common.dart';
 import 'package:first_ui/packets/packet_s2c_common.dart';
 
 
-class PacketS2CWithdrawal extends PacketS2CCommon
+class PacketS2CUnregisterCreator extends PacketS2CCommon
 {
-  PacketS2CWithdrawal()
+  PacketS2CUnregisterCreator()
   {
-    type = e_packet_type.s2c_withdrawal;
+    type = e_packet_type.s2c_unregister_creator;
   }
 
   void parseBytes(List<int> event)

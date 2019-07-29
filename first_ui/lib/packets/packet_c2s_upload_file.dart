@@ -17,7 +17,7 @@ class PacketC2SUploadFile extends PacketCommon
   String _pathName;
   String _fileFullName;
   int _userId;
-  int _artistId;
+  int _creatorId;
 
 
   PacketC2SUploadFile()
@@ -25,12 +25,12 @@ class PacketC2SUploadFile extends PacketCommon
     type = e_packet_type.c2s_upload_file;
   }
 
-  void generate(String pathName,String fileFullName,int userId,int artistId)
+  void generate(String pathName,String fileFullName,int userId,int creatorId)
   {
       _pathName = pathName;
       _fileFullName = fileFullName;
       _userId = userId;
-      _artistId = artistId;
+      _creatorId = creatorId;
   }
 
   void fetchBytes(onPacketUploadFileFetchDone) async
@@ -69,11 +69,11 @@ class PacketC2SUploadFile extends PacketCommon
     sendByteData.setUint32(0, this.size, Endian.little);
     sendByteData.setUint16(4, this.type.index, Endian.little);
     sendByteData.setUint32(6, _userId,Endian.little);
-    sendByteData.setUint32(10, _artistId,Endian.little);
+    sendByteData.setUint32(10, _creatorId,Endian.little);
 
     int currentOffset = 14;
     currentOffset = PacketUtility.writeStringToByteBuffer(sendByteData, currentOffset, fileNameStringEncodedList, Endian.little);
-    currentOffset = PacketUtility.writeImageToByteBuffer(sendByteData,imageByteData,currentOffset,fileNameStringEncodedList,Endian.little);
+    currentOffset = PacketUtility.writeImageToByteBuffer(sendByteData,imageByteData,currentOffset,Endian.little);
 
     socket.add(sendPacket);
 

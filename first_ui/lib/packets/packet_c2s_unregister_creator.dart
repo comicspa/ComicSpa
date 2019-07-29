@@ -6,21 +6,21 @@ import 'package:first_ui/models/user_info.dart';
 import 'package:first_ui/packets/packet_utility.dart';
 import 'package:first_ui/packets/packet_common.dart';
 import 'package:first_ui/packets/packet_c2s_common.dart';
-import 'package:first_ui/packets/packet_s2c_signup.dart';
+import 'package:first_ui/packets/packet_s2c_unregister_creator.dart';
 
 
-typedef void OnPacketSignupFetchDone(PacketS2CSignup packet);
+typedef void OnPacketUnregisterCreatorFetchDone(PacketS2CUnregisterCreator packet);
 
 
-class PacketC2SSignup extends PacketC2SCommon
+class PacketC2SUnregisterCreator extends PacketC2SCommon
 {
   String _socialId;
   String _emailAddress;
   e_social_provider_type _socialProviderType;
 
-  PacketC2SSignup()
+  PacketC2SUnregisterCreator()
   {
-    type = e_packet_type.c2s_signup;
+    type = e_packet_type.c2s_unregister_creator;
   }
 
   void generate(String socialId,String emailAddress,e_social_provider_type socialProviderType)
@@ -30,7 +30,7 @@ class PacketC2SSignup extends PacketC2SCommon
     _socialProviderType = socialProviderType;
   }
 
-  void fetchBytes(onPacketSignupFetchDone) async
+  void fetchBytes(onPacketUnregisterCreatorFetchDone) async
   {
     Socket socket = await GlobalCommon.createServiceSocket();
     print('connected server');
@@ -38,9 +38,9 @@ class PacketC2SSignup extends PacketC2SCommon
     // listen to the received data event stream
     socket.listen((List<int> event)
     {
-      PacketS2CSignup packet = new PacketS2CSignup();
+      PacketS2CUnregisterCreator packet = new PacketS2CUnregisterCreator();
       packet.parseBytes(event);
-      onPacketSignupFetchDone(packet);
+      onPacketUnregisterCreatorFetchDone(packet);
     });
 
 
