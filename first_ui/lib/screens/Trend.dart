@@ -26,7 +26,7 @@ class Trend extends StatefulWidget {
   @override
   _TrendState createState() => new _TrendState();
 }
-  Future<TestData> testData;
+  List<TestData> testData = <TestData>[];
 
 
 
@@ -112,146 +112,9 @@ class _TrendState extends State<Trend> {
               )
               ],
           ),
-          SizedBox(
-            height: 185,
-            child: FutureBuilder<List<TestData>>(
-              future: fetchTestData(),
-              builder: (context,snapshot){
-                if(!snapshot.hasData) return CircularProgressIndicator();
-                {
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    physics: BouncingScrollPhysics(),
-                    //TODO need an actual device testing to fix or change the physics type
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 20,
-                    itemBuilder: (context, index) {
-//                    EdgeInsets padding = index ==
-//                          0 // First Card indenting is Left 20 and others are Left 10
-//                        ? EdgeInsets.only(
-//                          left: 20.0,
-//                          right: 10.0,
-//                          top: 20.0,
-//                          bottom: 20.0)
-//                        : EdgeInsets.only(
-//                          left: 10.0,
-//                          right: 10.0,
-//                          top: 20.0,
-//                          bottom: 20.0);
-                    return Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Card(
-                            elevation: 18.0,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(2.0))),
-                            child: Image.network(.data[index],
-                              fit: BoxFit.cover,
-                              height: 180.0,
-                              width: 130.0,
-                            ),
-                            clipBehavior: Clip.antiAlias,
-                            margin: EdgeInsets.all(2.0),
-                          ),
-                          Text('Title',
-                            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-                          ),
-                          Text('description and more text',
-                            style: TextStyle(fontSize: 14.0, fontStyle: FontStyle.italic),
-                          ),
-                        ],
-                    );
-                },
-              },
-              },),
-          ),
-          SizedBox(
-            height: 160.0,
-            child: ListView.builder(
-              physics: BouncingScrollPhysics(),
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: 15,
-              itemBuilder: (BuildContext context, int index) => Card(
-                child: Center(
-                  child: Image.asset(
-                    'images/batman.jpg',
-                    height: 155,
-                    width: 105,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 160.0,
-            child: ListView.builder(
-              physics: BouncingScrollPhysics(),
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: 15,
-              itemBuilder: (BuildContext context, int index) => Card(
-                child: Center(
-                  child: Image.asset(
-                    'images/catHouse.jpg',
-                    height: 155,
-                    width: 105,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Text(
-            'Demo Headline 2',
-            style: TextStyle(fontSize: 18),
-          ),
-          Card(
-            child:
-            ListTile(title: Text('Motivation $int'), subtitle: Text('재미남')),
-          ),
-          SizedBox(
-            height: 160.0,
-            child: ListView.builder(
-              physics: ClampingScrollPhysics(),
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: 15,
-              itemBuilder: (BuildContext context, int index) => Card(
-                child: Center(
-                  child: Image.asset(
-                    'images/할리퀸.jpg',
-                    height: 155,
-                    width: 105,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Card(
-            child: ListTile(
-                title: Text('Motivation $int'), subtitle: Text('재미없음')),
-          ),
-          SizedBox(
-            height: 160.0,
-            child: ListView.builder(
-              physics: ClampingScrollPhysics(),
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              itemCount: 15,
-              itemBuilder: (BuildContext context, int index) => Card(
-                child: Center(
-                  child: Image.asset(
-                    'images/dragonBall.jpg',
-                    height: 155,
-                    width: 105,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
+
+         ],
+
       ),
     );
   }
