@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "746939945938",
+    "firebase_url": "https://comicspa-b1ce3-46a4b.firebaseio.com",
+    "project_id": "comicspa-b1ce3",
+    "storage_bucket": "comicspa-b1ce3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:746939945938:android:8b5e8eacf389d58a",
+        "android_client_info": {
+          "package_name": "com.comicspa.first_ui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "746939945938-85v2893ncflpucrv82oipuj994dsbme7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCETE2tTIqvt0Y0d8XC7SLwpMtWczsRRtA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "746939945938-85v2893ncflpucrv82oipuj994dsbme7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
