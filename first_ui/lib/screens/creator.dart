@@ -7,6 +7,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:first_ui/models/today_popular_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_today_popular_comic_info.dart';
 
 class CreatorScreen extends StatefulWidget {
   @override
@@ -231,7 +233,7 @@ class _CreatorScreenState extends State<CreatorScreen> {
                       physics: BouncingScrollPhysics(),
                       //TODO need an actual device testing to fix or change the physics type
                       scrollDirection: Axis.horizontal,
-                      itemCount: 7,
+                      itemCount: TodayPopularComicInfo.list.length ,
                       itemBuilder: (context, index) {
                         EdgeInsets padding = index ==
                                 0 // First Card indenting is Left 20 and others are Left 10

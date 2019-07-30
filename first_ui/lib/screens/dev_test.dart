@@ -31,7 +31,7 @@ class DevTest extends StatefulWidget {
 class _DevTestState extends State<DevTest> {
 
   int selectedCountIndex = -1;
-  PacketC2STodayPopularComicInfo c2STodayPopularComicInfo = new PacketC2STodayPopularComicInfo();
+  PacketC2STodayPopularComicInfo c2STodayPopularComicInfo = new PacketC2STodayPopularComicInfo(); // use this to handle data
   AsyncSnapshot snapshot;
 
   @override
@@ -39,7 +39,7 @@ class _DevTestState extends State<DevTest> {
     super.initState();
 
     //checkPermissionGetMultiFilePath();
-    c2STodayPopularComicInfo.generate(0, 0);
+    c2STodayPopularComicInfo.generate(0, 0);   // generating packet
   }
 
   Future<String> _signInWithGoogle() async {

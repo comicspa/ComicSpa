@@ -1,43 +1,31 @@
 import 'package:flutter/material.dart';
-import 'test_model.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:first_ui/models/today_popular_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_today_popular_comic_info.dart';
 
 
-//import 'package:carousel_pro/carousel_pro.dart';
 
 
-Future<List<TestData>> fetchTestData() async {
-  final response = await http.get('https://jsonplaceholder.typicode.com/photos');
 
-  if (response.statusCode == 200){
-    List responseJson = json.decode(response.body);
-    return responseJson.map((x) => TestData.fromJson(x)).toList();
-
-  } else {
-    throw Exception('Failed to load data');
-  }
-
-}
 
 
 class Trend extends StatefulWidget {
   @override
   _TrendState createState() => new _TrendState();
 }
-  List<TestData> testData = <TestData>[];
 
 
 
 
 class _TrendState extends State<Trend> {
 
+  PacketC2STodayPopularComicInfo c2STodayPopularComicInfo = new PacketC2STodayPopularComicInfo(); // use this to handle data
 
 
   @override
   void initState() {
     super.initState();
+    c2STodayPopularComicInfo.generate(0, 0);   // generating packet
 
   }
 
@@ -49,14 +37,14 @@ class _TrendState extends State<Trend> {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.all(0.0),
-            child: FutureBuilder<List<TestData>>(
-              future: fetchTestData(),
+            child: FutureBuilder<List<TodayPopularComicInfo>>(
+              future: c2STodayPopularComicInfo.fetchBytes(),
               builder: (context,snapshot){
                 if(!snapshot.hasData) return CircularProgressIndicator();
                 {
                   return CarouselSlider(
                       autoPlay: false,
-                      height: 280.0,
+                      height: 250.0,
                       aspectRatio: 16/9,
                       initialPage: 0,
                       viewportFraction: 1.0,
@@ -95,21 +83,89 @@ class _TrendState extends State<Trend> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Card(
-                elevation: 18.0,
-                shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(2.0))),
-                child: Image.network('images/야옹이.png',
-                fit: BoxFit.cover,
-                height: 180.0,
-                width: 130.0,
+              SizedBox(
+                height: 200,
+                child: Card(
+                  // This ensures that the Card's children (including the ink splash) are clipped correctly.
+                  clipBehavior: Clip.antiAlias,
+//                  shape: shape,
+                  child: InkWell(
+                    onTap: () {
+                      print('Card was tapped');
+                    },
+                    // Generally, material cards use onSurface with 12% opacity for the pressed state.
+                    splashColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.12),
+                    // Generally, material cards do not have a highlight overlay.
+                    highlightColor: Colors.transparent,
+                    child: Stack( children: <Widget>[
+                      Stack(
+                        children: <Widget>[
+                          Positioned.fill(
+                            // In order to have the ink splash appear above the image, you
+                            // must use Ink.image. This allows the image to be painted as part
+                            // of the Material and display ink effects above it. Using a
+                            // standard Image will obscure the ink splash.
+                            child: Ink.image(
+                              image: AssetImage('images/야옹이.png'),
+                              fit: BoxFit.cover,
+                              child: Container(),
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 2.0,
+                            left: 2.0,
+                            right: 2.0,
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              alignment: Alignment.centerLeft,
+                              child: Text('title',
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+
+
+// Description and share/explore buttons.
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 0.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            // three line description
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 2.0),
+                              child: Text('More description of this contents',
+
+                              ),
+                            ),
+                            Text('more text from db'),
+                            Text('more text from db'),
+                          ],
+                        ),
+
+                      ),
+
+                      ButtonTheme.bar( // make buttons use the appropriate styles for cards
+                        child: ButtonBar(
+                          children: <Widget>[
+                            FlatButton(
+                              child: const Text('Share'),
+                              onPressed: () { /* ... */ },
+                            ),
+                            FlatButton(
+                              child: const Text('Like'),
+                              onPressed: () { /* ... */ },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],),
+                  ),
                 ),
-                clipBehavior: Clip.antiAlias,
-                margin: EdgeInsets.all(2.0),
-                ),
-              Text('Title',
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-              )
+              ),
+
+
               ],
           ),
 
@@ -119,5 +175,6 @@ class _TrendState extends State<Trend> {
     );
   }
 }
+
 
 

@@ -75,21 +75,24 @@ class _HomeScreenState extends State<HomeScreen>
           MoreScreen(),
         ],
       ),
-      bottomNavigationBar: TabBar(
-        isScrollable: false,
-        labelColor: Color(0xFF5986E1),
-        labelStyle: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold),
-        indicatorWeight: 2,
-        unselectedLabelColor: Colors.grey,
-        controller: controller,
-        tabs: <Widget>[
-          Tab(text: 'Trend', icon: Icon(Icons.trending_up)), //Todo replace home with hot(=trending) need to update icon image
-          Tab(text: 'Library', icon: Icon(Icons.collections_bookmark)),
-          Tab(text: 'Creator', icon: Icon(Icons.palette)),
-          Tab(text: 'Trend', icon: Icon(Icons.trending_up)),
-          Tab(text: 'Serach', icon: Icon(Icons.search)),
-          //Tab(text: 'More', icon: Icon(Icons.menu)),
-        ],
+      bottomNavigationBar: SizedBox(
+        height: 40,
+        child: TabBar(
+          isScrollable: false,
+          labelColor: Color(0xFF5986E1),
+          labelStyle: TextStyle(fontSize: 5.0, fontWeight: FontWeight.bold),
+          indicatorWeight: 2,
+          unselectedLabelColor: Colors.grey,
+          controller: controller,
+          tabs: <Widget>[
+            Tab(icon: Icon(Icons.trending_up)), //Todo replace home with hot(=trending) need to update icon image
+            Tab(icon: Icon(Icons.collections_bookmark)),
+            Tab(icon: Icon(Icons.palette)),
+            Tab(icon: Icon(Icons.trending_up)),
+            Tab(icon: Icon(Icons.search)),
+            //Tab(text: 'More', icon: Icon(Icons.menu)),
+          ],
+        ),
       ),
     );
   }
