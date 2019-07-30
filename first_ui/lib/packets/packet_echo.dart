@@ -62,8 +62,8 @@ class PacketEcho extends PacketCommon
       String testString = utf8.decode(testStringList);
       print('PacketSize : $packetSize , PacketType : '+packetType.toString()+' , TestString : $testString , TestInt : $testInt , TestDouble : $testDouble');
 
-
-      onPacketEchoFetchDone(this);
+      if(null != onPacketEchoFetchDone)
+        onPacketEchoFetchDone(this);
     });
 
 

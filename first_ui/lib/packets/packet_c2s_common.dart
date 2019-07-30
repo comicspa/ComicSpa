@@ -11,11 +11,8 @@ class PacketC2SCommon extends PacketCommon
 
   bool generateHeader(int packetBodySize)
   {
-    if(0 != this.size)
-      return false;
-
     this.size += packetBodySize;
-    print('packetSize : $this.size , packetType : $this.type');
+    print('packetSize : ${this.size} , packetType : ${this.type}');
 
     packet = Uint8List(this.size);
     byteData = ByteData.view(packet.buffer);
@@ -44,7 +41,7 @@ class PacketC2SCommon extends PacketCommon
     if(null == byteData)
       return false;
 
-    byteData.setUint16(currentOffset, PacketCommon.endian);
+    byteData.setUint16(currentOffset,value, PacketCommon.endian);
     currentOffset += 2;
 
     return true;

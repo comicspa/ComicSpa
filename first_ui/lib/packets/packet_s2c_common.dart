@@ -50,9 +50,9 @@ class PacketS2CCommon extends PacketCommon
   }
 
 
-  String readStringToByteBuffer(List<int> fileNameStringEncodedList,Endian endian)
+  String readStringToByteBuffer()
   {
-    Map<int,String> map = PacketUtility.readStringFromByteBuffer(byteData, currentOffset,endian);
+    Map<int,String> map = PacketUtility.readStringFromByteBuffer(byteData, currentOffset,PacketCommon.endian);
     currentOffset = map.keys.elementAt(0);
     String stringName = map.values.elementAt(0);
     return stringName;

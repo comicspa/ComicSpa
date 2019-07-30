@@ -50,10 +50,6 @@ class Preset
 
   static void fetch(onPresetFetchDone)
   {
-    //startTime() async {
-    //var _duration = new Duration(seconds: 2);
-    //return new Timer(_duration, navigationPage);
-
     HttpClient client = new HttpClient();
     client.getUrl(Uri.parse('${GlobalCommon.storageServerBaseURL}/preset.txt')).then((
         HttpClientRequest request) {

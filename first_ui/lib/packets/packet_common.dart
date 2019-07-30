@@ -28,6 +28,9 @@ enum e_packet_type
 
   c2s_unregister_creator,
   s2c_unregister_creator,
+
+  c2s_today_popular_comic_info,
+  s2c_today_popular_comic_info,
 }
 
 
@@ -51,7 +54,7 @@ class PacketCommon
 
   Uint8List _packet;
   var byteData;
-  int _currentOffset;
+  int _currentOffset = 0;
 
   Uint8List get packet => _packet;
   int get currentOffset => _currentOffset;
