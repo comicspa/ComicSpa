@@ -31,6 +31,12 @@ enum e_packet_type
 
   c2s_today_popular_comic_info,
   s2c_today_popular_comic_info,
+
+  c2s_view_comic,
+  s2c_view_comic,
+
+  c2s_comic_detail_info,
+  s2c_comic_detail_info,
 }
 
 

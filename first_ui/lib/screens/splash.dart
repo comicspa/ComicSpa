@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:first_ui/models/preset.dart';
+import 'package:first_ui/manage/manage_device_info.dart';
 
 
 
@@ -49,6 +50,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    ManageDeviceInfo.getUniqueId(context).then((s) {
+      print('uniqueId : $s');
+    });
+
     return Scaffold(
         body: Stack(
       fit: StackFit.expand,

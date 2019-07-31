@@ -3,9 +3,10 @@ import 'dart:typed_data';
 import 'dart:convert';
 
 import 'package:first_ui/packets/packet_common.dart';
+import 'package:first_ui/packets/packet_s2c_common.dart';
 import 'package:first_ui/packets/packet_utility.dart';
 
-class PacketS2CUploadFile extends PacketCommon
+class PacketS2CUploadFile extends PacketS2CCommon
 {
 
   PacketS2CUploadFile()
@@ -15,14 +16,14 @@ class PacketS2CUploadFile extends PacketCommon
 
   void parseBytes(List<int> event)
   {
-    var receivedPacket = Uint8List.fromList(event);
-    var receivedByteData = ByteData.view(receivedPacket.buffer);
+    parseHeader(event);
 
-    var packetSize = receivedByteData.getUint32(0, Endian.little);
-    var packetType = receivedByteData.getUint16(4, Endian.little);
+    systemErrorCode = getUint32();
+    serviceErrorCode = getUint32();
 
-    print('PackSize : $packetSize , PacketType : $packetType');
+    print('PackSize : $size , PacketType : $type');
 
   }
 
 }
+

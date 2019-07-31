@@ -2,9 +2,6 @@ import 'dart:io';
 import 'dart:typed_data';
 
 
-
-
-
 class GlobalCommon
 {
   static final String _serviceServerBaseURL = 'http://221.165.42.119:9000';
@@ -54,20 +51,6 @@ class GlobalCommon
     return byteData;
   }
 
-  /*
-  static Future<String> getId() async
-  {
-    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    if (Theme.of(context).platform == TargetPlatform.iOS)
-    {
-      IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
-      return iosDeviceInfo.identifierForVendor; // unique ID on iOS
-    } else {
-      AndroidDeviceInfo androidDeviceInfo = await deviceInfo.androidInfo;
-      return androidDeviceInfo.androidId; // unique ID on Android
-    }
-  }
-  */
 
 
 }
