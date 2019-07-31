@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:first_ui/screens/hot_creator_card_future.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:first_ui/models/today_popular_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_today_popular_comic_info.dart';
+import 'package:first_ui/screens/Viewer.dart';
+
 
 class MoreScreen extends StatefulWidget {
   @override
@@ -7,54 +11,64 @@ class MoreScreen extends StatefulWidget {
 }
 
 class _MoreScreenState extends State<MoreScreen> {
+
+  PacketC2STodayPopularComicInfo c2STodayPopularComicInfo = new PacketC2STodayPopularComicInfo(); // use this to handle data
+
+  @override
+  void initState() {
+    super.initState();
+    c2STodayPopularComicInfo.generate(0, 0);   // generating packet
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuildHotCreators(); // Todo currently this screen is used for testing futurebuilder
-//    return Container(
-//      child: Text('More menus'),
-//    );
+    // Todo Currently this screen is used for testing viewer
+     return Padding(
+       padding: EdgeInsets.all(0.0),
+       child: FutureBuilder<List<TodayPopularComicInfo>>(
+         future: c2STodayPopularComicInfo.fetchBytes(),
+         builder: (context,snapshot){
+           if(!snapshot.hasData) return CircularProgressIndicator();
+           {
+             return CarouselSlider(
+                 autoPlay: false,
+                 height: 250.0,
+                 aspectRatio: 16/9,
+                 initialPage: 0,
+                 viewportFraction: 1.0,
+                 enableInfiniteScroll: true,
+                 scrollDirection: Axis.horizontal,
+
+
+                 items:snapshot.data.map((i){
+                   return Builder (
+                       builder: (BuildContext context){
+                         return Container(
+
+                           width: MediaQuery.of(context).size.width,
+                           margin: EdgeInsets.symmetric(horizontal: 0.0),
+                           decoration: BoxDecoration(color: Colors.white),
+                           child: GestureDetector(
+                             child: Image.network(i.thumbnailUrl, fit:BoxFit.fill),
+                             onTap: () {
+                               Navigator.push<Widget>(
+                                 context,
+                                 MaterialPageRoute(
+                                   builder: (context) => ViewerScreen(i.thumbnailUrl),
+                                 )
+                               );
+                             }
+                           ),
+                         );
+                       }
+                   );
+                 }).toList()
+             );
+           }
+         },
+       ),
+     );
   }
 }
-
-//class _MoreScreenState extends State<MoreScreen> {
-//  @override
-//  Widget build(BuildContext context) {
-//    return Scaffold(
-//      endDrawer: Drawer(
-//        // Add a ListView to the drawer. This ensures the user can scroll
-//        // through the options in the drawer if there isn't enough vertical
-//        // space to fit everything.
-//        child: ListView(
-//          // Important: Remove any padding from the ListView.
-//          padding: EdgeInsets.zero,
-//          children: <Widget>[
-//            DrawerHeader(
-//              child: Text('Drawer Header'),
-//              decoration: BoxDecoration(
-//                color: Colors.blue,
-//              ),
-//            ),
-//            ListTile(
-//              title: Text('Item 1'),
-//              onTap: () {
-//                // Update the state of the app
-//                // ...
-//                // Then close the drawer
-//                Navigator.pop(context);
-//              },
-//            ),
-//            ListTile(
-//              title: Text('Item 2'),
-//              onTap: () {
-//                // Update the state of the app
-//                // ...
-//                // Then close the drawer
-//                Navigator.pop(context);
-//              },
-//            ),
-//          ],
-//        ),
-//      ),
-//    );
-//  }
-//}
