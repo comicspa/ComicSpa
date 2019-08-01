@@ -31,39 +31,42 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Color(0xff202a30), //Colors.black87, // Color(0xFF5986E1),
-        title: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Image.asset(
-              'images/ComicSpa_logo.png',
-              width: 88,
-              height: 21.25,
-            ),
-            Padding(padding: const EdgeInsets.only(left: 8.0)),
-          ],
-        ),
-        actions: <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.0),
-            child: Icon(Icons.perm_identity),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(40.0),
+        child: AppBar(
+          elevation: 0,
+          backgroundColor: Color(0xff202a30), //Colors.black87, // Color(0xFF5986E1),
+          title: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Image.asset(
+                'images/ComicSpa_logo.png',
+                width: 88,
+                height: 21.25,
+              ),
+              Padding(padding: const EdgeInsets.only(left: 8.0)),
+            ],
+          ),
+          actions: <Widget>[
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.0),
+              child: Icon(Icons.perm_identity),
 //            child: Image.asset(
 //              'images/Comi.png',
 //              width: 21.5,
 //              height: 18.5,
 //            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: Image.asset(
-              'images/search.png',
-              width: 21.5,
-              height: 18.5,
             ),
-          ),
-        ],
+            Padding(   //Todo If search feature goes to bottomAppBar delete this padding
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: Image.asset(
+                'images/search.png',
+                width: 21.5,
+                height: 18.5,
+              ),
+            ),
+          ],
+        ),
       ),
       body: TabBarView(
         controller: controller,
@@ -87,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen>
           unselectedLabelColor: Colors.grey,
           controller: controller,
           tabs: <Widget>[
-            Tab(icon: Icon(Icons.trending_up)), //Todo replace home with hot(=trending) need to update icon image
+            Tab(icon: Icon(Icons.home)), //Todo replace home with hot(=trending) need to update icon image
             Tab(icon: Icon(Icons.collections_bookmark)),
             Tab(icon: Icon(Icons.palette)),
             Tab(icon: Icon(Icons.trending_up)),

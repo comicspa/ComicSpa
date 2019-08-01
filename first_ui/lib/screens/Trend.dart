@@ -88,7 +88,7 @@ class _TrendState extends State<Trend> {
             padding: EdgeInsets.fromLTRB(15, 20, 0, 5),
             child: Text(
             'Recommended',
-            style: TextStyle(fontSize: 18),
+            style: TextStyle(fontSize: 16, fontFamily: 'Lato', fontWeight: FontWeight.bold),
             textAlign: TextAlign.left,
           ),),
           // buildColumn(context),
@@ -109,13 +109,6 @@ class _TrendState extends State<Trend> {
                             child: Image.asset('images/야옹이.png', fit: BoxFit.fill)),
 
                       ),
-//                    AspectRatio(
-//                      aspectRatio: 16/9,
-//                      child: Ink.image(
-//                        image: AssetImage('images/야옹이.png'),
-//                        fit: BoxFit.fill,
-//                      ),
-//                    ),
                       Expanded(
                         child: Padding(
                           padding: EdgeInsets.all(5.0),
@@ -206,7 +199,7 @@ class _TrendState extends State<Trend> {
             padding: EdgeInsets.fromLTRB(15, 20, 0, 5),
             child: Text(
               'Realtime Trend',
-              style: TextStyle(fontSize: 18, fontFamily: 'Lato',),
+              style: TextStyle(fontSize: 16, fontFamily: 'Lato', fontWeight: FontWeight.bold),
               textAlign: TextAlign.left,
             ),
           ),
@@ -215,7 +208,7 @@ class _TrendState extends State<Trend> {
             padding: EdgeInsets.fromLTRB(15, 20, 0, 5),
             child: Text(
               'New',
-              style: TextStyle(fontSize: 18, fontFamily: 'Lato',),
+              style: TextStyle(fontSize: 16, fontFamily: 'Lato', fontWeight: FontWeight.bold),
               textAlign: TextAlign.left,
             ),
           ),
@@ -224,7 +217,7 @@ class _TrendState extends State<Trend> {
             padding: EdgeInsets.fromLTRB(15, 20, 0, 5),
             child: Text(
               'Today\'s Trend',
-              style: TextStyle(fontSize: 18, fontFamily: 'Lato',),
+              style: TextStyle(fontSize: 16, fontFamily: 'Lato', fontWeight: FontWeight.bold),
               textAlign: TextAlign.left,
             ),
           ),
@@ -233,7 +226,7 @@ class _TrendState extends State<Trend> {
             padding: EdgeInsets.fromLTRB(15, 20, 0, 5),
             child: Text(
               'Weekly Trend',
-              style: TextStyle(fontSize: 18, fontFamily: 'Lato',),
+              style: TextStyle(fontSize: 16, fontFamily: 'Lato', fontWeight: FontWeight.bold),
               textAlign: TextAlign.left,
             ),
           ),
