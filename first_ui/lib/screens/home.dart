@@ -4,6 +4,7 @@ import 'package:first_ui/screens/more.dart';
 import 'package:first_ui/screens/creator.dart';
 import 'package:first_ui/screens/testhome.dart';
 import 'package:first_ui/screens/Trend.dart';
+import 'package:first_ui/screens/signin.dart';
 //import 'package:flutter/services.dart';
 
 
@@ -24,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen>
 //    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
 //      statusBarColor: Color(0xff202a30),  // Colors.blueGrey //Color(0xFF5986E1),
 //    ));
-    controller = TabController(length: 5, initialIndex: 0, vsync: this);
+    controller = TabController(length: 6, initialIndex: 0, vsync: this);
   }
 
   @override
@@ -73,6 +74,7 @@ class _HomeScreenState extends State<HomeScreen>
           CreatorScreen(),
           Trend(),
           MoreScreen(),
+          SignInPage(),
         ],
       ),
       bottomNavigationBar: SizedBox(
@@ -90,6 +92,7 @@ class _HomeScreenState extends State<HomeScreen>
             Tab(icon: Icon(Icons.palette)),
             Tab(icon: Icon(Icons.trending_up)),
             Tab(icon: Icon(Icons.search)),
+            Tab(icon: Icon(Icons.menu)),
             //Tab(text: 'More', icon: Icon(Icons.menu)),
           ],
         ),
