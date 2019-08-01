@@ -41,6 +41,15 @@ flutter:
   assets:
     - images/
 
+  fonts:
+    - family: Lato
+      fonts:
+
+        - asset: fonts/Lato-Regular.ttf
+        - asset: fonts/Lato-RegularItalic.ttf
+          style: italic
+
+
   # assets:
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
