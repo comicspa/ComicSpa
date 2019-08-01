@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 
 import 'package:first_ui/packets/packet_common.dart';
 import 'package:first_ui/packets/packet_s2c_common.dart';
@@ -11,9 +12,9 @@ class PacketS2CViewComic extends PacketS2CCommon
     type = e_packet_type.s2c_view_comic;
   }
 
-  void parseBytes(List<int> event)
+  void parseBytes(int packetSize,ByteData byteDataExceptionSize)
   {
-    parseHeader(event);
+    parseHeaderChecked(packetSize,byteDataExceptionSize);
 
     systemErrorCode = getUint32();
     serviceErrorCode = getUint32();

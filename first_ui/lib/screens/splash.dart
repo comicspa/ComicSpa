@@ -51,9 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
 
-    ManageDeviceInfo.getUniqueId(context).then((s) {
-      print('uniqueId : $s');
-    });
+    ManageDeviceInfo.getUniqueId(context);
 
     return Scaffold(
         body: Stack(

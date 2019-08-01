@@ -18,7 +18,7 @@ class PacketS2CRegisterCreator extends PacketS2CCommon
     systemErrorCode = getUint32();
     serviceErrorCode = getUint32();
 
-    print('PackSize : $size , PacketType : $type');
+    print('PacketSize : $size , PacketType : $type');
 
   }
 

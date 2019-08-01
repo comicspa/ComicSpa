@@ -40,19 +40,13 @@ enum e_packet_type
 }
 
 
-
-
 class PacketCommon
 {
   static Endian _endian = Endian.little;
 
   static Endian get endian => _endian;
-  static set endian(Endian endian)
-  {
-    _endian = endian;
-  }
 
-  int _size = 4+2;
+  int _size = 4 + 2;
   e_packet_type _type = e_packet_type.none;
 
   int get size => _size;
@@ -75,7 +69,6 @@ class PacketCommon
     _currentOffset = currentOffset;
   }
 
-
   set size(int size)
   {
     _size = size;
@@ -86,5 +79,10 @@ class PacketCommon
     _type = type;
   }
 
+
+  static void setCSharpSocketServer()
+  {
+    _endian = Endian.little;
+  }
 
 }

@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_ui/models/today_popular_comic_info.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:first_ui/packets/packet_c2s_today_popular_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_view_comic.dart';
 import 'package:first_ui/packets/packet_echo.dart';
 
 import 'package:http/http.dart' as http;
@@ -40,6 +41,11 @@ class _DevTestState extends State<DevTest> {
 
     //checkPermissionGetMultiFilePath();
     c2STodayPopularComicInfo.generate(0, 0);   // generating packet
+
+    //PacketC2SViewComic c2SViewComic = new PacketC2SViewComic();
+    //c2SViewComic.generate();
+    //c2SViewComic.fetchBytes();
+
   }
 
   Future<String> _signInWithGoogle() async {

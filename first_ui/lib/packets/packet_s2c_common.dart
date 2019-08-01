@@ -33,6 +33,17 @@ class PacketS2CCommon extends PacketCommon
     return true;
   }
 
+  bool parseHeaderChecked(int packetSize,ByteData byteDataExceptionSize)
+  {
+    byteData = byteDataExceptionSize;
+
+    size = packetSize;
+    currentOffset += 4;
+    type = e_packet_type.values[getUint16()];
+
+    return true;
+  }
+
 
   int getUint32()
   {

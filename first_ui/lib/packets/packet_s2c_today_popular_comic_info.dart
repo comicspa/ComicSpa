@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 
 import 'package:first_ui/packets/packet_common.dart';
 import 'package:first_ui/packets/packet_s2c_common.dart';
@@ -12,9 +13,9 @@ class PacketS2CTodayPopularComicInfo extends PacketS2CCommon
     type = e_packet_type.s2c_today_popular_comic_info;
   }
 
-  void parseBytes(List<int> event)
+  void parseBytes(int packetSize,ByteData byteDataExceptionSize)
   {
-    parseHeader(event);
+    parseHeaderChecked(packetSize,byteDataExceptionSize);
 
     systemErrorCode = getUint32();
     serviceErrorCode = getUint32();
@@ -43,7 +44,5 @@ class PacketS2CTodayPopularComicInfo extends PacketS2CCommon
       TodayPopularComicInfo.list.add(todayPopularComicInfo);
     }
   }
-
-
 
 }

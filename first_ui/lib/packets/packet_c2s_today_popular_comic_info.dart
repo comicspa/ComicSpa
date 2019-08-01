@@ -14,6 +14,8 @@ import 'package:first_ui/models/today_popular_comic_info.dart';
 
 class PacketC2STodayPopularComicInfo extends PacketC2SCommon
 {
+  //static Uint8List packetBytesList;
+
   int _pageCountIndex;
   int _pageViewCount;
 
@@ -38,11 +40,29 @@ class PacketC2STodayPopularComicInfo extends PacketC2SCommon
     Socket socket = await GlobalCommon.createServiceSocket();
     print('connected server');
 
+
+    final List<int> eventList = new List<int>();
     // listen to the received data event stream
     socket.listen((List<int> event)
     {
-      PacketS2CTodayPopularComicInfo packet = new PacketS2CTodayPopularComicInfo();
-      packet.parseBytes(event);
+      //print('socket.listen : ${event.length}');
+      eventList.addAll(event);
+      //print('socket.listen : ${eventList.length}');
+
+      var packet = Uint8List.fromList(eventList);
+      ByteData byteData = ByteData.view(packet.buffer);
+      //print('eventList.length : ${eventList.length}');
+
+      int packetSize = byteData.getUint32(0,PacketCommon.endian);
+      //print('byteData.getUint32(0) : $packetSize');
+
+      if(eventList.length == packetSize)
+      {
+        //print('eventList.length == packetSize');
+
+        PacketS2CTodayPopularComicInfo packet = new PacketS2CTodayPopularComicInfo();
+        packet.parseBytes(packetSize,byteData);
+      }
 
       return TodayPopularComicInfo.list;
     });
@@ -57,7 +77,7 @@ class PacketC2STodayPopularComicInfo extends PacketC2SCommon
     socket.add(packet);
 
     // wait 5 seconds
-    await Future.delayed(Duration(seconds: 5));
+    await Future.delayed(Duration(seconds: 20));
     socket.close();
 
     return TodayPopularComicInfo.list;
