@@ -10,13 +10,11 @@ class ViewerScreen extends StatefulWidget {
   final String url;
   ViewerScreen(this.url);
 
-
   @override
   _ViewScreen createState() => new _ViewScreen(url);
 }
 
 class _ViewScreen extends State<ViewerScreen> {
-
 //  PacketC2STodayPopularComicInfo c2STodayPopularComicInfo = new PacketC2STodayPopularComicInfo(); // use this to handle data
 
 //  @override
@@ -28,33 +26,34 @@ class _ViewScreen extends State<ViewerScreen> {
 
   String url;
 
-  _ViewScreen(String url){this.url = url;}
+  _ViewScreen(String url) {
+    this.url = url;
+  }
 
   @override
   Widget build(BuildContext context) {
     // Todo Currently this screen is used for testing viewer
-    return Center(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: SizedBox(
-          height: double.infinity,
-          child: ListView(children: <Widget>[
-            Image.network(url, width: double.infinity,),
-            Image.network(url, width: double.infinity,),
-            Image.network(url, width: double.infinity,),
-            Image.network(url, width: double.infinity,),
-            Image.network(url, width: double.infinity,),
-          ],
-          ),
+    return ListView(
+      children: <Widget>[
+        Image.network(
+          url,
         ),
-
-      ),
+        Image.network(
+          url,
+        ),
+        Image.network(
+          url,
+        ),
+        Image.network(
+          url,
+        ),
+        Image.network(
+          url,
+        ),
+      ],
     );
   }
 }
-
-
-
 
 // fade in image loading sample
 //
