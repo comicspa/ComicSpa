@@ -32,12 +32,21 @@ class PacketC2SViewComic extends PacketC2SCommon
     print('connected server');
 
     // listen to the received data event stream
+    final List<int> eventList = new List<int>();
     socket.listen((List<int> event)
     {
-      PacketS2CViewComic packet = new PacketS2CViewComic();
-      packet.parseBytes(event);
+      eventList.addAll(event);
+      var packet = Uint8List.fromList(eventList);
+      ByteData byteData = ByteData.view(packet.buffer);
 
-      return ModelViewComic.getInstance();
+      int packetSize = byteData.getUint32(0,PacketCommon.endian);
+      if(eventList.length == packetSize)
+      {
+        PacketS2CViewComic packet = new PacketS2CViewComic();
+        packet.parseBytes(packetSize,byteData);
+        return ModelViewComic.getInstance();
+      }
+      return null;
     });
 
     int packetBodySize  = 0;
@@ -49,7 +58,7 @@ class PacketC2SViewComic extends PacketC2SCommon
     await Future.delayed(Duration(seconds: 10));
     socket.close();
 
-    return ModelViewComic.getInstance();
+    return null;
   }
 
 

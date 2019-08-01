@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 
 class ManageDeviceInfo
 {
+  static String _uniqueId;
 
-  static Future<String> getUniqueId(BuildContext context) async
+  String get uniqueId => _uniqueId;
+
+
+  static Future<String> _getUniqueId(BuildContext context) async
   {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     if (Theme.of(context).platform == TargetPlatform.iOS)
@@ -16,6 +20,17 @@ class ManageDeviceInfo
       AndroidDeviceInfo androidDeviceInfo = await deviceInfo.androidInfo;
       return androidDeviceInfo.androidId; // unique ID on Android
     }
+  }
+
+  static void getUniqueId(BuildContext context)
+  {
+    if(null != _uniqueId)
+      return;
+
+    _getUniqueId(context).then((s) {
+      _uniqueId = s;
+      print('uniqueId : $_uniqueId');
+    });
   }
 
 

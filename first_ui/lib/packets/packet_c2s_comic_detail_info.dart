@@ -34,8 +34,8 @@ class PacketC2SComicDetailInfo extends PacketC2SCommon
     // listen to the received data event stream
     socket.listen((List<int> event)
     {
-      PacketS2CViewComic packet = new PacketS2CViewComic();
-      packet.parseBytes(event);
+      //PacketS2CViewComic packet = new PacketS2CViewComic();
+      //packet.parseBytes(event);
 
       return ModelViewComic.getInstance();
     });
