@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:first_ui/models/today_popular_comic_info.dart';
+import 'package:first_ui/models/model_view_comic.dart';
 import 'package:first_ui/packets/packet_c2s_today_popular_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_view_comic.dart';
 import 'package:first_ui/screens/Viewer.dart';
 import 'package:first_ui/screens/image_test.dart';
 
@@ -14,10 +16,14 @@ class _MoreScreenState extends State<MoreScreen> {
   PacketC2STodayPopularComicInfo c2STodayPopularComicInfo =
       new PacketC2STodayPopularComicInfo(); // use this to handle data
 
+
+  PacketC2SViewComic c2SViewComic = new PacketC2SViewComic(); // use this to handle data
+
   @override
   void initState() {
     super.initState();
-    c2STodayPopularComicInfo.generate(0, 0); // generating packet
+    c2STodayPopularComicInfo.generate(0, 0);   // generating packet
+    c2SViewComic.generate();
   }
 
   @override
