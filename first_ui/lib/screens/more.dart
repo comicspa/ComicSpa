@@ -77,7 +77,7 @@ class _MoreScreenState extends State<MoreScreen> {
                 ));
           },
           child: Text(
-            "Image viewer testing",
+            "Image viewer testing!",
           ),
         )
       ],
