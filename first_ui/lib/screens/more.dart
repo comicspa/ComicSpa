@@ -6,6 +6,7 @@ import 'package:first_ui/packets/packet_c2s_today_popular_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_view_comic.dart';
 import 'package:first_ui/screens/Viewer.dart';
 import 'package:first_ui/screens/test/image_test.dart';
+import 'package:first_ui/screens/test/viewer_floating_button.dart';
 
 class MoreScreen extends StatefulWidget {
   @override
@@ -17,13 +18,13 @@ class _MoreScreenState extends State<MoreScreen> {
       new PacketC2STodayPopularComicInfo(); // use this to handle data
 
 
-  PacketC2SViewComic c2SViewComic = new PacketC2SViewComic(); // use this to handle data
+//  PacketC2SViewComic c2SViewComic = new PacketC2SViewComic(); // use this to handle data
 
   @override
   void initState() {
     super.initState();
     c2STodayPopularComicInfo.generate(0, 0);   // generating packet
-    c2SViewComic.generate();
+//    c2SViewComic.generate();
   }
 
   @override
@@ -68,7 +69,7 @@ class _MoreScreenState extends State<MoreScreen> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          ViewerScreen(i.thumbnailUrl),
+                                          ViewerScreen(i.thumbnailUrl), // link to Actual viewer
                                     ));
                               }),
                         );
@@ -81,19 +82,21 @@ class _MoreScreenState extends State<MoreScreen> {
         SizedBox(
           height: 20,
         ),
+
         FlatButton(
-          color: Colors.amber,
+          color: Colors.redAccent,
           onPressed: () {
             Navigator.push<Widget>(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ImageTestPage(),
+                  builder: (context) => ViewerWithFAB(),
                 ));
           },
           child: Text(
-            "Image viewer testing!",
+            "Image viewer with floating button testing!",
           ),
-        )
+        ),
+
       ],
     );
   }

@@ -11,10 +11,10 @@ class ViewerScreen extends StatefulWidget {
   ViewerScreen(this.url);
 
   @override
-  _ViewScreen createState() => new _ViewScreen(url);
+  _ViewerScreen createState() => new _ViewerScreen(url);
 }
 
-class _ViewScreen extends State<ViewerScreen> {
+class _ViewerScreen extends State<ViewerScreen> {
 //  PacketC2STodayPopularComicInfo c2STodayPopularComicInfo = new PacketC2STodayPopularComicInfo(); // use this to handle data
 
 //  @override
@@ -23,34 +23,121 @@ class _ViewScreen extends State<ViewerScreen> {
 //    c2STodayPopularComicInfo.generate(0, 0);   // generating packet
 //
 //  }
+  bool _isVisible;
+
+  @override
+  initState() {
+    //    SystemChrome.setEnabledSystemUIOverlays([]);
+
+    super.initState();
+    _isVisible = true;
+  }
 
   String url;
 
-  _ViewScreen(String url) {
+  _ViewerScreen(String url) {
     this.url = url;
   }
 
   @override
   Widget build(BuildContext context) {
     // Todo Currently this screen is used for testing viewer
-    return ListView(
-      children: <Widget>[
-        Image.network(
-          url,
+    return Scaffold(
+
+      body: Center(
+
+        child: GestureDetector(
+          onTap: () {
+            setState(() { _isVisible = !_isVisible; });
+          },
+          child: CustomScrollView(
+//          controller: _hideButtonController,
+            shrinkWrap: true,
+            slivers: <Widget>[
+              SliverPadding(
+                padding: EdgeInsets.all(0.0),
+                sliver: SliverList(
+                    delegate: SliverChildListDelegate(
+                        <Widget>[
+                          Image.asset(
+                              'images/01.jpg',
+                              fit: BoxFit.fill
+                          ),
+                          Image.asset(
+                            'images/02.jpg',
+                          ),
+                          Image.asset(
+                            'images/03.jpg',
+                          ),
+                          Image.asset(
+                            'images/04.jpg',
+                          ),
+                          Image.asset(
+                            'images/05.jpg',
+                          ),
+                          Image.network(
+                            url,
+                          ),
+                          Image.network(
+                            url,
+                          ),
+                          Image.network(
+                            url,
+                          ),
+
+                        ]
+                    )
+                ),
+              )
+            ],
+          ),
         ),
-        Image.network(
-          url,
+
+      ),
+      floatingActionButton: Visibility(
+        visible: _isVisible,
+        child: Row(
+
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            Container(
+              height: 35,
+              child: FloatingActionButton(
+                heroTag: 'btn1',
+                backgroundColor: Colors.brown,
+                onPressed: (){},
+                child: Icon(Icons.translate),
+              ),
+            ),
+            SizedBox(width: 40,),
+            Row(
+              children: <Widget>[
+                Container(
+                  height: 35,
+                  child: FloatingActionButton(
+                    heroTag: 'btn2',
+                    onPressed: (){},
+                    child: Icon(Icons.arrow_left),
+                  ),
+                ),
+
+                SizedBox(width: 40,), // need to change it to # input field for jumping to other episode
+
+                Container(
+                  height: 35,
+                  child: FloatingActionButton(
+                    heroTag: 'btn3',
+                    onPressed: (){},
+                    child: Icon(Icons.arrow_right),
+                  ),
+                ),
+              ],
+            ),
+
+
+          ],
         ),
-        Image.network(
-          url,
-        ),
-        Image.network(
-          url,
-        ),
-        Image.network(
-          url,
-        ),
-      ],
+      ),
     );
   }
 }

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
 import 'package:first_ui/screens/more.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:first_ui/models/today_popular_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_today_popular_comic_info.dart';
 
-class ImageTestPage extends StatefulWidget {
-//  final String url;
-//  ImageViewerTest(this.url);
+//Todo make fade-in image loading using "transparent_image package" later
+
+class ViewerWithJson extends StatefulWidget {
+  final String url;
+  ViewerWithJson(this.url);
 
   @override
-  _ImageTestPage createState() => new _ImageTestPage();
+  _ViewerWithJson createState() => new _ViewerWithJson(url);
 }
 
-class _ImageTestPage extends State<ImageTestPage> {
+class _ViewerWithJson extends State<ViewerWithJson> {
 //  PacketC2STodayPopularComicInfo c2STodayPopularComicInfo = new PacketC2STodayPopularComicInfo(); // use this to handle data
 
 //  @override
@@ -24,42 +24,32 @@ class _ImageTestPage extends State<ImageTestPage> {
 //
 //  }
 
-//  String url;
-//
-//  _ViewScreen(String url){this.url = url;}
+  String url;
 
-  @override
-  initState() {
-//    SystemChrome.setEnabledSystemUIOverlays([]);
-    super.initState();
+  _ViewerWithJson(String url) {
+    this.url = url;
   }
-
-//  @override
-//  void dispose() {
-//    //SystemChrome.restoreSystemUIOverlays();
-//    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
-//    super.dispose();
-//  }
 
   @override
   Widget build(BuildContext context) {
+    // Todo Currently this screen is used for testing viewer
     return ListView(
       children: <Widget>[
-        Image.asset(
-          'images/01.jpg',
+        Image.network(
+          url,
         ),
-        Image.asset(
-          'images/02.jpg',
+        Image.network(
+          url,
         ),
-        Image.asset(
-          'images/03.jpg',
+        Image.network(
+          url,
         ),
-        Image.asset(
-          'images/04.jpg',
+        Image.network(
+          url,
         ),
-        Image.asset(
-          'images/05.jpg',
-        )
+        Image.network(
+          url,
+        ),
       ],
     );
   }
@@ -78,23 +68,3 @@ class _ImageTestPage extends State<ImageTestPage> {
 //            ),
 //          ],
 //        )
-
-//
-//Scaffold(
-//body: GestureDetector(
-//child: Center(
-//child: Hero(
-//tag: 'imageHero',
-//child: CachedNetworkImage(
-//imageUrl:
-//'https://raw.githubusercontent.com/flutter/website/master/src/_includes/code/layout/lakes/images/lake.jpg',
-//placeholder: new CircularProgressIndicator(),
-//errorWidget: new Icon(Icons.error),
-//),
-//),
-//),
-//onTap: () {
-//Navigator.pop(context);
-//},
-//),
-//);
