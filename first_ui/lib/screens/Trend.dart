@@ -36,6 +36,7 @@ class _TrendState extends State<Trend> {
         mainAxisSize: MainAxisSize.min,
 
         children: <Widget>[
+          //Todo need to add indicator for the CarouselSlider with auto scroll true
           SizedBox(
             height: 250,
             child: Padding(

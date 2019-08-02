@@ -5,7 +5,7 @@ import 'package:first_ui/models/model_view_comic.dart';
 import 'package:first_ui/packets/packet_c2s_today_popular_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_view_comic.dart';
 import 'package:first_ui/screens/Viewer.dart';
-import 'package:first_ui/screens/image_test.dart';
+import 'package:first_ui/screens/test/image_test.dart';
 
 class MoreScreen extends StatefulWidget {
   @override
@@ -36,7 +36,15 @@ class _MoreScreenState extends State<MoreScreen> {
           child: FutureBuilder<List<TodayPopularComicInfo>>(
             future: c2STodayPopularComicInfo.fetchBytes(),
             builder: (context, snapshot) {
-              if (!snapshot.hasData) return CircularProgressIndicator();
+              if (!snapshot.hasData) return Center(child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(
+                      height: 25,
+                      width: 25,
+                      child: CircularProgressIndicator()),
+                ],
+              ));
               {
                 return CarouselSlider(
                     autoPlay: false,

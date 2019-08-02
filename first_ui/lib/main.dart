@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:first_ui/screens/splash.dart';
-import 'package:first_ui/screens/dev_test.dart';
+import 'package:first_ui/screens/test/dev_test.dart';
 import 'package:first_ui/screens/home.dart';
 import 'package:first_ui/screens/library.dart';
 import 'package:first_ui/screens/more.dart';
