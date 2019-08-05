@@ -43,6 +43,9 @@ enum e_packet_type
 
   c2s_new_comic_info,
   s2c_new_comic_info,
+
+  c2s_weekly_popular_comic_info,
+  s2c_weekly_popular_comic_info,
 }
 
 

@@ -2,6 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_ui/models/today_popular_comic_info.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -10,11 +13,7 @@ import 'package:first_ui/packets/packet_c2s_view_comic.dart';
 import 'package:first_ui/packets/packet_echo.dart';
 import 'package:first_ui/packets/packet_c2s_featured_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_new_comic_info.dart';
-
-
-import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
-
+import 'package:first_ui/packets/packet_c2s_weekly_popular_comic_info.dart';
 
 final FirebaseAuth _fAuth = FirebaseAuth.instance;
 final GoogleSignIn _gSignIn = new GoogleSignIn();
@@ -35,18 +34,22 @@ class DevTest extends StatefulWidget {
 class _DevTestState extends State<DevTest> {
 
   int selectedCountIndex = -1;
-  PacketC2STodayPopularComicInfo c2STodayPopularComicInfo = new PacketC2STodayPopularComicInfo(); // use this to handle data
   AsyncSnapshot snapshot;
+
+  PacketC2STodayPopularComicInfo c2STodayPopularComicInfo = new PacketC2STodayPopularComicInfo();
+  PacketC2SWeeklyPopularComicInfo c2SWeeklyPopularComicInfo = new PacketC2SWeeklyPopularComicInfo();
   PacketC2SFeaturedComicInfo c2SFeaturedComicInfo = new PacketC2SFeaturedComicInfo();
   PacketC2SViewComic c2SViewComic = new PacketC2SViewComic();
   PacketC2SNewComicInfo c2SNewComicInfo = new PacketC2SNewComicInfo();
+
 
   @override
   void initState() {
     super.initState();
 
     //checkPermissionGetMultiFilePath();
-    c2STodayPopularComicInfo.generate(0, 0);   // generating packet
+    c2STodayPopularComicInfo.generate(0, 0);
+    c2SWeeklyPopularComicInfo.generate(0, 0);
     c2SFeaturedComicInfo.generate(0, 0);
     c2SViewComic.generate();
     c2SNewComicInfo.generate(0,0);
@@ -127,7 +130,8 @@ class _DevTestState extends State<DevTest> {
           child: FutureBuilder(
               //future:c2STodayPopularComicInfo.fetchBytes(),
               //future:c2SFeaturedComicInfo.fetchBytes(),
-              future:c2SNewComicInfo.fetchBytes(),
+              //future:c2SNewComicInfo.fetchBytes(),
+              future:c2SWeeklyPopularComicInfo.fetchBytes(),
               initialData: [],
               builder: (context, snapshot) {
                 this.snapshot = snapshot;
