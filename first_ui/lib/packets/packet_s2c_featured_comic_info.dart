@@ -23,10 +23,10 @@ class PacketS2CFeaturedComicInfo extends PacketS2CCommon
     print('PackSize : $size , PacketType : $type , systemErrorCode : $systemErrorCode , serviceErrorCode : $serviceErrorCode');
 
 
-    int todayPopularComicInfoCount = getUint32();
-    print('todayPopularComicInfoCount : $todayPopularComicInfoCount');
+    int modelFeaturedComicInfoCount = getUint32();
+    print('modelFeaturedComicInfoCount : $modelFeaturedComicInfoCount');
 
-    for(int countIndex=0; countIndex<todayPopularComicInfoCount; ++countIndex)
+    for(int countIndex=0; countIndex<modelFeaturedComicInfoCount; ++countIndex)
     {
       ModelFeaturedComicInfo modelFeaturedComicInfo = new ModelFeaturedComicInfo();
 

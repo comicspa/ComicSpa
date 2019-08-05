@@ -51,6 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
 
+    ManageDeviceInfo.getResolution(context);
     ManageDeviceInfo.getUniqueId(context);
 
     return Scaffold(
