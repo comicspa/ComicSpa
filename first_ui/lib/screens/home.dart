@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen>
         preferredSize: Size.fromHeight(40.0),
         child: AppBar(
           elevation: 0,
-          backgroundColor: Color(0xff202a30), //Colors.black87, // Color(0xFF5986E1),
+          backgroundColor: Color.fromRGBO(21, 24, 45, 1.0),//Color(0xff202a30), //Colors.black87, // Color(0xFF5986E1),
           title: Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -90,12 +90,12 @@ class _HomeScreenState extends State<HomeScreen>
           unselectedLabelColor: Colors.grey,
           controller: controller,
           tabs: <Widget>[
-            Tab(icon: Icon(Icons.home)), //Todo replace home with hot(=trending) need to update icon image
-            Tab(icon: Icon(Icons.collections_bookmark)),
-            Tab(icon: Icon(Icons.palette)),
-            Tab(icon: Icon(Icons.trending_up)),
-            Tab(icon: Icon(Icons.search)),
-            Tab(icon: Icon(Icons.menu)),
+            Tab(icon: Icon(Icons.home, color: Color.fromRGBO(21, 24, 45, 0.9),)), //Todo replace home with hot(=trending) need to update icon image
+            Tab(icon: Icon(Icons.collections_bookmark, color: Color.fromRGBO(21, 24, 45, 0.9),)),
+            Tab(icon: Icon(Icons.palette, color: Color.fromRGBO(21, 24, 45, 0.9),)),
+            Tab(icon: Icon(Icons.trending_up, color: Color.fromRGBO(21, 24, 45, 0.9),)),
+            Tab(icon: Icon(Icons.search, color: Color.fromRGBO(21, 24, 45, 0.9),)),
+            Tab(icon: Icon(Icons.menu, color: Color.fromRGBO(21, 24, 45, 0.9),)),
             //Tab(text: 'More', icon: Icon(Icons.menu)),
           ],
         ),

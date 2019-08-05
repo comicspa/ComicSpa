@@ -179,9 +179,9 @@ class _CreatorScreenState extends State<CreatorScreen> {
                                   Align(
                                     alignment: Alignment.bottomCenter,
                                     child: Container(
-                                        height: 60.0,
+                                        height: 50.0,
                                         decoration: BoxDecoration(
-                                            color: Color(0xFF273A48),
+                                            color: Color.fromRGBO(21, 24, 45, 0.7),
                                             borderRadius: BorderRadius.only(
                                                 bottomLeft:
                                                     Radius.circular(5.0),
@@ -278,9 +278,9 @@ class _CreatorScreenState extends State<CreatorScreen> {
                                   Align(
                                     alignment: Alignment.bottomCenter,
                                     child: Container(
-                                        height: 60.0,
+                                        height: 50.0,
                                         decoration: BoxDecoration(
-                                            color: Color(0xFF273A48),
+                                            color: Color.fromRGBO(21, 24, 45, 1.0),
                                             borderRadius: BorderRadius.only(
                                                 bottomLeft:
                                                     Radius.circular(5.0),
@@ -865,7 +865,7 @@ class Creators {
 //height: 230.0,
 //child: ListView.builder(
 //physics: BouncingScrollPhysics(),
-////TODO need an actual device testing to fix or change the physics type
+//
 //scrollDirection: Axis.horizontal,
 //itemCount: 7,
 //itemBuilder: (context, index) {
@@ -880,7 +880,7 @@ class Creators {
 //padding: padding, // using padding setting above
 //child: InkWell(
 //onTap: () {
-//print('Card selected'); //Todo complete onTap:() feature
+//print('Card selected');
 //},
 //child: Container(
 //width: 300.0,
@@ -919,7 +919,7 @@ class Creators {
 //width: 300,
 //padding: EdgeInsets.only(left: 10, top: 5),
 //child: Text(
-//'작가: 야옹이', //TODO need $ variable
+//'작가: 야옹이',
 //style: TextStyle(
 //color: Colors.white,
 //fontWeight: FontWeight.bold),
@@ -930,7 +930,7 @@ class Creators {
 //padding: EdgeInsets.only(left: 10),
 //child: Text(
 //'저 요즘 잘 나가요~!',
-////TODO need $ variable
+//
 //style: TextStyle(color: Colors.white),
 //),
 //)

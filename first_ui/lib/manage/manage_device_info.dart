@@ -8,9 +8,9 @@ class ManageDeviceInfo
   static double _resolutionWidth = 0;
   static double _resolutionHeight = 0;
 
-  String get uniqueId => _uniqueId;
-  double get resolutionWidth => _resolutionWidth;
-  double get resolutionHeight => _resolutionHeight;
+  static String get uniqueId => _uniqueId;
+  static double get resolutionWidth => _resolutionWidth;
+  static double get resolutionHeight => _resolutionHeight;
 
   static Future<String> _getUniqueId(BuildContext context) async
   {

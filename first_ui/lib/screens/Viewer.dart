@@ -58,34 +58,23 @@ class _ViewerScreen extends State<ViewerScreen> {
                 padding: EdgeInsets.all(0.0),
                 sliver: SliverList(
                     delegate: SliverChildListDelegate(
-                        <Widget>[
-                          Image.asset(
-                              'images/01.jpg',
-                              fit: BoxFit.fill
-                          ),
-                          Image.asset(
-                            'images/02.jpg',
-                          ),
-                          Image.asset(
-                            'images/03.jpg',
-                          ),
-                          Image.asset(
-                            'images/04.jpg',
-                          ),
-                          Image.asset(
-                            'images/05.jpg',
-                          ),
-                          Image.network(
-                            url,
-                          ),
-                          Image.network(
-                            url,
-                          ),
-                          Image.network(
-                            url,
-                          ),
-
-                        ]
+                      <Widget>[
+                        Image.network(
+                          url,
+                        ),
+                        Image.network(
+                          url,
+                        ),
+                        Image.network(
+                          url,
+                        ),
+                        Image.network(
+                          url,
+                        ),
+                        Image.network(
+                          url,
+                        ),
+                      ],
                     )
                 ),
               )

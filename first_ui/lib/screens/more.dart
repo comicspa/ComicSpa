@@ -41,9 +41,11 @@ class _MoreScreenState extends State<MoreScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   SizedBox(
-                      height: 25,
-                      width: 25,
-                      child: CircularProgressIndicator()),
+                    height: 250,
+                    child:  Center(
+                        child: CircularProgressIndicator()
+                    ),
+                  ),
                 ],
               ));
               {
