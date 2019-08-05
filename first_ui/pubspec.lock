@@ -163,7 +163,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "1bea55418a64454c73268c67a73d8864bdd59899"
+      resolved-ref: "59f4a69e162e19245aa8936fd313bfd005102df2"
       url: "git://github.com/dnfield/flutter_svg"
     source: git
     version: "0.13.1"
@@ -192,7 +192,7 @@ packages:
       name: google_sign_in
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.4"
+    version: "4.0.6"
   html:
     dependency: transitive
     description:

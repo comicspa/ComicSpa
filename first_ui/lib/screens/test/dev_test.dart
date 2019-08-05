@@ -84,6 +84,9 @@ class _DevTestState extends State<DevTest> {
             setState(() {
               selectedCountIndex = index;
               print('$index: ${values[index].url}');
+
+              _signInWithGoogle();
+
             });
 
             //print(selectedCountIndex);

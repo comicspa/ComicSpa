@@ -1,34 +1,42 @@
 {
   "project_info": {
-    "project_number": "746939945938",
-    "firebase_url": "https://comicspa-b1ce3-46a4b.firebaseio.com",
-    "project_id": "comicspa-b1ce3",
-    "storage_bucket": "comicspa-b1ce3.appspot.com"
+    "project_number": "499078536707",
+    "firebase_url": "https://comicspa-248608.firebaseio.com",
+    "project_id": "comicspa-248608",
+    "storage_bucket": "comicspa-248608.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:746939945938:android:8b5e8eacf389d58a",
+        "mobilesdk_app_id": "1:499078536707:android:8b5e8eacf389d58a",
         "android_client_info": {
           "package_name": "com.comicspa.first_ui"
         }
       },
       "oauth_client": [
         {
-          "client_id": "746939945938-85v2893ncflpucrv82oipuj994dsbme7.apps.googleusercontent.com",
+          "client_id": "499078536707-3aqpcpfvdc3ibbthd7eb6f0aa9e41bdh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.comicspa.first_ui",
+            "certificate_hash": "5897aeae2bc19aea34b65b5b5a95dd741f3e53fa"
+          }
+        },
+        {
+          "client_id": "499078536707-9tiuksmam2rqu2n83a0h9rsit4hmpsh8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCETE2tTIqvt0Y0d8XC7SLwpMtWczsRRtA"
+          "current_key": "AIzaSyCDwp1H2rDOFVCYfBeHSPNp68_JdFcLt4c"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "746939945938-85v2893ncflpucrv82oipuj994dsbme7.apps.googleusercontent.com",
+              "client_id": "499078536707-9tiuksmam2rqu2n83a0h9rsit4hmpsh8.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -37,6 +37,9 @@ enum e_packet_type
 
   c2s_comic_detail_info,
   s2c_comic_detail_info,
+
+  c2s_featured_comic_info,
+  s2c_featured_comic_info,
 }
 
 
