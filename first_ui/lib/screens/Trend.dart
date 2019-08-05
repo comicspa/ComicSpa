@@ -1,52 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
 import 'package:first_ui/models/today_popular_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_today_popular_comic_info.dart';
 import 'package:first_ui/models/model_featured_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_featured_comic_info.dart';
-import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
-
-
-
-
-
-
+import 'package:first_ui/models/model_recommended_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_recommended_comic_info.dart';
+import 'package:first_ui/models/model_new_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_new_comic_info.dart';
+import 'package:first_ui/models/model_real_time_trend_info.dart';
+import 'package:first_ui/packets/packet_c2s_real_time_trend_info.dart';
+import 'package:first_ui/models/model_weekly_popular_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_weekly_popular_comic_info.dart';
 
 class Trend extends StatefulWidget {
   @override
   _TrendState createState() => new _TrendState();
 }
 
-
-
-
 class _TrendState extends State<Trend> {
-
-  PacketC2STodayPopularComicInfo c2STodayPopularComicInfo = new PacketC2STodayPopularComicInfo(); // use this to handle data
-  PacketC2SFeaturedComicInfo c2sFeaturedComicInfo = new PacketC2SFeaturedComicInfo(); // use this to handle data
-
+  PacketC2STodayPopularComicInfo c2STodayPopularComicInfo =
+      new PacketC2STodayPopularComicInfo(); // use this to handle data
+  PacketC2SFeaturedComicInfo c2sFeaturedComicInfo =
+      new PacketC2SFeaturedComicInfo(); // use this to handle data
+  PacketC2SRecommendedComicInfo c2sRecommendedComicInfo =
+      new PacketC2SRecommendedComicInfo();
+  PacketC2SNewComicInfo c2sNewComicInfo = new PacketC2SNewComicInfo();
+  PacketC2SRealTimeTrendInfo c2sRealTimeTrendInfo =
+      new PacketC2SRealTimeTrendInfo();
+  PacketC2SWeeklyPopularComicInfo c2sWeeklyPopularComicInfo =
+      new PacketC2SWeeklyPopularComicInfo();
 
   @override
   void initState() {
     super.initState();
     c2STodayPopularComicInfo.generate(0, 0);
     c2sFeaturedComicInfo.generate(0, 0);
+    c2sRecommendedComicInfo.generate(0, 0);
+    c2sNewComicInfo.generate(0, 0);
+    c2sRealTimeTrendInfo.generate(0, 0);
+    c2sWeeklyPopularComicInfo.generate(0, 0);
 
     countBanner(ModelFeaturedComicInfo.list);
 // generating packet
-
   }
 
   int _current = 0; // this is for indicator handler
-
-
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-
         children: <Widget>[
           //Todo need to add indicator for the CarouselSlider with auto scroll true
           SizedBox(
@@ -55,18 +61,19 @@ class _TrendState extends State<Trend> {
               padding: EdgeInsets.all(0.0),
               child: FutureBuilder<List<ModelFeaturedComicInfo>>(
                 future: c2sFeaturedComicInfo.fetchBytes(),
-                builder: (context,snapshot){
-                  if(!snapshot.hasData) return Center(child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                          height: 300,
-                          child:  Center(
-                              child: CircularProgressIndicator()
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData)
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          SizedBox(
+                            height: 300,
+                            child: Center(child: CircularProgressIndicator()),
                           ),
+                        ],
                       ),
-                    ],
-                  ));
+                    );
                   {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -76,7 +83,6 @@ class _TrendState extends State<Trend> {
                           autoPlay: true,
                           enlargeCenterPage: true,
                           aspectRatio: 1.3,
-
                           onPageChanged: (index) {
                             setState(() {
                               _current = index;
@@ -87,11 +93,12 @@ class _TrendState extends State<Trend> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: map<Widget>(
                             featuredComicsList,
-                                (index, url) {
+                            (index, url) {
                               return Container(
                                 width: 8.0,
                                 height: 8.0,
-                                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                                margin: EdgeInsets.symmetric(
+                                    vertical: 10.0, horizontal: 2.0),
                                 decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: _current == index
@@ -113,10 +120,14 @@ class _TrendState extends State<Trend> {
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.fromLTRB(15, 5, 0, 2),
             child: Text(
-            'Recommended',
-            style: TextStyle(fontSize: 16, fontFamily: 'Lato', fontWeight: FontWeight.bold),
-            textAlign: TextAlign.left,
-          ),),
+              'Recommended',
+              style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Lato',
+                  fontWeight: FontWeight.bold),
+              textAlign: TextAlign.left,
+            ),
+          ),
           // buildColumn(context),
           Container(
             padding: EdgeInsets.all(0),
@@ -125,42 +136,44 @@ class _TrendState extends State<Trend> {
               physics: ClampingScrollPhysics(),
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              itemCount: TodayPopularComicInfo.list.length,
+              itemCount: ModelRecommendedComicInfo.list.length,
               itemBuilder: (BuildContext context, int index) => Card(
                 child: Stack(
                   children: <Widget>[
                     SizedBox(
                       width: ManageDeviceInfo.resolutionWidth * 0.45,
-
                       child: Card(
-
                         elevation: 0,
                         clipBehavior: Clip.antiAlias,
                         child: Column(
                           children: <Widget>[
                             Container(
                               width: ManageDeviceInfo.resolutionWidth * 0.45,
-
                               child: ClipRRect(
-
-                                  borderRadius: BorderRadius.circular(2.0),
-                                  child: SizedBox(
-                                    height: ManageDeviceInfo.resolutionHeight * 0.135,
-                                    child: Image.asset('images/야옹이.png', fit: BoxFit.cover,), //Todo need to change the image link to  "snapshot.data[index].url"
-                                  ),
+                                borderRadius: BorderRadius.circular(2.0),
+                                child: SizedBox(
+                                  height:
+                                      ManageDeviceInfo.resolutionHeight * 0.135,
+                                  child: Image.asset(
+                                    'images/야옹이.png',
+                                    fit: BoxFit.cover,
+                                  ), //Todo need to change the image link to  "snapshot.data[index].url"
+                                ),
                               ),
-
                             ),
                             Expanded(
                                 child: Padding(
                                     padding: EdgeInsets.all(5.0),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: <Widget>[
-
                                         Container(
-                                          height: ManageDeviceInfo.resolutionHeight * 0.040,
-                                          child: Text('Title of this content is too long so we need to shorten it with ...',
+                                          height: ManageDeviceInfo
+                                                  .resolutionHeight *
+                                              0.040,
+                                          child: Text(
+                                            'Title of this content is too long so we need to shorten it with ...',
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
                                             textAlign: TextAlign.left,
@@ -171,77 +184,93 @@ class _TrendState extends State<Trend> {
                                             ),
                                           ),
                                         ),
-                                        SizedBox(height: ManageDeviceInfo.resolutionHeight * 0.004,),   // used for spacing purpose
+                                        SizedBox(
+                                          height: ManageDeviceInfo
+                                                  .resolutionHeight *
+                                              0.004,
+                                        ), // used for spacing purpose
                                         Expanded(
                                           child: Container(
-                                            height: ManageDeviceInfo.resolutionHeight * 0.03,
-                                            child: Text('More description of title with some catch phrase, more text, longer text, and too many of them',
+                                            height: ManageDeviceInfo
+                                                    .resolutionHeight *
+                                                0.03,
+                                            child: Text(
+                                              'More description of title with some catch phrase, more text, longer text, and too many of them',
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
-
                                               style: TextStyle(
                                                 fontFamily: 'Lato',
                                                 color: Colors.grey[800],
                                                 fontSize: 11,
                                               ),
                                             ),
-                                          )
                                           ),
-                                        SizedBox(height: ManageDeviceInfo.resolutionHeight * 0.002,),   // used for spacing purpose
+                                        ),
+                                        SizedBox(
+                                          height: ManageDeviceInfo
+                                                  .resolutionHeight *
+                                              0.002,
+                                        ), // used for spacing purpose
 
                                         Row(
-                                            mainAxisAlignment: MainAxisAlignment.start,
-
-                                            children: <Widget>[
-                                              SizedBox(
-                                                height: ManageDeviceInfo.resolutionHeight * 0.02,
-                                                width: ManageDeviceInfo.resolutionWidth * 0.1,
-
-                                                child: Text('ID',
-                                                  maxLines: 1,
-                                                  style: TextStyle(
-                                                    fontFamily: 'Lato',
-                                                    color: Colors.blueGrey,
-                                                    fontSize: 10,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: <Widget>[
+                                            SizedBox(
+                                              height: ManageDeviceInfo
+                                                      .resolutionHeight *
+                                                  0.02,
+                                              width: ManageDeviceInfo
+                                                      .resolutionWidth *
+                                                  0.1,
+                                              child: Text(
+                                                'ID',
+                                                maxLines: 1,
+                                                style: TextStyle(
+                                                  fontFamily: 'Lato',
+                                                  color: Colors.blueGrey,
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              SizedBox(
-                                                height: ManageDeviceInfo.resolutionHeight * 0.02,
-                                                width: ManageDeviceInfo.resolutionWidth * 0.3,
-                                                child: Text('Views: 489,584,219',
-                                                  maxLines: 1,
-                                                  overflow: TextOverflow.ellipsis,
-                                                  textAlign: TextAlign.left,
-                                                  style: TextStyle(
-                                                    fontFamily: 'Lato',
-                                                    color: Colors.grey[700],
-                                                    fontSize: 9,
-                                                  ),
+                                            ),
+                                            SizedBox(
+                                              height: ManageDeviceInfo
+                                                      .resolutionHeight *
+                                                  0.02,
+                                              width: ManageDeviceInfo
+                                                      .resolutionWidth *
+                                                  0.3,
+                                              child: Text(
+                                                'Views: 489,584,219',
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(
+                                                  fontFamily: 'Lato',
+                                                  color: Colors.grey[700],
+                                                  fontSize: 9,
                                                 ),
-
                                               ),
-                                            ],
-                                          )
+                                            ),
+                                          ],
+                                        )
                                       ],
-                                    )
-                                )
-                            )
+                                    )))
                           ],
                         ),
                       ),
                     ),
-                    Positioned.fill(  // added to display the inkwell effect properly when Card and other widgets are used together
+                    Positioned.fill(
+                      // added to display the inkwell effect properly when Card and other widgets are used together
                       child: Material(
                         color: Colors.transparent,
                         child: InkWell(
-
                           highlightColor: Colors.transparent,
-                          onTap: (){
+                          onTap: () {
                             print('Card was tapped');
-
-                          },),
+                          },
+                        ),
                       ),
                     ),
                   ],
@@ -254,7 +283,316 @@ class _TrendState extends State<Trend> {
             padding: EdgeInsets.fromLTRB(15, 20, 0, 2),
             child: Text(
               'Realtime Trend',
-              style: TextStyle(fontSize: 16, fontFamily: 'Lato', fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Lato',
+                  fontWeight: FontWeight.bold),
+              textAlign: TextAlign.left,
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.all(0),
+            height: ManageDeviceInfo.resolutionHeight * 0.28,
+            child: ListView.builder(
+              physics: ClampingScrollPhysics(),
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: ModelRealTimeTrendInfo.list.length,
+              itemBuilder: (BuildContext context, int index) => Card(
+                child: Stack(
+                  children: <Widget>[
+                    SizedBox(
+                      width: ManageDeviceInfo.resolutionWidth * 0.45,
+                      child: Card(
+                        elevation: 0,
+                        clipBehavior: Clip.antiAlias,
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              width: ManageDeviceInfo.resolutionWidth * 0.45,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(2.0),
+                                child: SizedBox(
+                                  height:
+                                      ManageDeviceInfo.resolutionHeight * 0.135,
+                                  child: Image.asset(
+                                    'images/batman.jpg',
+                                    fit: BoxFit.cover,
+                                  ), //Todo need to change the image link to  "snapshot.data[index].url"
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                                child: Padding(
+                                    padding: EdgeInsets.all(5.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Container(
+                                          height: ManageDeviceInfo
+                                                  .resolutionHeight *
+                                              0.040,
+                                          child: Text(
+                                            'Title of this content is too long so we need to shorten it with ...',
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                              fontFamily: 'Lato',
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: ManageDeviceInfo
+                                                  .resolutionHeight *
+                                              0.004,
+                                        ), // used for spacing purpose
+                                        Expanded(
+                                          child: Container(
+                                            height: ManageDeviceInfo
+                                                    .resolutionHeight *
+                                                0.03,
+                                            child: Text(
+                                              'More description of title with some catch phrase, more text, longer text, and too many of them',
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                fontFamily: 'Lato',
+                                                color: Colors.grey[800],
+                                                fontSize: 11,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: ManageDeviceInfo
+                                                  .resolutionHeight *
+                                              0.004,
+                                        ), // used for spacing purpose
+
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: <Widget>[
+                                            SizedBox(
+                                              height: ManageDeviceInfo
+                                                      .resolutionHeight *
+                                                  0.02,
+                                              child: Text(
+                                                'ID',
+                                                style: TextStyle(
+                                                  fontFamily: 'Lato',
+                                                  color: Colors.blueGrey,
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: ManageDeviceInfo
+                                                      .resolutionWidth *
+                                                  0.3,
+                                              child: Text(
+                                                'Views: 489,584,219',
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.right,
+                                                style: TextStyle(
+                                                  fontFamily: 'Lato',
+                                                  color: Colors.grey[700],
+                                                  fontSize: 9,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    )))
+                          ],
+                        ),
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          highlightColor: Colors.transparent,
+                          onTap: () {
+                            print('Card was tapped');
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Container(
+            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.fromLTRB(15, 20, 0, 5),
+            child: Text(
+              'New Comics',
+              style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Lato',
+                  fontWeight: FontWeight.bold),
+              textAlign: TextAlign.left,
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.all(0),
+            height: ManageDeviceInfo.resolutionHeight * 0.28,
+            child: ListView.builder(
+              physics: ClampingScrollPhysics(),
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: ModelNewComicInfo.list.length,
+              itemBuilder: (BuildContext context, int index) => Card(
+                child: Stack(
+                  children: <Widget>[
+                    SizedBox(
+                      width: ManageDeviceInfo.resolutionWidth * 0.45,
+                      child: Card(
+                        elevation: 0,
+                        clipBehavior: Clip.antiAlias,
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              width: ManageDeviceInfo.resolutionWidth * 0.45,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(2.0),
+                                child: SizedBox(
+                                  height:
+                                      ManageDeviceInfo.resolutionHeight * 0.135,
+                                  child: Image.asset(
+                                    'images/batman.jpg',
+                                    fit: BoxFit.cover,
+                                  ), //Todo need to change the image link to  "snapshot.data[index].url"
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                                child: Padding(
+                                    padding: EdgeInsets.all(5.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Container(
+                                          height: ManageDeviceInfo
+                                                  .resolutionHeight *
+                                              0.040,
+                                          child: Text(
+                                            'Title of this content is too long so we need to shorten it with ...',
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                              fontFamily: 'Lato',
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: ManageDeviceInfo
+                                                  .resolutionHeight *
+                                              0.004,
+                                        ), // used for spacing purpose
+                                        Expanded(
+                                          child: Container(
+                                            height: ManageDeviceInfo
+                                                    .resolutionHeight *
+                                                0.03,
+                                            child: Text(
+                                              'More description of title with some catch phrase, more text, longer text, and too many of them',
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                fontFamily: 'Lato',
+                                                color: Colors.grey[800],
+                                                fontSize: 11,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: ManageDeviceInfo
+                                                  .resolutionHeight *
+                                              0.004,
+                                        ), // used for spacing purpose
+
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: <Widget>[
+                                            SizedBox(
+                                              height: ManageDeviceInfo
+                                                      .resolutionHeight *
+                                                  0.02,
+                                              child: Text(
+                                                'ID',
+                                                style: TextStyle(
+                                                  fontFamily: 'Lato',
+                                                  color: Colors.blueGrey,
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: ManageDeviceInfo
+                                                      .resolutionWidth *
+                                                  0.3,
+                                              child: Text(
+                                                'Views: 489,584,219',
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.right,
+                                                style: TextStyle(
+                                                  fontFamily: 'Lato',
+                                                  color: Colors.grey[700],
+                                                  fontSize: 9,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    )))
+                          ],
+                        ),
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          highlightColor: Colors.transparent,
+                          onTap: () {
+                            print('Card was tapped');
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Container(
+            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.fromLTRB(15, 20, 0, 5),
+            child: Text(
+              'Today\'s Trend',
+              style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Lato',
+                  fontWeight: FontWeight.bold),
               textAlign: TextAlign.left,
             ),
           ),
@@ -271,36 +609,38 @@ class _TrendState extends State<Trend> {
                   children: <Widget>[
                     SizedBox(
                       width: ManageDeviceInfo.resolutionWidth * 0.45,
-
                       child: Card(
-
                         elevation: 0,
                         clipBehavior: Clip.antiAlias,
                         child: Column(
                           children: <Widget>[
                             Container(
                               width: ManageDeviceInfo.resolutionWidth * 0.45,
-
                               child: ClipRRect(
-
-                                  borderRadius: BorderRadius.circular(2.0),
-                                  child: SizedBox(
-                                      height: ManageDeviceInfo.resolutionHeight * 0.135,
-                                      child: Image.asset('images/batman.jpg', fit: BoxFit.cover,),  //Todo need to change the image link to  "snapshot.data[index].url"
-                                  ),
+                                borderRadius: BorderRadius.circular(2.0),
+                                child: SizedBox(
+                                  height:
+                                      ManageDeviceInfo.resolutionHeight * 0.135,
+                                  child: Image.asset(
+                                    'images/batman.jpg',
+                                    fit: BoxFit.cover,
+                                  ), //Todo need to change the image link to  "snapshot.data[index].url"
+                                ),
                               ),
-
                             ),
                             Expanded(
                                 child: Padding(
                                     padding: EdgeInsets.all(5.0),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: <Widget>[
-
                                         Container(
-                                          height: ManageDeviceInfo.resolutionHeight * 0.040,
-                                          child: Text('Title of this content is too long so we need to shorten it with ...',
+                                          height: ManageDeviceInfo
+                                                  .resolutionHeight *
+                                              0.040,
+                                          child: Text(
+                                            'Title of this content is too long so we need to shorten it with ...',
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
                                             textAlign: TextAlign.left,
@@ -311,30 +651,44 @@ class _TrendState extends State<Trend> {
                                             ),
                                           ),
                                         ),
-                                        SizedBox(height: ManageDeviceInfo.resolutionHeight * 0.004,),   // used for spacing purpose
+                                        SizedBox(
+                                          height: ManageDeviceInfo
+                                                  .resolutionHeight *
+                                              0.004,
+                                        ), // used for spacing purpose
                                         Expanded(
-                                            child: Container(
-                                              height: ManageDeviceInfo.resolutionHeight * 0.03,
-                                              child: Text('More description of title with some catch phrase, more text, longer text, and too many of them',
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-
-                                                style: TextStyle(
-                                                  fontFamily: 'Lato',
-                                                  color: Colors.grey[800],
-                                                  fontSize: 11,
-                                                ),
+                                          child: Container(
+                                            height: ManageDeviceInfo
+                                                    .resolutionHeight *
+                                                0.03,
+                                            child: Text(
+                                              'More description of title with some catch phrase, more text, longer text, and too many of them',
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                fontFamily: 'Lato',
+                                                color: Colors.grey[800],
+                                                fontSize: 11,
                                               ),
-                                            )
+                                            ),
+                                          ),
                                         ),
-                                        SizedBox(height: ManageDeviceInfo.resolutionHeight * 0.004,),   // used for spacing purpose
+                                        SizedBox(
+                                          height: ManageDeviceInfo
+                                                  .resolutionHeight *
+                                              0.004,
+                                        ), // used for spacing purpose
 
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           children: <Widget>[
                                             SizedBox(
-                                              height: ManageDeviceInfo.resolutionHeight * 0.02,
-                                              child: Text('ID',
+                                              height: ManageDeviceInfo
+                                                      .resolutionHeight *
+                                                  0.02,
+                                              child: Text(
+                                                'ID',
                                                 style: TextStyle(
                                                   fontFamily: 'Lato',
                                                   color: Colors.blueGrey,
@@ -344,8 +698,11 @@ class _TrendState extends State<Trend> {
                                               ),
                                             ),
                                             SizedBox(
-                                              width: ManageDeviceInfo.resolutionWidth * 0.3,
-                                              child: Text('Views: 489,584,219',
+                                              width: ManageDeviceInfo
+                                                      .resolutionWidth *
+                                                  0.3,
+                                              child: Text(
+                                                'Views: 489,584,219',
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
                                                 textAlign: TextAlign.right,
@@ -355,14 +712,11 @@ class _TrendState extends State<Trend> {
                                                   fontSize: 9,
                                                 ),
                                               ),
-
                                             ),
                                           ],
                                         )
                                       ],
-                                    )
-                                )
-                            )
+                                    )))
                           ],
                         ),
                       ),
@@ -371,12 +725,11 @@ class _TrendState extends State<Trend> {
                       child: Material(
                         color: Colors.transparent,
                         child: InkWell(
-
                           highlightColor: Colors.transparent,
-                          onTap: (){
+                          onTap: () {
                             print('Card was tapped');
-
-                          },),
+                          },
+                        ),
                       ),
                     ),
                   ],
@@ -388,132 +741,255 @@ class _TrendState extends State<Trend> {
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.fromLTRB(15, 20, 0, 5),
             child: Text(
-              'New Comics',
-              style: TextStyle(fontSize: 16, fontFamily: 'Lato', fontWeight: FontWeight.bold),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Container(
-            alignment: Alignment.centerLeft,
-            padding: EdgeInsets.fromLTRB(15, 20, 0, 5),
-            child: Text(
-              'Today\'s Trend',
-              style: TextStyle(fontSize: 16, fontFamily: 'Lato', fontWeight: FontWeight.bold),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Container(
-            alignment: Alignment.centerLeft,
-            padding: EdgeInsets.fromLTRB(15, 20, 0, 5),
-            child: Text(
               'Weekly Trend',
-              style: TextStyle(fontSize: 16, fontFamily: 'Lato', fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Lato',
+                  fontWeight: FontWeight.bold),
               textAlign: TextAlign.left,
             ),
           ),
+          Container(
+            padding: EdgeInsets.all(0),
+            height: ManageDeviceInfo.resolutionHeight * 0.28,
+            child: ListView.builder(
+              physics: ClampingScrollPhysics(),
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: ModelWeeklyPopularComicInfo.list.length,
+              itemBuilder: (BuildContext context, int index) => Card(
+                child: Stack(
+                  children: <Widget>[
+                    SizedBox(
+                      width: ManageDeviceInfo.resolutionWidth * 0.45,
+                      child: Card(
+                        elevation: 0,
+                        clipBehavior: Clip.antiAlias,
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              width: ManageDeviceInfo.resolutionWidth * 0.45,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(2.0),
+                                child: SizedBox(
+                                  height:
+                                      ManageDeviceInfo.resolutionHeight * 0.135,
+                                  child: Image.asset(
+                                    'images/batman.jpg',
+                                    fit: BoxFit.cover,
+                                  ), //Todo need to change the image link to  "snapshot.data[index].url"
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                                child: Padding(
+                                    padding: EdgeInsets.all(5.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Container(
+                                          height: ManageDeviceInfo
+                                                  .resolutionHeight *
+                                              0.040,
+                                          child: Text(
+                                            'Title of this content is too long so we need to shorten it with ...',
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                              fontFamily: 'Lato',
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: ManageDeviceInfo
+                                                  .resolutionHeight *
+                                              0.004,
+                                        ), // used for spacing purpose
+                                        Expanded(
+                                          child: Container(
+                                            height: ManageDeviceInfo
+                                                    .resolutionHeight *
+                                                0.03,
+                                            child: Text(
+                                              'More description of title with some catch phrase, more text, longer text, and too many of them',
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                fontFamily: 'Lato',
+                                                color: Colors.grey[800],
+                                                fontSize: 11,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: ManageDeviceInfo
+                                                  .resolutionHeight *
+                                              0.004,
+                                        ), // used for spacing purpose
 
-
-         ],
-
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: <Widget>[
+                                            SizedBox(
+                                              height: ManageDeviceInfo
+                                                      .resolutionHeight *
+                                                  0.02,
+                                              child: Text(
+                                                'ID',
+                                                style: TextStyle(
+                                                  fontFamily: 'Lato',
+                                                  color: Colors.blueGrey,
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: ManageDeviceInfo
+                                                      .resolutionWidth *
+                                                  0.3,
+                                              child: Text(
+                                                'Views: 489,584,219',
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.right,
+                                                style: TextStyle(
+                                                  fontFamily: 'Lato',
+                                                  color: Colors.grey[700],
+                                                  fontSize: 9,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    )))
+                          ],
+                        ),
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          highlightColor: Colors.transparent,
+                          onTap: () {
+                            print('Card was tapped');
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
 
   Column buildColumn(BuildContext context) {
     return Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            SizedBox(
-              height: 200,
-              child: Card(
-                // This ensures that the Card's children (including the ink splash) are clipped correctly.
-                clipBehavior: Clip.antiAlias,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        SizedBox(
+          height: 200,
+          child: Card(
+            // This ensures that the Card's children (including the ink splash) are clipped correctly.
+            clipBehavior: Clip.antiAlias,
 //                  shape: shape,
-                child: InkWell(
-                  onTap: () {
-                    print('Card was tapped');
-                  },
-                  // Generally, material cards use onSurface with 12% opacity for the pressed state.
-                  splashColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.12),
-                  // Generally, material cards do not have a highlight overlay.
-                  highlightColor: Colors.transparent,
-                  child: Stack( children: <Widget>[
-                    Stack(
-                      children: <Widget>[
-                        Positioned.fill(
-                          // In order to have the ink splash appear above the image, you
-                          // must use Ink.image. This allows the image to be painted as part
-                          // of the Material and display ink effects above it. Using a
-                          // standard Image will obscure the ink splash.
-                          child: Ink.image(
-                            image: AssetImage('images/야옹이.png'),
-                            fit: BoxFit.cover,
-                            child: Container(
-                              child: Text('testing'),
-                            ),
+            child: InkWell(
+              onTap: () {
+                print('Card was tapped');
+              },
+              // Generally, material cards use onSurface with 12% opacity for the pressed state.
+              splashColor:
+                  Theme.of(context).colorScheme.onSurface.withOpacity(0.12),
+              // Generally, material cards do not have a highlight overlay.
+              highlightColor: Colors.transparent,
+              child: Stack(
+                children: <Widget>[
+                  Stack(
+                    children: <Widget>[
+                      Positioned.fill(
+                        // In order to have the ink splash appear above the image, you
+                        // must use Ink.image. This allows the image to be painted as part
+                        // of the Material and display ink effects above it. Using a
+                        // standard Image will obscure the ink splash.
+                        child: Ink.image(
+                          image: AssetImage('images/야옹이.png'),
+                          fit: BoxFit.cover,
+                          child: Container(
+                            child: Text('testing'),
                           ),
                         ),
-                        Positioned(
-                          bottom: 2.0,
-                          left: 2.0,
-                          right: 2.0,
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            alignment: Alignment.centerLeft,
-                            child: Text('title',
-                            ),
+                      ),
+                      Positioned(
+                        bottom: 2.0,
+                        left: 2.0,
+                        right: 2.0,
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'title',
                           ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+// Description and share/explore buttons.
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 0.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        // three line description
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 2.0),
+                          child: Text(
+                            'More description of this contents',
+                          ),
+                        ),
+                        Text('more text from db'),
+                        Text('more text from db'),
+                      ],
+                    ),
+                  ),
+
+                  ButtonTheme.bar(
+                    // make buttons use the appropriate styles for cards
+                    child: ButtonBar(
+                      children: <Widget>[
+                        FlatButton(
+                          child: const Text('Share'),
+                          onPressed: () {/* ... */},
+                        ),
+                        FlatButton(
+                          child: const Text('Like'),
+                          onPressed: () {/* ... */},
                         ),
                       ],
                     ),
-
-
-// Description and share/explore buttons.
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 0.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          // three line description
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 2.0),
-                            child: Text('More description of this contents',
-
-                            ),
-                          ),
-                          Text('more text from db'),
-                          Text('more text from db'),
-                        ],
-                      ),
-
-                    ),
-
-                    ButtonTheme.bar( // make buttons use the appropriate styles for cards
-                      child: ButtonBar(
-                        children: <Widget>[
-                          FlatButton(
-                            child: const Text('Share'),
-                            onPressed: () { /* ... */ },
-                          ),
-                          FlatButton(
-                            child: const Text('Like'),
-                            onPressed: () { /* ... */ },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],),
-                ),
+                  ),
+                ],
               ),
             ),
-
-
-            ],
-        );
-  }
+          ),
+        ),
+      ],
+    );
+  } // not used at the moment
 }
-
 
 // Need handler for indicator
 List<T> map<T>(List list, Function handler) {
@@ -529,11 +1005,11 @@ List<T> map<T>(List list, Function handler) {
 
 final List<String> featuredComicsList = [];
 
-List<String> countBanner(List<ModelFeaturedComicInfo> countBanner) { // Todo Need to change this "TodayPopularComicInfo" to Creator Featured
+List<String> countBanner(List<ModelFeaturedComicInfo> countBanner) {
+  // Todo Need to change this "TodayPopularComicInfo" to Creator Featured
   print('countBanner start');
 
-  if(null == countBanner)
-    return null;
+  if (null == countBanner) return null;
 
   int count = countBanner.length;
   if (count > 6) count = 6;
@@ -546,13 +1022,11 @@ List<String> countBanner(List<ModelFeaturedComicInfo> countBanner) { // Todo Nee
   return featuredComicsList;
 }
 
-
 final List bannerListWithContainer = map<Widget>(
   featuredComicsList,
-      (index, i) {
+  (index, i) {
     return Container(
       height: 300,
-
       margin: EdgeInsets.all(5.0),
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -561,8 +1035,6 @@ final List bannerListWithContainer = map<Widget>(
     );
   },
 ).toList();
-
-
 
 // Basic carousel slider format
 
