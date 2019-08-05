@@ -14,6 +14,9 @@ import 'package:first_ui/packets/packet_echo.dart';
 import 'package:first_ui/packets/packet_c2s_featured_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_new_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_weekly_popular_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_real_time_trend_info.dart';
+import 'package:first_ui/packets/packet_c2s_recommended_comic_info.dart';
+
 
 final FirebaseAuth _fAuth = FirebaseAuth.instance;
 final GoogleSignIn _gSignIn = new GoogleSignIn();
@@ -41,7 +44,8 @@ class _DevTestState extends State<DevTest> {
   PacketC2SFeaturedComicInfo c2SFeaturedComicInfo = new PacketC2SFeaturedComicInfo();
   PacketC2SViewComic c2SViewComic = new PacketC2SViewComic();
   PacketC2SNewComicInfo c2SNewComicInfo = new PacketC2SNewComicInfo();
-
+  PacketC2SRealTimeTrendInfo c2SRealTimeTrendInfo = new PacketC2SRealTimeTrendInfo();
+  PacketC2SRecommendedComicInfo c2SRecommendedComicInfo = new PacketC2SRecommendedComicInfo();
 
   @override
   void initState() {
@@ -53,9 +57,8 @@ class _DevTestState extends State<DevTest> {
     c2SFeaturedComicInfo.generate(0, 0);
     c2SViewComic.generate();
     c2SNewComicInfo.generate(0,0);
-
-    //c2SViewComic.fetchBytes();
-
+    c2SRealTimeTrendInfo.generate(0,0);
+    c2SRecommendedComicInfo.generate(0,0);
   }
 
   Future<String> _signInWithGoogle() async {
@@ -131,7 +134,10 @@ class _DevTestState extends State<DevTest> {
               //future:c2STodayPopularComicInfo.fetchBytes(),
               //future:c2SFeaturedComicInfo.fetchBytes(),
               //future:c2SNewComicInfo.fetchBytes(),
-              future:c2SWeeklyPopularComicInfo.fetchBytes(),
+              //future:c2SViewComic.fetchBytes(),
+              //future:c2SWeeklyPopularComicInfo.fetchBytes(),
+              //future:c2SRealTimeTrendInfo.fetchBytes(),
+              future:c2SRecommendedComicInfo.fetchBytes(),
               initialData: [],
               builder: (context, snapshot) {
                 this.snapshot = snapshot;
@@ -151,8 +157,6 @@ class _DevTestState extends State<DevTest> {
         */
 
       ]),
-
-
 
       /*
       body: CustomScrollView(
