@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if(0 == switchPage)
       Navigator.of(context).pushReplacementNamed('/HomeScreen');
     else
-      Navigator.of(context).pushReplacementNamed('/DevTest');
+      Navigator.of(context).pushReplacementNamed('/PageDevTest');
   }
 
   @override
