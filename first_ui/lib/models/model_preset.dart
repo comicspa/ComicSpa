@@ -14,7 +14,6 @@ enum e_comic_genre
 typedef void OnPresetFetchDone();
 
 
-
 class ModelPreset
 {
 

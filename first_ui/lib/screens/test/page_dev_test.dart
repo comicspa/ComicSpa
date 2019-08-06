@@ -32,12 +32,12 @@ GoogleSignIn _googleSignIn = new GoogleSignIn(
 );
 
 
-class DevTest extends StatefulWidget {
+class PageDevTest extends StatefulWidget {
   @override
-  _DevTestState createState() => new _DevTestState();
+  _PageDevTestState createState() => new _PageDevTestState();
 }
 
-class _DevTestState extends State<DevTest> {
+class _PageDevTestState extends State<PageDevTest> {
 
   int selectedCountIndex = -1;
   AsyncSnapshot snapshot;
