@@ -6,33 +6,33 @@ import 'package:flutter/services.dart';
 import 'package:first_ui/models/global_common.dart';
 import 'package:first_ui/packets/packet_common.dart';
 import 'package:first_ui/packets/packet_c2s_common.dart';
-import 'package:first_ui/packets/packet_s2c_featured_comic_info.dart';
-import 'package:first_ui/models/model_featured_comic_info.dart';
+import 'package:first_ui/packets/packet_s2c_weekly_creator_info.dart';
+import 'package:first_ui/models/model_weekly_creator_info.dart';
 
 
 
-class PacketC2SFeaturedComicInfo extends PacketC2SCommon
+class PacketC2SWeeklyCreatorInfo extends PacketC2SCommon
 {
-  int _pageCountIndex;
-  int _pageViewCount;
+  int _pageCountIndex = 0;
+  int _pageViewCount = 0;
 
-  PacketC2SFeaturedComicInfo()
+  PacketC2SWeeklyCreatorInfo()
   {
-    type = e_packet_type.c2s_featured_comic_info;
+    type = e_packet_type.c2s_weekly_creator_info;
   }
 
-  void generate(int pageViewCount,int pageCountIndex)
+  void generate()
   {
-    _pageViewCount = pageViewCount;
-    _pageCountIndex = pageCountIndex;
+    //_pageViewCount = pageViewCount;
+    //_pageCountIndex = pageCountIndex;
   }
 
-  Future<List<ModelFeaturedComicInfo>> fetchBytes() async
+  Future<List<ModelWeeklyCreatorInfo>> fetchBytes() async
   {
-    print('PacketC2SFeaturedComicInfo : fetchBytes started');
+    print('PacketC2SWeeklyCreatorInfo : fetchBytes started');
 
-    if(null != ModelFeaturedComicInfo.list)
-      return ModelFeaturedComicInfo.list;
+    if(null != ModelWeeklyCreatorInfo.list)
+      return ModelWeeklyCreatorInfo.list;
 
     Socket socket = await GlobalCommon.createServiceSocket();
     print('connected server');
@@ -57,11 +57,11 @@ class PacketC2SFeaturedComicInfo extends PacketC2SCommon
       {
         //print('eventList.length == packetSize');
 
-        PacketS2CFeaturedComicInfo packet = new PacketS2CFeaturedComicInfo();
+        PacketS2CWeeklyCreatorInfo packet = new PacketS2CWeeklyCreatorInfo();
         packet.parseBytes(packetSize,byteData);
       }
 
-      return ModelFeaturedComicInfo.list;
+      return ModelWeeklyCreatorInfo.list;
     });
 
     int packetBodySize  = 4 + 4;
@@ -77,7 +77,7 @@ class PacketC2SFeaturedComicInfo extends PacketC2SCommon
     await Future.delayed(Duration(seconds: 20));
     socket.close();
 
-    return ModelFeaturedComicInfo.list;
+    return ModelWeeklyCreatorInfo.list;
   }
 
 

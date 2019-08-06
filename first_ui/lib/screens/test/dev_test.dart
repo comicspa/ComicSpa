@@ -17,6 +17,8 @@ import 'package:first_ui/packets/packet_c2s_weekly_popular_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_real_time_trend_info.dart';
 import 'package:first_ui/packets/packet_c2s_recommended_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_comic_detail_info.dart';
+import 'package:first_ui/packets/packet_c2s_new_creator_info.dart';
+import 'package:first_ui/packets/packet_c2s_weekly_creator_info.dart';
 
 
 final FirebaseAuth _fAuth = FirebaseAuth.instance;
@@ -47,13 +49,16 @@ class _DevTestState extends State<DevTest> {
   PacketC2SNewComicInfo c2SNewComicInfo = new PacketC2SNewComicInfo();
   PacketC2SRealTimeTrendInfo c2SRealTimeTrendInfo = new PacketC2SRealTimeTrendInfo();
   PacketC2SRecommendedComicInfo c2SRecommendedComicInfo = new PacketC2SRecommendedComicInfo();
-  PacketC2SComicDetailInfo c2sComicDetailInfo = new PacketC2SComicDetailInfo();
+  PacketC2SComicDetailInfo c2SComicDetailInfo = new PacketC2SComicDetailInfo();
+  PacketC2SNewCreatorInfo c2SNewCreatorInfo = new PacketC2SNewCreatorInfo();
+  PacketC2SWeeklyCreatorInfo c2SWeeklyCreatorInfo = new PacketC2SWeeklyCreatorInfo();
 
   @override
   void initState() {
     super.initState();
 
     //checkPermissionGetMultiFilePath();
+
     c2STodayPopularComicInfo.generate(0, 0);
     c2SWeeklyPopularComicInfo.generate(0, 0);
     c2SFeaturedComicInfo.generate(0, 0);
@@ -61,7 +66,9 @@ class _DevTestState extends State<DevTest> {
     c2SNewComicInfo.generate(0,0);
     c2SRealTimeTrendInfo.generate(0,0);
     c2SRecommendedComicInfo.generate(0,0);
-    c2sComicDetailInfo.generate();
+    c2SComicDetailInfo.generate();
+    c2SNewCreatorInfo.generate();
+    c2SWeeklyCreatorInfo.generate();
   }
 
   Future<String> _signInWithGoogle() async {
@@ -101,9 +108,11 @@ class _DevTestState extends State<DevTest> {
               selectedCountIndex = index;
               print('$index: ${values[index].url}');
 
-              _signInWithGoogle();
-              //c2sComicDetailInfo.fetchBytes();
+              //_signInWithGoogle();
+              //c2SComicDetailInfo.fetchBytes();
               //c2SViewComic.fetchBytes();
+              //c2SNewCreatorInfo.fetchBytes();
+              c2SWeeklyCreatorInfo.fetchBytes();
             });
 
             //print(selectedCountIndex);

@@ -52,6 +52,12 @@ enum e_packet_type
 
   c2s_recommended_comic_info,
   s2c_recommended_comic_info,
+
+  c2s_new_creator_info,
+  s2c_new_creator_info,
+
+  c2s_weekly_creator_info,
+  s2c_weekly_creator_info,
 }
 
 
