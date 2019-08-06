@@ -1,7 +1,8 @@
+import 'dart:typed_data';
 
 import 'package:first_ui/packets/packet_common.dart';
 import 'package:first_ui/packets/packet_s2c_common.dart';
-import 'package:first_ui/models/model_view_comic.dart';
+import 'package:first_ui/models/model_comic_detail_info.dart';
 
 
 class PacketS2CComicDetailInfo extends PacketS2CCommon
@@ -11,22 +12,23 @@ class PacketS2CComicDetailInfo extends PacketS2CCommon
     type = e_packet_type.s2c_comic_detail_info;
   }
 
-  void parseBytes(List<int> event)
+  void parseBytes(int packetSize,ByteData byteDataExceptionSize)
   {
-    parseHeader(event);
+    parseHeaderChecked(packetSize,byteDataExceptionSize);
 
     systemErrorCode = getUint32();
     serviceErrorCode = getUint32();
 
     print('PackSize : $size , PacketType : $type , systemErrorCode : $systemErrorCode , serviceErrorCode : $serviceErrorCode');
 
-    ModelViewComic.getInstance().comicNumber = getUint32();
-    ModelViewComic.getInstance().comicTitle = readStringToByteBuffer();
+    /*
+    ModelComicDetailInfo.getInstance().comicNumber = getUint32();
+    ModelComicDetailInfo.getInstance().comicTitle = readStringToByteBuffer();
 
-    if(null == ModelViewComic.getInstance().comicImageUrlList)
-      ModelViewComic.getInstance().comicImageUrlList = new List<String>();
+    if(null == ModelComicDetailInfo.getInstance().comicImageUrlList)
+      ModelComicDetailInfo.getInstance().comicImageUrlList = new List<String>();
     else
-      ModelViewComic.getInstance().comicImageUrlList.clear();
+      ModelComicDetailInfo.getInstance().comicImageUrlList.clear();
 
     int comicCount = getUint32();
     print('comicCount : $comicCount');
@@ -35,8 +37,9 @@ class PacketS2CComicDetailInfo extends PacketS2CCommon
       String comicImageUrl = readStringToByteBuffer();
       print('comicImageUrl[$countIndex] : $comicImageUrl');
 
-      ModelViewComic.getInstance().comicImageUrlList.add(comicImageUrl);
+      ModelComicDetailInfo.getInstance().comicImageUrlList.add(comicImageUrl);
     }
+    */
   }
 
 

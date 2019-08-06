@@ -4,15 +4,19 @@ class ModelComicDetailInfo
 {
   String _userId;
   String _creatorId;
-  String _comicTitle;
-  String _pageUrl;
+  String _comicMainTitleName;
+  String _representationImageUrl;
   String _explain;
+  String _creatorName;
+  double _point;
 
   String get userId => _userId;
   String get creatorId => _creatorId;
-  String get comicTitle => _comicTitle;
-  String get pageUrl => _pageUrl;
+  String get comicMainTitleName => _comicMainTitleName;
+  String get representationImageUrl => _representationImageUrl;
   String get explain => _explain;
+  String get creatorName => _creatorName;
+  double get point => _point;
 
   set userId(String userId)
   {
@@ -22,17 +26,25 @@ class ModelComicDetailInfo
   {
     _creatorId = creatorId;
   }
-  set comicTitle(String comicTitle)
+  set comicMainTitleName(String comicMainTitleName)
   {
-    _comicTitle = comicTitle;
+    _comicMainTitleName = comicMainTitleName;
   }
-  set pageUrl(String pageUrl)
+  set representationImageUrl(String representationImageUrl)
   {
-    _pageUrl = pageUrl;
+    _representationImageUrl = representationImageUrl;
   }
   set explain(String explain)
   {
     _explain = explain;
+  }
+  set creatorName(String creatorName)
+  {
+    _creatorName = creatorName;
+  }
+  set point(double point)
+  {
+    _point = point;
   }
 
   static ModelComicDetailInfo _instance;

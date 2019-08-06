@@ -51,4 +51,5 @@ class ModelFeaturedComicInfo
 
   static List<ModelFeaturedComicInfo> list;
 
+  static List<String> thumbnailUrls;
 }
