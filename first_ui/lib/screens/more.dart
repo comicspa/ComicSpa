@@ -72,8 +72,10 @@ class _MoreScreenState extends State<MoreScreen> {
                                     MaterialPageRoute(
                                       builder: (context) =>
                                           ViewerScreen(i.thumbnailUrl), // link to Actual viewer
-                                    ));
-                              }),
+                                    ),
+                                );
+                              },
+                          ),
                         );
                       });
                     }).toList());
