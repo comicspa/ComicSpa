@@ -9,6 +9,7 @@ class FeaturedComicInfo extends ComicInfo
 {
 
 
+
   static Future<FeaturedComicInfo> fetch() async
   {
     print('start fetch');
