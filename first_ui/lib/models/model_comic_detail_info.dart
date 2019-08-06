@@ -1,5 +1,5 @@
 
-import 'package:first_ui/models/comic_info.dart';
+import 'package:first_ui/models/model_comic_info.dart';
 
 
 class ModelComicDetailInfo
@@ -11,7 +11,7 @@ class ModelComicDetailInfo
   String _explain;
   String _creatorName;
   double _point;
-  List<ComicInfo> _comicInfoList;
+  List<ModelComicInfo> _modelComicInfoList;
 
   String get userId => _userId;
   String get creatorId => _creatorId;
@@ -20,7 +20,7 @@ class ModelComicDetailInfo
   String get explain => _explain;
   String get creatorName => _creatorName;
   double get point => _point;
-  List<ComicInfo> get comicInfoList => _comicInfoList;
+  List<ModelComicInfo> get modelComicInfoList => _modelComicInfoList;
 
   set userId(String userId)
   {
@@ -50,9 +50,9 @@ class ModelComicDetailInfo
   {
     _point = point;
   }
-  set comicInfoList(List<ComicInfo> comicInfoList)
+  set modelComicInfoList(List<ModelComicInfo> modelComicInfoList)
   {
-    _comicInfoList = comicInfoList;
+    _modelComicInfoList = modelComicInfoList;
   }
 
   static ModelComicDetailInfo _instance;
