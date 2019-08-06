@@ -1,22 +1,26 @@
 
+import 'package:first_ui/models/comic_info.dart';
+
 
 class ModelComicDetailInfo
 {
   String _userId;
   String _creatorId;
-  String _comicMainTitleName;
+  String _mainTitleName;
   String _representationImageUrl;
   String _explain;
   String _creatorName;
   double _point;
+  List<ComicInfo> _comicInfoList;
 
   String get userId => _userId;
   String get creatorId => _creatorId;
-  String get comicMainTitleName => _comicMainTitleName;
+  String get mainTitleName => _mainTitleName;
   String get representationImageUrl => _representationImageUrl;
   String get explain => _explain;
   String get creatorName => _creatorName;
   double get point => _point;
+  List<ComicInfo> get comicInfoList => _comicInfoList;
 
   set userId(String userId)
   {
@@ -26,9 +30,9 @@ class ModelComicDetailInfo
   {
     _creatorId = creatorId;
   }
-  set comicMainTitleName(String comicMainTitleName)
+  set mainTitleName(String mainTitleName)
   {
-    _comicMainTitleName = comicMainTitleName;
+    _mainTitleName = mainTitleName;
   }
   set representationImageUrl(String representationImageUrl)
   {
@@ -45,6 +49,10 @@ class ModelComicDetailInfo
   set point(double point)
   {
     _point = point;
+  }
+  set comicInfoList(List<ComicInfo> comicInfoList)
+  {
+    _comicInfoList = comicInfoList;
   }
 
   static ModelComicDetailInfo _instance;

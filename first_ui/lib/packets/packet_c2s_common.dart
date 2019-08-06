@@ -48,6 +48,19 @@ class PacketC2SCommon extends PacketCommon
   }
 
 
+  bool setDouble(double value)
+  {
+    if(null == byteData)
+      return false;
+
+    byteData.setFloat64(currentOffset,value, PacketCommon.endian);
+    currentOffset += 8;
+
+    return true;
+  }
+
+
+
   void writeStringToByteBuffer(List<int> fileNameStringEncodedList)
   {
     currentOffset = PacketUtility.writeStringToByteBuffer(byteData, currentOffset, fileNameStringEncodedList, PacketCommon.endian);

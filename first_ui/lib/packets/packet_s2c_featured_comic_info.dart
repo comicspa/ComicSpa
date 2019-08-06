@@ -42,11 +42,6 @@ class PacketS2CFeaturedComicInfo extends PacketS2CCommon
       if(null == ModelFeaturedComicInfo.list)
         ModelFeaturedComicInfo.list = new List<ModelFeaturedComicInfo>();
       ModelFeaturedComicInfo.list.add(modelFeaturedComicInfo);
-
-      if(null == ModelFeaturedComicInfo.thumbnailUrls)
-        ModelFeaturedComicInfo.thumbnailUrls = new List<String>();
-      ModelFeaturedComicInfo.thumbnailUrls.add(modelFeaturedComicInfo.thumbnailUrl);
-
     }
   }
 

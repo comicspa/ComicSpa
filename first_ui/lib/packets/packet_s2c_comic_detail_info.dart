@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:first_ui/packets/packet_common.dart';
 import 'package:first_ui/packets/packet_s2c_common.dart';
 import 'package:first_ui/models/model_comic_detail_info.dart';
+import 'package:first_ui/models/comic_info.dart';
 
 
 class PacketS2CComicDetailInfo extends PacketS2CCommon
@@ -21,25 +22,37 @@ class PacketS2CComicDetailInfo extends PacketS2CCommon
 
     print('PackSize : $size , PacketType : $type , systemErrorCode : $systemErrorCode , serviceErrorCode : $serviceErrorCode');
 
-    /*
-    ModelComicDetailInfo.getInstance().comicNumber = getUint32();
-    ModelComicDetailInfo.getInstance().comicTitle = readStringToByteBuffer();
+    //String _userId;
+    //String _creatorId;
+    ModelComicDetailInfo.getInstance().creatorName = readStringToByteBuffer();
+    ModelComicDetailInfo.getInstance().mainTitleName = readStringToByteBuffer();
+    ModelComicDetailInfo.getInstance().representationImageUrl = readStringToByteBuffer();
+    ModelComicDetailInfo.getInstance().explain = readStringToByteBuffer();
+    print('comicDetailInfo_explain : ${ModelComicDetailInfo.getInstance().explain}');
+    ModelComicDetailInfo.getInstance().point = getDouble();
 
-    if(null == ModelComicDetailInfo.getInstance().comicImageUrlList)
-      ModelComicDetailInfo.getInstance().comicImageUrlList = new List<String>();
+    if(null == ModelComicDetailInfo.getInstance().comicInfoList)
+      ModelComicDetailInfo.getInstance().comicInfoList = new List<ComicInfo>();
     else
-      ModelComicDetailInfo.getInstance().comicImageUrlList.clear();
+      ModelComicDetailInfo.getInstance().comicInfoList.clear();
 
-    int comicCount = getUint32();
-    print('comicCount : $comicCount');
-    for(int countIndex=0; countIndex<comicCount; ++countIndex)
+    int comicInfoCount = getUint32();
+    print('comicInfoCount : $comicInfoCount');
+    for(int countIndex=0; countIndex<comicInfoCount; ++countIndex)
     {
-      String comicImageUrl = readStringToByteBuffer();
-      print('comicImageUrl[$countIndex] : $comicImageUrl');
+      ComicInfo comicInfo = new ComicInfo();
 
-      ModelComicDetailInfo.getInstance().comicImageUrlList.add(comicImageUrl);
+      comicInfo.episode = getUint32();
+      comicInfo.thumbnailImageUrl = readStringToByteBuffer();
+      comicInfo.subTitleName = readStringToByteBuffer();
+      comicInfo.collected = getUint32();
+      comicInfo.updated = getUint32();
+
+      print('comicInfo_thumbnailImageURL[$countIndex] : ${comicInfo.thumbnailImageUrl}');
+
+      ModelComicDetailInfo.getInstance().comicInfoList.add(comicInfo);
     }
-    */
+
   }
 
 

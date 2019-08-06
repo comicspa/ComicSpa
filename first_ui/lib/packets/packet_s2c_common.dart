@@ -60,6 +60,13 @@ class PacketS2CCommon extends PacketCommon
     return value;
   }
 
+  double getDouble()
+  {
+    double value = byteData.getFloat64(currentOffset, PacketCommon.endian);
+    currentOffset += 8;
+    return value;
+  }
+
 
   String readStringToByteBuffer()
   {
