@@ -10,7 +10,6 @@ import 'package:first_ui/models/today_popular_comic_info.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:first_ui/packets/packet_c2s_today_popular_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_view_comic.dart';
-import 'package:first_ui/packets/packet_echo.dart';
 import 'package:first_ui/packets/packet_c2s_featured_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_new_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_weekly_popular_comic_info.dart';
