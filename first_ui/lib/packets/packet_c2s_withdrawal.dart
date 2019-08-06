@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:first_ui/models/global_common.dart';
+import 'package:first_ui/models/model_common.dart';
 import 'package:first_ui/models/user_info.dart';
 import 'package:first_ui/packets/packet_utility.dart';
 import 'package:first_ui/packets/packet_common.dart';
@@ -28,7 +28,7 @@ class PacketC2SWithdrawal extends PacketC2SCommon
 
   void fetchBytes(onPacketWithdrawalFetchDone) async
   {
-    Socket socket = await GlobalCommon.createServiceSocket();
+    Socket socket = await ModelCommon.createServiceSocket();
     print('connected server');
 
     // listen to the received data event stream

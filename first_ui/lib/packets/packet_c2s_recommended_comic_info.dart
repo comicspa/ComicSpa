@@ -3,7 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 
-import 'package:first_ui/models/global_common.dart';
+import 'package:first_ui/models/model_common.dart';
 import 'package:first_ui/packets/packet_common.dart';
 import 'package:first_ui/packets/packet_c2s_common.dart';
 import 'package:first_ui/packets/packet_s2c_recommended_comic_info.dart';
@@ -34,7 +34,7 @@ class PacketC2SRecommendedComicInfo extends PacketC2SCommon
     if(null != ModelRecommendedComicInfo.list)
       return ModelRecommendedComicInfo.list;
 
-    Socket socket = await GlobalCommon.createServiceSocket();
+    Socket socket = await ModelCommon.createServiceSocket();
     print('connected server');
 
 

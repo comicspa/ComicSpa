@@ -3,7 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 
-import 'package:first_ui/models/global_common.dart';
+import 'package:first_ui/models/model_common.dart';
 import 'package:first_ui/packets/packet_common.dart';
 import 'package:first_ui/packets/packet_c2s_common.dart';
 import 'package:first_ui/packets/packet_s2c_today_popular_comic_info.dart';
@@ -13,8 +13,6 @@ import 'package:first_ui/models/today_popular_comic_info.dart';
 
 class PacketC2STodayPopularComicInfo extends PacketC2SCommon
 {
-  //static Uint8List packetBytesList;
-
   int _pageCountIndex;
   int _pageViewCount;
 
@@ -36,7 +34,7 @@ class PacketC2STodayPopularComicInfo extends PacketC2SCommon
     if(null != TodayPopularComicInfo.list)
       return TodayPopularComicInfo.list;
 
-    Socket socket = await GlobalCommon.createServiceSocket();
+    Socket socket = await ModelCommon.createServiceSocket();
     print('connected server');
 
 

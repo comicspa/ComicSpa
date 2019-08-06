@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:first_ui/models/preset.dart';
+import 'package:first_ui/models/model_preset.dart';
 import 'package:first_ui/manage/manage_device_info.dart';
 
 
@@ -25,11 +25,11 @@ class _SplashScreenState extends State<SplashScreen> {
     //var _duration = new Duration(seconds: 2);
     //return new Timer(_duration, navigationPage);
 
-    Preset.fetch(_presetFetchDone);
+    ModelPreset.fetch(_presetFetchDone);
   }
 
   void navigationPage() {
-    int switchPage = 1;
+    int switchPage = 0;
     if(0 == switchPage)
       Navigator.of(context).pushReplacementNamed('/HomeScreen');
     else

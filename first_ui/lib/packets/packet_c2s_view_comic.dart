@@ -4,7 +4,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 
-import 'package:first_ui/models/global_common.dart';
+import 'package:first_ui/models/model_common.dart';
 import 'package:first_ui/packets/packet_common.dart';
 import 'package:first_ui/packets/packet_c2s_common.dart';
 import 'package:first_ui/packets/packet_s2c_view_comic.dart';
@@ -27,7 +27,7 @@ class PacketC2SViewComic extends PacketC2SCommon
   {
     print('PacketC2SViewComic : fetchBytes started');
 
-    Socket socket = await GlobalCommon.createServiceSocket();
+    Socket socket = await ModelCommon.createServiceSocket();
     print('connected server');
 
     // listen to the received data event stream
