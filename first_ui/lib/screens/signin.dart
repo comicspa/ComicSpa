@@ -81,7 +81,7 @@ class _SignInPageState extends State<SignInPage> {
           children: <Widget>[
             Container( // Todo need to fix this for svg image
               height: 50,
-                child: SvgPicture.asset('images/btn_google_light_normal_iso.svg', )),
+                child: SvgPicture.asset('images/icon_alarm.svg', )),
 //            Image(image: SvgPicture.asset("images/btn_google_light_normal_ios.svg"), height: 35.0),
             Padding(
               padding: const EdgeInsets.only(left: 10),

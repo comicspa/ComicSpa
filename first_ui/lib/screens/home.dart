@@ -5,6 +5,7 @@ import 'package:first_ui/screens/creator.dart';
 import 'package:first_ui/screens/testhome.dart';
 import 'package:first_ui/screens/Trend.dart';
 import 'package:first_ui/screens/signin.dart';
+import 'package:first_ui/screens/notification.dart';
 //import 'package:flutter/services.dart';
 
 
@@ -51,11 +52,16 @@ class _HomeScreenState extends State<HomeScreen>
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12.0),
               child: Icon(Icons.perm_identity),
-//            child: Image.asset(
-//              'images/Comi.png',
-//              width: 21.5,
-//              height: 18.5,
-//            ),
+            ),
+            IconButton(
+              icon: Icon(Icons.notifications,),
+              onPressed: (){
+                Navigator.push(context,
+                  MaterialPageRoute(
+                    builder: (context) => NotificationScreen(),
+                  ),
+                );
+              },
             ),
             Padding(   //Todo If search feature goes to bottomAppBar delete this padding
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -103,49 +109,3 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 }
-
-//        new BottomNavigationBar(
-//            type: BottomNavigationBarType.fixed,
-//            items: [
-//              new BottomNavigationBarItem(
-//                  backgroundColor: Colors.white,
-//                  icon: new Image.asset(
-//                    'images/HomeKey_home_on.png',
-//                    width: 23,
-//                    height: 20,
-//                  ),
-//                  title: new Text('Home',
-//                      style: new TextStyle(
-//                          color: const Color(0xFF06244e), fontSize: 11.0))),
-//              new BottomNavigationBarItem(
-//                  icon: new Image.asset(
-//                    'images/HomeKey_library_on.png',
-//                    width: 23,
-//                    height: 20,
-//                  ),
-//                  title: new Text('Library',
-//                      style: new TextStyle(
-//                          color: const Color(0xFF06244e), fontSize: 11.0))),
-//              new BottomNavigationBarItem(
-//                  icon: new Image.asset(
-//                    'images/HomeKey_creater_on.png',
-//                    width: 23,
-//                    height: 20,
-//                  ),
-//                  title: new Text(
-//                    'Creators',
-//                    style: new TextStyle(
-//                        color: const Color(0xFF06244e), fontSize: 11.0),
-//                  )),
-//              new BottomNavigationBarItem(
-//                  icon: new Image.asset(
-//                    'images/HomeKey_etc_on.png',
-//                    width: 23,
-//                    height: 20,
-//                  ),
-//                  title: new Text(
-//                    'More',
-//                    style: new TextStyle(
-//                        color: const Color(0xFF06244e), fontSize: 11.0),
-//                  ))
-//            ]));

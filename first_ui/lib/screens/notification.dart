@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:first_ui/screens/library.dart';
-import 'package:first_ui/screens/more.dart';
-import 'package:first_ui/screens/creator.dart';
-import 'package:first_ui/screens/testhome.dart';
 import 'package:first_ui/screens/Trend.dart';
-import 'package:first_ui/screens/signin.dart';
-import 'package:first_ui/screens/notification.dart';
 
-// Coming soon page for multi-purpose
 
-class ComingSoonScreen extends StatefulWidget {
+
+class NotificationScreen extends StatefulWidget {
   @override
-  _ComingSoonScreenState createState() => new _ComingSoonScreenState();
+  _NotificationScreenState createState() => new _NotificationScreenState();
 }
 
-class _ComingSoonScreenState extends State<ComingSoonScreen> {
+class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +36,7 @@ class _ComingSoonScreenState extends State<ComingSoonScreen> {
             IconButton(
               icon: Icon(Icons.notifications,),
               onPressed: (){
-                Navigator.pop(context,
+                Navigator.push<Widget>(context,
                   MaterialPageRoute(
                     builder: (context) => NotificationScreen(),
                   ),
@@ -85,12 +79,34 @@ class _ComingSoonScreenState extends State<ComingSoonScreen> {
               child: Text('Back to Main Page'),
               onPressed: () {
 
-             },
+                  Navigator.pop(context,
+                    MaterialPageRoute(
+                      builder: (context) => Trend(),
+                    ),
+                  );
+
+              },
             ),
+
+
+            Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+
+                    ],
+                  ),
+                  Row(),
+                  Row(),
+                ],
+              ),
+            ),
+
           ],
         ),
       ),
-
     );
   }
 }
