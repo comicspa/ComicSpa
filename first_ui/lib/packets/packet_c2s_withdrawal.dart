@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:first_ui/models/model_common.dart';
-import 'package:first_ui/models/user_info.dart';
+import 'package:first_ui/models/model_user_info.dart';
 import 'package:first_ui/packets/packet_utility.dart';
 import 'package:first_ui/packets/packet_common.dart';
 import 'package:first_ui/packets/packet_c2s_common.dart';
