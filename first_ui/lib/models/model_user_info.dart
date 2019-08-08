@@ -10,34 +10,86 @@ enum e_social_provider_type
 
 class ModelUserInfo
 {
-  static String _id;
-  static String _creatorId;
-  static e_social_provider_type _socialProviderType;
-  static int _comi;
+  String _id;
+  String _creatorId;
+  e_social_provider_type _socialProviderType = e_social_provider_type.none;
+  int _comi;
+  bool _loggedIn;
+  String _email;
+  String _displayName;
+  String _photoUrl;
+  String _uId;
 
-  static String get id => _id;
-  static String get creatorId => _creatorId;
-  static e_social_provider_type get socialProviderType => _socialProviderType;
-  static int get comi => _comi;
+  String get id => _id;
+  String get creatorId => _creatorId;
+  e_social_provider_type get socialProviderType => _socialProviderType;
+  int get comi => _comi;
+  bool get loggedIn => _loggedIn;
+  bool get me => _loggedIn;
+  String get email => _email;
+  String get displayName => _displayName;
+  String get photoUrl => _photoUrl;
+  String get uId => _uId;
 
-  static set id(String id)
+  set id(String id)
   {
     _id = id;
   }
 
-  static set createId(String createId)
+  set creatorId(String creatorId)
   {
-    createId = createId;
+    _creatorId = creatorId;
   }
 
-  static set socialProviderType(e_social_provider_type socialProviderType)
+  set socialProviderType(e_social_provider_type socialProviderType)
   {
     _socialProviderType = socialProviderType;
   }
 
-  static set comi(int comi)
+  set comi(int comi)
   {
     _comi = comi;
+  }
+
+  set loggedIn(bool loggedIn)
+  {
+    _loggedIn = loggedIn;
+  }
+
+  set email(String email)
+  {
+    _email = email;
+  }
+
+  set displayName(String displayName)
+  {
+    _displayName = displayName;
+  }
+
+  set photoUrl(String photoUrl)
+  {
+    _photoUrl = photoUrl;;
+  }
+
+  set uId(String uId)
+  {
+    _uId = uId;
+  }
+
+
+  static ModelUserInfo _instance;
+  static ModelUserInfo getInstance() {
+    if(_instance == null) {
+      _instance = ModelUserInfo();
+      return _instance;
+    }
+    return _instance;
+  }
+
+  @override
+  String toString()
+  {
+    return 'email : $_email , displayName : $_displayName , photoUrl : $_photoUrl , uId : $uId';
   }
 
 }
