@@ -36,6 +36,8 @@ class _TrendState extends State<Trend> {
   @override
   void initState() {
     super.initState();
+    // generating packet
+
     c2STodayPopularComicInfo.generate(0, 0);
     c2sFeaturedComicInfo.generate(0, 0);
     c2sRecommendedComicInfo.generate(0, 0);
@@ -43,8 +45,6 @@ class _TrendState extends State<Trend> {
     c2sRealTimeTrendInfo.generate(0, 0);
     c2sWeeklyPopularComicInfo.generate(0, 0);
 
-
-// generating packet
   }
 
   int _current = 0; // this is for indicator handler

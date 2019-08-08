@@ -115,7 +115,7 @@ class _SignInPageState extends State<SignInPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
 
-              Image(image: AssetImage('images/facebook_logo_RGB-Blue_512.png'), height: 35.0),
+              Image(image: AssetImage('images/sns_logos/facebook_logo_RGB-Blue_512.png'), height: 35.0),
               Padding(
                 padding: const EdgeInsets.only(left: 10),
                 child: Text(
