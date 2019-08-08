@@ -4,11 +4,9 @@ import 'package:first_ui/screens/more.dart';
 import 'package:first_ui/screens/creator.dart';
 import 'package:first_ui/screens/testhome.dart';
 import 'package:first_ui/screens/Trend.dart';
-import 'package:first_ui/screens/signin.dart';
+import 'package:first_ui/screens/sign_in.dart';
 import 'package:first_ui/screens/notification.dart';
 //import 'package:flutter/services.dart';
-
-
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -36,7 +34,8 @@ class _HomeScreenState extends State<HomeScreen>
         preferredSize: Size.fromHeight(40.0),
         child: AppBar(
           elevation: 0,
-          backgroundColor: Color.fromRGBO(21, 24, 45, 1.0),//Color(0xff202a30), //Colors.black87, // Color(0xFF5986E1),
+          backgroundColor: Color.fromRGBO(21, 24, 45,
+              1.0), //Color(0xff202a30), //Colors.black87, // Color(0xFF5986E1),
           title: Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -54,16 +53,20 @@ class _HomeScreenState extends State<HomeScreen>
               child: Icon(Icons.perm_identity),
             ),
             IconButton(
-              icon: Icon(Icons.notifications,),
-              onPressed: (){
-                Navigator.push(context,
+              icon: Icon(
+                Icons.notifications,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
                   MaterialPageRoute(
                     builder: (context) => NotificationScreen(),
                   ),
                 );
               },
             ),
-            Padding(   //Todo If search feature goes to bottomAppBar delete this padding
+            Padding(
+              //Todo If search feature goes to bottomAppBar delete this padding
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Image.asset(
                 'images/search.png',
@@ -96,12 +99,36 @@ class _HomeScreenState extends State<HomeScreen>
           unselectedLabelColor: Colors.grey,
           controller: controller,
           tabs: <Widget>[
-            Tab(icon: Icon(Icons.home, color: Color.fromRGBO(21, 24, 45, 0.9),)), //Todo replace home with hot(=trending) need to update icon image
-            Tab(icon: Icon(Icons.collections_bookmark, color: Color.fromRGBO(21, 24, 45, 0.9),)),
-            Tab(icon: Icon(Icons.palette, color: Color.fromRGBO(21, 24, 45, 0.9),)),
-            Tab(icon: Icon(Icons.trending_up, color: Color.fromRGBO(21, 24, 45, 0.9),)),
-            Tab(icon: Icon(Icons.search, color: Color.fromRGBO(21, 24, 45, 0.9),)),
-            Tab(icon: Icon(Icons.menu, color: Color.fromRGBO(21, 24, 45, 0.9),)),
+            Tab(
+                icon: Icon(
+              Icons.home,
+              color: Color.fromRGBO(21, 24, 45, 0.9),
+            )), //Todo replace home with hot(=trending) need to update icon image
+            Tab(
+                icon: Icon(
+              Icons.collections_bookmark,
+              color: Color.fromRGBO(21, 24, 45, 0.9),
+            )),
+            Tab(
+                icon: Icon(
+              Icons.palette,
+              color: Color.fromRGBO(21, 24, 45, 0.9),
+            )),
+            Tab(
+                icon: Icon(
+              Icons.trending_up,
+              color: Color.fromRGBO(21, 24, 45, 0.9),
+            )),
+            Tab(
+                icon: Icon(
+              Icons.search,
+              color: Color.fromRGBO(21, 24, 45, 0.9),
+            )),
+            Tab(
+                icon: Icon(
+              Icons.menu,
+              color: Color.fromRGBO(21, 24, 45, 0.9),
+            )),
             //Tab(text: 'More', icon: Icon(Icons.menu)),
           ],
         ),

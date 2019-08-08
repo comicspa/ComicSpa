@@ -4,7 +4,7 @@ import 'package:first_ui/screens/more.dart';
 import 'package:first_ui/screens/creator.dart';
 import 'package:first_ui/screens/testhome.dart';
 import 'package:first_ui/screens/Trend.dart';
-import 'package:first_ui/screens/signin.dart';
+import 'package:first_ui/screens/sign_in.dart';
 import 'package:first_ui/screens/notification.dart';
 
 // Coming soon page for multi-purpose
@@ -22,7 +22,8 @@ class _ComingSoonScreenState extends State<ComingSoonScreen> {
         preferredSize: Size.fromHeight(40.0),
         child: AppBar(
           elevation: 0,
-          backgroundColor: Color.fromRGBO(21, 24, 45, 1.0),//Color(0xff202a30), //Colors.black87, // Color(0xFF5986E1),
+          backgroundColor: Color.fromRGBO(21, 24, 45,
+              1.0), //Color(0xff202a30), //Colors.black87, // Color(0xFF5986E1),
           title: Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -40,16 +41,20 @@ class _ComingSoonScreenState extends State<ComingSoonScreen> {
               child: Icon(Icons.perm_identity),
             ),
             IconButton(
-              icon: Icon(Icons.notifications,),
-              onPressed: (){
-                Navigator.pop(context,
+              icon: Icon(
+                Icons.notifications,
+              ),
+              onPressed: () {
+                Navigator.pop(
+                  context,
                   MaterialPageRoute(
                     builder: (context) => NotificationScreen(),
                   ),
                 );
               },
             ),
-            Padding(   //Todo If search feature goes to bottomAppBar delete this padding
+            Padding(
+              //Todo If search feature goes to bottomAppBar delete this padding
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Image.asset(
                 'images/search.png',
@@ -61,7 +66,6 @@ class _ComingSoonScreenState extends State<ComingSoonScreen> {
         ),
       ),
       body: Center(
-
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -83,14 +87,11 @@ class _ComingSoonScreenState extends State<ComingSoonScreen> {
               textColor: Colors.white,
               color: Colors.redAccent,
               child: Text('Back to Main Page'),
-              onPressed: () {
-
-             },
+              onPressed: () {},
             ),
           ],
         ),
       ),
-
     );
   }
 }
