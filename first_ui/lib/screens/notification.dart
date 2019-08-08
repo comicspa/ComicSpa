@@ -59,100 +59,126 @@ class _NotificationScreenState extends State<NotificationScreen> {
           ],
         ),
       ),
-      body: Center(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
 
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-
-            Container(
-              child: Icon(
-                Icons.info_outline,
-                color: Color.fromRGBO(21, 24, 45, 1.0),
-                size: ManageDeviceInfo.resolutionHeight * 0.05,
-              ),
+          Container(
+            child: Icon(
+              Icons.info_outline,
+              color: Color.fromRGBO(21, 24, 45, 1.0),
+              size: ManageDeviceInfo.resolutionHeight * 0.05,
             ),
-            SizedBox(
-              width: ManageDeviceInfo.resolutionWidth * 0.7,
-              child: Padding(padding: EdgeInsets.all(15.0),
-                child: Text(
-                  'Notification requires sign in, please sign in or sign up!',
-                  maxLines: 2,
-                  textAlign: TextAlign.justify,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.normal,
-                    fontFamily: 'Lato',
-                  ),
+          ),
+          SizedBox(
+            width: ManageDeviceInfo.resolutionWidth * 0.7,
+            child: Padding(padding: EdgeInsets.all(15.0),
+              child: Text(
+                'Notification requires sign in, please sign in or sign up!',
+                maxLines: 2,
+                textAlign: TextAlign.justify,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.normal,
+                  fontFamily: 'Lato',
                 ),
               ),
             ),
-            RaisedButton(
-              textColor: Colors.white,
-              color: Colors.redAccent,
-              child: Text('Back to Main Page'),
-              onPressed: () {
+          ),
+          RaisedButton(
+            textColor: Colors.white,
+            color: Colors.redAccent,
+            child: Text('Need to work on Sign-in'),
+            onPressed: () {
 
-                  Navigator.pop(context,
-                    MaterialPageRoute(
-                      builder: (context) => Trend(),
+                Navigator.pop(context,
+                  MaterialPageRoute(
+                    builder: (context) => Trend(),
+                  ),
+                );
+
+            },
+          ),
+
+          SizedBox(height: 20,),
+
+
+
+          Row(
+            children: <Widget>[
+              SizedBox(
+                width: ManageDeviceInfo.resolutionWidth * 0.15,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                  child: CircleAvatar(
+                    radius: ManageDeviceInfo.resolutionWidth * 0.05,
+                    child: Image(
+                      image: AssetImage(
+                        'images/catHouse.jpg', //Todo make NetworkAsset later
+                      ),
+                      fit: BoxFit.cover,
                     ),
-                  );
-
-              },
-            ),
-            ClipOval(
-              child: Image.asset(
-                'catHouse.jpg',
-                fit: BoxFit.cover,
-                height: ManageDeviceInfo.resolutionHeight * 0.145,
-                width: ManageDeviceInfo.resolutionHeight * 0.145,
+                  ),
+                ),
               ),
-            ),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                ClipOval(
-                  child: Image.asset(
-                    'catHouse.jpg',
-                    fit: BoxFit.cover,
-                    height: ManageDeviceInfo.resolutionHeight * 0.045,
-                    width: ManageDeviceInfo.resolutionHeight * 0.045,
+              SizedBox(
+                width: ManageDeviceInfo.resolutionWidth * 0.55,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(10, 8, 10, 5),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+//                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text('Update: Noticfication title and if the title is long then it will provide 3 lines at the max',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.normal,
+                            fontFamily: 'Lato',
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text('1분 전, 1시간 전, 1일 전',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.normal,
+                            fontFamily: 'Lato',
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
+              ),
+              SizedBox(
+                width: ManageDeviceInfo.resolutionWidth * 0.2 ,
 
-                Text('Update: Noticfication title',
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.normal,
-                    fontFamily: 'Lato',
+                child: Image(
+                  image: AssetImage(
+                    'images/야옹이.png', //Todo make NetworkAsset later
                   ),
+                  fit: BoxFit.cover
                 ),
-                Image.asset('xMen.jpg', //Todo change this to NetworkImage(url) later
-                  fit: BoxFit.cover,
-                  scale: 0.2,
-                ),
-                Text('1분 전, 1시간 전, 1일 전',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.normal,
-                    fontFamily: 'Lato',
-                  ),
-                ),
-                _simplePopup(),
+              ),
+              SizedBox(
+                width: ManageDeviceInfo.resolutionWidth * 0.1,
+                child: _simplePopup(),
+              ),
 
+            ],
+          ),
 
-
-              ],
-            ),
-
-          ],
-        ),
+        ],
       ),
     );
   }
