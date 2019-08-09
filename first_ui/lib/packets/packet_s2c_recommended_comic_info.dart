@@ -28,19 +28,19 @@ class PacketS2CRecommendedComicInfo extends PacketS2CCommon
 
     for(int countIndex=0; countIndex<modelRecommendedComicInfoCount; ++countIndex)
     {
-      ModelRecommendedComicInfo modelRealTimeTrendInfo = new ModelRecommendedComicInfo();
+      ModelRecommendedComicInfo modelRecommendedComicInfo = new ModelRecommendedComicInfo();
 
-      modelRealTimeTrendInfo.albumId = getUint32();
-      modelRealTimeTrendInfo.id = getUint32();
-      modelRealTimeTrendInfo.title = readStringToByteBuffer();
-      modelRealTimeTrendInfo.url = readStringToByteBuffer();
-      modelRealTimeTrendInfo.thumbnailUrl = readStringToByteBuffer();
+      modelRecommendedComicInfo.albumId = getUint32();
+      modelRecommendedComicInfo.id = getUint32();
+      modelRecommendedComicInfo.title = readStringToByteBuffer();
+      modelRecommendedComicInfo.url = readStringToByteBuffer();
+      modelRecommendedComicInfo.thumbnailUrl = readStringToByteBuffer();
 
-      print(modelRealTimeTrendInfo.toString());
+      print(modelRecommendedComicInfo.toString());
 
       if(null == ModelRecommendedComicInfo.list)
         ModelRecommendedComicInfo.list = new List<ModelRecommendedComicInfo>();
-      ModelRecommendedComicInfo.list.add(modelRealTimeTrendInfo);
+      ModelRecommendedComicInfo.list.add(modelRecommendedComicInfo);
     }
   }
 

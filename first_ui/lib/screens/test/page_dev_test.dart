@@ -19,6 +19,9 @@ import 'package:first_ui/packets/packet_c2s_new_creator_info.dart';
 import 'package:first_ui/packets/packet_c2s_weekly_creator_info.dart';
 
 import 'package:first_ui/manage/manage_firebase_auth.dart';
+import 'package:first_ui/manage/manage_firebase_ml_vision.dart';
+import 'package:first_ui/manage/manage_firebase_storage.dart';
+import 'package:first_ui/manage/manage_paint_canvas.dart';
 
 
 class PageDevTest extends StatefulWidget {
@@ -60,8 +63,6 @@ class _PageDevTestState extends State<PageDevTest> {
     c2SWeeklyCreatorInfo.generate();
   }
 
-
-
   Widget createTodayPopularComicInfoListView(BuildContext context, AsyncSnapshot snapshot)
   {
     var values = snapshot.data;
@@ -79,7 +80,27 @@ class _PageDevTestState extends State<PageDevTest> {
               selectedCountIndex = index;
               print('$index: ${values[index].url}');
 
-              ManageFirebaseAuth.simpleUsageSignInWithGoogle();
+
+              switch(selectedCountIndex)
+              {
+                case 0:
+                  {
+                    ManageFirebaseAuth.simpleUsageSignInWithGoogle();
+                  }
+                  break;
+
+                case 1:
+                  {
+                    ManageFirebaseMLVision.simpleUsageTextDetection();
+                  }
+                  break;
+
+                case 2:
+                  {
+                    ManageFirebaseStorage.simpleUsageUploadFile('ooo');
+                  }
+                  break;
+              }
 
               //c2SComicDetailInfo.fetchBytes();
               //c2SViewComic.fetchBytes();
@@ -98,6 +119,19 @@ class _PageDevTestState extends State<PageDevTest> {
               Divider(
                 height: 2.0,
               ),
+
+              /*
+              new Positioned(
+                  bottom: 0.0,
+                  left: 0.0,
+                  right: 0.0,
+                  top: 0.0,
+                  child: new CustomPaint(
+                    painter: new ManagePaintCanvas(),
+                  )
+              ),
+              */
+
             ],
           ),
         );
@@ -309,7 +343,6 @@ class _PageDevTestState extends State<PageDevTest> {
         ],
       ),
       */
-
 
     );
 

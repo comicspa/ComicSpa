@@ -25,15 +25,28 @@ class _SplashScreenState extends State<SplashScreen> {
     //var _duration = new Duration(seconds: 2);
     //return new Timer(_duration, navigationPage);
 
-    ModelPreset.fetch(_presetFetchDone);
+    ModelPreset.fetch2(_presetFetchDone);
+    //navigationPage();
   }
 
   void navigationPage() {
     int switchPage = 0;
-    if(0 == switchPage)
-      Navigator.of(context).pushReplacementNamed('/HomeScreen');
-    else
-      Navigator.of(context).pushReplacementNamed('/PageDevTest');
+    switch(switchPage)
+    {
+      case 0:
+        Navigator.of(context).pushReplacementNamed('/HomeScreen');
+        break;
+
+      case 1:
+        Navigator.of(context).pushReplacementNamed('/PageDevTest');
+        break;
+
+      case 2:
+        Navigator.of(context).pushReplacementNamed('/PageDevView');
+        break;
+    }
+
+
   }
 
   @override
