@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'detail_page.dart';
 
 class SignInPage extends StatefulWidget {
   @override
@@ -29,6 +30,18 @@ class _SignInPageState extends State<SignInPage> {
               _signInButtonSvgTest(),
               SizedBox(height: 20),
               _signInButtonFaceBook(),
+              SizedBox(height: 20),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => DetailPage('testurl')
+                  ));
+                },
+                child: Container(
+                  color: Colors.yellow,
+                  child: Text('Detail Page'),
+                ),
+              )
             ],
           ),
         ),
