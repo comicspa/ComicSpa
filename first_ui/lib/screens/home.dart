@@ -6,6 +6,7 @@ import 'package:first_ui/screens/testhome.dart';
 import 'package:first_ui/screens/Trend.dart';
 import 'package:first_ui/screens/sign_in.dart';
 import 'package:first_ui/screens/notification.dart';
+import 'package:first_ui/screens/coming_soon.dart';
 //import 'package:flutter/services.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -52,27 +53,19 @@ class _HomeScreenState extends State<HomeScreen>
               padding: EdgeInsets.symmetric(horizontal: 12.0),
               child: Icon(Icons.perm_identity),
             ),
+
             IconButton(
               icon: Icon(
-                Icons.notifications,
+                Icons.search,
               ),
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => NotificationScreen(),
+                    builder: (context) => ComingSoonScreen(),
                   ),
                 );
               },
-            ),
-            Padding(
-              //Todo If search feature goes to bottomAppBar delete this padding
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              child: Image.asset(
-                'images/search.png',
-                width: 21.5,
-                height: 18.5,
-              ),
             ),
           ],
         ),
