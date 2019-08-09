@@ -88,94 +88,94 @@ class _NotificationLandingPageState extends State<NotificationLandingPage> {
 
   Center signInPage() {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Align(
-            alignment: Alignment.center,
-            child: Text('Sign in',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontSize: ManageDeviceInfo.resolutionWidth * .07,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Lato',
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Align(
+              alignment: Alignment.center,
+              child: Text('Sign in',
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontSize: ManageDeviceInfo.resolutionWidth * .07,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Lato',
+                ),
               ),
             ),
-          ),
-          Divider(),
-          SignInButton(
-            Buttons.Google,
-            onPressed: () {
+            Divider(),
+            SignInButton(
+              Buttons.Google,
+              onPressed: () {
 
-              ManageFirebaseAuth.signInWithGoogle().then((value)
-              {
-                //value == ModelUserInfo.getInstance()
-                print(value.toString());
-                print('success');
+                ManageFirebaseAuth.signInWithGoogle().then((value)
+                {
+                  //value == ModelUserInfo.getInstance()
+                  print(value.toString());
+                  print('success');
+                },
+                    onError: (error)
+                    {
+                      print('error : $error');
+                    }).catchError( (error)
+                {
+                  print('catchError : $error');
+                });
               },
-                  onError: (error)
-                  {
-                    print('error : $error');
-                  }).catchError( (error)
-              {
-                print('catchError : $error');
-              });
-            },
-          ),
-          SignInButton(
-            Buttons.Facebook,
-            onPressed: () {},
-          ),
-          SignInButton(
-            Buttons.Twitter,
-            text: "Use Twitter",
-            onPressed: () {},
-          ),
-          Divider(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SignInButton(
-                Buttons.LinkedIn,
-                mini: true,
-                onPressed: () {},
-              ),
-              SignInButton(
-                Buttons.Tumblr,
-                mini: true,
-                onPressed: () {},
-              ),
+            ),
+            SignInButton(
+              Buttons.Facebook,
+              onPressed: () {},
+            ),
+            SignInButton(
+              Buttons.Twitter,
+              text: "Use Twitter",
+              onPressed: () {},
+            ),
+            Divider(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SignInButton(
+                  Buttons.LinkedIn,
+                  mini: true,
+                  onPressed: () {},
+                ),
+                SignInButton(
+                  Buttons.Tumblr,
+                  mini: true,
+                  onPressed: () {},
+                ),
 
-            ],
-          ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Container(
-              padding: EdgeInsets.all(20.0),
-              child: RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'Go to Sign up',
-                      style: TextStyle(
-                        color: Colors.blueAccent,
-                        fontFamily: 'Lato',
-                        fontWeight: FontWeight.bold,
-                        fontSize: ManageDeviceInfo.resolutionHeight * 0.02,
-                      ),
-                      recognizer: TapGestureRecognizer()..onTap = () {
-                        signUpPage();
-                      },
-                    )
-                  ]
-                )
+              ],
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Container(
+                padding: EdgeInsets.all(20.0),
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'Go to Sign up',
+                        style: TextStyle(
+                          color: Colors.blueAccent,
+                          fontFamily: 'Lato',
+                          fontWeight: FontWeight.bold,
+                          fontSize: ManageDeviceInfo.resolutionHeight * 0.02,
+                        ),
+                        recognizer: TapGestureRecognizer()..onTap = () {
+                          signUpPage();
+                        },
+                      )
+                    ]
+                  )
+                ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
   }
 
 
