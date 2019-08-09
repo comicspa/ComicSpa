@@ -11,8 +11,11 @@ class ManageFilePicker
   {
     Map<String,String> filePathsMap = await FilePicker.getMultiFilePath(type:FileType.IMAGE);
 
-    if(null != filePathsMap) {
-      for (var data in filePathsMap.keys) {
+    if(null != filePathsMap)
+    {
+      for (var data in filePathsMap.keys)
+      {
+        //data : filefullname
         print('getfilePath : $data, ${filePathsMap[data]}');
       }
     }
