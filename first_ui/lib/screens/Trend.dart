@@ -1128,34 +1128,6 @@ List<String> countBanner(List<ModelFeaturedComicInfo> countBanner) {
 }
 
 
-//List<Widget> bannerListWithContainer(BuildContext context) {
-//    List bannerList = map<Widget>(
-//    featuredComicsList,
-//    (index, i) {
-//      return Container(
-//        height: 300,
-//        margin: EdgeInsets.all(5.0),
-//        child: ClipRRect(
-//          borderRadius: BorderRadius.all(Radius.circular(5.0)),
-//          child: GestureDetector(
-//            child: Image.network(i.thumbnailUrl,
-//            fit: BoxFit.fill),
-//            onTap: () {
-//              Navigator.push<Widget>(
-//              context,
-//                MaterialPageRoute(
-//                builder: (context) =>
-//                ViewerScreen(i.thumbnailUrl), // link to Actual viewer
-//              ),
-//            );
-//            },
-//          ),
-//        ),
-//      );
-//    },
-//    ).toList();
-//  return bannerList;
-//}
 
 
   List bannerList = map<Widget>(
@@ -1175,53 +1147,3 @@ List<String> countBanner(List<ModelFeaturedComicInfo> countBanner) {
 
 
 
-
-// Basic carousel slider format
-
-//SizedBox(
-//height: 250,
-//child: Padding(
-//padding: EdgeInsets.all(0.0),
-//child: FutureBuilder<List<TodayPopularComicInfo>>(
-//future: c2STodayPopularComicInfo.fetchBytes(),
-//builder: (context,snapshot){
-//if(!snapshot.hasData) return Center(child: Column(
-//mainAxisAlignment: MainAxisAlignment.center,
-//children: <Widget>[
-//SizedBox(
-//height: 25,
-//width: 25,
-//child: CircularProgressIndicator()),
-//],
-//));
-//
-//{
-//return CarouselSlider(
-//autoPlay: false,
-//height: 250.0,
-//aspectRatio: 16/9,
-//initialPage: 0,
-//viewportFraction: 1.0,
-//enableInfiniteScroll: true,
-//scrollDirection: Axis.horizontal,
-//
-//
-//items:snapshot.data.map((i){
-//return Builder (
-//builder: (BuildContext context){
-//return Container(
-//
-//width: MediaQuery.of(context).size.width,
-//margin: EdgeInsets.symmetric(horizontal: 0.0),
-//decoration: BoxDecoration(color: Colors.white),
-//child: Image.network(i.thumbnailUrl, fit:BoxFit.fill),
-//);
-//}
-//);
-//}).toList()
-//);
-//}
-//},
-//),
-//),
-//),

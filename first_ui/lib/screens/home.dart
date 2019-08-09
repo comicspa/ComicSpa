@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen>
           LibraryScreen(),
           CreatorScreen(),
           Trend(),
-          MoreScreen(),
+          NotificationScreen(),
           SignInPage(),
         ],
       ),
@@ -121,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen>
             )),
             Tab(
                 icon: Icon(
-              Icons.search,
+              Icons.message,
               color: Color.fromRGBO(21, 24, 45, 0.9),
             )),
             Tab(

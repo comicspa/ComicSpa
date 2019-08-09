@@ -14,7 +14,7 @@ class ModelUserInfo
   String _creatorId;
   e_social_provider_type _socialProviderType = e_social_provider_type.none;
   int _comi;
-  bool _loggedIn;
+  bool _loggedIn = false;
   String _email;
   String _displayName;
   String _photoUrl;
