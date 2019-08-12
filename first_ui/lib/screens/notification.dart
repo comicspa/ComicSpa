@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:first_ui/screens/Trend.dart';
+import 'package:first_ui/screens/trend.dart';
 import 'package:first_ui/manage/manage_device_info.dart';// use this to make all the widget size responsive to the device size.
 import 'package:first_ui/screens/notification_landing_page.dart';
 import 'package:first_ui/models/model_user_info.dart';
@@ -19,6 +19,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ModelUserInfo.getInstance().loggedIn = true;   // Todo this need to be deleted when testing SignIn
     return ModelUserInfo.getInstance().loggedIn ? notificationPage(context) : NotificationLandingPage(); // Todo replace ComingSoonScreen later with notificationLandingPage
 
   }
@@ -55,7 +56,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
         RaisedButton(
           textColor: Colors.white,
           color: Colors.redAccent,
-          child: Text('Need to work on Sign-in'),
+          child: Text('Make ModelUserInfo.getInstance().loggedIn = false; to enable Sign-in page '),
           onPressed: () {
 
               Navigator.pop(context,

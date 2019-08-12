@@ -3,7 +3,7 @@ import 'package:first_ui/screens/library.dart';
 import 'package:first_ui/screens/more.dart';
 import 'package:first_ui/screens/creator.dart';
 import 'package:first_ui/screens/testhome.dart';
-import 'package:first_ui/screens/Trend.dart';
+import 'package:first_ui/screens/trend.dart';
 import 'package:first_ui/screens/sign_in.dart';
 import 'package:first_ui/screens/notification.dart';
 import 'package:first_ui/screens/coming_soon.dart';
