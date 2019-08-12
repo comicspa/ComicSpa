@@ -1,3 +1,5 @@
+
+
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -6,19 +8,17 @@ import 'package:flutter/services.dart';
 import 'package:first_ui/models/model_common.dart';
 import 'package:first_ui/packets/packet_common.dart';
 import 'package:first_ui/packets/packet_c2s_common.dart';
-import 'package:first_ui/packets/packet_s2c_weekly_creator_info.dart';
-import 'package:first_ui/models/model_weekly_creator_info.dart';
+import 'package:first_ui/packets/packet_s2c_my_locker_comic_owned.dart';
+import 'package:first_ui/models/model_my_locker_comic_owned.dart';
 
-
-
-class PacketC2SWeeklyCreatorInfo extends PacketC2SCommon
+class PacketC2SMyLockerComicOwned extends PacketC2SCommon
 {
-  int _pageCountIndex = 0;
-  int _pageViewCount = 0;
+  int _pageCountIndex;
+  int _pageViewCount;
 
-  PacketC2SWeeklyCreatorInfo()
+  PacketC2SMyLockerComicOwned()
   {
-    type = e_packet_type.c2s_weekly_creator_info;
+    type = e_packet_type.c2s_my_locker_comic_owned;
   }
 
   void generate()
@@ -27,12 +27,12 @@ class PacketC2SWeeklyCreatorInfo extends PacketC2SCommon
     //_pageCountIndex = pageCountIndex;
   }
 
-  Future<List<ModelWeeklyCreatorInfo>> fetchBytes() async
+  Future<List<ModelMyLockerComicOwned>> fetchBytes() async
   {
-    print('PacketC2SWeeklyCreatorInfo : fetchBytes started');
+    print('PacketC2SFeaturedComicInfo : fetchBytes started');
 
-    if(null != ModelWeeklyCreatorInfo.list)
-      return ModelWeeklyCreatorInfo.list;
+    if(null != ModelMyLockerComicOwned.list)
+      return ModelMyLockerComicOwned.list;
 
     Socket socket = await ModelCommon.createServiceSocket();
     print('connected server');
@@ -48,7 +48,7 @@ class PacketC2SWeeklyCreatorInfo extends PacketC2SCommon
 
       var packet = Uint8List.fromList(eventList);
       ByteData byteData = ByteData.view(packet.buffer);
-      print('eventList.length : ${eventList.length}');
+      //print('eventList.length : ${eventList.length}');
 
       int packetSize = byteData.getUint32(0,PacketCommon.endian);
       //print('byteData.getUint32(0) : $packetSize');
@@ -57,11 +57,11 @@ class PacketC2SWeeklyCreatorInfo extends PacketC2SCommon
       {
         //print('eventList.length == packetSize');
 
-        PacketS2CWeeklyCreatorInfo packet = new PacketS2CWeeklyCreatorInfo();
+        PacketS2CMyLockerComicOwned packet = new PacketS2CMyLockerComicOwned();
         packet.parseBytes(packetSize,byteData);
       }
 
-      return ModelWeeklyCreatorInfo.list;
+      return ModelMyLockerComicOwned.list;
     });
 
     int packetBodySize  = 4 + 4;
@@ -77,7 +77,7 @@ class PacketC2SWeeklyCreatorInfo extends PacketC2SCommon
     await Future.delayed(Duration(seconds: 20));
     socket.close();
 
-    return ModelWeeklyCreatorInfo.list;
+    return ModelMyLockerComicOwned.list;
   }
 
 
