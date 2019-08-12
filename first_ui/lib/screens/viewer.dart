@@ -12,7 +12,6 @@ import 'package:first_ui/models/model_featured_comic_info.dart';
 //Todo make fade-in image loading using "transparent_image package" later
 
 class ViewerScreen extends StatefulWidget {
-
   final ModelFeaturedComicInfo modelFeaturedComicInfo;
   //final String url;
   //ViewerScreen(this.url);
@@ -24,7 +23,7 @@ class ViewerScreen extends StatefulWidget {
 
 class _ViewerScreen extends State<ViewerScreen> {
 //  PacketC2STodayPopularComicInfo c2STodayPopularComicInfo = new PacketC2STodayPopularComicInfo(); // use this to handle data
-    PacketC2SViewComic c2sViewComic = PacketC2SViewComic();
+  PacketC2SViewComic c2sViewComic = PacketC2SViewComic();
 
 //  @override
 //  void initState() {
@@ -47,9 +46,7 @@ class _ViewerScreen extends State<ViewerScreen> {
 //  String url;
   ModelFeaturedComicInfo modelFeaturedComicInfo;
 
-
-  _ViewerScreen(ModelFeaturedComicInfo modelFeaturedComicInfo ) {
-
+  _ViewerScreen(ModelFeaturedComicInfo modelFeaturedComicInfo) {
     this.modelFeaturedComicInfo = modelFeaturedComicInfo;
 //    this.url = url;
   }
@@ -58,59 +55,52 @@ class _ViewerScreen extends State<ViewerScreen> {
   Widget build(BuildContext context) {
     // Todo Currently this screen is used for testing viewer
     return Scaffold(
-
       body: Center(
-
         child: GestureDetector(
           onTap: () {
-            setState(() { _isVisible = !_isVisible; });
+            setState(() {
+              _isVisible = !_isVisible;
+            });
           },
           child: FutureBuilder<ModelViewComic>(
             future: c2sViewComic.fetchBytes(),
             builder: (context, snapshot) {
-              if (!snapshot.hasData)
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: ManageDeviceInfo.resolutionHeight * .3,
-                        child: Center(child: CircularProgressIndicator()),
-                      ),
-                    ],
-                  ),
-                );
-              {
-//                return CustomScrollView(
-//                  slivers: <Widget>[
-//                    SliverFixedExtentList(
-//                      itemExtent: double.infinity,
-//                      delegate: SliverChildBuilderDelegate(
-//                              (context, index) =>
-//                              ListView(children: <Widget>[
-//                                Image.network(ModelViewComic.getInstance().comicImageUrlList[index]),
-//                              ],
-//                              )
+//              if (!snapshot.hasData)
+//                return Center(
+//                  child: Column(
+//                    mainAxisAlignment: MainAxisAlignment.center,
+//                    children: <Widget>[
+//                      SizedBox(
+//                        height: ManageDeviceInfo.resolutionHeight * .3,
+//                        child: Center(child: CircularProgressIndicator()),
 //                      ),
-//
-//                    ),
-//
-//                  ],
+//                    ],
+//                  ),
 //                );
-                return ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  physics: BouncingScrollPhysics(),
-                  itemCount: ModelViewComic.getInstance().comicImageUrlList.length,
-                  itemBuilder: (BuildContext context, int index) =>
-                      ListView(
-                        children: <Widget>[
-                          Image.network(ModelViewComic.getInstance().comicImageUrlList[index]),
-                        ],
-                      ),
-                );
-              }
-
+//              {
+//                return ListView(
+//                  shrinkWrap: true,
+//                  scrollDirection: Axis.vertical,
+//                  padding: EdgeInsets.all(0.0),
+//                  children: List.generate(
+//                      ModelViewComic.getInstance().comicImageUrlList.length,
+//                      (index) {
+//                    return Center(
+//                      child: Image.network(ModelViewComic.getInstance()
+//                          .comicImageUrlList[index]),
+//                    );
+//                  }),
+//                );
+              return ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                physics: BouncingScrollPhysics(),
+                itemCount: snapshot.data.comicImageUrlList.length,
+//                      ModelViewComic.getInstance().comicImageUrlList.length,
+                itemBuilder: (BuildContext context, int index) =>
+                    Image.network(snapshot.data.comicImageUrlList[index]),
+              );
+//              }
             },
           ),
 //          child: CustomScrollView(
@@ -146,49 +136,47 @@ class _ViewerScreen extends State<ViewerScreen> {
 //        ),
         ),
       ),
-      floatingActionButton: Visibility(
-        visible: _isVisible,
-        child: Row(
-
-
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            Container(
-              height: 30,
-              child: FloatingActionButton(
-                heroTag: 'btn1',
-                backgroundColor: Colors.brown,
-                onPressed: (){},
-                child: Icon(Icons.translate),
-              ),
-            ),
-            SizedBox(width: 40,),
-            Container(
-              height: 30,
-              child: FloatingActionButton.extended(
-                heroTag: 'btn2',
-                onPressed: (){},
-                label: Text('Pre'),
-                icon: Icon(Icons.arrow_left),
-              ),
-            ),
-            SizedBox(width: 20,),
-
-            Container(
-              height: 30,
-              child: FloatingActionButton.extended(
-                heroTag: 'btn3',
-                onPressed: (){},
-                label: Text('Next'),
-                icon: Icon(Icons.arrow_right),
-
-              ),
-            ),
-
-
-          ],
-        ),
-      ),
+//      floatingActionButton: Visibility(
+//        visible: _isVisible,
+//        child: Row(
+//          mainAxisAlignment: MainAxisAlignment.end,
+//          children: <Widget>[
+//            Container(
+//              height: 30,
+//              child: FloatingActionButton(
+//                heroTag: 'btn1',
+//                backgroundColor: Colors.brown,
+//                onPressed: () {},
+//                child: Icon(Icons.translate),
+//              ),
+//            ),
+//            SizedBox(
+//              width: 40,
+//            ),
+//            Container(
+//              height: 30,
+//              child: FloatingActionButton.extended(
+//                heroTag: 'btn2',
+//                onPressed: () {},
+//                label: Text('Pre'),
+//                icon: Icon(Icons.arrow_left),
+//              ),
+//            ),
+//            SizedBox(
+//              width: 20,
+//            ),
+//            Container(
+//              height: 30,
+//              child: FloatingActionButton.extended(
+//                heroTag: 'btn3',
+//                onPressed: () {},
+//                label: Text('Next'),
+//                icon: Icon(Icons.arrow_right),
+//              ),
+//            ),
+//          ],
+//        ),
+//      ),
     );
   }
 }
