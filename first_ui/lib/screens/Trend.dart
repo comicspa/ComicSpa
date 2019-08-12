@@ -13,7 +13,6 @@ import 'package:first_ui/models/model_real_time_trend_info.dart';
 import 'package:first_ui/packets/packet_c2s_real_time_trend_info.dart';
 import 'package:first_ui/models/model_weekly_popular_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_weekly_popular_comic_info.dart';
-import 'package:first_ui/screens/Viewer.dart';
 import 'package:first_ui/screens/detail_page.dart';
 
 
@@ -97,7 +96,7 @@ class _TrendState extends State<Trend> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            ViewerScreen(i.thumbnailUrl), // link to Actual viewer
+                                            DetailPage(i.thumbnailUrl), // link to Actual viewer
                                       ),
                                     );
                                   },
@@ -505,7 +504,7 @@ class _TrendState extends State<Trend> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            ViewerScreen(snapshot.data[index].thumbnailUrl), // link to Actual viewer
+                                            DetailPage(snapshot.data[index].thumbnailUrl), // link to Actual viewer
                                       ),
                                     );
                                   },
@@ -695,7 +694,7 @@ class _TrendState extends State<Trend> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          ViewerScreen(snapshot.data[index].thumbnailUrl), // link to Actual viewer
+                                          DetailPage(snapshot.data[index].thumbnailUrl), // link to Actual viewer
                                     ),
                                   );
                                 },
@@ -885,7 +884,7 @@ class _TrendState extends State<Trend> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          ViewerScreen(snapshot.data[index].thumbnailUrl), // link to Actual viewer
+                                          DetailPage(snapshot.data[index].thumbnailUrl), // link to Actual viewer
                                     ),
                                   );
                                 },
@@ -1075,7 +1074,7 @@ class _TrendState extends State<Trend> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          ViewerScreen(snapshot.data[index].thumbnailUrl), // link to Actual viewer
+                                          DetailPage(snapshot.data[index].thumbnailUrl), // link to Actual viewer
                                     ),
                                   );
                                 },
