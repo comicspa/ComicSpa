@@ -19,6 +19,18 @@ service firebase.storage {
 }
 */
 
+/*
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
+ */
+
+
 class ManageFirebaseStorage
 {
   static void getDownloadURL(String fileFullPathName)  async
@@ -88,8 +100,18 @@ class ManageFirebaseStorage
   {
     print('simpleUsageDownloadFile2TempDirectory - start');
 
+    String extend;
+    if(httpPath.contains('jpg'))
+    {
+      extend = 'jpg';
+    }
+    else if(httpPath.contains('png'))
+    {
+      extend = 'png';
+    }
+
     String uri = Uri.decodeFull(httpPath);
-    final RegExp regex = RegExp('([^?/]*\.(jpg))');
+    final RegExp regex = RegExp('([^?/]*\.($extend))');
     final String fileName = regex.stringMatch(uri);
 
     final Directory tempDir = Directory.systemTemp;
