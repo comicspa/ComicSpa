@@ -13,7 +13,8 @@ import 'package:first_ui/models/model_real_time_trend_info.dart';
 import 'package:first_ui/packets/packet_c2s_real_time_trend_info.dart';
 import 'package:first_ui/models/model_weekly_popular_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_weekly_popular_comic_info.dart';
-import 'package:first_ui/screens/detail_page.dart';
+import 'detail_page.dart';
+import 'viewer.dart';
 
 
 class Trend extends StatefulWidget {
@@ -76,8 +77,8 @@ class _TrendState extends State<Trend> {
                         ],
                       ),
                     );
-                  {
 
+                  {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -96,7 +97,7 @@ class _TrendState extends State<Trend> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            DetailPage(i.thumbnailUrl), // link to Actual viewer
+                                            ViewerScreen(i), // link to Actual viewer
                                       ),
                                     );
                                   },

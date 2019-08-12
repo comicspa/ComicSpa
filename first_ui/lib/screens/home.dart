@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:first_ui/screens/library.dart';
-import 'package:first_ui/screens/more.dart';
-import 'package:first_ui/screens/creator.dart';
-import 'package:first_ui/screens/testhome.dart';
-import 'package:first_ui/screens/trend.dart';
-import 'package:first_ui/screens/sign_in.dart';
-import 'package:first_ui/screens/notification.dart';
-import 'package:first_ui/screens/coming_soon.dart';
+import 'library.dart';
+import 'more.dart';
+import 'creator.dart';
+import 'testhome.dart';
+import 'trend.dart';
+import 'sign_in.dart';
+import 'notification.dart';
+import 'coming_soon.dart';
 //import 'package:flutter/services.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -26,6 +26,13 @@ class _HomeScreenState extends State<HomeScreen>
 //      statusBarColor: Color(0xff202a30),  // Colors.blueGrey //Color(0xFF5986E1),
 //    ));
     controller = TabController(length: 6, initialIndex: 0, vsync: this);
+    controller.addListener(_handleTabSelection);
+  }
+
+  void _handleTabSelection() {
+    setState(() {
+
+    });
   }
 
   @override
@@ -86,41 +93,48 @@ class _HomeScreenState extends State<HomeScreen>
         height: 40,
         child: TabBar(
           isScrollable: false,
-          labelColor: Color(0xFF5986E1),
-          labelStyle: TextStyle(fontSize: 5.0, fontWeight: FontWeight.bold),
+          labelColor: Color.fromRGBO(21, 24, 45,
+              1.0),
+//          labelStyle: TextStyle(fontSize: 5.0, fontWeight: FontWeight.bold),
           indicatorWeight: 2,
           unselectedLabelColor: Colors.grey,
           controller: controller,
           tabs: <Widget>[
             Tab(
-                icon: Icon(
+              icon: Icon(
               Icons.home,
-              color: Color.fromRGBO(21, 24, 45, 0.9),
+              color: controller.index == 0 ? Color.fromRGBO(21, 24, 45,
+                  1.0) : Colors.grey,
             )), //Todo replace home with hot(=trending) need to update icon image
             Tab(
-                icon: Icon(
+              icon: Icon(
               Icons.collections_bookmark,
-              color: Color.fromRGBO(21, 24, 45, 0.9),
+              color: controller.index == 1 ? Color.fromRGBO(21, 24, 45,
+                  1.0) : Colors.grey,
             )),
             Tab(
-                icon: Icon(
+              icon: Icon(
               Icons.palette,
-              color: Color.fromRGBO(21, 24, 45, 0.9),
+              color: controller.index == 2 ? Color.fromRGBO(21, 24, 45,
+                  1.0) : Colors.grey,
             )),
             Tab(
-                icon: Icon(
+              icon: Icon(
               Icons.trending_up,
-              color: Color.fromRGBO(21, 24, 45, 0.9),
+              color: controller.index == 3 ? Color.fromRGBO(21, 24, 45,
+                  1.0) : Colors.grey,
             )),
             Tab(
-                icon: Icon(
+              icon: Icon(
               Icons.message,
-              color: Color.fromRGBO(21, 24, 45, 0.9),
+              color: controller.index == 4 ? Color.fromRGBO(21, 24, 45,
+                  1.0) : Colors.grey,
             )),
             Tab(
-                icon: Icon(
+              icon: Icon(
               Icons.menu,
-              color: Color.fromRGBO(21, 24, 45, 0.9),
+              color: controller.index == 5 ? Color.fromRGBO(21, 24, 45,
+                  1.0) : Colors.grey,
             )),
             //Tab(text: 'More', icon: Icon(Icons.menu)),
           ],

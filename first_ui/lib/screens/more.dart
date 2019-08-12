@@ -67,13 +67,13 @@ class _MoreScreenState extends State<MoreScreen> {
                               child: Image.network(i.thumbnailUrl,
                                   fit: BoxFit.fill),
                               onTap: () {
-                                Navigator.push<Widget>(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          ViewerScreen(i.thumbnailUrl), // link to Actual viewer
-                                    ),
-                                );
+//                                Navigator.push<Widget>(
+//                                    context,
+//                                    MaterialPageRoute(
+//                                      builder: (context) =>
+//                                          ViewerScreen(i.thumbnailUrl), // link to Actual viewer
+//                                    ),
+//                                );
                               },
                           ),
                         );

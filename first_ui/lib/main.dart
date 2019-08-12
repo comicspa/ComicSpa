@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:first_ui/screens/splash.dart';
 import 'package:first_ui/screens/test/page_dev_test.dart';
 import 'package:first_ui/screens/test/page_dev_view.dart';
 import 'package:first_ui/screens/home.dart';
-import 'package:first_ui/screens/library.dart';
-import 'package:first_ui/screens/more.dart';
-import 'package:first_ui/screens/creator.dart';
+import 'package:first_ui/screens/splash.dart';
+
+
 
 
 void main() => runApp(MyApp());

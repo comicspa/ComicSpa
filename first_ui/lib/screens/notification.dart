@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:first_ui/screens/trend.dart';
+import 'notification_landing_page.dart';
+import 'trend.dart';
 import 'package:first_ui/manage/manage_device_info.dart';// use this to make all the widget size responsive to the device size.
-import 'package:first_ui/screens/notification_landing_page.dart';
 import 'package:first_ui/models/model_user_info.dart';
 
 

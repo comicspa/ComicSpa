@@ -65,7 +65,8 @@ class _DetailPageState extends State<DetailPage> {
           child: Column(
             children: <Widget>[
               Container(
-                color: Color(0xFF7596D8),
+                color: Color.fromRGBO(21, 24, 45,
+                    1.0),
                 width: ManageDeviceInfo.resolutionWidth,
                 height: ManageDeviceInfo.resolutionHeight * 0.4,
                 child: Column(
@@ -162,7 +163,7 @@ class _DetailPageState extends State<DetailPage> {
                 width: ManageDeviceInfo.resolutionWidth * 0.9,
                 child: Column(
                   children: <Widget>[
-                    Text('이어보기',
+                    Text('보기',
                       style: TextStyle(
                         fontFamily: 'Lato',
                         fontWeight: FontWeight.normal,
@@ -195,9 +196,9 @@ class _DetailPageState extends State<DetailPage> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(
-                            builder: (context) => ViewerScreen('https://picsum.photos/600?image=9')
-                        ));
+//                        Navigator.push(context, MaterialPageRoute(
+//                            builder: (context) => ViewerScreen('https://picsum.photos/600?image=9')
+//                        ));
                       },
                       child: Card(
                         child: ListTile(
