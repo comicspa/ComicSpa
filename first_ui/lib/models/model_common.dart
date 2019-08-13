@@ -18,9 +18,8 @@ class ModelCommon
   }
 
 
-  static Future<Uint8List> getUint8ListFromFile(String filePathFullName) async
+  static Future<Uint8List> getUint8ListFromFile(File file) async
   {
-    File file = new File(filePathFullName);
     if(null == file)
     {
       print('null == file');
@@ -32,9 +31,16 @@ class ModelCommon
   }
 
 
-  static Future<ByteBuffer> getByteBufferFromFile(String filePathFullName) async
+  static Future<Uint8List> getUint8ListFromFilePath(String filePathFullName) async
   {
-    Uint8List readFileBytes = await getUint8ListFromFile(filePathFullName);
+    File file = new File(filePathFullName);
+    return getUint8ListFromFile(file);
+  }
+
+
+  static Future<ByteBuffer> getByteBufferFromFilePath(String filePathFullName) async
+  {
+    Uint8List readFileBytes = await getUint8ListFromFilePath(filePathFullName);
     if(null == readFileBytes)
       return null;
 
@@ -43,9 +49,9 @@ class ModelCommon
   }
 
 
-  static Future<ByteData> getByteDataFromFile(String filePathFullName) async
+  static Future<ByteData> getByteDataFromFilFilePathe(String filePathFullName) async
   {
-    ByteBuffer  readFileByteBuffer = await getByteBufferFromFile(filePathFullName);
+    ByteBuffer  readFileByteBuffer = await getByteBufferFromFilePath(filePathFullName);
     if(null == readFileByteBuffer)
       return null;
 

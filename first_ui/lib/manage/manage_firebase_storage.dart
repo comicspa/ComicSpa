@@ -66,7 +66,7 @@ class ManageFirebaseStorage
 
         print('getfilePath : $fileFullName , $fileFullPath');
 
-        Uint8List uint8list = await ModelCommon.getUint8ListFromFile(fileFullPath);
+        Uint8List uint8list = await ModelCommon.getUint8ListFromFilePath(fileFullPath);
 
         String fileFullPathName = 'comics';
         if(true != pathName.isEmpty && 0 < pathName.length)

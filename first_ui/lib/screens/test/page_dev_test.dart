@@ -5,7 +5,6 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
-
 import 'package:first_ui/models/today_popular_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_today_popular_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_view_comic.dart';
@@ -22,6 +21,8 @@ import 'package:first_ui/manage/manage_firebase_auth.dart';
 import 'package:first_ui/manage/manage_firebase_ml_vision.dart';
 import 'package:first_ui/manage/manage_firebase_storage.dart';
 import 'package:first_ui/manage/manage_paint_canvas.dart';
+import 'package:first_ui/manage/manage_flutter_cache_manager.dart';
+import 'package:first_ui/models/model_view_comic.dart';
 
 
 class PageDevTest extends StatefulWidget {
@@ -45,6 +46,7 @@ class _PageDevTestState extends State<PageDevTest> {
   PacketC2SNewCreatorInfo c2SNewCreatorInfo = new PacketC2SNewCreatorInfo();
   PacketC2SWeeklyCreatorInfo c2SWeeklyCreatorInfo = new PacketC2SWeeklyCreatorInfo();
 
+
   @override
   void initState() {
     super.initState();
@@ -61,7 +63,60 @@ class _PageDevTestState extends State<PageDevTest> {
     c2SComicDetailInfo.generate();
     c2SNewCreatorInfo.generate();
     c2SWeeklyCreatorInfo.generate();
+
+
+    image(0,0);
+
   }
+
+  Future<Image> image(int viewComicCountIndex,int comicPieceCountIndex) async
+  {
+    String comicImageUrl = ModelViewComic.list[viewComicCountIndex].comicImageUrlList[comicPieceCountIndex];
+    File file = await ManageFlutterCacheManager.getSingleFileFromCache(comicImageUrl);
+    if(!file.existsSync())
+    {
+      await ManageFlutterCacheManager.downloadFile(comicImageUrl);
+      file = await ManageFlutterCacheManager.getSingleFileFromCache(comicImageUrl);
+    }
+
+    ManageFirebaseMLVision.simpleUsageTextDetectionFromFile(file);
+    return Image.file(file);
+
+
+    /*
+    ManageCachedNetworkImage.getSingleFileFromCache("http://221.165.42.119/ComicSpa/creator/100000/1000001/01.jpg").then((value)
+    {
+      print('cache file path : ${value.path} , size : ${value.lengthSync()}');
+      print('success');
+
+      ManageFirebaseMLVision.simpleUsageTextDetectionFromFile(value);
+    },
+        onError: (error)
+        {
+          print('error : $error');
+        }).catchError( (error)
+    {
+      print('catchError : $error');
+    });
+    */
+
+  }
+
+  /*
+  @override
+  void initState() {
+    super.initState();
+    var sunImage = new NetworkImage(
+        "https://resources.ninghao.org/images/childhood-in-a-picture.jpg");
+    sunImage.obtainKey(new ImageConfiguration()).then((val) {
+      var load = sunImage.load(val);
+      load.addListener((listener, err) async {
+        setState(() => image = listener);
+      });
+    });
+  }
+  */
+
 
   Widget createTodayPopularComicInfoListView(BuildContext context, AsyncSnapshot snapshot)
   {
@@ -80,7 +135,6 @@ class _PageDevTestState extends State<PageDevTest> {
               selectedCountIndex = index;
               print('$index: ${values[index].url}');
 
-
               switch(selectedCountIndex)
               {
                 case 0:
@@ -91,13 +145,19 @@ class _PageDevTestState extends State<PageDevTest> {
 
                 case 1:
                   {
-                    ManageFirebaseMLVision.simpleUsageTextDetection();
+                    ManageFirebaseMLVision.simpleUsageTextDetectionFromFilePicker();
                   }
                   break;
 
                 case 2:
                   {
                     ManageFirebaseStorage.simpleUsageUploadFile('ooo');
+                  }
+                  break;
+
+                case 3:
+                  {
+
                   }
                   break;
               }

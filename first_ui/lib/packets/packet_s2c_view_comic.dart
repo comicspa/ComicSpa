@@ -25,7 +25,11 @@ class PacketS2CViewComic extends PacketS2CCommon
     if(null == ModelViewComic.list)
       ModelViewComic.list = new List<ModelViewComic>();
 
-    ModelViewComic modelViewComic = new ModelViewComic();
+    ModelViewComic modelViewComic;
+    if(1 > ModelViewComic.list.length)
+      modelViewComic = new ModelViewComic();
+    else
+      modelViewComic = ModelViewComic.list[0];
 
     modelViewComic.comicNumber = getUint32();
     print('comicNumber : ${modelViewComic.comicNumber}');

@@ -77,6 +77,7 @@ class ManageFirebaseAuth
   static void simpleUsageSignInWithGoogle()
   {
     print('simpleUsageSignInWithGoogle - start');
+
     ManageFirebaseAuth.signInWithGoogle().then((value)
     {
       //value == ModelUserInfo.getInstance()
@@ -90,6 +91,7 @@ class ManageFirebaseAuth
     {
       print('catchError : $error');
     });
+
     print('simpleUsageSignInWithGoogle - finish');
   }
 
