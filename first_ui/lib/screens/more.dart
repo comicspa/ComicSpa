@@ -14,8 +14,8 @@ class MoreScreen extends StatefulWidget {
 }
 
 class _MoreScreenState extends State<MoreScreen> {
-  PacketC2STodayPopularComicInfo c2STodayPopularComicInfo =
-      new PacketC2STodayPopularComicInfo(); // use this to handle data
+//  PacketC2STodayPopularComicInfo c2STodayPopularComicInfo =
+//      new PacketC2STodayPopularComicInfo(); // use this to handle data
 
 
 //  PacketC2SViewComic c2SViewComic = new PacketC2SViewComic(); // use this to handle data
@@ -23,7 +23,7 @@ class _MoreScreenState extends State<MoreScreen> {
   @override
   void initState() {
     super.initState();
-    c2STodayPopularComicInfo.generate(0, 0);   // generating packet
+//    c2STodayPopularComicInfo.generate(0, 0);   // generating packet
 //    c2SViewComic.generate();
   }
 
@@ -34,54 +34,7 @@ class _MoreScreenState extends State<MoreScreen> {
       children: <Widget>[
         Padding(
           padding: EdgeInsets.all(0.0),
-          child: FutureBuilder<List<TodayPopularComicInfo>>(
-            future: c2STodayPopularComicInfo.fetchBytes(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) return Center(child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(
-                    height: 250,
-                    child:  Center(
-                        child: CircularProgressIndicator()
-                    ),
-                  ),
-                ],
-              ));
-              {
-                return CarouselSlider(
-                    autoPlay: false,
-                    height: 250.0,
-                    aspectRatio: 16 / 9,
-                    initialPage: 0,
-                    viewportFraction: 1.0,
-                    enableInfiniteScroll: true,
-                    scrollDirection: Axis.horizontal,
-                    items: snapshot.data.map((i) {
-                      return Builder(builder: (BuildContext context) {
-                        return Container(
-                          width: MediaQuery.of(context).size.width,
-                          margin: EdgeInsets.symmetric(horizontal: 0.0),
-                          decoration: BoxDecoration(color: Colors.white),
-                          child: GestureDetector(
-                              child: Image.network(i.thumbnailUrl,
-                                  fit: BoxFit.fill),
-                              onTap: () {
-//                                Navigator.push<Widget>(
-//                                    context,
-//                                    MaterialPageRoute(
-//                                      builder: (context) =>
-//                                          ViewerScreen(i.thumbnailUrl), // link to Actual viewer
-//                                    ),
-//                                );
-                              },
-                          ),
-                        );
-                      });
-                    }).toList());
-              }
-            },
-          ),
+//
         ),
         SizedBox(
           height: 20,

@@ -62,22 +62,22 @@ class _ViewerScreen extends State<ViewerScreen> {
               _isVisible = !_isVisible;
             });
           },
-          child: FutureBuilder<ModelViewComic>(
+          child: FutureBuilder<List<ModelViewComic>>(
             future: c2sViewComic.fetchBytes(),
             builder: (context, snapshot) {
-//              if (!snapshot.hasData)
-//                return Center(
-//                  child: Column(
-//                    mainAxisAlignment: MainAxisAlignment.center,
-//                    children: <Widget>[
-//                      SizedBox(
-//                        height: ManageDeviceInfo.resolutionHeight * .3,
-//                        child: Center(child: CircularProgressIndicator()),
-//                      ),
-//                    ],
-//                  ),
-//                );
-//              {
+              if (!snapshot.hasData)
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: ManageDeviceInfo.resolutionHeight * .3,
+                        child: Center(child: CircularProgressIndicator()),
+                      ),
+                    ],
+                  ),
+                );
+              {
 //                return ListView(
 //                  shrinkWrap: true,
 //                  scrollDirection: Axis.vertical,
@@ -95,12 +95,12 @@ class _ViewerScreen extends State<ViewerScreen> {
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 physics: BouncingScrollPhysics(),
-                itemCount: snapshot.data.comicImageUrlList.length,
+                itemCount: snapshot.data[0].comicImageUrlList.length,
 //                      ModelViewComic.getInstance().comicImageUrlList.length,
                 itemBuilder: (BuildContext context, int index) =>
-                    Image.network(snapshot.data.comicImageUrlList[index]),
+                    Image.network(snapshot.data[0].comicImageUrlList[index]),
               );
-//              }
+              }
             },
           ),
 //          child: CustomScrollView(
@@ -136,47 +136,47 @@ class _ViewerScreen extends State<ViewerScreen> {
 //        ),
         ),
       ),
-//      floatingActionButton: Visibility(
-//        visible: _isVisible,
-//        child: Row(
-//          mainAxisAlignment: MainAxisAlignment.end,
-//          children: <Widget>[
-//            Container(
-//              height: 30,
-//              child: FloatingActionButton(
-//                heroTag: 'btn1',
-//                backgroundColor: Colors.brown,
-//                onPressed: () {},
-//                child: Icon(Icons.translate),
-//              ),
-//            ),
-//            SizedBox(
-//              width: 40,
-//            ),
-//            Container(
-//              height: 30,
-//              child: FloatingActionButton.extended(
-//                heroTag: 'btn2',
-//                onPressed: () {},
-//                label: Text('Pre'),
-//                icon: Icon(Icons.arrow_left),
-//              ),
-//            ),
-//            SizedBox(
-//              width: 20,
-//            ),
-//            Container(
-//              height: 30,
-//              child: FloatingActionButton.extended(
-//                heroTag: 'btn3',
-//                onPressed: () {},
-//                label: Text('Next'),
-//                icon: Icon(Icons.arrow_right),
-//              ),
-//            ),
-//          ],
-//        ),
-//      ),
+      floatingActionButton: Visibility(
+        visible: _isVisible,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            Container(
+              height: 30,
+              child: FloatingActionButton(
+                heroTag: 'btn1',
+                backgroundColor: Colors.brown,
+                onPressed: () {},
+                child: Icon(Icons.translate),
+              ),
+            ),
+            SizedBox(
+              width: 40,
+            ),
+            Container(
+              height: 30,
+              child: FloatingActionButton.extended(
+                heroTag: 'btn2',
+                onPressed: () {},
+                label: Text('Pre'),
+                icon: Icon(Icons.arrow_left),
+              ),
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            Container(
+              height: 30,
+              child: FloatingActionButton.extended(
+                heroTag: 'btn3',
+                onPressed: () {},
+                label: Text('Next'),
+                icon: Icon(Icons.arrow_right),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
