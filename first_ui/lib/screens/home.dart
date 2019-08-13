@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen>
           CreatorScreen(),
           Trend(),
           NotificationScreen(),
-          SignInPage(),
+          MoreScreen(),
         ],
       ),
       bottomNavigationBar: SizedBox(

@@ -40,19 +40,7 @@ class _ComingSoonScreenState extends State<ComingSoonScreen> {
               padding: EdgeInsets.symmetric(horizontal: 12.0),
               child: Icon(Icons.perm_identity),
             ),
-            IconButton(
-              icon: Icon(
-                Icons.notifications,
-              ),
-              onPressed: () {
-                Navigator.pop(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => NotificationScreen(),
-                  ),
-                );
-              },
-            ),
+
             Padding(
               //Todo If search feature goes to bottomAppBar delete this padding
               padding: const EdgeInsets.symmetric(horizontal: 15.0),

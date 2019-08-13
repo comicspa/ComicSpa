@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:first_ui/models/today_popular_comic_info.dart';
-import 'package:first_ui/models/model_view_comic.dart';
-import 'package:first_ui/packets/packet_c2s_today_popular_comic_info.dart';
-import 'package:first_ui/packets/packet_c2s_view_comic.dart';
-import 'package:first_ui/screens/viewer.dart';
-import 'package:first_ui/screens/test/image_test.dart';
+import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
+import 'coming_soon.dart';
 import 'package:first_ui/screens/test/viewer_floating_button.dart';
 
 class MoreScreen extends StatefulWidget {
@@ -30,30 +25,229 @@ class _MoreScreenState extends State<MoreScreen> {
   @override
   Widget build(BuildContext context) {
     // Todo Currently this screen is used for testing viewer
-    return Column(
+    return ListView(
       children: <Widget>[
-        Padding(
-          padding: EdgeInsets.all(0.0),
-//
-        ),
-        SizedBox(
-          height: 20,
-        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Stack(
+              children: <Widget>[
+                Container(
+                  width: ManageDeviceInfo.resolutionWidth * 1.0,
+                  height: ManageDeviceInfo.resolutionHeight * 0.22,
+                  color: Color.fromRGBO(21, 24, 45, 1.0),
+                ),
+                Positioned(
+                  top: ManageDeviceInfo.resolutionHeight * 0.03,
+                  right: ManageDeviceInfo.resolutionWidth / 2.3,
+                  child: CircleAvatar(
+                    radius: ManageDeviceInfo.resolutionHeight * 0.04,
+                    backgroundImage: AssetImage('images/catHouse.jpg'),
+                    child: Icon(Icons.person),
+                  ),
+                ),
+                Positioned(
+                  bottom: ManageDeviceInfo.resolutionHeight * 0.03,
+                  left: ManageDeviceInfo.resolutionWidth * 0.17,
+                  child: Row(
+                    children: <Widget>[
+                      SizedBox(
+                        height: ManageDeviceInfo.resolutionHeight * 0.05,
+                        width: ManageDeviceInfo.resolutionWidth * 0.3,
+                        child: OutlineButton(
+                          highlightedBorderColor: Colors.redAccent,
+                          shape: StadiumBorder(),
+                          borderSide: BorderSide(color: Colors.white70),
+                          onPressed: () {
+                            Navigator.push<Widget>(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ComingSoonScreen(),
+                                ));
+                          },
+                          child: Text(
+                            'Redeem',
+                            style: TextStyle(
+                              fontFamily: 'Lato',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white70,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: ManageDeviceInfo.resolutionWidth * 0.05,
+                      ),
+                      SizedBox(
+                        height: ManageDeviceInfo.resolutionHeight * 0.05,
+                        width: ManageDeviceInfo.resolutionWidth * 0.3,
+                        child: OutlineButton(
+                          highlightedBorderColor: Colors.redAccent,
+                          shape: StadiumBorder(),
+                          borderSide: BorderSide(color: Colors.white70),
+                          onPressed: () {
+                            Navigator.push<Widget>(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ComingSoonScreen(),
+                                ));
+                          },
+                          child: Text(
+                            'Top-up Sparky',
+                            style: TextStyle(
+                              fontFamily: 'Lato',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white70,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+            Container(
+              color: Colors.white10,
+              height: ManageDeviceInfo.resolutionHeight * 0.03,
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.palette),
+              title: Text(
+                'Creator',
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontFamily: 'Lato',
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
+              trailing: Icon(Icons.chevron_right),
+              onTap: () {
+                Navigator.push<Widget>(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ComingSoonScreen(),
+                  ),
+                );
+              },
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.help_outline),
+              title: Text(
+                'Support',
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontFamily: 'Lato',
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
+              trailing: Icon(Icons.chevron_right),
+              onTap: () {
+                Navigator.push<Widget>(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ComingSoonScreen(),
+                  ),
+                );
+              },
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text(
+                'Settings',
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontFamily: 'Lato',
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
+              trailing: Icon(Icons.chevron_right),
+              onTap: () {
+                Navigator.push<Widget>(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ComingSoonScreen(),
+                  ),
+                );
+              },
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text(
+                'About',
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontFamily: 'Lato',
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
+              trailing: Icon(Icons.info),
+              onTap: () {
+                Navigator.push<Widget>(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ComingSoonScreen(),
+                  ),
+                );
+              },
+            ),
 
-        FlatButton(
-          color: Colors.redAccent,
-          onPressed: () {
-            Navigator.push<Widget>(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ViewerWithFAB(),
-                ));
-          },
-          child: Text(
-            "Image viewer with floating button testing!",
-          ),
-        ),
+            SizedBox(
+              height: ManageDeviceInfo.resolutionHeight * 0.05,
+            ),
+            Container(
+              color: Colors.white60,
+              height: ManageDeviceInfo.resolutionHeight * 0.02 ,
+            ),
 
+            MaterialButton(
+
+              textColor: const Color(0xFF807a6b),
+              padding: EdgeInsets.all(20.0),
+              onPressed: (){},
+              child: Row(
+                children: <Widget>[
+                  Icon(Icons.exit_to_app),
+                  SizedBox(width: 20.0),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text('Sign-Out'),
+                     SizedBox(height: 5.0),
+                    ],
+                  ),
+               ],
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+
+            FlatButton(
+              color: Colors.redAccent,
+              onPressed: () {
+                Navigator.push<Widget>(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ViewerWithFAB(),
+                    ));
+              },
+              child: Text(
+                "Sign-in   or   Sign-up",
+              ),
+            ),
+
+          ],
+        ),
       ],
     );
   }
