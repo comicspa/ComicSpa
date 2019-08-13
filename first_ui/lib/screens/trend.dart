@@ -147,7 +147,7 @@ class _TrendState extends State<Trend> {
             child: Text(
               'Recommended',
               style: TextStyle(
-                  fontSize: 16,
+                  fontSize: ManageDeviceInfo.resolutionHeight * 0.024,
                   fontFamily: 'Lato',
                   fontWeight: FontWeight.bold),
               textAlign: TextAlign.left,
@@ -223,7 +223,7 @@ class _TrendState extends State<Trend> {
                                                   style: TextStyle(
                                                     fontFamily: 'Lato',
                                                     fontWeight: FontWeight.bold,
-                                                    fontSize: 12,
+                                                    fontSize: ManageDeviceInfo.resolutionHeight * 0.017,
                                                   ),
                                                 ),
                                               ),
@@ -244,7 +244,7 @@ class _TrendState extends State<Trend> {
                                                     style: TextStyle(
                                                       fontFamily: 'Lato',
                                                       color: Colors.grey[800],
-                                                      fontSize: 11,
+                                                      fontSize: ManageDeviceInfo.resolutionHeight * 0.016,
                                                     ),
                                                   ),
                                                 ),
@@ -337,7 +337,7 @@ class _TrendState extends State<Trend> {
             child: Text(
               'Realtime Trend',
               style: TextStyle(
-                  fontSize: 16,
+                  fontSize: ManageDeviceInfo.resolutionHeight * 0.024,
                   fontFamily: 'Lato',
                   fontWeight: FontWeight.bold),
               textAlign: TextAlign.left,
@@ -527,7 +527,7 @@ class _TrendState extends State<Trend> {
             child: Text(
               'New Comics',
               style: TextStyle(
-                  fontSize: 16,
+                  fontSize: ManageDeviceInfo.resolutionHeight * 0.024,
                   fontFamily: 'Lato',
                   fontWeight: FontWeight.bold),
               textAlign: TextAlign.left,
@@ -717,7 +717,7 @@ class _TrendState extends State<Trend> {
             child: Text(
               'Today\'s Trend',
               style: TextStyle(
-                  fontSize: 16,
+                  fontSize: ManageDeviceInfo.resolutionHeight * 0.024,
                   fontFamily: 'Lato',
                   fontWeight: FontWeight.bold),
               textAlign: TextAlign.left,
@@ -907,7 +907,7 @@ class _TrendState extends State<Trend> {
             child: Text(
               'Weekly Trend',
               style: TextStyle(
-                  fontSize: 16,
+                  fontSize: ManageDeviceInfo.resolutionHeight * 0.024,
                   fontFamily: 'Lato',
                   fontWeight: FontWeight.bold),
               textAlign: TextAlign.left,

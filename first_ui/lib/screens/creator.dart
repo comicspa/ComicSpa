@@ -362,7 +362,7 @@ class _CreatorScreenState extends State<CreatorScreen> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          MoreScreen())); //Todo testing route so update this later
+                                                          DetailPage(snapshot.data[index].url))); //Todo testing route so update this later
                                             },
                                           ),
                                         ),

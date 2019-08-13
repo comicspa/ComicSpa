@@ -76,7 +76,7 @@ class _DetailPageState extends State<DetailPage> {
                         Container(
                             padding: EdgeInsets.fromLTRB(10,30,10,0),
                             child: ClipRRect(
-                                borderRadius: BorderRadius.circular(25.0),
+                                borderRadius: BorderRadius.circular(5.0),
                                 child: Image.asset('images/mainTest.jpg',width: 140, height:130)
                             )
                         ),
