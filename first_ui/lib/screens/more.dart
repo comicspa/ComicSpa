@@ -180,7 +180,7 @@ class _MoreScreenState extends State<MoreScreen> {
             ),
             Divider(),
             ListTile(
-              leading: Icon(Icons.settings),
+              leading: Icon(Icons.info),
               title: Text(
                 'About',
                 textAlign: TextAlign.left,
@@ -190,7 +190,7 @@ class _MoreScreenState extends State<MoreScreen> {
                   color: Colors.black87,
                 ),
               ),
-              trailing: Icon(Icons.info),
+              trailing: Icon(Icons.chevron_right),
               onTap: () {
                 Navigator.push<Widget>(
                   context,
