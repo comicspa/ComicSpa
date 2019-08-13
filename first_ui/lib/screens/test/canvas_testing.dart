@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'dart:ui' as ui;
 
 // Coming soon page for multi-purpose
 
