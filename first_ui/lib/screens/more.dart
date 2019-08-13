@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
 import 'coming_soon.dart';
-import 'package:first_ui/screens/test/ocr_test.dart';
+//import 'package:first_ui/screens/test/ocr_test.dart';
 
 class MoreScreen extends StatefulWidget {
   @override
@@ -238,7 +238,7 @@ class _MoreScreenState extends State<MoreScreen> {
                 Navigator.push<Widget>(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => OcrTesting(),
+                      //builder: (context) => OcrTesting(),
                     ));
               },
               child: Text(

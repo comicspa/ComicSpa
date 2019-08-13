@@ -1,3 +1,5 @@
+/*
+
 import 'package:flutter/material.dart';
 import 'package:firebase_mlkit_language/firebase_mlkit_language.dart';
 
@@ -142,3 +144,4 @@ class _OcrTesting extends State<OcrTesting> {
     );
   }
 }
+*/

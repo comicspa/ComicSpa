@@ -65,7 +65,7 @@ class _PageDevTestState extends State<PageDevTest> {
     c2SWeeklyCreatorInfo.generate();
 
 
-    image(0,0);
+    //image(0,0);
 
   }
 
@@ -79,7 +79,7 @@ class _PageDevTestState extends State<PageDevTest> {
       file = await ManageFlutterCacheManager.getSingleFileFromCache(comicImageUrl);
     }
 
-    ManageFirebaseMLVision.simpleUsageTextDetectionFromFile(file);
+    ManageFirebaseMLVision.detectTextFromFile(file,ModelViewComic.list[viewComicCountIndex].detectTextInfoList[comicPieceCountIndex]);
     return Image.file(file);
 
 

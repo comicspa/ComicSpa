@@ -32,8 +32,6 @@ dependencies:
   firebase_storage: ^3.0.5
   flutter_signin_button: ^0.2.8
   firebase_database: ^3.0.5
-  firebase_mlkit_language: ^1.1.2
-  mlkit: ^0.13.2
   flutter_cache_manager: ^1.1.1
 
 

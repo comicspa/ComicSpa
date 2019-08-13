@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 
+
+import 'package:first_ui/models/model_view_comic_detect_text_info.dart';
+
+
 import 'package:first_ui/manage/manage_file_picker.dart';
 
 
@@ -14,12 +18,14 @@ class ManageFirebaseMLVision
 {
 
   static TextRecognizer textRecognizer = FirebaseVision.instance.textRecognizer();
-  static TextRecognizer cloudTextRecognizer = FirebaseVision.instance.cloudTextRecognizer();
+
 
 
   static void simpleUsageTextDetectionFromFilePicker() async
   {
     print('simpleUsageTextDetection - start');
+
+    TextRecognizer cloudTextRecognizer = FirebaseVision.instance.cloudTextRecognizer();
 
     Map<String,String> filePathsMap = await ManageFilePicker.getMultiFilePath();
     if(null != filePathsMap)
@@ -63,7 +69,7 @@ class ManageFirebaseMLVision
         }
 
         //print('VisionText : ${visionText.text}');
-        await textRecognizer.close();
+        await cloudTextRecognizer.close();
 
       }
     }
@@ -73,9 +79,12 @@ class ManageFirebaseMLVision
 
 
 
-  static void simpleUsageTextDetectionFromFile(File file) async
+  static void detectTextFromFile(File file,ModelViewComicDetectTextInfo modelViewComicDetectTextInfo) async
   {
-    print('simpleUsageTextDetectionFromFile - start');
+    print('detectTextFromFile - start');
+
+
+    TextRecognizer cloudTextRecognizer = FirebaseVision.instance.cloudTextRecognizer();
 
     FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(file);
     VisionText visionText = await cloudTextRecognizer.processImage(visionImage);
@@ -106,9 +115,9 @@ class ManageFirebaseMLVision
     }
 
     //print('VisionText : ${visionText.text}');
-    await textRecognizer.close();
+    await cloudTextRecognizer.close();
 
-    print('simpleUsageTextDetectionFromFile - finish');
+    print('detectTextFromFile - finish');
   }
 
 

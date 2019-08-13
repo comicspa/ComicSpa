@@ -148,13 +148,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.9.2"
-  firebase_mlkit_language:
-    dependency: "direct main"
-    description:
-      name: firebase_mlkit_language
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.2"
   firebase_storage:
     dependency: "direct main"
     description:
@@ -205,10 +198,10 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "889f1645e3db95090527d5aa73afe3747cb973ce"
+      resolved-ref: "75ddf6b05a05c6608e51e86c6d10164f1ba61620"
       url: "git://github.com/dnfield/flutter_svg"
     source: git
-    version: "0.13.1"
+    version: "0.14.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -312,13 +305,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.6"
-  mlkit:
-    dependency: "direct main"
-    description:
-      name: mlkit
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.13.2"
   package_config:
     dependency: transitive
     description:
@@ -367,7 +353,7 @@ packages:
       name: permission_handler
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.1+1"
+    version: "3.2.2"
   petitparser:
     dependency: transitive
     description:

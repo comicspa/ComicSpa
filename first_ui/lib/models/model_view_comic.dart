@@ -1,4 +1,6 @@
 
+import 'package:first_ui/models/model_view_comic_detect_text_info.dart';
+
 
 class ModelViewComic
 {
@@ -7,12 +9,14 @@ class ModelViewComic
   String _comicTitle;
   int _comicNumber;
   List<String> _comicImageUrlList;
+  List<ModelViewComicDetectTextInfo> _detectTextInfoList;
 
   String get userId => _userId;
   String get creatorId => _creatorId;
   String get comicTitle => _comicTitle;
   int get comicNumber => _comicNumber;
   List<String> get comicImageUrlList => _comicImageUrlList;
+  List<ModelViewComicDetectTextInfo> get detectTextInfoList => _detectTextInfoList;
 
   set userId(String userId)
   {
@@ -33,6 +37,10 @@ class ModelViewComic
   set comicImageUrlList(List<String> comicImageUrlList)
   {
     _comicImageUrlList = comicImageUrlList;
+  }
+  set detectTextInfoList(List<ModelViewComicDetectTextInfo> detectTextInfoList)
+  {
+    _detectTextInfoList = detectTextInfoList;
   }
 
   static List<ModelViewComic> list;
