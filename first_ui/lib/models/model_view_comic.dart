@@ -35,7 +35,9 @@ class ModelViewComic
     _comicImageUrlList = comicImageUrlList;
   }
 
+  static List<ModelViewComic> list;
 
+  /*
   static ModelViewComic _instance;
   static ModelViewComic getInstance() {
     if(_instance == null) {
@@ -44,5 +46,6 @@ class ModelViewComic
     }
     return _instance;
   }
+  */
 
 }

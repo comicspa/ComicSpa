@@ -31,14 +31,13 @@ class PacketC2SMyLockerComicRecent extends PacketC2SCommon
 
   Future<List<ModelMyLockerComicRecent>> fetchBytes() async
   {
-    print('PacketC2SFeaturedComicInfo : fetchBytes started');
+    print('PacketC2SMyLockerComicRecent : fetchBytes started');
 
     if(null != ModelMyLockerComicRecent.list)
       return ModelMyLockerComicRecent.list;
 
     Socket socket = await ModelCommon.createServiceSocket();
     print('connected server');
-
 
     final List<int> eventList = new List<int>();
     // listen to the received data event stream

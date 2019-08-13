@@ -23,9 +23,11 @@ class PacketC2SViewComic extends PacketC2SCommon
   void generate()
   {}
 
-  Future<ModelViewComic> fetchBytes() async
+  Future<List<ModelViewComic>> fetchBytes() async
   {
     print('PacketC2SViewComic : fetchBytes started');
+    if(null != ModelViewComic.list)
+      return ModelViewComic.list;
 
     Socket socket = await ModelCommon.createServiceSocket();
     print('connected server');
@@ -43,7 +45,9 @@ class PacketC2SViewComic extends PacketC2SCommon
       {
         PacketS2CViewComic packet = new PacketS2CViewComic();
         packet.parseBytes(packetSize,byteData);
-        return ModelViewComic.getInstance();
+
+        //return ModelViewComic.getInstance();
+        return ModelViewComic.list;
       }
       return null;
     });
@@ -57,7 +61,8 @@ class PacketC2SViewComic extends PacketC2SCommon
     await Future.delayed(Duration(seconds: 10));
     socket.close();
 
-    return null;
+    //return null;
+    return ModelViewComic.list;
   }
 
 

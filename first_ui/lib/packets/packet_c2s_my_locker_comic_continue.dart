@@ -31,7 +31,7 @@ class PacketC2SMyLockerComicContinue extends PacketC2SCommon
 
   Future<List<ModelMyLockerComicContinue>> fetchBytes() async
   {
-    print('PacketC2SFeaturedComicInfo : fetchBytes started');
+    print('PacketC2SMyLockerComicContinue : fetchBytes started');
 
     if(null != ModelMyLockerComicContinue.list)
       return ModelMyLockerComicContinue.list;
