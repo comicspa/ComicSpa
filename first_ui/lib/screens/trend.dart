@@ -15,6 +15,7 @@ import 'package:first_ui/models/model_weekly_popular_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_weekly_popular_comic_info.dart';
 import 'detail_page.dart';
 import 'viewer.dart';
+import 'common_widgets.dart';
 
 
 class Trend extends StatefulWidget {
@@ -66,17 +67,7 @@ class _TrendState extends State<Trend> {
                 future: c2sFeaturedComicInfo.fetchBytes(),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData)
-                    return Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          SizedBox(
-                            height: ManageDeviceInfo.resolutionHeight * .3,
-                            child: Center(child: CircularProgressIndicator()),
-                          ),
-                        ],
-                      ),
-                    );
+                    return LoadingIndicator();
 
                   {
                     return Column(
@@ -160,19 +151,7 @@ class _TrendState extends State<Trend> {
               future: c2sRecommendedComicInfo.fetchBytes(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData)
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(
-                          height: ManageDeviceInfo.resolutionHeight * .25,
-                          child:  Center(
-                              child: CircularProgressIndicator()
-                          ),
-                        ),
-                      ],
-                    ),
-                );
+                  return new LoadingIndicator();
                 {
                   return ListView.builder(
                     physics: ClampingScrollPhysics(),
@@ -365,7 +344,7 @@ class _TrendState extends State<Trend> {
                   );
                 {
                   return ListView.builder(
-                    physics: ClampingScrollPhysics(),
+                    physics: BouncingScrollPhysics(),
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemCount: ModelRecommendedComicInfo.list.length,
@@ -540,22 +519,10 @@ class _TrendState extends State<Trend> {
               future: c2sNewComicInfo.fetchBytes(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData)
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(
-                          height: ManageDeviceInfo.resolutionHeight * .25,
-                          child:  Center(
-                              child: CircularProgressIndicator()
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
+                  return LoadingIndicator();
                 {
                   return ListView.builder(
-                    physics: ClampingScrollPhysics(),
+                    physics: BouncingScrollPhysics(),
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemCount: ModelNewComicInfo.list.length,
@@ -730,22 +697,10 @@ class _TrendState extends State<Trend> {
               future: c2STodayPopularComicInfo.fetchBytes(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData)
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(
-                          height: ManageDeviceInfo.resolutionHeight * .25,
-                          child:  Center(
-                              child: CircularProgressIndicator()
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
+                  return LoadingIndicator();
                 {
                   return ListView.builder(
-                    physics: ClampingScrollPhysics(),
+                    physics: BouncingScrollPhysics(),
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemCount: ModelNewComicInfo.list.length,
@@ -920,22 +875,10 @@ class _TrendState extends State<Trend> {
               future: c2sWeeklyPopularComicInfo.fetchBytes(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData)
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(
-                          height: ManageDeviceInfo.resolutionHeight * .25,
-                          child:  Center(
-                              child: CircularProgressIndicator()
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
+                  return LoadingIndicator();
                 {
                   return ListView.builder(
-                    physics: ClampingScrollPhysics(),
+                    physics: BouncingScrollPhysics(),
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemCount: ModelWeeklyPopularComicInfo.list.length,
@@ -1097,6 +1040,8 @@ class _TrendState extends State<Trend> {
   }
 
 }
+
+
 
 // Need handler for indicator
 List<T> map<T>(List list, Function handler) {

@@ -5,6 +5,7 @@ import 'package:first_ui/models/model_new_creator_info.dart';
 import 'package:first_ui/packets/packet_c2s_new_creator_info.dart';
 import 'more.dart';
 import 'detail_page.dart';
+import 'common_widgets.dart';
 
 
 class CreatorScreen extends StatefulWidget {
@@ -46,11 +47,11 @@ class _CreatorScreenState extends State<CreatorScreen> {
                       return const Text('');
                     case ConnectionState.active:
                       return const Center(
-                        child: CircularProgressIndicator(),
+                        child: LoadingIndicator(),
                       );
                     case ConnectionState.waiting:
                       return const Center(
-                        child: CircularProgressIndicator(),
+                        child: LoadingIndicator(),
                       );
                     //
                     case ConnectionState.done:
@@ -191,11 +192,11 @@ class _CreatorScreenState extends State<CreatorScreen> {
                       return const Text('');
                     case ConnectionState.active:
                       return const Center(
-                        child: CircularProgressIndicator(),
+                        child: LoadingIndicator(),
                       );
                     case ConnectionState.waiting:
                       return const Center(
-                        child: CircularProgressIndicator(),
+                        child: LoadingIndicator(),
                       );
                   //
                     case ConnectionState.done:
@@ -326,11 +327,11 @@ class _CreatorScreenState extends State<CreatorScreen> {
                       return const Text('');
                     case ConnectionState.active:
                       return const Center(
-                        child: CircularProgressIndicator(),
+                        child: LoadingIndicator(),
                       );
                     case ConnectionState.waiting:
                       return const Center(
-                        child: CircularProgressIndicator(),
+                        child: LoadingIndicator(),
                       );
                   //
                     case ConnectionState.done:
