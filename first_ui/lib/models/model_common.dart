@@ -31,6 +31,29 @@ class ModelCommon
   }
 
 
+  static Future<ByteBuffer> getByteBufferFromFile(File file) async
+  {
+    Uint8List readFileBytes = await getUint8ListFromFile(file);
+    if(null == readFileBytes)
+      return null;
+
+    ByteBuffer  readFileByteBuffer = readFileBytes.buffer;
+    return readFileByteBuffer;
+  }
+
+
+  static Future<ByteData> getByteDataFromFilFile(File file) async
+  {
+    ByteBuffer  readFileByteBuffer = await getByteBufferFromFile(file);
+    if(null == readFileByteBuffer)
+      return null;
+
+    ByteData byteData = ByteData.view(readFileByteBuffer);
+    return byteData;
+  }
+
+
+
   static Future<Uint8List> getUint8ListFromFilePath(String filePathFullName) async
   {
     File file = new File(filePathFullName);
@@ -49,7 +72,7 @@ class ModelCommon
   }
 
 
-  static Future<ByteData> getByteDataFromFilFilePathe(String filePathFullName) async
+  static Future<ByteData> getByteDataFromFilFilePath(String filePathFullName) async
   {
     ByteBuffer  readFileByteBuffer = await getByteBufferFromFilePath(filePathFullName);
     if(null == readFileByteBuffer)
