@@ -3,6 +3,7 @@ import 'package:first_ui/manage/manage_device_info.dart'; // use this to make al
 import 'coming_soon.dart';
 //import 'package:first_ui/screens/test/ocr_test.dart';
 import 'package:first_ui/screens/test/canvas_testing.dart';
+import 'package:first_ui/screens/test/canvas_testing2.dart';
 
 class MoreScreen extends StatefulWidget {
   @override
@@ -214,7 +215,14 @@ class _MoreScreenState extends State<MoreScreen> {
 
               textColor: const Color(0xFF807a6b),
               padding: EdgeInsets.all(20.0),
-              onPressed: (){},
+              onPressed: (){
+                Navigator.push<Widget>(
+                    context,
+                    MaterialPageRoute(
+                    builder: (context) => ImageLoading2Canvas(),
+                    ),
+                );
+              },
               child: Row(
                 children: <Widget>[
                   Icon(Icons.exit_to_app),
