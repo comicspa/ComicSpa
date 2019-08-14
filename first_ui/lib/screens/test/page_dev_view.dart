@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:first_ui/manage/manage_firebase_storage.dart';
-//import 'package:first_ui/manage/manage_image.dart';
 
 class PageDevView extends StatelessWidget {
 
