@@ -23,7 +23,6 @@ class ManageFirebaseMLVision
   {
     print('detectTextFromFile - start');
 
-
     TextRecognizer cloudTextRecognizer = FirebaseVision.instance.cloudTextRecognizer();
 
     FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(file);
@@ -33,8 +32,9 @@ class ManageFirebaseMLVision
     {
       for (int i = 0; i < visionText.blocks.length; ++i)
       {
-        TextBlock textBlock = visionText.blocks.elementAt(i);
+        TextBlock textBlock = visionText.blocks[i];
 
+        /*
         if (null != textBlock.recognizedLanguages)
         {
           for (int m = 0; m < textBlock.recognizedLanguages.length; ++m)
@@ -42,14 +42,18 @@ class ManageFirebaseMLVision
             print('recognizedLanguages[$m] : ${textBlock.recognizedLanguages.elementAt(m).toString()}');
           }
         }
+        */
 
         print('text[$i] : ${textBlock.text}');
         print('boundingBox[$i] : ${textBlock.boundingBox.toString()}');
         print('cornerPoints[$i] : ${textBlock.cornerPoints.toString()}');
 
-        for (int j = 0; j < textBlock.lines.length; ++j)
+        if(null != textBlock.lines)
         {
-          print('linetext[$i][$j] : ${textBlock.lines.elementAt(j).text}');
+          for (int j = 0; j < textBlock.lines.length; ++j)
+          {
+            print('linetext[$i][$j] : ${textBlock.lines[j].text}');
+          }
         }
       }
     }
