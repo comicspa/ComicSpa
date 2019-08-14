@@ -24,7 +24,7 @@ class _DrawRectState extends State<DrawRect> {
                 content: Form(
                   key: _formKey,
                   child: SizedBox(
-                    height: ManageDeviceInfo.resolutionHeight * 0.5,
+                    height: ManageDeviceInfo.resolutionHeight * 0.38,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -75,11 +75,12 @@ class _DrawRectState extends State<DrawRect> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 1),
+                              padding: const EdgeInsets.symmetric(vertical: 15),
                               child: SizedBox(
                                 height:
                                     ManageDeviceInfo.resolutionHeight * 0.035,
                                 child: RaisedButton(
+                                  shape: StadiumBorder(),
                                   onPressed: () {
                                     // Validate will return true if the form is valid, or false if
                                     // the form is invalid.
@@ -94,11 +95,12 @@ class _DrawRectState extends State<DrawRect> {
                             ),
                             Padding(
                               padding:
-                                  const EdgeInsets.symmetric(vertical: 16.0),
+                                  const EdgeInsets.symmetric(vertical: 15.0),
                               child: SizedBox(
                                 height:
                                     ManageDeviceInfo.resolutionHeight * 0.035,
                                 child: RaisedButton(
+                                  shape: StadiumBorder(),
                                   onPressed: () {
                                     // Validate will return true if the form is valid, or false if
                                     // the form is invalid.
@@ -112,6 +114,30 @@ class _DrawRectState extends State<DrawRect> {
                             ),
                           ],
                         ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.all(
+                                  ManageDeviceInfo.resolutionHeight * 0.02),
+                              child: SizedBox(
+                                height:
+                                    ManageDeviceInfo.resolutionHeight * 0.035,
+                                child: RaisedButton(
+                                  shape: StadiumBorder(),
+                                  onPressed: () {
+                                    // Validate will return true if the form is valid, or false if
+                                    // the form is invalid.
+                                    if (_formKey.currentState.validate()) {
+                                      // Process data.
+                                    }
+                                  },
+                                  child: Text('Language'),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),
