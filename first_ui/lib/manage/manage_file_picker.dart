@@ -19,10 +19,16 @@ class ManageFilePicker
         print('getfilePath : $data, ${filePathsMap[data]}');
       }
     }
-
-
     return filePathsMap;
   }
+
+  /*
+  static Future<String> getFilePath() async
+  {
+    String filePathName =  await FilePicker.getFilePath(FileType.IMAGE,'');
+    return filePathName;
+  }
+  */
 
 
 }

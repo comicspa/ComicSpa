@@ -19,6 +19,7 @@ class ModelUserInfo
   String _displayName;
   String _photoUrl;
   String _uId;
+  String _accessToken;
 
   String get id => _id;
   String get creatorId => _creatorId;
@@ -30,6 +31,7 @@ class ModelUserInfo
   String get displayName => _displayName;
   String get photoUrl => _photoUrl;
   String get uId => _uId;
+  String get accessToken => _accessToken;
 
   set id(String id)
   {
@@ -74,6 +76,11 @@ class ModelUserInfo
   set uId(String uId)
   {
     _uId = uId;
+  }
+
+  set accessToken(String accessToken)
+  {
+    _accessToken = accessToken;
   }
 
 

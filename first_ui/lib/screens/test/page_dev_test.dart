@@ -17,12 +17,13 @@ import 'package:first_ui/packets/packet_c2s_comic_detail_info.dart';
 import 'package:first_ui/packets/packet_c2s_new_creator_info.dart';
 import 'package:first_ui/packets/packet_c2s_weekly_creator_info.dart';
 
+import 'package:first_ui/manage/manage_common.dart';
 import 'package:first_ui/manage/manage_firebase_auth.dart';
 import 'package:first_ui/manage/manage_firebase_ml_vision.dart';
 import 'package:first_ui/manage/manage_firebase_storage.dart';
 import 'package:first_ui/manage/manage_paint_canvas.dart';
-import 'package:first_ui/manage/manage_flutter_cache_manager.dart';
 import 'package:first_ui/models/model_view_comic.dart';
+
 
 
 class PageDevTest extends StatefulWidget {
@@ -63,42 +64,6 @@ class _PageDevTestState extends State<PageDevTest> {
     c2SComicDetailInfo.generate();
     c2SNewCreatorInfo.generate();
     c2SWeeklyCreatorInfo.generate();
-
-
-    //image(0,0);
-
-  }
-
-  Future<Image> image(int viewComicCountIndex,int comicPieceCountIndex) async
-  {
-    String comicImageUrl = ModelViewComic.list[viewComicCountIndex].comicImageUrlList[comicPieceCountIndex];
-    File file = await ManageFlutterCacheManager.getSingleFileFromCache(comicImageUrl);
-    if(!file.existsSync())
-    {
-      await ManageFlutterCacheManager.downloadFile(comicImageUrl);
-      file = await ManageFlutterCacheManager.getSingleFileFromCache(comicImageUrl);
-    }
-
-    ManageFirebaseMLVision.detectTextFromFile(file,ModelViewComic.list[viewComicCountIndex].detectTextInfoList[comicPieceCountIndex]);
-    return Image.file(file);
-
-
-    /*
-    ManageCachedNetworkImage.getSingleFileFromCache("http://221.165.42.119/ComicSpa/creator/100000/1000001/01.jpg").then((value)
-    {
-      print('cache file path : ${value.path} , size : ${value.lengthSync()}');
-      print('success');
-
-      ManageFirebaseMLVision.simpleUsageTextDetectionFromFile(value);
-    },
-        onError: (error)
-        {
-          print('error : $error');
-        }).catchError( (error)
-    {
-      print('catchError : $error');
-    });
-    */
 
   }
 
@@ -145,7 +110,7 @@ class _PageDevTestState extends State<PageDevTest> {
 
                 case 1:
                   {
-                    ManageFirebaseMLVision.simpleUsageTextDetectionFromFilePicker();
+                    ManageCommon.detectTextFromFilePicker();
                   }
                   break;
 
