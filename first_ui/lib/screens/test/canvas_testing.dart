@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
 
 import 'dart:ui' as ui;
 
@@ -8,11 +9,116 @@ class DrawRect extends StatefulWidget {
 }
 
 class _DrawRectState extends State<DrawRect> {
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GestureDetector(
         onTap: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                backgroundColor: Colors.transparent,
+                content: Form(
+                  key: _formKey,
+                  child: SizedBox(
+                    height: ManageDeviceInfo.resolutionHeight * 0.5,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                          height: ManageDeviceInfo.resolutionHeight * 0.2,
+                          child: TextFormField(
+                            textInputAction: TextInputAction.send,
+                            autofocus: true,
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontFamily: 'Lato',
+                              color: Colors.black87,
+                            ),
+                            decoration: InputDecoration(
+                                hintText: 'You may start typing',
+                                contentPadding: EdgeInsets.all(
+                                    ManageDeviceInfo.resolutionHeight * 0.01)
+
+//                              border: OutlineInputBorder(),
+//                              focusedBorder: OutlineInputBorder(
+//                                borderSide: BorderSide(
+//                                  color: Colors.greenAccent,
+//                                ),
+//                              ),
+//                              enabledBorder: OutlineInputBorder(
+//                                borderSide: BorderSide(
+//                                  color: Colors.redAccent,
+//                                ),
+//                              ),
+//                              contentPadding: EdgeInsets.all(
+//                                  ManageDeviceInfo.resolutionWidth * 0.02),
+                                ),
+                            keyboardType: TextInputType.multiline,
+                            maxLines: null,
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Please enter some text';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 1),
+                              child: SizedBox(
+                                height:
+                                    ManageDeviceInfo.resolutionHeight * 0.035,
+                                child: RaisedButton(
+                                  onPressed: () {
+                                    // Validate will return true if the form is valid, or false if
+                                    // the form is invalid.
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text('Cancel'),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: ManageDeviceInfo.resolutionWidth * 0.1,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 16.0),
+                              child: SizedBox(
+                                height:
+                                    ManageDeviceInfo.resolutionHeight * 0.035,
+                                child: RaisedButton(
+                                  onPressed: () {
+                                    // Validate will return true if the form is valid, or false if
+                                    // the form is invalid.
+                                    if (_formKey.currentState.validate()) {
+                                      // Process data.
+                                    }
+                                  },
+                                  child: Text('Submit'),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+          );
           debugPrint("hello");
         },
         child: Stack(
@@ -21,7 +127,8 @@ class _DrawRectState extends State<DrawRect> {
               left: 100,
               top: 200,
               child: Container(
-                width: 200, //Todo should be same and painter size and make this as variable
+                width:
+                    200, //Todo should be same and painter size and make this as variable
                 height: 100,
                 color: Colors.yellowAccent,
                 child: CustomPaint(
@@ -45,10 +152,7 @@ class MyRect extends CustomPainter {
     canvas.drawRect(
       new Rect.fromLTWH(0.0, 0.0, 150.0, 50.0),
       paint,
-
     );
-
-
   }
 
 //  @override
@@ -63,7 +167,6 @@ class MyRect extends CustomPainter {
     return false;
   }
 }
-
 
 //class RectsExample extends StatefulWidget {
 //  @override
@@ -84,42 +187,41 @@ class MyRect extends CustomPainter {
 //            Rect.fromLTRB(40, 60, 80, 100),
 //          ],
 //          selectedIndex: _index,
-////          onSelected: (index){
-////              showDialog(
-////                  context: context,
-////                  builder: (BuildContext context) {
-////                    return AlertDialog(
-////                      content: Form(
-////                        key: _formKey,
-////                        child: Column(
-////                          mainAxisSize: MainAxisSize.min,
-////                          children: <Widget>[
-////                            Padding(
-////                              padding: EdgeInsets.all(8.0),
-////                              child: TextFormField(),
-////                            ),
-////                            Padding(
-////                              padding: EdgeInsets.all(8.0),
-////                              child: TextFormField(),
-////                            ),
-////                            Padding(
-////                              padding: const EdgeInsets.all(8.0),
-////                              child: RaisedButton(
-////                                child: Text("Submit"),
-////                                onPressed: () {
-////                                  if (_formKey.currentState.validate()) {
-////                                    _formKey.currentState.save();
-////                                  }
-////                                },
-////                              ),
-////                            )
-////                          ],
-////                        ),
-////                      ),
-////                    );
-////                  });
-////
-////          },
+//          onSelected: (index) {
+//            showDialog(
+//                context: context,
+//                builder: (BuildContext context) {
+//                  return AlertDialog(
+//                    content: Form(
+//                      key: _formKey,
+//                      child: Column(
+//                        mainAxisSize: MainAxisSize.min,
+//                        children: <Widget>[
+//                          Padding(
+//                            padding: EdgeInsets.all(8.0),
+//                            child: TextFormField(),
+//                          ),
+//                          Padding(
+//                            padding: EdgeInsets.all(8.0),
+//                            child: TextFormField(),
+//                          ),
+//                          Padding(
+//                            padding: const EdgeInsets.all(8.0),
+//                            child: RaisedButton(
+//                              child: Text("Submit"),
+//                              onPressed: () {
+//                                if (_formKey.currentState.validate()) {
+//                                  _formKey.currentState.save();
+//                                }
+//                              },
+//                            ),
+//                          )
+//                        ],
+//                      ),
+//                    ),
+//                  );
+//                });
+//          },
 //          onSelected: (index) {
 //            setState(() {
 //              _index = index;
