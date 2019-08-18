@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:first_ui/manage/manage_device_info.dart';// use this to make all the widget size responsive to the device size.
+import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
 
 import 'dart:ui' as ui;
 import 'dart:io';
@@ -11,9 +11,6 @@ import 'package:first_ui/models/model_common.dart';
 import 'package:first_ui/manage/manage_flutter_cache_manager.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:first_ui/manage/manage_firebase_ml_vision.dart';
-
-
-
 
 class ImageLoading2Canvas extends StatefulWidget {
   ImageLoading2Canvas({Key key, this.title}) : super(key: key);
@@ -34,26 +31,24 @@ class _ImageLoading2CanvasState extends State<ImageLoading2Canvas> {
     super.initState();
     init();
   }
+
   init() async {
 //    final ByteData data = await rootBundle.load('http://221.165.42.119/ComicSpa/creator/100000/1000001/04.jpg');
-   // final ByteData data = await rootBundle.load('images/04.jpg');
+    // final ByteData data = await rootBundle.load('images/04.jpg');
 
+    File file = await ManageFlutterCacheManager.getSingleFileFromCache(
+        'http://221.165.42.119/ComicSpa/creator/100000/1000001/04.jpg');
+    if (!file.existsSync()) {
+      print('!file.existsSync()');
+    }
 
-    File file = await ManageFlutterCacheManager.getSingleFileFromCache('http://221.165.42.119/ComicSpa/creator/100000/1000001/04.jpg');
-    if(!file.existsSync())
-      {
-        print('!file.existsSync()');
-      }
-
-
-    VisionText visionText = await ManageFirebaseMLVision.detectTextFromFile(file);
+    VisionText visionText =
+        await ManageFirebaseMLVision.detectTextFromFile(file);
 
     textBlockList = new List<TextBlock>();
 
-    if (null != visionText.blocks)
-    {
-      for (int i = 0; i < visionText.blocks.length; ++i)
-      {
+    if (null != visionText.blocks) {
+      for (int i = 0; i < visionText.blocks.length; ++i) {
         TextBlock textBlock = visionText.blocks[i];
 
         textBlockList.add(textBlock);
@@ -69,29 +64,22 @@ class _ImageLoading2CanvasState extends State<ImageLoading2Canvas> {
         */
 
         //print('text[$i] : ${textBlock.text}');
-       // print('boundingBox[$i] : ${textBlock.boundingBox.toString()}');
+        // print('boundingBox[$i] : ${textBlock.boundingBox.toString()}');
         //print('cornerPoints[$i] : ${textBlock.cornerPoints.toString()}');
 
-        if(null != textBlock.lines)
-        {
-          for (int j = 0; j < textBlock.lines.length; ++j)
-          {
-           // print('linetext[$i][$j] : ${textBlock.lines[j].text}');
+        if (null != textBlock.lines) {
+          for (int j = 0; j < textBlock.lines.length; ++j) {
+            // print('linetext[$i][$j] : ${textBlock.lines[j].text}');
           }
         }
       }
     }
-
-
-
-
 
     //ByteBuffer data = await ModelCommon.getByteBufferFromFile(file);
     Uint8List list = await ModelCommon.getUint8ListFromFile(file);
     print('aaaaaa : ${list.length}');
 
     image = await loadImage(list);
-
   }
 
   Future<ui.Image> loadImage(List<int> img) async {
@@ -109,44 +97,40 @@ class _ImageLoading2CanvasState extends State<ImageLoading2Canvas> {
   Widget _buildImage() {
     if (this.isImageLoaded) {
       return new CustomPaint(
-        painter: new ImageEditor(image: image),
+        painter: new PaintingImage(image: image),
       );
     } else {
       return new Center(child: new Text('loading'));
     }
   }
+
   @override
   Widget build(BuildContext context) {
-
     return new Scaffold(
-
-        body: ListView(
-          children: <Widget>[
-            FittedBox(
-              child: SizedBox(
-                width: image.width.toDouble(),
-                height: image.height.toDouble(),
-
-                child: _buildImage(),
-              ),
+      body: ListView(
+        children: <Widget>[
+          FittedBox(
+            child: SizedBox(
+              width: image.width.toDouble(),
+              height: image.height.toDouble(),
+              child: _buildImage(),
             ),
-          ],
-        ),
+          ),
+        ],
+      ),
     );
   }
 }
 
-class ImageEditor extends CustomPainter {
-
-
-  ImageEditor({
+class PaintingImage extends CustomPainter {
+  PaintingImage({
     this.image,
   });
 
   ui.Image image;
 
   @override
-  void paint(Canvas canvas, Size size)   {
+  void paint(Canvas canvas, Size size) {
     print('sdjifoeifye : ${image.height}');
 
     //ByteData data = await image.toByteData();
@@ -158,5 +142,4 @@ class ImageEditor extends CustomPainter {
   bool shouldRepaint(CustomPainter oldDelegate) {
     return false;
   }
-
 }
