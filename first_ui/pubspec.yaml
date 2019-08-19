@@ -35,6 +35,7 @@ dependencies:
   flutter_cache_manager: ^1.1.1
   cached_network_image: ^1.1.1
   corsac_jwt: ^0.1.2
+  image: ^2.1.4
 
 dev_dependencies:
   flutter_test:
