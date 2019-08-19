@@ -26,7 +26,7 @@ import 'package:first_ui/manage/manage_access_token.dart';
 
 
 import 'package:first_ui/models/model_view_comic.dart';
-import 'package:image/image.dart';
+
 
 
 
