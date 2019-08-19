@@ -16,11 +16,13 @@ class ManageDeviceInfo
   static e_target_platform_type _targetPlatformType = e_target_platform_type.none;
   static double _resolutionWidth = 0;
   static double _resolutionHeight = 0;
+  static double _statusBarHeight = 0.0;
 
   static String get uniqueId => _uniqueId;
   static e_target_platform_type get targetPlatformType => _targetPlatformType;
   static double get resolutionWidth => _resolutionWidth;
   static double get resolutionHeight => _resolutionHeight;
+  static double get statusBarHeight => _statusBarHeight;
 
   static Future<String> _getUniqueId(BuildContext context) async
   {
@@ -61,5 +63,19 @@ class ManageDeviceInfo
     });
   }
 
+  static void getStatusBarHeight(BuildContext context)
+  {
+    if(0 == _statusBarHeight)
+      _statusBarHeight =  MediaQuery.of(context).padding.top;
+
+    print('getStatusBarHeight : $_statusBarHeight');
+  }
+
+  static void firstInitialize(BuildContext context)
+  {
+    getResolution(context);
+    getUniqueId(context);
+    getStatusBarHeight(context);
+  }
 
 }
