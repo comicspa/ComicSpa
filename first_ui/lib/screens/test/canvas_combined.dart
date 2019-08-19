@@ -11,6 +11,7 @@ import 'package:first_ui/models/model_common.dart';
 import 'package:first_ui/manage/manage_flutter_cache_manager.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:first_ui/manage/manage_firebase_ml_vision.dart';
+import 'package:first_ui/manage/manage_image.dart';
 
 class DrawRectAndImage extends StatefulWidget {
   @override
@@ -18,6 +19,7 @@ class DrawRectAndImage extends StatefulWidget {
 }
 
 
+ManageImage manageImage = new ManageImage();
 List<TextBlock> textBlockList = new List<TextBlock>();
 
 class _DrawRectAndImageState extends State<DrawRectAndImage> {
@@ -44,6 +46,15 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
     await ManageFirebaseMLVision.detectTextFromFile(file);
 
 
+    if(false ==  manageImage.decode(file.readAsBytesSync()))
+      {
+        print('false == manageImage.decode');
+
+      }
+    else
+      {
+        print('imaghe size - width : ${manageImage.width} , height : ${manageImage.height}');
+      }
 
     if (null != visionText.blocks) {
       for (int i = 0; i < visionText.blocks.length; ++i) {
@@ -99,11 +110,14 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
         children: <Widget>[
           ListView(
             children: <Widget>[
-              SizedBox(
-
-                width: ManageDeviceInfo.resolutionWidth * 1,
-                height: image.height.toDouble(),
-                child: _buildImage(),
+              SafeArea(
+                child: FittedBox(
+                  child: SizedBox(
+                    width: ManageDeviceInfo.resolutionWidth * (manageImage.width / ManageDeviceInfo.resolutionWidth),
+                    height: ManageDeviceInfo.resolutionHeight * (manageImage.height / ManageDeviceInfo.resolutionHeight),
+                    child: _buildImage(),
+                  ),
+                ),
               ),
             ],
           ),
@@ -240,21 +254,23 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
               );
               debugPrint("hello");
             },
-            child: Stack(
-              children: <Widget>[
-                Positioned(
-                  left: textBlockList[0].boundingBox.left / 3.1,
-                  top: textBlockList[0].boundingBox.top / 3.1 ,
-                  child: Container(
-                    width: 150,//textBlockList[0].boundingBox.width / 3.1, //Todo should be same and painter size and make this as variable
-                    height: textBlockList[0].boundingBox.height / 3.1,
-                    color: Colors.transparent,
-                    child: CustomPaint(
-                      painter: (MyRect()),
+            child: SafeArea(
+              child: Stack(
+                children: <Widget>[
+                  Positioned(
+                    left: ManageDeviceInfo.resolutionWidth / (manageImage.width/textBlockList[0].boundingBox.left),
+                    top: ManageDeviceInfo.resolutionHeight / (manageImage.height/textBlockList[0].boundingBox.top),
+                    child: Container(
+                      width: ManageDeviceInfo.resolutionWidth / (manageImage.width/textBlockList[0].boundingBox.width), //Todo should be same and painter size and make this as variable
+                      height: ManageDeviceInfo.resolutionHeight / (manageImage.height/textBlockList[0].boundingBox.height),
+                      color: Colors.yellow,
+                      child: CustomPaint(
+                        painter: (MyRect()),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
 
@@ -282,22 +298,16 @@ class MyRect extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint();
-    paint.color = Colors.black;
+    paint.color = Colors.blue;
     paint.style = PaintingStyle.stroke;
 
 
     canvas.drawRect(
-      new Rect.fromLTWH(0, 0, textBlockList[0].boundingBox.width, textBlockList[0].boundingBox.height),
+      new Rect.fromLTWH(0, 0, ManageDeviceInfo.resolutionWidth / (manageImage.width/textBlockList[0].boundingBox.width), ManageDeviceInfo.resolutionHeight / (manageImage.height/textBlockList[0].boundingBox.height)),
       paint,
     );
   }
 
-//  @override
-//  Path getInnerPath(Rect rect, {TextDirection textDirection}) {
-//    return new Path()
-//      ..fillType = PathFillType.evenOdd
-//      ..addPath(getOuterPath(rect), Offset.zero);
-//  }
 
   @override
   bool shouldRepaint(MyRect oldDelegate) {
