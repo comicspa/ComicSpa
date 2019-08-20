@@ -7,6 +7,8 @@ import 'trend.dart';
 import 'sign_in.dart';
 import 'notification.dart';
 import 'coming_soon.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 //import 'package:flutter/services.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -47,11 +49,8 @@ class _HomeScreenState extends State<HomeScreen>
           title: Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Image.asset(
-                'images/ComicSpa_logo.png',
-                width: 88,
-                height: 21.25,
-              ),
+              Center(child: SvgPicture.asset('images/sparky_logo.svg', width: 88, height: 21.25,)),
+
               Padding(padding: const EdgeInsets.only(left: 8.0)),
             ],
           ),
