@@ -16,6 +16,8 @@ class CreatorScreen extends StatefulWidget {
 class _CreatorScreenState extends State<CreatorScreen> {
   PacketC2SWeeklyCreatorInfo c2sWeeklyCreatorInfo =
   new PacketC2SWeeklyCreatorInfo();
+  PacketC2SWeeklyCreatorInfo c2sWeeklyCreatorInfo2 =
+  new PacketC2SWeeklyCreatorInfo();
   PacketC2SNewCreatorInfo c2sNewCreatorInfo =
   new PacketC2SNewCreatorInfo(); //
 
@@ -26,6 +28,7 @@ class _CreatorScreenState extends State<CreatorScreen> {
     // generating packet
 
     c2sWeeklyCreatorInfo.generate();
+    c2sWeeklyCreatorInfo2.generate();
     c2sNewCreatorInfo.generate();
 
   }
@@ -320,7 +323,7 @@ class _CreatorScreenState extends State<CreatorScreen> {
             child: Padding(
               padding: const EdgeInsets.all(0.0),
               child: FutureBuilder<List<ModelWeeklyCreatorInfo>>( //Todo need to change when Recommended Creator is ready
-                future: c2sWeeklyCreatorInfo.fetchBytes(),
+                future: c2sWeeklyCreatorInfo2.fetchBytes(),
                 builder: (BuildContext context, snapshot) {
                   switch (snapshot.connectionState) {
                     case ConnectionState.none:

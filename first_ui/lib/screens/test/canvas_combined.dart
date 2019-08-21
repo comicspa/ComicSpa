@@ -18,13 +18,21 @@ class DrawRectAndImage extends StatefulWidget {
   _DrawRectAndImageState createState() => _DrawRectAndImageState();
 }
 
-ManageImage manageImage = new ManageImage();
-List<TextBlock> textBlockList = new List<TextBlock>();
+ManageImage manageImage1 = new ManageImage();
+List<TextBlock> textBlockList1 = new List<TextBlock>();
+List<Rect> boundingBoxList1 = new List<Rect>();
+
+ManageImage manageImage2 = new ManageImage();
+List<TextBlock> textBlockList2 = new List<TextBlock>();
+List<Rect> boundingBoxList2 = new List<Rect>();
+
 
 class _DrawRectAndImageState extends State<DrawRectAndImage> {
   final _formKey = GlobalKey<FormState>();
-  ui.Image image;
+  ui.Image image1;
+  ui.Image image2;
   bool isImageLoaded = false;
+  double totalImageHeight;
 
   void initState() {
     super.initState();
@@ -32,27 +40,52 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
   }
 
   init() async {
-    File file = await ManageFlutterCacheManager.getSingleFileFromCache(
+
+    //////////////////////////////////////////////////////////////////////////
+    File file1 = await ManageFlutterCacheManager.getSingleFileFromCache(
+        'http://221.165.42.119/ComicSpa/creator/100000/1000001/01.jpg');
+    if (!file1.existsSync()) {
+      print('!file1.existsSync()');
+    }
+    File file2 = await ManageFlutterCacheManager.getSingleFileFromCache(
         'http://221.165.42.119/ComicSpa/creator/100000/1000001/04.jpg');
-    if (!file.existsSync()) {
-      print('!file.existsSync()');
+    if (!file2.existsSync()) {
+      print('!file2.existsSync()');
     }
 
-    VisionText visionText =
-        await ManageFirebaseMLVision.detectTextFromFile(file);
+    /////////////////////////////////////////////////////////////////////////
 
-    if (false == manageImage.decode(file.readAsBytesSync())) {
+    VisionText visionText1 =
+        await ManageFirebaseMLVision.detectTextFromFile(file1);
+
+    if (false == manageImage1.decode(file1.readAsBytesSync())) {
       print('false == manageImage.decode');
     } else {
       print(
-          'imaghe size - width : ${manageImage.width} , height : ${manageImage.height}');
+          'imaghe size - width : ${manageImage1.width} , height : ${manageImage1.height}');
     }
 
-    if (null != visionText.blocks) {
-      for (int i = 0; i < visionText.blocks.length; ++i) {
-        TextBlock textBlock = visionText.blocks[i];
 
-        textBlockList.add(textBlock);
+    VisionText visionText2 =
+    await ManageFirebaseMLVision.detectTextFromFile(file2);
+
+    if (false == manageImage2.decode(file2.readAsBytesSync())) {
+      print('false == manageImage.decode');
+    } else {
+      print(
+          'imaghe size - width : ${manageImage2.width} , height : ${manageImage2.height}');
+    }
+
+    /////////////////////////////////////////////////////////////////////////
+
+
+    if (null != visionText1.blocks) {
+      for (int i = 0; i < visionText1.blocks.length; ++i) {
+        TextBlock textBlock = visionText1.blocks[i];
+
+        textBlockList1.add(textBlock);
+
+        boundingBoxList1.add(textBlock.boundingBox);
 
         /*
         if (null != textBlock.recognizedLanguages)
@@ -75,14 +108,57 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
         }
       }
     }
+    print('textBlockList Count : ${textBlockList1.length}');
 
-    print('textBlockList Count : ${textBlockList.length}');
+    if (null != visionText2.blocks) {
+      for (int i = 0; i < visionText2.blocks.length; ++i) {
+        TextBlock textBlock = visionText2.blocks[i];
+
+        textBlockList2.add(textBlock);
+
+        boundingBoxList2.add(textBlock.boundingBox);
+        //boundingBoxList1.add(textBlock.boundingBox);
+
+        /*
+        if (null != textBlock.recognizedLanguages)
+        {
+          for (int m = 0; m < textBlock.recognizedLanguages.length; ++m)
+          {
+            print('recognizedLanguages[$m] : ${textBlock.recognizedLanguages.elementAt(m).toString()}');
+          }
+        }
+        */
+
+        //print('text[$i] : ${textBlock.text}');
+        // print('boundingBox[$i] : ${textBlock.boundingBox.toString()}');
+        //print('cornerPoints[$i] : ${textBlock.cornerPoints.toString()}');
+
+        if (null != textBlock.lines) {
+          for (int j = 0; j < textBlock.lines.length; ++j) {
+            // print('linetext[$i][$j] : ${textBlock.lines[j].text}');
+          }
+        }
+      }
+    }
+    print('textBlockList2 Count : ${textBlockList2.length}');
+
+    /////////////////////////////////////////////////////////////////////////
+
+
 
     //ByteBuffer data = await ModelCommon.getByteBufferFromFile(file);
-    Uint8List list = await ModelCommon.getUint8ListFromFile(file);
-    print('aaaaaa : ${list.length}');
+    Uint8List list1 = await ModelCommon.getUint8ListFromFile(file1);
+    print('aaaaaa : ${list1.length}');
+    image1 = await loadImage(list1);
 
-    image = await loadImage(list);
+    Uint8List list2 = await ModelCommon.getUint8ListFromFile(file2);
+    print('bbbbbb : ${list2.length}');
+    image2 = await loadImage(list2);
+
+    /////////////////////////////////////////////////////////////////////////
+
+    totalImageHeight = image1.height.toDouble() + image2.height.toDouble();
+
   }
 
   Future<ui.Image> loadImage(List<int> img) async {
@@ -97,101 +173,92 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
     return completer.future;
   }
 
+  ScrollController _myController1 = new ScrollController(); // make seperate controllers
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-//          ListView(
-//            children: <Widget>[
-//              FittedBox(
-//                child: SizedBox(
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        controller: _myController1,
+        child: Stack(
+          children: <Widget>[
+            FittedBox(
+              child: SizedBox(
+                width: ManageDeviceInfo.resolutionWidth *
+                    (manageImage1.width /
+                        ManageDeviceInfo.resolutionWidth),
+                height: ManageDeviceInfo.resolutionHeight *
+                    (totalImageHeight /
+                        ManageDeviceInfo.resolutionHeight),
+                child: _buildImage(),
+              ),
+            ),
+//            ListView(
+//              children: <Widget>[
+//                FittedBox(
+//                  child: SizedBox(
+//                    width: ManageDeviceInfo.resolutionWidth *
+//                    (manageImage1.width /
+//                    ManageDeviceInfo.resolutionWidth),
+//                    height: ManageDeviceInfo.resolutionHeight *
+//                        (manageImage1.height /
+//                            ManageDeviceInfo.resolutionHeight),
+//                    child: _buildImage(),
+//                  ),
+//                ),
+//                FittedBox(
+//                  child: SizedBox(
+//                    width: ManageDeviceInfo.resolutionWidth *
+//                        (manageImage2.width /
+//                            ManageDeviceInfo.resolutionWidth),
+//                    height: ManageDeviceInfo.resolutionHeight *
+//                        (manageImage2.height /
+//                            ManageDeviceInfo.resolutionHeight),
+//                    child: _buildImage2(),
+//                  ),
+//                ),
+//              ],
+//            ),
+
+//                Container(
 //                  width: ManageDeviceInfo.resolutionWidth *
-//                  (manageImage.width /
-//                  ManageDeviceInfo.resolutionWidth),
+//                      (manageImage.width /
+//                          ManageDeviceInfo.resolutionWidth),
 //                  height: ManageDeviceInfo.resolutionHeight *
 //                      (manageImage.height /
 //                          ManageDeviceInfo.resolutionHeight),
-//                  child: _buildImage(),
+//                ),
+            for(var boundingBox in boundingBoxList1)
+              Positioned(
+                left: ManageDeviceInfo.resolutionWidth / (manageImage1.width /
+                    boundingBox.left),
+                top: boundingBox.top/(manageImage1.width /
+                    ManageDeviceInfo.resolutionWidth),
+                child: Container(
+                  width: ManageDeviceInfo.resolutionWidth /
+                      (manageImage1.width / boundingBox.width),
+                  height: ManageDeviceInfo.resolutionHeight /
+                      (totalImageHeight / boundingBox.height)  + ManageDeviceInfo.statusBarHeight,
+                  color: Colors.yellow,
+                ),
+              ),
+//            for(var boundingBox in boundingBoxList2)
+//              Positioned(
+//                left: ManageDeviceInfo.resolutionWidth / (manageImage2.width /
+//                    boundingBox.left),
+//                top: boundingBox.top/(manageImage2.width /
+//                    ManageDeviceInfo.resolutionWidth),
+//                child: Container(
+//                  width: ManageDeviceInfo.resolutionWidth /
+//                      (manageImage2.width / boundingBox.width),
+//                  height: ManageDeviceInfo.resolutionHeight /
+//                      (manageImage2.height / boundingBox.height)  + ManageDeviceInfo.statusBarHeight,
+//                  color: Colors.transparent,
 //                ),
 //              ),
-//            ],
-//          ),
-
-
-
-//          Positioned(
-//            left: ManageDeviceInfo.resolutionWidth / (manageImage.width /
-//                textBlockList[0].boundingBox.left),
-//            top: ManageDeviceInfo.resolutionHeight / (manageImage.height /
-//                textBlockList[0].boundingBox.top),
-//            child: Container(
-//              width: ManageDeviceInfo.resolutionWidth / (manageImage.width / textBlockList[0].boundingBox.width),
-//              height: ManageDeviceInfo.resolutionHeight / (manageImage.height / textBlockList[0].boundingBox.height),
-//              color: Colors.yellow,
-//              child: CustomPaint(
-//                painter: (MyRect(0)),
-//              ),
-//            ),
-//          ),
-
-
-
-          ListView.builder(
-            itemCount: textBlockList.length.toInt(),
-            itemBuilder: (context, index){
-              return Stack(
-                children: <Widget>[
-                  Container(
-                    width: ManageDeviceInfo.resolutionWidth * (manageImage.width / ManageDeviceInfo.resolutionWidth),
-                    height: ManageDeviceInfo.resolutionHeight * (manageImage.height / ManageDeviceInfo.resolutionHeight),
-                  ),
-                  Positioned(
-                    left: ManageDeviceInfo.resolutionWidth / (manageImage.width /
-                        textBlockList[4].boundingBox.left),
-                    top: ManageDeviceInfo.resolutionHeight / (manageImage.height /
-                        textBlockList[4].boundingBox.top),
-                    child: Container(
-                      width: ManageDeviceInfo.resolutionWidth / (manageImage.width / textBlockList[4].boundingBox.width),
-                      height: ManageDeviceInfo.resolutionHeight / (manageImage.height / textBlockList[4].boundingBox.height),
-                      color: Colors.yellow,
-                      child: CustomPaint(
-                        painter: (MyRect(4)),
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
-          ListView.builder(
-            itemCount: textBlockList.length.toInt(),
-            itemBuilder: (context, index){
-              return Stack(
-                children: <Widget>[
-                  Container(
-                    width: ManageDeviceInfo.resolutionWidth * (manageImage.width / ManageDeviceInfo.resolutionWidth),
-                    height: ManageDeviceInfo.resolutionHeight * (manageImage.height / ManageDeviceInfo.resolutionHeight),
-                  ),
-                  Positioned(
-                    left: ManageDeviceInfo.resolutionWidth / (manageImage.width /
-                        textBlockList[5].boundingBox.left),
-                    top: ManageDeviceInfo.resolutionHeight / (manageImage.height /
-                        textBlockList[5].boundingBox.top),
-                    child: Container(
-                      width: ManageDeviceInfo.resolutionWidth / (manageImage.width / textBlockList[5].boundingBox.width),
-                      height: ManageDeviceInfo.resolutionHeight / (manageImage.height / textBlockList[5].boundingBox.height),
-                      color: Colors.yellow,
-                      child: CustomPaint(
-                        painter: (MyRect(5)),
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -333,16 +400,82 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
                 );
   }
 
+
   Widget _buildImage() {
     if (this.isImageLoaded) {
       return new CustomPaint(
-        painter: new PaintingImage(image: image),
+        painter: new PaintingImage2(image1: image1,image2: image2),
+      );
+    } else {
+      return new Center(child: new Text('loading'));
+    }
+  }
+
+  Widget _buildImage2() {
+    if (this.isImageLoaded) {
+      return new CustomPaint(
+        painter: new PaintingImage(image: image2),
       );
     } else {
       return new Center(child: new Text('loading'));
     }
   }
 }
+
+
+
+class PaintingImage extends CustomPainter {
+  PaintingImage({
+    this.image,
+  });
+
+  ui.Image image;
+
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    print('sdjifoeifye : ${image.height}');
+
+    //ByteData data = await image.toByteData();
+
+    canvas.drawImage(image, new Offset(0.0, 0.0), new Paint());
+
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
+  }
+}
+
+
+class PaintingImage2 extends CustomPainter {
+  PaintingImage2({
+    this.image1,this.image2
+  });
+
+  ui.Image image1;
+ui.Image image2;
+
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    print('sdjifoeifye : ${image1.height}');
+
+    //ByteData data = await image.toByteData();
+
+    canvas.drawImage(image1, new Offset(0.0, 0.0), new Paint());
+    canvas.drawImage(image2, new Offset(0.0, image1.height.toDouble()), new Paint());
+
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
+  }
+}
+
+
 
 class MyRect extends CustomPainter {
 
@@ -363,9 +496,9 @@ class MyRect extends CustomPainter {
           0,
           0,
           ManageDeviceInfo.resolutionWidth /
-              (manageImage.width / textBlockList[index].boundingBox.width),
+              (manageImage1.width / textBlockList1[index].boundingBox.width),
           ManageDeviceInfo.resolutionHeight /
-              (manageImage.height / textBlockList[index].boundingBox.height)),
+              (manageImage1.height / textBlockList1[index].boundingBox.height)),
       paint,
     );
 
@@ -389,28 +522,34 @@ class MyRect extends CustomPainter {
   }
 }
 
-class PaintingImage extends CustomPainter {
-  PaintingImage({
-    this.image,
-  });
 
-  ui.Image image;
+Widget outlinedBoxLists(List<String> strings){
+  List<Widget> list = List<Widget>();
 
-  @override
-  void paint(Canvas canvas, Size size) {
-    print('sdjifoeifye : ${image.height}');
-
-    //ByteData data = await image.toByteData();
-
-    canvas.drawImage(image, new Offset(0.0, 0.0), new Paint());
+  for (var i = 0; i == textBlockList1.length; i++) {
+    list.add(
+      Stack(
+        children: <Widget>[
+          Positioned(
+            left: ManageDeviceInfo.resolutionWidth / (manageImage1.width /
+                textBlockList1[i].boundingBox.left),
+            top: ManageDeviceInfo.resolutionHeight / (manageImage1.height /
+                textBlockList1[i].boundingBox.top),
+            child: Container(
+              width: ManageDeviceInfo.resolutionWidth /
+                  (manageImage1.width / textBlockList1[i].boundingBox.width),
+              height: ManageDeviceInfo.resolutionHeight /
+                  (manageImage1.height / textBlockList1[i].boundingBox.height),
+              color: Colors.yellow,
+            ),
+          ),
+        ],
+      ),
+    );
   }
+  return Stack(children: list);
 
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
-  }
 }
-
 
 
 //ListView.builder(
