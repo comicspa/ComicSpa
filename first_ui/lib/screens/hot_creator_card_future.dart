@@ -136,106 +136,110 @@ class _BuildHotCreatorCardsState extends State<BuildHotCreatorCards> {
           children: <Widget>[
             Container(
 //                  Card(
-                child: InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            MoreScreen())); //Todo testing route so update this later
-              },
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 10.0),
-                child: SizedBox(
-                  height: 100,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        child: Image.network(
-                          widget.hotCreators[index].thumbnailUrl,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-//                            AspectRatio(
-//                              aspectRatio: 1.0,
-//                              child: Container(
-//                                decoration: const BoxDecoration(
-////                                image: DecorationImage(
-////                                    image: NetworkImage(
-////                                        snapshot.data[index].picture)
-////                                ),
-//                                    color: Colors.pink),
-//                              ),
-//                            ),
-                      Expanded(
-                        child: Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(20.0, 0.0, 2.0, 0.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Expanded(
-                                flex: 2,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(
-                                      widget.hotCreators[index].title,
-                                      //Todo update this testing data
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    const Padding(
-                                        padding: EdgeInsets.only(bottom: 2.0)),
-                                    Text(
-                                      widget.hotCreators[index].title,
-                                      //Todo update this testing data
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                        fontSize: 12.0,
-                                        color: Colors.black54,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: <Widget>[
-                                    Text(
-                                      widget.hotCreators[index].title,
-                                      style: const TextStyle(
-                                        fontSize: 12.0,
-                                        color: Colors.black87,
-                                      ),
-                                    ),
-                                    Text(
-                                      'Date published · views ★', //Todo update this testing data
-                                      style: const TextStyle(
-                                        fontSize: 12.0,
-                                        color: Colors.black54,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              MoreScreen())); //Todo testing route so update this later
+                },
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  child: SizedBox(
+                    height: 100,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                          child: Image.network(
+                            widget.hotCreators[index].thumbnailUrl,
+                            fit: BoxFit.cover,
                           ),
                         ),
-                      )
-                    ],
+                        //                            AspectRatio(
+                        //                              aspectRatio: 1.0,
+                        //                              child: Container(
+                        //                                decoration: const BoxDecoration(
+                        ////                                image: DecorationImage(
+                        ////                                    image: NetworkImage(
+                        ////                                        snapshot.data[index].picture)
+                        ////                                ),
+                        //                                    color: Colors.pink),
+                        //                              ),
+                        //                            ),
+                        Expanded(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(20.0, 0.0, 2.0, 0.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Expanded(
+                                  flex: 2,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        widget.hotCreators[index].title,
+                                        //Todo update this testing data
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      const Padding(
+                                          padding:
+                                              EdgeInsets.only(bottom: 2.0)),
+                                      Text(
+                                        widget.hotCreators[index].title,
+                                        //Todo update this testing data
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                          fontSize: 12.0,
+                                          color: Colors.black54,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: <Widget>[
+                                      Text(
+                                        widget.hotCreators[index].title,
+                                        style: const TextStyle(
+                                          fontSize: 12.0,
+                                          color: Colors.black87,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Date published · views ★', //Todo update this testing data
+                                        style: const TextStyle(
+                                          fontSize: 12.0,
+                                          color: Colors.black54,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-            )),
+            ),
           ],
         );
       },

@@ -153,8 +153,7 @@ class _DrawRectState extends State<DrawRect> {
               left: 100,
               top: 200,
               child: Container(
-                width:
-                    200, //Todo should be same and painter size and make this as variable
+                width: 200,
                 height: 100,
                 color: Colors.yellowAccent,
                 child: CustomPaint(

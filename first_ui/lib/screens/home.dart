@@ -32,9 +32,7 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   void _handleTabSelection() {
-    setState(() {
-
-    });
+    setState(() {});
   }
 
   @override
@@ -46,20 +44,18 @@ class _HomeScreenState extends State<HomeScreen>
           elevation: 0,
           backgroundColor: Color.fromRGBO(21, 24, 45,
               1.0), //Color(0xff202a30), //Colors.black87, // Color(0xFF5986E1),
-          title: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Center(child: SvgPicture.asset('images/sparky_logo.svg', width: 88, height: 21.25,)),
+          centerTitle: true,
 
-              Padding(padding: const EdgeInsets.only(left: 8.0)),
-            ],
+          title: SvgPicture.asset(
+            'images/sparky_logo.svg',
+            width: 88,
+            height: 21.25,
           ),
           actions: <Widget>[
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12.0),
               child: Icon(Icons.perm_identity),
             ),
-
             IconButton(
               icon: Icon(
                 Icons.search,
@@ -92,48 +88,53 @@ class _HomeScreenState extends State<HomeScreen>
         height: 40,
         child: TabBar(
           isScrollable: false,
-          labelColor: Color.fromRGBO(21, 24, 45,
-              1.0),
+          labelColor: Color.fromRGBO(21, 24, 45, 1.0),
 //          labelStyle: TextStyle(fontSize: 5.0, fontWeight: FontWeight.bold),
           indicatorWeight: 2,
           unselectedLabelColor: Colors.grey,
           controller: controller,
           tabs: <Widget>[
             Tab(
-              icon: Icon(
+                icon: Icon(
               Icons.home,
-              color: controller.index == 0 ? Color.fromRGBO(21, 24, 45,
-                  1.0) : Colors.grey,
+              color: controller.index == 0
+                  ? Color.fromRGBO(21, 24, 45, 1.0)
+                  : Colors.grey,
             )), //Todo replace home with hot(=trending) need to update icon image
             Tab(
-              icon: Icon(
+                icon: Icon(
               Icons.collections_bookmark,
-              color: controller.index == 1 ? Color.fromRGBO(21, 24, 45,
-                  1.0) : Colors.grey,
+              color: controller.index == 1
+                  ? Color.fromRGBO(21, 24, 45, 1.0)
+                  : Colors.grey,
             )),
             Tab(
-              icon: Icon(
+                icon: Icon(
               Icons.palette,
-              color: controller.index == 2 ? Color.fromRGBO(21, 24, 45,
-                  1.0) : Colors.grey,
+              color: controller.index == 2
+                  ? Color.fromRGBO(21, 24, 45, 1.0)
+                  : Colors.grey,
             )),
             Tab(
-              icon: Icon(
+                icon: Icon(
               Icons.trending_up,
-              color: controller.index == 3 ? Color.fromRGBO(21, 24, 45,
-                  1.0) : Colors.grey,
+              color: controller.index == 3
+                  ? Color.fromRGBO(21, 24, 45, 1.0)
+                  : Colors.grey,
             )),
             Tab(
-              icon: Icon(
+                icon: Icon(
               Icons.message,
-              color: controller.index == 4 ? Color.fromRGBO(21, 24, 45,
-                  1.0) : Colors.grey,
+              color: controller.index == 4
+                  ? Color.fromRGBO(21, 24, 45, 1.0)
+                  : Colors.grey,
             )),
             Tab(
-              icon: Icon(
+                icon: Icon(
               Icons.menu,
-              color: controller.index == 5 ? Color.fromRGBO(21, 24, 45,
-                  1.0) : Colors.grey,
+              color: controller.index == 5
+                  ? Color.fromRGBO(21, 24, 45, 1.0)
+                  : Colors.grey,
             )),
             //Tab(text: 'More', icon: Icon(Icons.menu)),
           ],

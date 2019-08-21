@@ -26,7 +26,6 @@ ManageImage manageImage2 = new ManageImage();
 List<TextBlock> textBlockList2 = new List<TextBlock>();
 List<Rect> boundingBoxList2 = new List<Rect>();
 
-
 class _DrawRectAndImageState extends State<DrawRectAndImage> {
   final _formKey = GlobalKey<FormState>();
   ui.Image image1;
@@ -40,7 +39,6 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
   }
 
   init() async {
-
     //////////////////////////////////////////////////////////////////////////
     File file1 = await ManageFlutterCacheManager.getSingleFileFromCache(
         'http://221.165.42.119/ComicSpa/creator/100000/1000001/01.jpg');
@@ -65,9 +63,8 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
           'imaghe size - width : ${manageImage1.width} , height : ${manageImage1.height}');
     }
 
-
     VisionText visionText2 =
-    await ManageFirebaseMLVision.detectTextFromFile(file2);
+        await ManageFirebaseMLVision.detectTextFromFile(file2);
 
     if (false == manageImage2.decode(file2.readAsBytesSync())) {
       print('false == manageImage.decode');
@@ -77,7 +74,6 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
     }
 
     /////////////////////////////////////////////////////////////////////////
-
 
     if (null != visionText1.blocks) {
       for (int i = 0; i < visionText1.blocks.length; ++i) {
@@ -144,8 +140,6 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
 
     /////////////////////////////////////////////////////////////////////////
 
-
-
     //ByteBuffer data = await ModelCommon.getByteBufferFromFile(file);
     Uint8List list1 = await ModelCommon.getUint8ListFromFile(file1);
     print('aaaaaa : ${list1.length}');
@@ -158,7 +152,6 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
     /////////////////////////////////////////////////////////////////////////
 
     totalImageHeight = image1.height.toDouble() + image2.height.toDouble();
-
   }
 
   Future<ui.Image> loadImage(List<int> img) async {
@@ -173,7 +166,8 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
     return completer.future;
   }
 
-  ScrollController _myController1 = new ScrollController(); // make seperate controllers
+  ScrollController _myController1 =
+      new ScrollController(); // make seperate controllers
 
   @override
   Widget build(BuildContext context) {
@@ -186,77 +180,174 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
             FittedBox(
               child: SizedBox(
                 width: ManageDeviceInfo.resolutionWidth *
-                    (manageImage1.width /
-                        ManageDeviceInfo.resolutionWidth),
+                    (manageImage1.width / ManageDeviceInfo.resolutionWidth),
                 height: ManageDeviceInfo.resolutionHeight *
-                    (totalImageHeight /
-                        ManageDeviceInfo.resolutionHeight),
+                    (totalImageHeight / ManageDeviceInfo.resolutionHeight),
                 child: _buildImage(),
               ),
             ),
-//            ListView(
-//              children: <Widget>[
-//                FittedBox(
-//                  child: SizedBox(
-//                    width: ManageDeviceInfo.resolutionWidth *
-//                    (manageImage1.width /
-//                    ManageDeviceInfo.resolutionWidth),
-//                    height: ManageDeviceInfo.resolutionHeight *
-//                        (manageImage1.height /
-//                            ManageDeviceInfo.resolutionHeight),
-//                    child: _buildImage(),
-//                  ),
-//                ),
-//                FittedBox(
-//                  child: SizedBox(
-//                    width: ManageDeviceInfo.resolutionWidth *
-//                        (manageImage2.width /
-//                            ManageDeviceInfo.resolutionWidth),
-//                    height: ManageDeviceInfo.resolutionHeight *
-//                        (manageImage2.height /
-//                            ManageDeviceInfo.resolutionHeight),
-//                    child: _buildImage2(),
-//                  ),
-//                ),
-//              ],
-//            ),
-
-//                Container(
-//                  width: ManageDeviceInfo.resolutionWidth *
-//                      (manageImage.width /
-//                          ManageDeviceInfo.resolutionWidth),
-//                  height: ManageDeviceInfo.resolutionHeight *
-//                      (manageImage.height /
-//                          ManageDeviceInfo.resolutionHeight),
-//                ),
-            for(var boundingBox in boundingBoxList1)
+            for (var boundingBox in boundingBoxList1)
               Positioned(
-                left: ManageDeviceInfo.resolutionWidth / (manageImage1.width /
-                    boundingBox.left),
-                top: boundingBox.top/(manageImage1.width /
-                    ManageDeviceInfo.resolutionWidth),
-                child: Container(
-                  width: ManageDeviceInfo.resolutionWidth /
-                      (manageImage1.width / boundingBox.width),
-                  height: ManageDeviceInfo.resolutionHeight /
-                      (totalImageHeight / boundingBox.height)  + ManageDeviceInfo.statusBarHeight,
-                  color: Colors.yellow,
+                left: ManageDeviceInfo.resolutionWidth /
+                    (manageImage1.width / boundingBox.left),
+                top: boundingBox.top /
+                    (manageImage1.width / ManageDeviceInfo.resolutionWidth),
+                child: GestureDetector(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          backgroundColor: Colors.transparent,
+                          content: Form(
+                            key: _formKey,
+                            child: SizedBox(
+                              height: ManageDeviceInfo.resolutionHeight * 0.38,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(5.0),
+                                    ),
+                                    height:
+                                        ManageDeviceInfo.resolutionHeight * 0.2,
+                                    child: TextFormField(
+                                      textInputAction: TextInputAction.send,
+                                      autofocus: true,
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                        fontFamily: 'Lato',
+                                        color: Colors.black87,
+                                      ),
+                                      decoration: InputDecoration(
+                                          hintText: 'You may start typing',
+                                          contentPadding: EdgeInsets.all(
+                                              ManageDeviceInfo
+                                                      .resolutionHeight *
+                                                  0.01)
+
+//                              border: OutlineInputBorder(),
+//                              focusedBorder: OutlineInputBorder(
+//                                borderSide: BorderSide(
+//                                  color: Colors.greenAccent,
+//                                ),
+//                              ),
+//                              enabledBorder: OutlineInputBorder(
+//                                borderSide: BorderSide(
+//                                  color: Colors.redAccent,
+//                                ),
+//                              ),
+//                              contentPadding: EdgeInsets.all(
+//                                  ManageDeviceInfo.resolutionWidth * 0.02),
+                                          ),
+                                      keyboardType: TextInputType.multiline,
+                                      maxLines: null,
+                                      validator: (value) {
+                                        if (value.isEmpty) {
+                                          return 'Please enter some text';
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 15),
+                                        child: SizedBox(
+                                          height: ManageDeviceInfo
+                                                  .resolutionHeight *
+                                              0.035,
+                                          child: RaisedButton(
+                                            shape: StadiumBorder(),
+                                            onPressed: () {
+// Validate will return true if the form is valid, or false if
+// the form is invalid.
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text('Cancel'),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width:
+                                            ManageDeviceInfo.resolutionWidth *
+                                                0.1,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 15.0),
+                                        child: SizedBox(
+                                          height: ManageDeviceInfo
+                                                  .resolutionHeight *
+                                              0.035,
+                                          child: RaisedButton(
+                                            shape: StadiumBorder(),
+                                            onPressed: () {
+// Validate will return true if the form is valid, or false if
+// the form is invalid.
+                                              if (_formKey.currentState
+                                                  .validate()) {
+// Process data.
+                                              }
+                                            },
+                                            child: Text('Submit'),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.all(
+                                            ManageDeviceInfo.resolutionHeight *
+                                                0.02),
+                                        child: SizedBox(
+                                          height: ManageDeviceInfo
+                                                  .resolutionHeight *
+                                              0.035,
+                                          child: RaisedButton(
+                                            shape: StadiumBorder(),
+                                            onPressed: () {
+// Validate will return true if the form is valid, or false if
+// the form is invalid.
+                                              if (_formKey.currentState
+                                                  .validate()) {
+// Process data.
+                                              }
+                                            },
+                                            child: Text('Language'),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                    debugPrint("hello");
+                  },
+                  child: Container(
+                    width: ManageDeviceInfo.resolutionWidth /
+                        (manageImage1.width / boundingBox.width),
+                    height: ManageDeviceInfo.resolutionHeight /
+                            (totalImageHeight / boundingBox.height) +
+                        ManageDeviceInfo.statusBarHeight,
+                    decoration: textBoxDecoration(),
+                    color: Colors.transparent,
+                  ),
                 ),
               ),
-//            for(var boundingBox in boundingBoxList2)
-//              Positioned(
-//                left: ManageDeviceInfo.resolutionWidth / (manageImage2.width /
-//                    boundingBox.left),
-//                top: boundingBox.top/(manageImage2.width /
-//                    ManageDeviceInfo.resolutionWidth),
-//                child: Container(
-//                  width: ManageDeviceInfo.resolutionWidth /
-//                      (manageImage2.width / boundingBox.width),
-//                  height: ManageDeviceInfo.resolutionHeight /
-//                      (manageImage2.height / boundingBox.height)  + ManageDeviceInfo.statusBarHeight,
-//                  color: Colors.transparent,
-//                ),
-//              ),
           ],
         ),
       ),
@@ -265,146 +356,140 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
 
   AlertDialog buildTranslatePopUp(BuildContext context) {
     return AlertDialog(
-                  backgroundColor: Colors.transparent,
-                  content: Form(
-                    key: _formKey,
-                    child: SizedBox(
-                      height: ManageDeviceInfo.resolutionHeight * 0.38,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(5.0),
-                            ),
-                            height:
-                            ManageDeviceInfo.resolutionHeight * 0.2,
-                            child: TextFormField(
-                              textInputAction: TextInputAction.send,
-                              autofocus: true,
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontFamily: 'Lato',
-                                color: Colors.black87,
-                              ),
-                              decoration: InputDecoration(
-                                  hintText: 'You may start typing',
-                                  contentPadding: EdgeInsets.all(
-                                      ManageDeviceInfo.resolutionHeight *
-                                          0.01)
+      backgroundColor: Colors.transparent,
+      content: Form(
+        key: _formKey,
+        child: SizedBox(
+          height: ManageDeviceInfo.resolutionHeight * 0.38,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                height: ManageDeviceInfo.resolutionHeight * 0.2,
+                child: TextFormField(
+                  textInputAction: TextInputAction.send,
+                  autofocus: true,
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontFamily: 'Lato',
+                    color: Colors.black87,
+                  ),
+                  decoration: InputDecoration(
+                      hintText: 'You may start typing',
+                      contentPadding: EdgeInsets.all(
+                          ManageDeviceInfo.resolutionHeight * 0.01)
 
-  //                              border: OutlineInputBorder(),
-  //                              focusedBorder: OutlineInputBorder(
-  //                                borderSide: BorderSide(
-  //                                  color: Colors.greenAccent,
-  //                                ),
-  //                              ),
-  //                              enabledBorder: OutlineInputBorder(
-  //                                borderSide: BorderSide(
-  //                                  color: Colors.redAccent,
-  //                                ),
-  //                              ),
-  //                              contentPadding: EdgeInsets.all(
-  //                                  ManageDeviceInfo.resolutionWidth * 0.02),
-                              ),
-                              keyboardType: TextInputType.multiline,
-                              maxLines: null,
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  return 'Please enter some text';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 15),
-                                child: SizedBox(
-                                  height:
-                                  ManageDeviceInfo.resolutionHeight *
-                                      0.035,
-                                  child: RaisedButton(
-                                    shape: StadiumBorder(),
-                                    onPressed: () {
-                                      // Validate will return true if the form is valid, or false if
-                                      // the form is invalid.
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text('Cancel'),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: ManageDeviceInfo.resolutionWidth *
-                                    0.1,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 15.0),
-                                child: SizedBox(
-                                  height:
-                                  ManageDeviceInfo.resolutionHeight *
-                                      0.035,
-                                  child: RaisedButton(
-                                    shape: StadiumBorder(),
-                                    onPressed: () {
-                                      // Validate will return true if the form is valid, or false if
-                                      // the form is invalid.
-                                      if (_formKey.currentState
-                                          .validate()) {
-                                        // Process data.
-                                      }
-                                    },
-                                    child: Text('Submit'),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.all(
-                                    ManageDeviceInfo.resolutionHeight *
-                                        0.02),
-                                child: SizedBox(
-                                  height:
-                                  ManageDeviceInfo.resolutionHeight *
-                                      0.035,
-                                  child: RaisedButton(
-                                    shape: StadiumBorder(),
-                                    onPressed: () {
-                                      // Validate will return true if the form is valid, or false if
-                                      // the form is invalid.
-                                      if (_formKey.currentState
-                                          .validate()) {
-                                        // Process data.
-                                      }
-                                    },
-                                    child: Text('Language'),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
+                      //                              border: OutlineInputBorder(),
+                      //                              focusedBorder: OutlineInputBorder(
+                      //                                borderSide: BorderSide(
+                      //                                  color: Colors.greenAccent,
+                      //                                ),
+                      //                              ),
+                      //                              enabledBorder: OutlineInputBorder(
+                      //                                borderSide: BorderSide(
+                      //                                  color: Colors.redAccent,
+                      //                                ),
+                      //                              ),
+                      //                              contentPadding: EdgeInsets.all(
+                      //                                  ManageDeviceInfo.resolutionWidth * 0.02),
+                      ),
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    child: SizedBox(
+                      height: ManageDeviceInfo.resolutionHeight * 0.035,
+                      child: RaisedButton(
+                        shape: StadiumBorder(),
+                        onPressed: () {
+                          // Validate will return true if the form is valid, or false if
+                          // the form is invalid.
+                          Navigator.pop(context);
+                        },
+                        child: Text('Cancel'),
                       ),
                     ),
                   ),
-                );
+                  SizedBox(
+                    width: ManageDeviceInfo.resolutionWidth * 0.1,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15.0),
+                    child: SizedBox(
+                      height: ManageDeviceInfo.resolutionHeight * 0.035,
+                      child: RaisedButton(
+                        shape: StadiumBorder(),
+                        onPressed: () {
+                          // Validate will return true if the form is valid, or false if
+                          // the form is invalid.
+                          if (_formKey.currentState.validate()) {
+                            // Process data.
+                          }
+                        },
+                        child: Text('Submit'),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.all(
+                        ManageDeviceInfo.resolutionHeight * 0.02),
+                    child: SizedBox(
+                      height: ManageDeviceInfo.resolutionHeight * 0.035,
+                      child: RaisedButton(
+                        shape: StadiumBorder(),
+                        onPressed: () {
+                          // Validate will return true if the form is valid, or false if
+                          // the form is invalid.
+                          if (_formKey.currentState.validate()) {
+                            // Process data.
+                          }
+                        },
+                        child: Text('Language'),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
+  BoxDecoration textBoxDecoration() {
+    return BoxDecoration(
+      border: Border.all(width: 2.0),
+      borderRadius: BorderRadius.all(
+          Radius.circular(5.0) //                 <--- border radius here
+          ),
+    );
+  }
 
   Widget _buildImage() {
     if (this.isImageLoaded) {
       return new CustomPaint(
-        painter: new PaintingImage2(image1: image1,image2: image2),
+        painter: new PaintingImage2(image1: image1, image2: image2),
       );
     } else {
       return new Center(child: new Text('loading'));
@@ -422,15 +507,12 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
   }
 }
 
-
-
 class PaintingImage extends CustomPainter {
   PaintingImage({
     this.image,
   });
 
   ui.Image image;
-
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -439,7 +521,6 @@ class PaintingImage extends CustomPainter {
     //ByteData data = await image.toByteData();
 
     canvas.drawImage(image, new Offset(0.0, 0.0), new Paint());
-
   }
 
   @override
@@ -448,15 +529,11 @@ class PaintingImage extends CustomPainter {
   }
 }
 
-
 class PaintingImage2 extends CustomPainter {
-  PaintingImage2({
-    this.image1,this.image2
-  });
+  PaintingImage2({this.image1, this.image2});
 
   ui.Image image1;
-ui.Image image2;
-
+  ui.Image image2;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -465,8 +542,8 @@ ui.Image image2;
     //ByteData data = await image.toByteData();
 
     canvas.drawImage(image1, new Offset(0.0, 0.0), new Paint());
-    canvas.drawImage(image2, new Offset(0.0, image1.height.toDouble()), new Paint());
-
+    canvas.drawImage(
+        image2, new Offset(0.0, image1.height.toDouble()), new Paint());
   }
 
   @override
@@ -475,16 +552,12 @@ ui.Image image2;
   }
 }
 
-
-
 class MyRect extends CustomPainter {
-
   int index = 0;
   MyRect(this.index);
 
   @override
   void paint(Canvas canvas, Size size) {
-
     print('MyRect Paint Index : $index');
 
     var paint = Paint();
@@ -522,8 +595,7 @@ class MyRect extends CustomPainter {
   }
 }
 
-
-Widget outlinedBoxLists(List<String> strings){
+Widget outlinedBoxLists(List<String> strings) {
   List<Widget> list = List<Widget>();
 
   for (var i = 0; i == textBlockList1.length; i++) {
@@ -531,10 +603,10 @@ Widget outlinedBoxLists(List<String> strings){
       Stack(
         children: <Widget>[
           Positioned(
-            left: ManageDeviceInfo.resolutionWidth / (manageImage1.width /
-                textBlockList1[i].boundingBox.left),
-            top: ManageDeviceInfo.resolutionHeight / (manageImage1.height /
-                textBlockList1[i].boundingBox.top),
+            left: ManageDeviceInfo.resolutionWidth /
+                (manageImage1.width / textBlockList1[i].boundingBox.left),
+            top: ManageDeviceInfo.resolutionHeight /
+                (manageImage1.height / textBlockList1[i].boundingBox.top),
             child: Container(
               width: ManageDeviceInfo.resolutionWidth /
                   (manageImage1.width / textBlockList1[i].boundingBox.width),
@@ -548,9 +620,7 @@ Widget outlinedBoxLists(List<String> strings){
     );
   }
   return Stack(children: list);
-
 }
-
 
 //ListView.builder(
 //shrinkWrap: true,
@@ -727,7 +797,7 @@ Widget outlinedBoxLists(List<String> strings){
 //(manageImage.width /
 //textBlockList[index]
 //    .boundingBox
-//    .width), //Todo should be same and painter size and make this as variable
+//    .width),
 //height: ManageDeviceInfo.resolutionHeight /
 //(manageImage.height /
 //textBlockList[index].boundingBox.height),
