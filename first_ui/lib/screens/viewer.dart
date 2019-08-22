@@ -95,10 +95,10 @@ class _ViewerScreen extends State<ViewerScreen> {
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 physics: BouncingScrollPhysics(),
-                itemCount: snapshot.data[0].comicImageUrlList.length,
+                itemCount: snapshot.data[0].imageUrlList.length,
 //                      ModelViewComic.getInstance().comicImageUrlList.length,
                 itemBuilder: (BuildContext context, int index) =>
-                    Image.network(snapshot.data[0].comicImageUrlList[index]),
+                    Image.network(snapshot.data[0].imageUrlList[index]),
               );
               }
             },

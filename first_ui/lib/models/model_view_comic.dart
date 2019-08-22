@@ -2,58 +2,53 @@
 import 'package:first_ui/models/model_view_comic_detect_text_info.dart';
 
 
+enum e_comic_view_style
+{
+  vertical,
+  horizontal,
+}
+
+
 class ModelViewComic
 {
   String _userId;
-  String _creatorId;
-  String _comicTitle;
-  int _comicNumber;
-  List<String> _comicImageUrlList;
-  List<ModelViewComicDetectTextInfo> _detectTextInfoList;
+  String _title;
+  String _id;
+  String _episode;
+  List<String> _imageUrlList;
+  e_comic_view_style _style = e_comic_view_style.vertical;
 
   String get userId => _userId;
-  String get creatorId => _creatorId;
-  String get comicTitle => _comicTitle;
-  int get comicNumber => _comicNumber;
-  List<String> get comicImageUrlList => _comicImageUrlList;
-  List<ModelViewComicDetectTextInfo> get detectTextInfoList => _detectTextInfoList;
+  String get title => _title;
+  String get episode => _episode;
+  String get id => _id;
+  List<String> get imageUrlList => _imageUrlList;
+  e_comic_view_style get style => _style;
 
   set userId(String userId)
   {
     _userId = userId;
   }
-  set creatorId(String creatorId)
+  set title(String title)
   {
-    _creatorId = creatorId;
+    _title = title;
   }
-  set comicTitle(String comicTitle)
+  set episode(String episode)
   {
-    _comicTitle = comicTitle;
+    _episode = episode;
   }
-  set comicNumber(int comicNumber)
+  set id(String id)
   {
-    _comicNumber = comicNumber;
+    _id = id;
   }
-  set comicImageUrlList(List<String> comicImageUrlList)
+  set imageUrlList(List<String> imageUrlList)
   {
-    _comicImageUrlList = comicImageUrlList;
+    _imageUrlList = imageUrlList;
   }
-  set detectTextInfoList(List<ModelViewComicDetectTextInfo> detectTextInfoList)
+  set style(e_comic_view_style style)
   {
-    _detectTextInfoList = detectTextInfoList;
+    _style = style;
   }
 
   static List<ModelViewComic> list;
-
-  /*
-  static ModelViewComic _instance;
-  static ModelViewComic getInstance() {
-    if(_instance == null) {
-      _instance = ModelViewComic();
-      return _instance;
-    }
-    return _instance;
-  }
-  */
-
 }

@@ -31,14 +31,14 @@ class PacketS2CViewComic extends PacketS2CCommon
     else
       modelViewComic = ModelViewComic.list[0];
 
-    modelViewComic.comicNumber = getUint32();
-    print('comicNumber : ${modelViewComic.comicNumber}');
+    modelViewComic.episode = getUint32().toString();
+    print('comicNumber : ${modelViewComic.episode}');
 
-    modelViewComic.comicTitle = readStringToByteBuffer();
-    print('comicTitle : ${modelViewComic.comicTitle}');
+    modelViewComic.title = readStringToByteBuffer();
+    print('comicTitle : ${modelViewComic.title}');
 
-    if(null == modelViewComic.comicImageUrlList)
-      modelViewComic.comicImageUrlList = new List<String>();
+    if(null == modelViewComic.imageUrlList)
+      modelViewComic.imageUrlList = new List<String>();
 
     int comicCount = getUint32();
     print('comicCount : $comicCount');
@@ -47,7 +47,7 @@ class PacketS2CViewComic extends PacketS2CCommon
       String comicImageUrl = readStringToByteBuffer();
       print('comicImageUrl[$countIndex] : $comicImageUrl');
 
-      modelViewComic.comicImageUrlList.add(comicImageUrl);
+      modelViewComic.imageUrlList.add(comicImageUrl);
     }
 
     ModelViewComic.list.add(modelViewComic);
