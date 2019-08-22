@@ -33,8 +33,6 @@ class ManageFirebaseMLVision
 
     FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(file);
 
-
-
     VisionText visionText = await textRecognizer.processImage(visionImage);
 
     if (null != visionText.blocks)
@@ -43,16 +41,13 @@ class ManageFirebaseMLVision
       {
         TextBlock textBlock = visionText.blocks[i];
 
-        /*
         if (null != textBlock.recognizedLanguages)
         {
           for (int m = 0; m < textBlock.recognizedLanguages.length; ++m)
           {
-            print('recognizedLanguages[$m] : ${textBlock.recognizedLanguages.elementAt(m).toString()}');
+            print('recognizedLanguages[$i][$m] : ${textBlock.recognizedLanguages[m].toString()}');
           }
         }
-        */
-
         print('text[$i] : ${textBlock.text}');
         print('boundingBox[$i] : ${textBlock.boundingBox.toString()}');
         print('cornerPoints[$i] : ${textBlock.cornerPoints.toString()}');
