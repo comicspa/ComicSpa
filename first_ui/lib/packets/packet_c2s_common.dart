@@ -14,7 +14,7 @@ class PacketC2SCommon extends PacketCommon
     this.size += packetBodySize;
     print('packetSize : ${this.size} , packetType : ${this.type}');
 
-    packet = Uint8List(this.size + 20);
+    packet = Uint8List(this.size);
     byteData = ByteData.view(packet.buffer);
 
     setUint32(this.size);

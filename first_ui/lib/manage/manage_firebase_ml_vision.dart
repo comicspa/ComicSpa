@@ -17,16 +17,25 @@ import 'package:first_ui/models/model_view_comic_detect_text_info.dart';
 class ManageFirebaseMLVision
 {
 
-  static TextRecognizer textRecognizer = FirebaseVision.instance.textRecognizer();
-
-  static Future<VisionText> detectTextFromFile(File file) async
+  static Future<VisionText> detectTextFromFile(File file,bool useCloud) async
   {
     print('detectTextFromFile - start');
 
-    TextRecognizer cloudTextRecognizer = FirebaseVision.instance.cloudTextRecognizer();
+    TextRecognizer textRecognizer;
+    if(true == useCloud)
+    {
+      textRecognizer = FirebaseVision.instance.cloudTextRecognizer();
+    }
+    else
+    {
+      textRecognizer = FirebaseVision.instance.textRecognizer();
+    }
 
     FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(file);
-    VisionText visionText = await cloudTextRecognizer.processImage(visionImage);
+
+
+
+    VisionText visionText = await textRecognizer.processImage(visionImage);
 
     if (null != visionText.blocks)
     {
@@ -59,7 +68,8 @@ class ManageFirebaseMLVision
     }
 
     //print('VisionText : ${visionText.text}');
-    await cloudTextRecognizer.close();
+    await textRecognizer.close();
+
 
     print('detectTextFromFile - finish');
     return visionText;

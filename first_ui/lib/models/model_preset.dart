@@ -25,11 +25,17 @@ class ModelPreset
   static String _faqURL = 'https://www.google.co.kr';
   static String _privacyPolicyURL = 'https://www.google.co.kr';
   static String _termsOfUseURL = 'https://www.google.co.kr';
+  static final String _comicBaseUrl = 'comics';
+  static final String _representationImageFileFullName = '00.jpg';
+  static final String _thumbnailImageFileFullName = '0000.jpg';
 
   static String get version => _version;
   static String get faqURL => _faqURL;
   static String get privacyPolicyURL => _privacyPolicyURL;
   static String get termsOfUseURL => _termsOfUseURL;
+  static String get comicBaseUrl => _comicBaseUrl;
+  static String get representationImageFileFullName => _representationImageFileFullName;
+  static String get thumbnailImageFileFullName => _thumbnailImageFileFullName;
 
   static void fromJson(String presetJsonString)
   {

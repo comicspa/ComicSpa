@@ -30,7 +30,7 @@ class PacketS2CRecommendedCreatorInfo extends PacketS2CCommon
     {
       ModelRecommendedCreatorInfo modelRecommendedCreatorInfo = new ModelRecommendedCreatorInfo();
 
-      modelRecommendedCreatorInfo.albumId = getUint32();
+      modelRecommendedCreatorInfo.comicId = getUint32();
       modelRecommendedCreatorInfo.id = getUint32();
       modelRecommendedCreatorInfo.title = readStringToByteBuffer();
       modelRecommendedCreatorInfo.url = readStringToByteBuffer();

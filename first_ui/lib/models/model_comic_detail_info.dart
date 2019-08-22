@@ -5,7 +5,6 @@ import 'package:first_ui/models/model_comic_info.dart';
 class ModelComicDetailInfo
 {
   String _userId;
-  String _creatorId;
   String _mainTitleName;
   String _representationImageUrl;
   String _explain;
@@ -14,7 +13,6 @@ class ModelComicDetailInfo
   List<ModelComicInfo> _modelComicInfoList;
 
   String get userId => _userId;
-  String get creatorId => _creatorId;
   String get mainTitleName => _mainTitleName;
   String get representationImageUrl => _representationImageUrl;
   String get explain => _explain;
@@ -25,10 +23,6 @@ class ModelComicDetailInfo
   set userId(String userId)
   {
     _userId = userId;
-  }
-  set creatorId(String creatorId)
-  {
-    _creatorId = creatorId;
   }
   set mainTitleName(String mainTitleName)
   {

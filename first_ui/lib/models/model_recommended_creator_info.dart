@@ -2,21 +2,21 @@
 
 class ModelRecommendedCreatorInfo
 {
-  int _albumId;
+  int _comicId;
   int _id;
   String _title;
   String _url;
   String _thumbnailUrl;
 
-  int get albumId => _albumId;
+  int get comicId => _comicId;
   int get id => _id;
   String get title => _title;
   String get url => _url;
   String get thumbnailUrl => _thumbnailUrl;
 
-  set albumId(int albumId)
+  set comicId(int comicId)
   {
-    _albumId = albumId;
+    _comicId = comicId;
   }
 
   set id(int id)

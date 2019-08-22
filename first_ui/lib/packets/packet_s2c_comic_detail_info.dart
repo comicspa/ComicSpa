@@ -23,7 +23,6 @@ class PacketS2CComicDetailInfo extends PacketS2CCommon
     print('PackSize : $size , PacketType : $type , systemErrorCode : $systemErrorCode , serviceErrorCode : $serviceErrorCode');
 
     //String _userId;
-    //String _creatorId;
     ModelComicDetailInfo.getInstance().creatorName = readStringToByteBuffer();
     ModelComicDetailInfo.getInstance().mainTitleName = readStringToByteBuffer();
     ModelComicDetailInfo.getInstance().representationImageUrl = readStringToByteBuffer();

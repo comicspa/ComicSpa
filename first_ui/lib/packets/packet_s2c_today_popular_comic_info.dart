@@ -30,7 +30,7 @@ class PacketS2CTodayPopularComicInfo extends PacketS2CCommon
     {
       TodayPopularComicInfo todayPopularComicInfo = new TodayPopularComicInfo();
 
-      todayPopularComicInfo.albumId = getUint32();
+      todayPopularComicInfo.comicId = getUint32();
       todayPopularComicInfo.id = getUint32();
       todayPopularComicInfo.title = readStringToByteBuffer();
       todayPopularComicInfo.url = readStringToByteBuffer();

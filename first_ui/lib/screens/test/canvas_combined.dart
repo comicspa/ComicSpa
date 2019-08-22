@@ -54,7 +54,7 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
     /////////////////////////////////////////////////////////////////////////
 
     VisionText visionText1 =
-        await ManageFirebaseMLVision.detectTextFromFile(file1);
+        await ManageFirebaseMLVision.detectTextFromFile(file1,true);
 
     if (false == manageImage1.decode(file1.readAsBytesSync())) {
       print('false == manageImage.decode');
@@ -64,7 +64,7 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
     }
 
     VisionText visionText2 =
-        await ManageFirebaseMLVision.detectTextFromFile(file2);
+        await ManageFirebaseMLVision.detectTextFromFile(file2,true);
 
     if (false == manageImage2.decode(file2.readAsBytesSync())) {
       print('false == manageImage.decode');

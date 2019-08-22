@@ -30,7 +30,7 @@ class PacketS2CMyLockerComicOwned extends PacketS2CCommon
     {
       ModelMyLockerComicOwned modelMyLockerComicOwned = new ModelMyLockerComicOwned();
 
-      modelMyLockerComicOwned.albumId = getUint32();
+      modelMyLockerComicOwned.comicId = getUint32();
       modelMyLockerComicOwned.id = getUint32();
       modelMyLockerComicOwned.title = readStringToByteBuffer();
       modelMyLockerComicOwned.url = readStringToByteBuffer();

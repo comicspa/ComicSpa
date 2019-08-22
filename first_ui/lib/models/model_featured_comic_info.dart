@@ -6,26 +6,26 @@
 
 class ModelFeaturedComicInfo
 {
-  int _albumId;
-  int _id;
+  String _comicId;
+  String _userId;
   String _title;
   String _url;
   String _thumbnailUrl;
 
-  int get albumId => _albumId;
-  int get id => _id;
+  String get comicId => _comicId;
+  String get userId => _userId;
   String get title => _title;
   String get url => _url;
   String get thumbnailUrl => _thumbnailUrl;
 
-  set albumId(int albumId)
+  set comicId(String comicId)
   {
-    _albumId = albumId;
+    _comicId = comicId;
   }
 
-  set id(int id)
+  set userId(String userId)
   {
-    _id = id;
+    _userId = userId;
   }
 
   set title(String title)

@@ -30,7 +30,7 @@ class PacketS2CMyLockerComicCheckout extends PacketS2CCommon
     {
       ModelMyLockerComicCheckout modelMyLockerComicCheckout = new ModelMyLockerComicCheckout();
 
-      modelMyLockerComicCheckout.albumId = getUint32();
+      modelMyLockerComicCheckout.comicId = getUint32();
       modelMyLockerComicCheckout.id = getUint32();
       modelMyLockerComicCheckout.title = readStringToByteBuffer();
       modelMyLockerComicCheckout.url = readStringToByteBuffer();

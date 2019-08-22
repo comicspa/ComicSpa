@@ -12,7 +12,7 @@ class ManageCommon
 {
 
 
-  static Future<VisionText> detectTextFromFilePicker() async
+  static Future<VisionText> detectTextFromFilePicker(bool useCloud) async
   {
     print('detectTextFromFilePicker - start');
 
@@ -23,7 +23,7 @@ class ManageCommon
       {
         print('getfilePath : $data, ${filePathsMap[data]}');
         File imageFile = new File(filePathsMap[data]);
-        return ManageFirebaseMLVision.detectTextFromFile(imageFile);
+        return ManageFirebaseMLVision.detectTextFromFile(imageFile,useCloud);
       }
     }
 
@@ -33,14 +33,14 @@ class ManageCommon
 
 
 
-  static Future<VisionText> detectTextFromCache(String imageUrl) async
+  static Future<VisionText> detectTextFromCache(String imageUrl,bool useCloud) async
   {
     imageUrl = 'http://221.165.42.119/ComicSpa/creator/100000/1000001/01.jpg';
     File file = await ManageFlutterCacheManager.getSingleFileFromCache(imageUrl);
     if(!file.existsSync())
       return null;
 
-    VisionText visionText = await ManageFirebaseMLVision.detectTextFromFile(file);
+    VisionText visionText = await ManageFirebaseMLVision.detectTextFromFile(file,useCloud);
     return visionText;
 
 
@@ -62,6 +62,4 @@ class ManageCommon
     */
 
   }
-
-
 }

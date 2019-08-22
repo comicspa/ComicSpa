@@ -30,7 +30,7 @@ class PacketS2CRecommendedComicInfo extends PacketS2CCommon
     {
       ModelRecommendedComicInfo modelRecommendedComicInfo = new ModelRecommendedComicInfo();
 
-      modelRecommendedComicInfo.albumId = getUint32();
+      modelRecommendedComicInfo.comicId = getUint32();
       modelRecommendedComicInfo.id = getUint32();
       modelRecommendedComicInfo.title = readStringToByteBuffer();
       modelRecommendedComicInfo.url = readStringToByteBuffer();

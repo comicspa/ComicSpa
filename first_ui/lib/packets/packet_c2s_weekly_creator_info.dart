@@ -37,7 +37,6 @@ class PacketC2SWeeklyCreatorInfo extends PacketC2SCommon
     Socket socket = await ModelCommon.createServiceSocket();
     print('connected server');
 
-
     final List<int> eventList = new List<int>();
     // listen to the received data event stream
     socket.listen((List<int> event)
@@ -64,17 +63,17 @@ class PacketC2SWeeklyCreatorInfo extends PacketC2SCommon
       return ModelWeeklyCreatorInfo.list;
     });
 
-    int packetBodySize  = 4 + 4;
+
+    int packetBodySize = 4 + 4;
     generateHeader(packetBodySize);
 
     setUint32(_pageCountIndex);
     setUint32(_pageViewCount);
 
-
     socket.add(packet);
 
     // wait 5 seconds
-    await Future.delayed(Duration(seconds: 20));
+    await Future.delayed(Duration(seconds: 5));
     socket.close();
 
     return ModelWeeklyCreatorInfo.list;

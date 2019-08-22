@@ -22,7 +22,6 @@ class PacketS2CWeeklyCreatorInfo extends PacketS2CCommon
 
     print('PackSize : $size , PacketType : $type , systemErrorCode : $systemErrorCode , serviceErrorCode : $serviceErrorCode');
 
-
     int modelWeeklyCreatorInfoCount = getUint32();
     print('modelWeeklyCreatorInfoCount : $modelWeeklyCreatorInfoCount');
 

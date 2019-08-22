@@ -29,7 +29,7 @@ class PacketS2CWeeklyPopularComicInfo extends PacketS2CCommon
     {
       ModelWeeklyPopularComicInfo modelWeeklyPopularComicInfo = new ModelWeeklyPopularComicInfo();
 
-      modelWeeklyPopularComicInfo.albumId = getUint32();
+      modelWeeklyPopularComicInfo.comicId = getUint32();
       modelWeeklyPopularComicInfo.id = getUint32();
       modelWeeklyPopularComicInfo.title = readStringToByteBuffer();
       modelWeeklyPopularComicInfo.url = readStringToByteBuffer();

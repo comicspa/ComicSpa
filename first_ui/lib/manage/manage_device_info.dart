@@ -14,8 +14,8 @@ class ManageDeviceInfo
 {
   static String _uniqueId;
   static e_target_platform_type _targetPlatformType = e_target_platform_type.none;
-  static double _resolutionWidth = 0;
-  static double _resolutionHeight = 0;
+  static double _resolutionWidth = 0.0;
+  static double _resolutionHeight = 0.0;
   static double _statusBarHeight = 0.0;
 
   static String get uniqueId => _uniqueId;
@@ -49,7 +49,7 @@ class ManageDeviceInfo
     if(0 == _resolutionHeight)
       _resolutionHeight = MediaQuery.of(context).size.height;
 
-    print('Resolution Width : $_resolutionWidth , Height : $_resolutionHeight');
+    print('getResolution - Width : $_resolutionWidth , Height : $_resolutionHeight');
   }
 
   static void getUniqueId(BuildContext context)
@@ -59,7 +59,7 @@ class ManageDeviceInfo
 
     _getUniqueId(context).then((s) {
       _uniqueId = s;
-      print('uniqueId : $_uniqueId');
+      print('getUniqueId : $_uniqueId');
     });
   }
 

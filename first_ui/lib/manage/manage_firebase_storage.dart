@@ -33,7 +33,16 @@ service firebase.storage {
 
 class ManageFirebaseStorage
 {
-  static void getDownloadURL(String fileFullPathName)  async
+
+  static Future<String> getDownloadUrl(String fileFullPathName)  async
+  {
+    final ref = FirebaseStorage.instance.ref().child(fileFullPathName);
+    String url = await ref.getDownloadURL();
+    return url;
+  }
+
+
+  static void sampleUseGetDownloadUrl(String fileFullPathName)  async
   {
     final ref = FirebaseStorage.instance.ref().child(fileFullPathName);
     String url = await ref.getDownloadURL().then((value)
@@ -49,6 +58,7 @@ class ManageFirebaseStorage
     {
       print('catchError : $error');
     });
+
   }
 
   static void simpleUsageUploadFile(String pathName) async

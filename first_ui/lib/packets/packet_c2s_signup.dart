@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:first_ui/models/model_common.dart';
 import 'package:first_ui/models/model_user_info.dart';
@@ -12,13 +11,13 @@ import 'package:first_ui/packets/packet_s2c_signup.dart';
 typedef void OnPacketSignupFetchDone(PacketS2CSignup packet);
 
 
-class PacketC2SSignup extends PacketC2SCommon
+class PacketC2SSignUp extends PacketC2SCommon
 {
   String _socialId;
   String _emailAddress;
   e_social_provider_type _socialProviderType;
 
-  PacketC2SSignup()
+  PacketC2SSignUp()
   {
     type = e_packet_type.c2s_signup;
   }

@@ -70,6 +70,24 @@ class _PageDevTestState extends State<PageDevTest> {
     c2SWeeklyCreatorInfo.generate();
 
     //ManageAccessToken.test();
+
+
+    /*
+    ManageFirebaseStorage.getDownloadUrl('comics/1566265967000/01/0000.jpg').then((value)
+    {
+      //value == String
+      print(value.toString());
+      print('getDownloadUrl success');
+    },
+        onError: (error)
+        {
+          print('getDownloadUrl error : $error');
+        }).catchError( (error)
+    {
+      print('getDownloadUrl catchError : $error');
+    });
+    */
+
   }
 
   /*
@@ -115,7 +133,7 @@ class _PageDevTestState extends State<PageDevTest> {
 
                 case 1:
                   {
-                    ManageCommon.detectTextFromFilePicker();
+                    ManageCommon.detectTextFromFilePicker(true);
                   }
                   break;
 

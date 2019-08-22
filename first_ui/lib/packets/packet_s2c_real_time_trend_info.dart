@@ -30,7 +30,7 @@ class PacketS2CRealTimeTrendInfo extends PacketS2CCommon
     {
       ModelRealTimeTrendInfo modelRealTimeTrendInfo = new ModelRealTimeTrendInfo();
 
-      modelRealTimeTrendInfo.albumId = getUint32();
+      modelRealTimeTrendInfo.comicId = getUint32();
       modelRealTimeTrendInfo.id = getUint32();
       modelRealTimeTrendInfo.title = readStringToByteBuffer();
       modelRealTimeTrendInfo.url = readStringToByteBuffer();
