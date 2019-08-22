@@ -6,6 +6,7 @@ import 'dart:async';
 
 import 'package:first_ui/models/model_preset.dart';
 import 'package:first_ui/manage/manage_device_info.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 
 
@@ -70,28 +71,29 @@ class _SplashScreenState extends State<SplashScreen> {
           children: <Widget>[
             Container(
               decoration: BoxDecoration(
-                color: new Color(0xff7c94b6),
-                gradient: LinearGradient(
-                  colors: [new Color(0xff7c94e6), new Color(0xff5c94b1)],
-                  begin: Alignment.centerRight,
-                  end: Alignment.bottomLeft,
-                ),
+                color: Colors.white,
+                //Color(0xff7c94b6),
+//                gradient: LinearGradient(
+//                  colors: [new Color(0xff7c94e6), new Color(0xff5c94b1)],
+//                  begin: Alignment.centerRight,
+//                  end: Alignment.bottomLeft,
+//                ),
               ),
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Image.asset(
-                  'images/ComicSpa_logo.png',
-                  width: 176,
-                  height: 42.5,
+                SvgPicture.asset(
+                  'images/sparky_logo.svg',
+                  width: ManageDeviceInfo.resolutionWidth * 0.075,
+                  height: ManageDeviceInfo.resolutionHeight * 0.035,
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 10.0),
                 ),
                 Text(
                   'Bring Joys to Everyone',
-                  style: TextStyle(color: Colors.white, fontSize: 18.0),
+                  style: TextStyle(color: Colors.black, fontSize: 18.0),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 20.0),

@@ -13,14 +13,17 @@ import 'package:first_ui/manage/manage_image.dart';
 
 class ModelTextDetection
 {
-  int _beforeImageTotalHeight = 0;
+  int _previousImageTotalHeight = 0;
   ui.Image _image;
   List<TextBlock> _textBlockList = new List<TextBlock>();
   List<Rect> _boundingBoxList = new List<Rect>();
   ManageImage _manageImage = new ManageImage();
   Uint8List _uint8list;
+  int countIndex = -1;
+  String text = '';
+  bool changed = false;
 
-  int get beforeImageTotalHeight => _beforeImageTotalHeight;
+  int get previousImageTotalHeight => _previousImageTotalHeight;
   List<TextBlock> get textBlockList => _textBlockList;
   ui.Image get image => _image;
   ManageImage  get manageImage => _manageImage;
@@ -31,9 +34,9 @@ class ModelTextDetection
   {
     _uint8list = uint8List;
   }
-  set beforeImageTotalHeight(int beforeImageTotalHeight)
+  set previousImageTotalHeight(int previousImageTotalHeight)
   {
-    _beforeImageTotalHeight = beforeImageTotalHeight;
+    _previousImageTotalHeight = previousImageTotalHeight;
   }
 
   static List<ModelTextDetection> list;
@@ -47,7 +50,8 @@ class ModelTextDetection
     else
       list = new List<ModelTextDetection>();
 
-    int beforeImageTotalHeight = 0;
+    int boundingBoxCountIndex = 0;
+    int previousImageTotalHeight = 0;
     for(int countIndex=0; countIndex<urlList.length; ++countIndex)
     {
       File file = await ManageFlutterCacheManager.getSingleFileFromCache(urlList[countIndex]);
@@ -69,8 +73,8 @@ class ModelTextDetection
       }
 
       if(0 < countIndex)
-        beforeImageTotalHeight += list[countIndex-1].manageImage.height;
-      modelTextDetection.beforeImageTotalHeight = beforeImageTotalHeight;
+        previousImageTotalHeight += list[countIndex-1].manageImage.height;
+      modelTextDetection.previousImageTotalHeight = previousImageTotalHeight;
 
       if (null != visionText.blocks) {
         for (int i = 0; i < visionText.blocks.length; ++i) {
@@ -78,6 +82,7 @@ class ModelTextDetection
 
           modelTextDetection.textBlockList.add(textBlock);
           modelTextDetection.boundingBoxList.add(textBlock.boundingBox);
+
 
           /*
         if (null != textBlock.recognizedLanguages)

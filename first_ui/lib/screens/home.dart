@@ -8,6 +8,8 @@ import 'sign_in.dart';
 import 'notification.dart';
 import 'coming_soon.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
+
 
 //import 'package:flutter/services.dart';
 
@@ -27,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen>
 //    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
 //      statusBarColor: Color(0xff202a30),  // Colors.blueGrey //Color(0xFF5986E1),
 //    ));
-    controller = TabController(length: 6, initialIndex: 0, vsync: this);
+    controller = TabController(length: 5, initialIndex: 0, vsync: this);
     controller.addListener(_handleTabSelection);
   }
 
@@ -39,26 +41,29 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(40.0),
+        preferredSize: Size.fromHeight(ManageDeviceInfo.resolutionHeight * 0.055),
         child: AppBar(
-          elevation: 0,
-          backgroundColor: Color.fromRGBO(21, 24, 45,
-              1.0), //Color(0xff202a30), //Colors.black87, // Color(0xFF5986E1),
+          elevation: 1,
+          backgroundColor: Colors.white, //Color.fromRGBO(21, 24, 45, 1.0),
+               //Color(0xff202a30), //Colors.black87, // Color(0xFF5986E1),
           centerTitle: true,
 
           title: SvgPicture.asset(
             'images/sparky_logo.svg',
-            width: 88,
-            height: 21.25,
+            width: ManageDeviceInfo.resolutionWidth * 0.045,
+            height: ManageDeviceInfo.resolutionHeight * 0.025,
           ),
           actions: <Widget>[
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12.0),
-              child: Icon(Icons.perm_identity),
+              child: Icon(
+                  Icons.perm_identity,
+                  color: Color.fromRGBO(21, 24, 45, 1.0)),
             ),
             IconButton(
               icon: Icon(
                 Icons.search,
+                  color: Color.fromRGBO(21, 24, 45, 1.0),
               ),
               onPressed: () {
                 Navigator.push(
@@ -76,10 +81,9 @@ class _HomeScreenState extends State<HomeScreen>
         controller: controller,
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
-          TestHome(),
-          LibraryScreen(),
-          CreatorScreen(),
           Trend(),
+          CreatorScreen(),
+          LibraryScreen(),
           NotificationScreen(),
           MoreScreen(),
         ],
@@ -103,28 +107,22 @@ class _HomeScreenState extends State<HomeScreen>
             )), //Todo replace home with hot(=trending) need to update icon image
             Tab(
                 icon: Icon(
-              Icons.collections_bookmark,
+              Icons.palette,
               color: controller.index == 1
                   ? Color.fromRGBO(21, 24, 45, 1.0)
                   : Colors.grey,
             )),
             Tab(
                 icon: Icon(
-              Icons.palette,
+              Icons.collections,
               color: controller.index == 2
                   ? Color.fromRGBO(21, 24, 45, 1.0)
                   : Colors.grey,
             )),
+
             Tab(
                 icon: Icon(
-              Icons.trending_up,
-              color: controller.index == 3
-                  ? Color.fromRGBO(21, 24, 45, 1.0)
-                  : Colors.grey,
-            )),
-            Tab(
-                icon: Icon(
-              Icons.message,
+              Icons.email,
               color: controller.index == 4
                   ? Color.fromRGBO(21, 24, 45, 1.0)
                   : Colors.grey,
