@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:first_ui/manage/manage_device_info.dart';
 import 'viewer.dart';
 import 'coming_soon.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 
 class DetailPage extends StatefulWidget {
 
@@ -23,29 +25,35 @@ class _DetailPageState extends State<DetailPage> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(40.0),
         child: AppBar(
-          elevation: 0,
-          backgroundColor: Color.fromRGBO(21, 24, 45,
-              1.0), //Color(0xff202a30), //Colors.black87, // Color(0xFF5986E1),
-          title: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Image.asset(
-                'images/ComicSpa_logo.png',
-                width: 88,
-                height: 21.25,
-              ),
-              Padding(padding: const EdgeInsets.only(left: 8.0)),
-            ],
+          elevation: 1,
+          backgroundColor: Colors.white, //Color.fromRGBO(21, 24, 45, 1.0),
+          //Color(0xff202a30), //Colors.black87, // Color(0xFF5986E1),
+          centerTitle: true,
+
+          title: SvgPicture.asset(
+            'images/sparky_logo.svg',
+            width: ManageDeviceInfo.resolutionWidth * 0.045,
+            height: ManageDeviceInfo.resolutionHeight * 0.025,
           ),
           actions: <Widget>[
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12.0),
-              child: Icon(Icons.perm_identity),
+            IconButton(
+              icon: Icon(
+                Icons.perm_identity,
+                color: Color.fromRGBO(21, 24, 45, 1.0),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ComingSoonScreen(),
+                  ),
+                );
+              },
             ),
-
             IconButton(
               icon: Icon(
                 Icons.search,
+                color: Color.fromRGBO(21, 24, 45, 1.0),
               ),
               onPressed: () {
                 Navigator.push(
