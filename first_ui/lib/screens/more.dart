@@ -254,9 +254,11 @@ class _MoreScreenState extends State<MoreScreen> {
                 "Sign-in   or   Sign-up",
               ),
             ),
-
+            Divider(),
           ],
+
         ),
+
       ],
     );
   }

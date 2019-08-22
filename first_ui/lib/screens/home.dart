@@ -54,11 +54,19 @@ class _HomeScreenState extends State<HomeScreen>
             height: ManageDeviceInfo.resolutionHeight * 0.025,
           ),
           actions: <Widget>[
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12.0),
-              child: Icon(
+            IconButton(
+              icon: Icon(
                   Icons.perm_identity,
-                  color: Color.fromRGBO(21, 24, 45, 1.0)),
+                  color: Color.fromRGBO(21, 24, 45, 1.0),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ComingSoonScreen(),
+                  ),
+                );
+              },
             ),
             IconButton(
               icon: Icon(
@@ -107,11 +115,14 @@ class _HomeScreenState extends State<HomeScreen>
             )), //Todo replace home with hot(=trending) need to update icon image
             Tab(
                 icon: Icon(
-              Icons.palette,
-              color: controller.index == 1
-                  ? Color.fromRGBO(21, 24, 45, 1.0)
-                  : Colors.grey,
-            )),
+                  Icons.palette,
+                  color: controller.index == 1
+                    ? Color.fromRGBO(21, 24, 45, 1.0)
+                    : Colors.grey,
+               )
+              //    controller.index ==1 ? SvgPicture.asset('images/HomeKey_creater_on.svg', height: ManageDeviceInfo.resolutionHeight * 0.031): SvgPicture.asset('images/HomeKey_creater_off.svg', height: ManageDeviceInfo.resolutionHeight * 0.031),
+            ),
+
             Tab(
                 icon: Icon(
               Icons.collections,
