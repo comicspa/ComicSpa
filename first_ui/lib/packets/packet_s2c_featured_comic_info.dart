@@ -9,13 +9,23 @@ import 'package:first_ui/manage/manage_firebase_storage.dart';
 
 class PacketS2CFeaturedComicInfo extends PacketS2CCommon
 {
+  bool worked = false;
+
   PacketS2CFeaturedComicInfo()
   {
     type = e_packet_type.s2c_featured_comic_info;
   }
 
-  /*
   void parseBytes(int packetSize,ByteData byteDataExceptionSize)
+  {
+    if(false == worked)
+      parseBytesBefore(packetSize,byteDataExceptionSize);
+    else
+      parseBytesAfter(packetSize,byteDataExceptionSize);
+  }
+
+
+  void parseBytesBefore(int packetSize,ByteData byteDataExceptionSize)
   {
     parseHeaderChecked(packetSize,byteDataExceptionSize);
 
@@ -46,10 +56,10 @@ class PacketS2CFeaturedComicInfo extends PacketS2CCommon
       ModelFeaturedComicInfo.list.add(modelFeaturedComicInfo);
     }
   }
-  */
 
 
-  void parseBytes(int packetSize,ByteData byteDataExceptionSize)
+
+  void parseBytesAfter(int packetSize,ByteData byteDataExceptionSize)
   {
     parseHeaderChecked(packetSize,byteDataExceptionSize);
 
@@ -94,6 +104,7 @@ class PacketS2CFeaturedComicInfo extends PacketS2CCommon
       ModelFeaturedComicInfo.list.add(modelFeaturedComicInfo);
     }
   }
+
 
 
 }

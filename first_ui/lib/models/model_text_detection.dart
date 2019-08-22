@@ -65,8 +65,7 @@ class ModelTextDetection
         print('false == manageImage.decode');
       } else {
         print(
-            'imaghe size - width : ${modelTextDetection.manageImage
-                .width} , height : ${modelTextDetection.manageImage.height}');
+            'imaghe size - width : ${modelTextDetection.manageImage.width} , height : ${modelTextDetection.manageImage.height}');
       }
 
       if(0 < countIndex)
