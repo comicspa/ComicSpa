@@ -102,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen>
 //                          color: const Color(0xFF06244e), fontSize: 11.0))),
 //              new BottomNavigationBarItem(
 //                  icon: new Image.asset(
-//                    'images/HomeKey_creater_on.png',
+//                    'images/HomeKey_creator_on.png',
 //                    width: 23,
 //                    height: 20,
 //                  ),

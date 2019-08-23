@@ -134,14 +134,14 @@ class _HomeScreenState extends State<HomeScreen>
             Tab(
                 icon: Icon(
               Icons.email,
-              color: controller.index == 4
+              color: controller.index == 3
                   ? Color.fromRGBO(21, 24, 45, 1.0)
                   : Colors.grey,
             )),
             Tab(
                 icon: Icon(
               Icons.menu,
-              color: controller.index == 5
+              color: controller.index == 4
                   ? Color.fromRGBO(21, 24, 45, 1.0)
                   : Colors.grey,
             )),
