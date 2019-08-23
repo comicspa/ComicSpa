@@ -55,6 +55,7 @@ class ModelTextDetection
   static List<ModelTextDetection> list;
   static List<BoundingBoxInfo> boundingBoxInfoList;
   static int imageTotalHeight = 0;
+  static bool finished = false;
 
 
   static Future<List<ModelTextDetection>> generate(List<String> urlList,bool useCloud) async
@@ -177,6 +178,7 @@ class ModelTextDetection
          print('imageTotalHeight[$countIndex/${urlList.length}] : $imageTotalHeight');
        }
 
+    finished = true;
        return list;
      }
 
