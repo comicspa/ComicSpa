@@ -44,7 +44,7 @@ class ManageFirebaseMLVision
         {
           for (int m = 0; m < textBlock.recognizedLanguages.length; ++m)
           {
-            print('recognizedLanguages[$i][$m] : ${textBlock.recognizedLanguages[m].toString()}');
+            print('recognizedLanguages code[$i][$m] : ${textBlock.recognizedLanguages[m].languageCode}');
           }
         }
         print('text[$i] : ${textBlock.text}');

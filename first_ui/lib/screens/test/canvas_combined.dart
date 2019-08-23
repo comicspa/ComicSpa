@@ -487,7 +487,15 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
   }
 
 
+  Widget _buildImage() {
 
+      return new CustomPaint(
+        painter: new PaintingImage(),
+      );
+
+  }
+
+  /*
   Widget _buildImage() {
     if (2 == this.isImageLoaded) {
       return new CustomPaint(
@@ -497,6 +505,7 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
       return new Center(child: new Text('loading'));
     }
   }
+  */
 
   /*
   Widget _buildImage() {
@@ -529,11 +538,13 @@ class PaintingImage extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    //print('sdjifoeifye : ${image.height}');
 
     if(null != ModelTextDetection.list) {
       for (int countIndex = 0; countIndex <
           ModelTextDetection.list.length; ++countIndex) {
+
+        //print('PaintingImage[$countIndex/${ModelTextDetection.list.length}] : ${ModelTextDetection.list[countIndex].image.height}');
+
         canvas.drawImage(
             ModelTextDetection.list[countIndex].image, new Offset(0.0,
             ModelTextDetection.list[countIndex].previousImageTotalHeight

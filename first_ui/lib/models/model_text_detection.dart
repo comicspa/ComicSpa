@@ -72,14 +72,14 @@ class ModelTextDetection
          {
            url = value.toString();
            //value == String
-           print('getDownloadURL success : $url');
+           print('getDownloadURL success[$countIndex/${urlList.length}] : $url');
          },
              onError: (error)
              {
-               print('getDownloadURL error : $error');
+               print('getDownloadURL error[$countIndex/${urlList.length}] : $error');
              }).catchError( (error)
          {
-           print('getDownloadURL catchError : $error');
+           print('getDownloadURL catchError[$countIndex/${urlList.length}] : $error');
          });
 
          /*
@@ -105,7 +105,7 @@ class ModelTextDetection
 
          FileInfo fileInfo = await ManageFlutterCacheManager.downloadFile(url);
          int fileLength = await fileInfo.file.length();
-         print('fileLength[$countIndex] : $fileLength');
+         print('fileLength[$countIndex/${urlList.length}] : $fileLength');
 
 
          VisionText visionText = await ManageFirebaseMLVision.detectTextFromFile(fileInfo.file, useCloud);
@@ -115,12 +115,13 @@ class ModelTextDetection
          modelTextDetection.uint8List = uint8list;
          modelTextDetection.image = await loadImage(uint8list);
 
+         print('imaghe1[$countIndex/${urlList.length}] size - width : ${modelTextDetection.image.width} , height : ${modelTextDetection.image.height}');
+
          if (false ==
-             modelTextDetection.manageImage.decode(/*fileInfo.file.readAsBytesSync()*/uint8list)) {
+             modelTextDetection.manageImage.decode(uint8list)) {
            print('false == manageImage.decode');
          } else {
-           print(
-               'imaghe size[$countIndex] - width : ${modelTextDetection.manageImage.width} , height : ${modelTextDetection.manageImage.height}');
+           print('imaghe2[$countIndex/${urlList.length}] size - width : ${modelTextDetection.manageImage.width} , height : ${modelTextDetection.manageImage.height}');
          }
 
          if (null != visionText.blocks) {
@@ -169,11 +170,11 @@ class ModelTextDetection
 
          if(0 < countIndex)
            previousImageTotalHeight += list[countIndex-1].manageImage.height;
-         print('previousImageTotalHeight[$countIndex] : $previousImageTotalHeight');
+         print('previousImageTotalHeight[$countIndex/${urlList.length}] : $previousImageTotalHeight');
          modelTextDetection.previousImageTotalHeight = previousImageTotalHeight;
 
          imageTotalHeight += modelTextDetection.manageImage.height;
-         print('imageTotalHeight[$countIndex] : $imageTotalHeight');
+         print('imageTotalHeight[$countIndex/${urlList.length}] : $imageTotalHeight');
        }
 
        return list;
