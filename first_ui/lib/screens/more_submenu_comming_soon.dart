@@ -1,29 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:first_ui/screens/library.dart';
-import 'package:first_ui/screens/more.dart';
-import 'package:first_ui/screens/creator.dart';
-import 'package:first_ui/screens/testhome.dart';
-import 'package:first_ui/screens/trend.dart';
-import 'package:first_ui/screens/sign_in.dart';
-import 'package:first_ui/screens/notification.dart';
+
 
 // Coming soon page for multi-purpose
 
-class ComingSoonScreen extends StatefulWidget {
+class SubMenuComingSoonScreen extends StatefulWidget {
+  SubMenuComingSoonScreen(this.titleText);
+  final String titleText;
+
+
   @override
-  _ComingSoonScreenState createState() => new _ComingSoonScreenState();
+  _SubMenuComingSoonScreenState createState() => new _SubMenuComingSoonScreenState(titleText);
 }
 
-class _ComingSoonScreenState extends State<ComingSoonScreen> {
+class _SubMenuComingSoonScreenState extends State<SubMenuComingSoonScreen> {
+  _SubMenuComingSoonScreenState(this.titleText);
+   String titleText;
+
+   @override
+   void initState()
+   {
+     super.initState();
+
+     print('titleText : $titleText');
+
+
+   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(40.0),
         child: AppBar(
+          iconTheme: IconThemeData(
+            color: Colors.black, //change your color here
+          ),
           elevation: 1,
           backgroundColor: Colors.white, //Color.fromRGBO(21, 24, 45, 1.0), //Color(0xff202a30), //Colors.black87, // Color(0xFF5986E1),
-          title: Text(''),
+          title: Text(titleText,
+            style: TextStyle(color: Colors.black),
+          ),
+          centerTitle: true,
         ),
       ),
       body: Center(

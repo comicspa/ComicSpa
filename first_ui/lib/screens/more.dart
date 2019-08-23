@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
-import 'coming_soon.dart';
+import 'more_submenu_comming_soon.dart';
 //import 'package:first_ui/screens/test/ocr_test.dart';
 import 'package:first_ui/screens/test/canvas_testing2.dart';
 import 'package:first_ui/screens/test/canvas_combined.dart';
+
 
 class MoreScreen extends StatefulWidget {
   @override
@@ -65,7 +66,7 @@ class _MoreScreenState extends State<MoreScreen> {
                             Navigator.push<Widget>(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => ComingSoonScreen(),
+                                  builder: (context) => SubMenuComingSoonScreen('Redeem'),
                                 ));
                           },
                           child: Text(
@@ -92,7 +93,7 @@ class _MoreScreenState extends State<MoreScreen> {
                             Navigator.push<Widget>(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => ComingSoonScreen(),
+                                  builder: (context) => SubMenuComingSoonScreen('Top-up Sparky'),
                                 ));
                           },
                           child: Text(
@@ -131,7 +132,7 @@ class _MoreScreenState extends State<MoreScreen> {
                 Navigator.push<Widget>(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ComingSoonScreen(),
+                    builder: (context) => SubMenuComingSoonScreen('Creator'),
                   ),
                 );
               },
@@ -153,7 +154,7 @@ class _MoreScreenState extends State<MoreScreen> {
                 Navigator.push<Widget>(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ComingSoonScreen(),
+                    builder: (context) => SubMenuComingSoonScreen('Support'),
                   ),
                 );
               },
@@ -175,7 +176,7 @@ class _MoreScreenState extends State<MoreScreen> {
                 Navigator.push<Widget>(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ComingSoonScreen(),
+                    builder: (context) => SubMenuComingSoonScreen('Settings'),
                   ),
                 );
               },
@@ -197,7 +198,7 @@ class _MoreScreenState extends State<MoreScreen> {
                 Navigator.push<Widget>(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ComingSoonScreen(),
+                    builder: (context) => SubMenuComingSoonScreen('About'),
                   ),
                 );
               },
