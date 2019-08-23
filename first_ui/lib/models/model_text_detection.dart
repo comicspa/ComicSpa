@@ -56,12 +56,19 @@ class ModelTextDetection
   static int imageTotalHeight = 0;
 
 
-  static Future<List<ModelTextDetection>> generate(List<String> urlList,bool useCloud) async
+  static Future<List<ModelTextDetection>> generate() async
   {
     if(null != list) {
       list.clear();
       list = null;
     }
+
+    bool useCloud = true;
+    List<String> urlList = new List<String>();
+    urlList.add('comics/01.jpg');
+    urlList.add('comics/02.jpg');
+
+
        int boundingBoxCountIndex = 0;
        int previousImageTotalHeight = 0;
        for(int countIndex=0; countIndex<urlList.length; ++countIndex)

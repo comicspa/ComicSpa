@@ -13,6 +13,7 @@ import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:first_ui/manage/manage_firebase_ml_vision.dart';
 import 'package:first_ui/manage/manage_image.dart';
 import 'package:first_ui/models/model_text_detection.dart';
+import 'package:first_ui/screens/common_widgets.dart';
 
 class DrawRectAndImage extends StatefulWidget {
   @override
@@ -193,7 +194,7 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
     urlList.add('comics/01.jpg');
     urlList.add('comics/02.jpg');
 
-    ModelTextDetection.generate(urlList, true);
+    ModelTextDetection.generate();
 
     if(null != ModelTextDetection.list)
     {
@@ -230,21 +231,48 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
+      body:  SingleChildScrollView(  // Todo add loading indicator here
         scrollDirection: Axis.vertical,
         child: Stack(
           children: <Widget>[
-            FittedBox(
-              child: SizedBox(
-                width: null != ModelTextDetection.list? ManageDeviceInfo.resolutionWidth *
-                    //(manageImage1.width / ManageDeviceInfo.resolutionWidth),
-                    (ModelTextDetection.list[0].manageImage.width/ ManageDeviceInfo.resolutionWidth) : ManageDeviceInfo.resolutionWidth,
-                height: ManageDeviceInfo.resolutionHeight *
-                    //(totalImageHeight / ManageDeviceInfo.resolutionHeight),
-                    (ModelTextDetection.imageTotalHeight / ManageDeviceInfo.resolutionHeight),
-                child: _buildImage(),
-              ),
+            Container(
+              child: FutureBuilder<List<ModelTextDetection>>(
+                future:  ModelTextDetection.generate(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData)
+                    return LoadingIndicator();
+                  {
+                    return FittedBox(
+                      child: SizedBox(
+                        width: null != ModelTextDetection.list
+                            ? ManageDeviceInfo.resolutionWidth *
+                            //(manageImage1.width / ManageDeviceInfo.resolutionWidth),
+                            (ModelTextDetection.list[0].manageImage.width /
+                                ManageDeviceInfo.resolutionWidth)
+                            : ManageDeviceInfo.resolutionWidth,
+                        height: ManageDeviceInfo.resolutionHeight *
+                            //(totalImageHeight / ManageDeviceInfo.resolutionHeight),
+                            (ModelTextDetection.imageTotalHeight /
+                                ManageDeviceInfo.resolutionHeight),
+                        child: _buildImage(),
+                      ),
+                    );
+                  }
+                }
+                ),
             ),
+//            FittedBox(
+//              child: SizedBox(
+//                width: null != ModelTextDetection.list? ManageDeviceInfo.resolutionWidth *
+//                    //(manageImage1.width / ManageDeviceInfo.resolutionWidth),
+//                    (ModelTextDetection.list[0].manageImage.width/ ManageDeviceInfo.resolutionWidth) : ManageDeviceInfo.resolutionWidth,
+//                height: ManageDeviceInfo.resolutionHeight *
+//                    //(totalImageHeight / ManageDeviceInfo.resolutionHeight),
+//                    (ModelTextDetection.imageTotalHeight / ManageDeviceInfo.resolutionHeight),
+//                child: _buildImage(),
+//
+//              ),
+//            ),
             //for(var boundingBoxInfo in boundingBoxInfoList)
             if(null != ModelTextDetection.boundingBoxInfoList)
             for(var boundingBoxInfo in ModelTextDetection.boundingBoxInfoList)
