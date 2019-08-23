@@ -1,6 +1,7 @@
 
 import 'dart:io';
 import 'dart:ui' as ui;
+import 'dart:async';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -12,7 +13,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:first_ui/manage/manage_firebase_storage.dart';
 import 'package:first_ui/manage/manage_firebase_ml_vision.dart';
 import 'package:first_ui/manage/manage_image.dart';
-
+import 'package:path_provider/path_provider.dart';
 
 
 class BoundingBoxInfo
@@ -56,52 +57,70 @@ class ModelTextDetection
   static int imageTotalHeight = 0;
 
 
-  static Future<List<ModelTextDetection>> generate() async
+  static Future<List<ModelTextDetection>> generate(List<String> urlList,bool useCloud) async
   {
-    if(null != list) {
-      list.clear();
-      list = null;
-    }
+    if(null != list)
+      return list;
 
-    bool useCloud = true;
-    List<String> urlList = new List<String>();
-    urlList.add('comics/01.jpg');
-    urlList.add('comics/02.jpg');
-
-
-       int boundingBoxCountIndex = 0;
-       int previousImageTotalHeight = 0;
-       for(int countIndex=0; countIndex<urlList.length; ++countIndex)
+    int boundingBoxCountIndex = 0;
+    int previousImageTotalHeight = 0;
+    for(int countIndex=0; countIndex<urlList.length; ++countIndex)
        {
-         //'comics/01.jpg'
-         String url;
-
-         final ref = FirebaseStorage.instance.ref().child(urlList[countIndex]);
-         ref.getDownloadURL().then((value)
+         String url;//'comics/01.jpg'
+         final ref = FirebaseStorage.instance.ref().child('comics/${urlList[countIndex]}');
+         await ref.getDownloadURL().then((value)
          {
+           url = value.toString();
            //value == String
-           print('success : $value');
+           print('getDownloadURL success : $url');
          },
              onError: (error)
              {
-               print('error : $error');
+               print('getDownloadURL error : $error');
              }).catchError( (error)
          {
-           print('catchError : $error');
+           print('getDownloadURL catchError : $error');
          });
 
+         /*
+         Directory tempDir = await getTemporaryDirectory();
+         String tempPath = tempDir.path;
+         print('tempPath : $tempPath');
+
+         HttpClient client = new HttpClient();
+         var downloadData = List<int>();
+         File file = new File('$tempPath/${urlList[countIndex]}');
+         client.getUrl(Uri.parse(url))
+             .then((HttpClientRequest request) {
+           return request.close();
+         })
+             .then((HttpClientResponse response) {
+           response.listen((d) => downloadData.addAll(d),
+               onDone: () {
+                 file.writeAsBytes(downloadData);
+               }
+           );
+         });
+          */
 
          FileInfo fileInfo = await ManageFlutterCacheManager.downloadFile(url);
+         int fileLength = await fileInfo.file.length();
+         print('fileLength[$countIndex] : $fileLength');
+
+
          VisionText visionText = await ManageFirebaseMLVision.detectTextFromFile(fileInfo.file, useCloud);
+         Uint8List uint8list = await ModelCommon.getUint8ListFromFile(fileInfo.file);
 
          ModelTextDetection modelTextDetection = new ModelTextDetection();
+         modelTextDetection.uint8List = uint8list;
+         modelTextDetection.image = await loadImage(uint8list);
 
          if (false ==
-             modelTextDetection.manageImage.decode(fileInfo.file.readAsBytesSync())) {
+             modelTextDetection.manageImage.decode(/*fileInfo.file.readAsBytesSync()*/uint8list)) {
            print('false == manageImage.decode');
          } else {
            print(
-               'imaghe size - width : ${modelTextDetection.manageImage.width} , height : ${modelTextDetection.manageImage.height}');
+               'imaghe size[$countIndex] - width : ${modelTextDetection.manageImage.width} , height : ${modelTextDetection.manageImage.height}');
          }
 
          if (null != visionText.blocks) {
@@ -127,7 +146,6 @@ class ModelTextDetection
         //  }
         //}
 
-
              //print('text[$i] : ${textBlock.text}');
              // print('boundingBox[$i] : ${textBlock.boundingBox.toString()}');
              //print('cornerPoints[$i] : ${textBlock.cornerPoints.toString()}');
@@ -151,31 +169,23 @@ class ModelTextDetection
 
          if(0 < countIndex)
            previousImageTotalHeight += list[countIndex-1].manageImage.height;
+         print('previousImageTotalHeight[$countIndex] : $previousImageTotalHeight');
          modelTextDetection.previousImageTotalHeight = previousImageTotalHeight;
 
          imageTotalHeight += modelTextDetection.manageImage.height;
+         print('imageTotalHeight[$countIndex] : $imageTotalHeight');
        }
-
-
 
        return list;
      }
 
 
 
-
-
-  /*
-  static Future<ui.Image> loadImage(List<int> img) async
-  {
+  static Future<ui.Image> loadImage(List<int> img) async {
     final Completer<ui.Image> completer = new Completer();
-    ui.decodeImageFromList(img, (ui.Image img));
+    ui.decodeImageFromList(img, (ui.Image img) {
       return completer.complete(img);
     });
     return completer.future;
   }
-  */
-  //image = await loadImage(list);
-
-
 }

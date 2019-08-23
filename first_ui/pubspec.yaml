@@ -36,6 +36,7 @@ dependencies:
   cached_network_image: ^1.1.1
   corsac_jwt: ^0.1.2
   image: ^2.1.4
+  path_provider: ^1.2.0
 
 dev_dependencies:
   flutter_test:

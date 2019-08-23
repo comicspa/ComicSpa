@@ -129,7 +129,6 @@ class ModelPreset
 
   static void test() async
   {
-
     final ref = FirebaseStorage.instance.ref().child('comics/01.jpg');
 
     String url = await ref.getDownloadURL().then((value)

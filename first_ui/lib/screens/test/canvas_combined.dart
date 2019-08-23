@@ -47,6 +47,8 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
   int isImageLoaded = 0;
   //double totalImageHeight;
   int tappedCountIndex = -1;
+  bool useCloud = true;
+  List<String> urlList = new List<String>();
 
   @override
   void dispose() {
@@ -190,6 +192,7 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
 
   init() async
   {
+    /*
     List<String> urlList = new List<String>();
     urlList.add('comics/01.jpg');
     urlList.add('comics/02.jpg');
@@ -203,6 +206,11 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
         ModelTextDetection.list[countIndex].image = await loadImage(ModelTextDetection.list[countIndex].uint8List);
       }
     }
+     */
+
+    urlList.add('01.jpg');
+    urlList.add('04.jpg');
+
   }
 
 
@@ -237,7 +245,7 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
           children: <Widget>[
             Container(
               child: FutureBuilder<List<ModelTextDetection>>(
-                future:  ModelTextDetection.generate(),
+                future:  ModelTextDetection.generate(urlList,useCloud),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData)
                     return LoadingIndicator();
@@ -382,6 +390,11 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
                         onPressed: () {
                           // Validate will return true if the form is valid, or false if
                           // the form is invalid.
+                          textController.text = '';
+                          setState(() {
+
+                          });
+
                           Navigator.of(null).pop();
                         },
                         child: Text('Cancel'),

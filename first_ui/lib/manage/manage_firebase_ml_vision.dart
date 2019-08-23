@@ -16,7 +16,6 @@ import 'package:first_ui/models/model_view_comic_detect_text_info.dart';
 
 class ManageFirebaseMLVision
 {
-
   static Future<VisionText> detectTextFromFile(File file,bool useCloud) async
   {
     print('detectTextFromFile - start');
