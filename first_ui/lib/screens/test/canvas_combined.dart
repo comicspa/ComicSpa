@@ -19,14 +19,12 @@ class DrawRectAndImage extends StatefulWidget {
   _DrawRectAndImageState createState() => _DrawRectAndImageState();
 }
 
+
+/*
 ManageImage manageImage1 = new ManageImage();
 List<TextBlock> textBlockList1 = new List<TextBlock>();
-
-
 ManageImage manageImage2 = new ManageImage();
 List<TextBlock> textBlockList2 = new List<TextBlock>();
-
-
 
 class BoundingBoxInfo
 {
@@ -37,16 +35,16 @@ class BoundingBoxInfo
 }
 
 List<BoundingBoxInfo> boundingBoxInfoList = new List<BoundingBoxInfo>();
-
+*/
 
 
 class _DrawRectAndImageState extends State<DrawRectAndImage> {
   final _formKey = GlobalKey<FormState>();
   final textController = TextEditingController();
-  ui.Image image1;
-  ui.Image image2;
-  bool isImageLoaded = false;
-  double totalImageHeight;
+  //ui.Image image1;
+  //ui.Image image2;
+  int isImageLoaded = 0;
+  //double totalImageHeight;
   int tappedCountIndex = -1;
 
   @override
@@ -61,6 +59,7 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
     init();
   }
 
+  /*
   init() async {
     //////////////////////////////////////////////////////////////////////////
     File file1 = await ManageFlutterCacheManager.getSingleFileFromCache(
@@ -114,15 +113,14 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
         boundingBoxInfoList.add(boundingBoxInfo);
 
 
-        /*
-        if (null != textBlock.recognizedLanguages)
-        {
-          for (int m = 0; m < textBlock.recognizedLanguages.length; ++m)
-          {
-            print('recognizedLanguages[$m] : ${textBlock.recognizedLanguages.elementAt(m).toString()}');
-          }
-        }
-        */
+
+        //if (null != textBlock.recognizedLanguages)
+        //{
+        //  for (int m = 0; m < textBlock.recognizedLanguages.length; ++m)
+        //  {
+        //    print('recognizedLanguages[$m] : ${textBlock.recognizedLanguages.elementAt(m).toString()}');
+        //  }
+        //}
 
         //print('text[$i] : ${textBlock.text}');
         // print('boundingBox[$i] : ${textBlock.boundingBox.toString()}');
@@ -149,15 +147,15 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
         boundingBoxInfo.text = '';
         boundingBoxInfoList.add(boundingBoxInfo);
 
-        /*
-        if (null != textBlock.recognizedLanguages)
-        {
-          for (int m = 0; m < textBlock.recognizedLanguages.length; ++m)
-          {
-            print('recognizedLanguages[$m] : ${textBlock.recognizedLanguages.elementAt(m).toString()}');
-          }
-        }
-        */
+
+        //if (null != textBlock.recognizedLanguages)
+        //{
+        //  for (int m = 0; m < textBlock.recognizedLanguages.length; ++m)
+        //  {
+        //    print('recognizedLanguages[$m] : ${textBlock.recognizedLanguages.elementAt(m).toString()}');
+        //  }
+        //}
+
 
         //print('text[$i] : ${textBlock.text}');
         // print('boundingBox[$i] : ${textBlock.boundingBox.toString()}');
@@ -187,20 +185,47 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
 
     totalImageHeight = image1.height.toDouble() + image2.height.toDouble();
   }
+  */
+
+  init() async
+  {
+    List<String> urlList = new List<String>();
+    urlList.add('comics/01.jpg');
+    urlList.add('comics/02.jpg');
+
+    ModelTextDetection.generate(urlList, true);
+
+    if(null != ModelTextDetection.list)
+    {
+      for(int countIndex=0; countIndex<ModelTextDetection.list.length; ++countIndex)
+      {
+        ModelTextDetection.list[countIndex].image = await loadImage(ModelTextDetection.list[countIndex].uint8List);
+      }
+    }
+  }
+
+
 
   Future<ui.Image> loadImage(List<int> img) async {
     final Completer<ui.Image> completer = new Completer();
     ui.decodeImageFromList(img, (ui.Image img) {
+      /*
       setState(() {
         print('fffffffffffff');
-        isImageLoaded = true;
-      });
+        ++isImageLoaded;
+      });*/
+
+      ++isImageLoaded;
+      if(2 == isImageLoaded) {
+        setState(() {
+
+        });
+      }
+
       return completer.complete(img);
     });
     return completer.future;
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -211,20 +236,25 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
           children: <Widget>[
             FittedBox(
               child: SizedBox(
-                width: ManageDeviceInfo.resolutionWidth *
-                    (manageImage1.width / ManageDeviceInfo.resolutionWidth),
+                width: null != ModelTextDetection.list? ManageDeviceInfo.resolutionWidth *
+                    //(manageImage1.width / ManageDeviceInfo.resolutionWidth),
+                    (ModelTextDetection.list[0].manageImage.width/ ManageDeviceInfo.resolutionWidth) : ManageDeviceInfo.resolutionWidth,
                 height: ManageDeviceInfo.resolutionHeight *
-                    (totalImageHeight / ManageDeviceInfo.resolutionHeight),
+                    //(totalImageHeight / ManageDeviceInfo.resolutionHeight),
+                    (ModelTextDetection.imageTotalHeight / ManageDeviceInfo.resolutionHeight),
                 child: _buildImage(),
               ),
             ),
-            //for (var boundingBox in boundingBoxList1)
-            for(var boundingBoxInfo in boundingBoxInfoList)
+            //for(var boundingBoxInfo in boundingBoxInfoList)
+            if(null != ModelTextDetection.boundingBoxInfoList)
+            for(var boundingBoxInfo in ModelTextDetection.boundingBoxInfoList)
               Positioned(
                 left: ManageDeviceInfo.resolutionWidth /
-                    (manageImage1.width / boundingBoxInfo.boundingBox.left),
+                    //(manageImage1.width / boundingBoxInfo.boundingBox.left),
+                    (ModelTextDetection.list[0].manageImage.width / boundingBoxInfo.boundingBox.left),
                 top: boundingBoxInfo.boundingBox.top /
-                    (manageImage1.width / ManageDeviceInfo.resolutionWidth),
+                    //(manageImage1.width / ManageDeviceInfo.resolutionWidth),
+                    (ModelTextDetection.list[0].manageImage.width / ManageDeviceInfo.resolutionWidth),
                 child: GestureDetector(
                   onTap: () {
 
@@ -240,9 +270,11 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
                   },
                   child: Container(
                     width: ManageDeviceInfo.resolutionWidth /
-                        (manageImage1.width / boundingBoxInfo.boundingBox.width),
+                        //(manageImage1.width / boundingBoxInfo.boundingBox.width),
+                        (ModelTextDetection.list[0].manageImage.width / boundingBoxInfo.boundingBox.width),
                     height: ManageDeviceInfo.resolutionHeight /
-                            (totalImageHeight / boundingBoxInfo.boundingBox.height) +
+                            //(totalImageHeight / boundingBoxInfo.boundingBox.height) +
+                        (ModelTextDetection.imageTotalHeight / boundingBoxInfo.boundingBox.height) +
                         ManageDeviceInfo.statusBarHeight,
                     decoration: textBoxDecoration(boundingBoxInfo.changed),
                     child: Text(
@@ -342,8 +374,8 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
                           // the form is invalid.
                           if (_formKey.currentState.validate()) {
 
-                            boundingBoxInfoList[tappedCountIndex].text = textController.text;
-                            boundingBoxInfoList[tappedCountIndex].changed = true;
+                            ModelTextDetection.boundingBoxInfoList[tappedCountIndex].text = textController.text;
+                            ModelTextDetection.boundingBoxInfoList[tappedCountIndex].changed = true;
                             textController.text = '';
                             setState(() {
 
@@ -399,6 +431,19 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
     );
   }
 
+
+
+  Widget _buildImage() {
+    if (2 == this.isImageLoaded) {
+      return new CustomPaint(
+        painter: new PaintingImage(),
+      );
+    } else {
+      return new Center(child: new Text('loading'));
+    }
+  }
+
+  /*
   Widget _buildImage() {
     if (this.isImageLoaded) {
       return new CustomPaint(
@@ -418,8 +463,41 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
       return new Center(child: new Text('loading'));
     }
   }
+  */
+
+
 }
 
+
+
+class PaintingImage extends CustomPainter {
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    //print('sdjifoeifye : ${image.height}');
+
+    if(null != ModelTextDetection.list) {
+      for (int countIndex = 0; countIndex <
+          ModelTextDetection.list.length; ++countIndex) {
+        canvas.drawImage(
+            ModelTextDetection.list[countIndex].image, new Offset(0.0,
+            ModelTextDetection.list[countIndex].previousImageTotalHeight
+                .toDouble()), new Paint());
+      }
+    }
+
+
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
+  }
+}
+
+
+
+/*
 class PaintingImage extends CustomPainter {
   PaintingImage({
     this.image,
@@ -464,7 +542,10 @@ class PaintingImage2 extends CustomPainter {
     return false;
   }
 }
+*/
 
+
+/*
 class MyRect extends CustomPainter {
   int index = 0;
   MyRect(this.index);
@@ -508,6 +589,7 @@ class MyRect extends CustomPainter {
   }
 }
 
+
 Widget outlinedBoxLists(List<String> strings) {
   List<Widget> list = List<Widget>();
 
@@ -534,5 +616,7 @@ Widget outlinedBoxLists(List<String> strings) {
   }
   return Stack(children: list);
 }
+*/
+
 
 

@@ -127,5 +127,40 @@ class ModelPreset
   }
 
 
+  static void test() async
+  {
+
+    final ref = FirebaseStorage.instance.ref().child('comics/01.jpg');
+
+    String url = await ref.getDownloadURL().then((value)
+    {
+      //value == ModelUserInfo.getInstance()
+      print(value.toString());
+      print('success');
+
+      HttpClient client = new HttpClient();
+      client.getUrl(Uri.parse(value)).then((
+          HttpClientRequest request) {
+        return request.close();
+      }).then((HttpClientResponse response) {
+        response.listen((contents) {
+
+          print('1.test : ${contents.length}');
+
+        });
+      });
+    },
+        onError: (error)
+        {
+          print('error : $error');
+        }).catchError( (error)
+    {
+      print('catchError : $error');
+    });
+
+
+
+  }
+
 
 }
