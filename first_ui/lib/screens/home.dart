@@ -55,9 +55,10 @@ class _HomeScreenState extends State<HomeScreen>
           ),
           actions: <Widget>[
             IconButton(
+              tooltip: 'Profile',
               icon: Icon(
-                  Icons.perm_identity,
-                  color: Color.fromRGBO(21, 24, 45, 1.0),
+                Icons.perm_identity,
+                color: Color.fromRGBO(21, 24, 45, 1.0),
               ),
               onPressed: () {
                 Navigator.push(

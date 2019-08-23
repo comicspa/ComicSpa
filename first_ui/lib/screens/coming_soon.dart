@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
+
 import 'package:first_ui/screens/library.dart';
 import 'package:first_ui/screens/more.dart';
 import 'package:first_ui/screens/creator.dart';
@@ -15,15 +17,25 @@ class ComingSoonScreen extends StatefulWidget {
 }
 
 class _ComingSoonScreenState extends State<ComingSoonScreen> {
+//  final String titleText;
+//  _ComingSoonScreenState(this.titleText);
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(40.0),
         child: AppBar(
+          iconTheme: IconThemeData(
+            color: Colors.black, //change your color here
+          ),
           elevation: 1,
           backgroundColor: Colors.white, //Color.fromRGBO(21, 24, 45, 1.0), //Color(0xff202a30), //Colors.black87, // Color(0xFF5986E1),
-          title: Text(''),
+          title: Text('Coming Soon',
+            style: TextStyle(color: Colors.black),
+          ),
         ),
       ),
       body: Center(
@@ -33,22 +45,26 @@ class _ComingSoonScreenState extends State<ComingSoonScreen> {
             Container(
               child: Icon(
                 Icons.info_outline,
-                size: 35,
+                size: ManageDeviceInfo.resolutionHeight * 0.035,
               ),
             ),
+
             Text(
               'Coming soon~!',
               style: TextStyle(
-                fontSize: 16,
+                fontSize: ManageDeviceInfo.resolutionHeight * 0.05,
                 fontStyle: FontStyle.italic,
                 fontWeight: FontWeight.bold,
               ),
             ),
+            SizedBox(height: ManageDeviceInfo.resolutionHeight * 0.1,),
             RaisedButton(
               textColor: Colors.white,
               color: Colors.redAccent,
               child: Text('Back to Main Page'),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
           ],
         ),
