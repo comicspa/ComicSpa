@@ -22,6 +22,7 @@ class BoundingBoxInfo
   int countIndex = -1;
   String text = '';
   bool changed = false;
+  int previousImageTotalHeight = 0;
 }
 
 
@@ -67,21 +68,8 @@ class ModelTextDetection
     int previousImageTotalHeight = 0;
     for(int countIndex=0; countIndex<urlList.length; ++countIndex)
        {
-         String url;//'comics/01.jpg'
-         final ref = FirebaseStorage.instance.ref().child('comics/${urlList[countIndex]}');
-         await ref.getDownloadURL().then((value)
-         {
-           url = value.toString();
-           //value == String
-           print('getDownloadURL success[$countIndex/${urlList.length}] : $url');
-         },
-             onError: (error)
-             {
-               print('getDownloadURL error[$countIndex/${urlList.length}] : $error');
-             }).catchError( (error)
-         {
-           print('getDownloadURL catchError[$countIndex/${urlList.length}] : $error');
-         });
+         String url  = await ManageFirebaseStorage.getDownloadUrl('comics/${urlList[countIndex]}');
+         print('url[$countIndex/${urlList.length}] : $url');
 
          /*
          Directory tempDir = await getTemporaryDirectory();
@@ -118,12 +106,27 @@ class ModelTextDetection
 
          print('imaghe1[$countIndex/${urlList.length}] size - width : ${modelTextDetection.image.width} , height : ${modelTextDetection.image.height}');
 
-         if (false ==
-             modelTextDetection.manageImage.decode(uint8list)) {
+         if (false == modelTextDetection.manageImage.decode(uint8list))
+         {
            print('false == manageImage.decode');
-         } else {
+         }
+         else
+         {
            print('imaghe2[$countIndex/${urlList.length}] size - width : ${modelTextDetection.manageImage.width} , height : ${modelTextDetection.manageImage.height}');
          }
+
+
+         if(null == list)
+           list = new List<ModelTextDetection>();
+         list.add(modelTextDetection);
+
+
+         if(0 < countIndex)
+           previousImageTotalHeight += list[countIndex-1].manageImage.height;
+         print('previousImageTotalHeight[$countIndex/${urlList.length}] : $previousImageTotalHeight');
+         modelTextDetection.previousImageTotalHeight = previousImageTotalHeight;
+
+
 
          if (null != visionText.blocks) {
            for (int i = 0; i < visionText.blocks.length; ++i) {
@@ -138,6 +141,7 @@ class ModelTextDetection
              boundingBoxInfo.countIndex = boundingBoxCountIndex ++;
              boundingBoxInfo.boundingBox = textBlock.boundingBox;
              boundingBoxInfo.text = '';
+             boundingBoxInfo.previousImageTotalHeight = previousImageTotalHeight;
              boundingBoxInfoList.add(boundingBoxInfo);
 
         //if (null != textBlock.recognizedLanguages)
@@ -165,14 +169,7 @@ class ModelTextDetection
          modelTextDetection.uint8List = await ModelCommon.getUint8ListFromFile(fileInfo.file);
         */
 
-          if(null == list)
-            list = new List<ModelTextDetection>();
-         list.add(modelTextDetection);
 
-         if(0 < countIndex)
-           previousImageTotalHeight += list[countIndex-1].manageImage.height;
-         print('previousImageTotalHeight[$countIndex/${urlList.length}] : $previousImageTotalHeight');
-         modelTextDetection.previousImageTotalHeight = previousImageTotalHeight;
 
          imageTotalHeight += modelTextDetection.manageImage.height;
          print('imageTotalHeight[$countIndex/${urlList.length}] : $imageTotalHeight');

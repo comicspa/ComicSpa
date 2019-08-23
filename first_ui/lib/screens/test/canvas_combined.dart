@@ -270,7 +270,7 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
                         (ModelTextDetection.list[0].manageImage.width / boundingBoxInfo.boundingBox.left),
                     top: (boundingBoxInfo.boundingBox.top /
                         //(manageImage1.width / ManageDeviceInfo.resolutionWidth),
-                        (ModelTextDetection.list[0].manageImage.width / ManageDeviceInfo.resolutionWidth)) + ModelTextDetection.list[0].previousImageTotalHeight,
+                        (ModelTextDetection.list[0].manageImage.width / ManageDeviceInfo.resolutionWidth)) + boundingBoxInfo.previousImageTotalHeight,
                     child: GestureDetector(
                       onTap: () {
 
