@@ -248,7 +248,21 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
                 future:  ModelTextDetection.generate(urlList,useCloud),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData)
-                    return LoadingIndicator();
+                    return FittedBox(
+                      child: SizedBox(
+                        width: null != ModelTextDetection.list
+                            ? ManageDeviceInfo.resolutionWidth *
+                            //(manageImage1.width / ManageDeviceInfo.resolutionWidth),
+                            (ModelTextDetection.list[0].manageImage.width /
+                                ManageDeviceInfo.resolutionWidth)
+                            : ManageDeviceInfo.resolutionWidth,
+                        height: ManageDeviceInfo.resolutionHeight *
+                            //(totalImageHeight / ManageDeviceInfo.resolutionHeight),
+                            (ModelTextDetection.imageTotalHeight /
+                                ManageDeviceInfo.resolutionHeight),
+                        child: _buildImage(),
+                      ),
+                    );
                   {
                     return FittedBox(
                       child: SizedBox(
