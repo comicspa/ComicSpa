@@ -4,9 +4,8 @@ import 'package:first_ui/packets/packet_c2s_weekly_creator_info.dart';
 import 'package:first_ui/models/model_new_creator_info.dart';
 import 'package:first_ui/packets/packet_c2s_new_creator_info.dart';
 import 'more.dart';
-import 'detail_page.dart';
+import 'creator_detail_page.dart';
 import 'common_widgets.dart';
-
 
 class CreatorScreen extends StatefulWidget {
   @override
@@ -15,12 +14,10 @@ class CreatorScreen extends StatefulWidget {
 
 class _CreatorScreenState extends State<CreatorScreen> {
   PacketC2SWeeklyCreatorInfo c2sWeeklyCreatorInfo =
-  new PacketC2SWeeklyCreatorInfo();
+      new PacketC2SWeeklyCreatorInfo();
   PacketC2SWeeklyCreatorInfo c2sWeeklyCreatorInfo2 =
-  new PacketC2SWeeklyCreatorInfo();
-  PacketC2SNewCreatorInfo c2sNewCreatorInfo =
-  new PacketC2SNewCreatorInfo(); //
-
+      new PacketC2SWeeklyCreatorInfo();
+  PacketC2SNewCreatorInfo c2sNewCreatorInfo = new PacketC2SNewCreatorInfo(); //
 
   @override
   void initState() {
@@ -30,9 +27,7 @@ class _CreatorScreenState extends State<CreatorScreen> {
     c2sWeeklyCreatorInfo.generate();
     c2sWeeklyCreatorInfo2.generate();
     c2sNewCreatorInfo.generate();
-
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -87,17 +82,19 @@ class _CreatorScreenState extends State<CreatorScreen> {
                                           bottom: 20.0);
 
                                   return Padding(
-                                    padding: padding, // using padding setting above
+                                    padding:
+                                        padding, // using padding setting above
                                     child: InkWell(
                                       onTap: () {
-
-                                          Navigator.push<Widget>(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DetailPage(snapshot.data[index].url), // link to Actual viewer
-                                            ),
-                                          );
+                                        Navigator.push<Widget>(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                CreatorDetailPage(snapshot
+                                                    .data[index]
+                                                    .url), // link to Actual viewer
+                                          ),
+                                        );
 
                                         print(
                                             'Card selected'); //Todo complete onTap:() feature
@@ -105,16 +102,19 @@ class _CreatorScreenState extends State<CreatorScreen> {
                                       child: Container(
                                         width: 300.0,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(5.0),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
                                           color: Colors.blueGrey,
                                           boxShadow: [
                                             BoxShadow(
-                                                color: Colors.black.withAlpha(70),
+                                                color:
+                                                    Colors.black.withAlpha(70),
                                                 offset: Offset(3.0, 10.0),
                                                 blurRadius: 15.0)
                                           ],
                                           image: DecorationImage(
-                                            image: NetworkImage(snapshot.data[index].url),
+                                            image: NetworkImage(
+                                                snapshot.data[index].url),
                                             fit: BoxFit.cover,
                                           ),
                                         ),
@@ -127,12 +127,16 @@ class _CreatorScreenState extends State<CreatorScreen> {
                                               child: Container(
                                                   height: 50.0,
                                                   decoration: BoxDecoration(
-                                                      color: Color.fromRGBO(21, 24, 45, 0.7),
-                                                      borderRadius: BorderRadius.only(
-                                                          bottomLeft:
-                                                              Radius.circular(5.0),
-                                                          bottomRight:
-                                                              Radius.circular(5.0))),
+                                                      color: Color.fromRGBO(
+                                                          21, 24, 45, 0.7),
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      5.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      5.0))),
                                                   child: Column(
                                                     // 카드 아래 텍스트 영역
                                                     mainAxisAlignment:
@@ -140,25 +144,31 @@ class _CreatorScreenState extends State<CreatorScreen> {
                                                     children: <Widget>[
                                                       Container(
                                                         width: 300,
-                                                        padding: EdgeInsets.only(
-                                                            left: 10, top: 5),
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 10,
+                                                                top: 5),
                                                         child: Text(
                                                           '작가: 야옹이', //TODO need $ variable
                                                           style: TextStyle(
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                               fontWeight:
-                                                                  FontWeight.bold),
+                                                                  FontWeight
+                                                                      .bold),
                                                         ),
                                                       ),
                                                       Container(
                                                         width: 300,
                                                         padding:
-                                                            EdgeInsets.only(left: 10),
+                                                            EdgeInsets.only(
+                                                                left: 10),
                                                         child: Text(
                                                           '저 요즘 잘 나가요~!',
                                                           //TODO need $ variable
                                                           style: TextStyle(
-                                                              color: Colors.white),
+                                                              color:
+                                                                  Colors.white),
                                                         ),
                                                       )
                                                     ],
@@ -172,15 +182,12 @@ class _CreatorScreenState extends State<CreatorScreen> {
                                 },
                               ),
                             ),
-
                           ],
                         );
-
                   }
 
                   return Text('Result: ${snapshot.data}');
                 },
-
               ),
             ),
           ),
@@ -201,9 +208,9 @@ class _CreatorScreenState extends State<CreatorScreen> {
                       return const Center(
                         child: LoadingIndicator(),
                       );
-                  //
+                    //
                     case ConnectionState.done:
-                    //default:
+                      //default:
                       if (snapshot.hasError)
                         return new Text('Error: ${snapshot.error}');
                       else
@@ -219,20 +226,21 @@ class _CreatorScreenState extends State<CreatorScreen> {
                                 itemCount: ModelNewCreatorInfo.list.length,
                                 itemBuilder: (context, index) {
                                   EdgeInsets padding = index ==
-                                      0 // First Card indenting is Left 20 and others are Left 10
+                                          0 // First Card indenting is Left 20 and others are Left 10
                                       ? EdgeInsets.only(
-                                      left: 20.0,
-                                      right: 10.0,
-                                      top: 20.0,
-                                      bottom: 20.0)
+                                          left: 20.0,
+                                          right: 10.0,
+                                          top: 20.0,
+                                          bottom: 20.0)
                                       : EdgeInsets.only(
-                                      left: 10.0,
-                                      right: 10.0,
-                                      top: 20.0,
-                                      bottom: 20.0);
+                                          left: 10.0,
+                                          right: 10.0,
+                                          top: 20.0,
+                                          bottom: 20.0);
 
                                   return Padding(
-                                    padding: padding, // using padding setting above
+                                    padding:
+                                        padding, // using padding setting above
                                     child: InkWell(
                                       onTap: () {
                                         print(
@@ -241,16 +249,19 @@ class _CreatorScreenState extends State<CreatorScreen> {
                                       child: Container(
                                         width: 300.0,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(5.0),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
                                           color: Colors.blueGrey,
                                           boxShadow: [
                                             BoxShadow(
-                                                color: Colors.black.withAlpha(70),
+                                                color:
+                                                    Colors.black.withAlpha(70),
                                                 offset: Offset(3.0, 10.0),
                                                 blurRadius: 15.0)
                                           ],
                                           image: DecorationImage(
-                                            image: NetworkImage(snapshot.data[index].url),
+                                            image: NetworkImage(
+                                                snapshot.data[index].url),
                                             fit: BoxFit.cover,
                                           ),
                                         ),
@@ -263,38 +274,48 @@ class _CreatorScreenState extends State<CreatorScreen> {
                                               child: Container(
                                                   height: 50.0,
                                                   decoration: BoxDecoration(
-                                                      color: Color.fromRGBO(21, 24, 45, 0.7),
-                                                      borderRadius: BorderRadius.only(
-                                                          bottomLeft:
-                                                          Radius.circular(5.0),
-                                                          bottomRight:
-                                                          Radius.circular(5.0))),
+                                                      color: Color.fromRGBO(
+                                                          21, 24, 45, 0.7),
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      5.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      5.0))),
                                                   child: Column(
                                                     // 카드 아래 텍스트 영역
                                                     mainAxisAlignment:
-                                                    MainAxisAlignment.start,
+                                                        MainAxisAlignment.start,
                                                     children: <Widget>[
                                                       Container(
                                                         width: 300,
-                                                        padding: EdgeInsets.only(
-                                                            left: 10, top: 5),
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 10,
+                                                                top: 5),
                                                         child: Text(
                                                           '작가: 야옹이', //TODO need $ variable
                                                           style: TextStyle(
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                               fontWeight:
-                                                              FontWeight.bold),
+                                                                  FontWeight
+                                                                      .bold),
                                                         ),
                                                       ),
                                                       Container(
                                                         width: 300,
                                                         padding:
-                                                        EdgeInsets.only(left: 10),
+                                                            EdgeInsets.only(
+                                                                left: 10),
                                                         child: Text(
                                                           '저 요즘 잘 나가요~!',
                                                           //TODO need $ variable
                                                           style: TextStyle(
-                                                              color: Colors.white),
+                                                              color:
+                                                                  Colors.white),
                                                         ),
                                                       )
                                                     ],
@@ -314,15 +335,14 @@ class _CreatorScreenState extends State<CreatorScreen> {
 
                   return Text('Result: ${snapshot.data}');
                 },
-
-
               ),
             ),
           ),
           SizedBox(
             child: Padding(
               padding: const EdgeInsets.all(0.0),
-              child: FutureBuilder<List<ModelWeeklyCreatorInfo>>( //Todo need to change when Recommended Creator is ready
+              child: FutureBuilder<List<ModelWeeklyCreatorInfo>>(
+                //Todo need to change when Recommended Creator is ready
                 future: c2sWeeklyCreatorInfo2.fetchBytes(),
                 builder: (BuildContext context, snapshot) {
                   switch (snapshot.connectionState) {
@@ -336,15 +356,14 @@ class _CreatorScreenState extends State<CreatorScreen> {
                       return const Center(
                         child: LoadingIndicator(),
                       );
-                  //
+                    //
                     case ConnectionState.done:
-                    //default:
+                      //default:
                       if (snapshot.hasError)
                         return new Text('Error: ${snapshot.error}');
                       else
                         return Column(
                           children: <Widget>[
-
                             Padding(
                               padding: EdgeInsets.all(2.0),
                               child: ListView.builder(
@@ -366,19 +385,22 @@ class _CreatorScreenState extends State<CreatorScreen> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          DetailPage(snapshot.data[index].url))); //Todo testing route so update this later
+                                                          CreatorDetailPage(snapshot
+                                                              .data[index]
+                                                              .url))); //Todo testing route so update this later
                                             },
                                           ),
                                         ),
                                       ),
                                       Card(
                                         child: Padding(
-                                          padding: EdgeInsets.symmetric(vertical: 10.0),
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 10.0),
                                           child: SizedBox(
                                             height: 160,
                                             child: Row(
                                               crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                                  CrossAxisAlignment.start,
                                               children: <Widget>[
                                                 Container(
                                                   child: Image.network(
@@ -399,44 +421,57 @@ class _CreatorScreenState extends State<CreatorScreen> {
                                                 //                            ),
                                                 Expanded(
                                                   child: Padding(
-                                                    padding: const EdgeInsets.fromLTRB(
+                                                    padding: const EdgeInsets
+                                                            .fromLTRB(
                                                         20.0, 0.0, 2.0, 0.0),
                                                     child: Column(
                                                       crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: <Widget>[
                                                         Expanded(
                                                           flex: 2,
                                                           child: Column(
                                                             crossAxisAlignment:
-                                                            CrossAxisAlignment.start,
+                                                                CrossAxisAlignment
+                                                                    .start,
                                                             children: <Widget>[
                                                               Text(
                                                                 snapshot
-                                                                    .data[index].id,
+                                                                    .data[index]
+                                                                    .id,
                                                                 //Todo update this testing data
                                                                 maxLines: 2,
                                                                 overflow:
-                                                                TextOverflow.ellipsis,
-                                                                style: const TextStyle(
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                                style:
+                                                                    const TextStyle(
                                                                   fontWeight:
-                                                                  FontWeight.bold,
+                                                                      FontWeight
+                                                                          .bold,
                                                                 ),
                                                               ),
                                                               const Padding(
-                                                                  padding:
-                                                                  EdgeInsets.only(
-                                                                      bottom: 2.0)),
+                                                                  padding: EdgeInsets
+                                                                      .only(
+                                                                          bottom:
+                                                                              2.0)),
                                                               Text(
                                                                 snapshot
-                                                                    .data[index].explain,
+                                                                    .data[index]
+                                                                    .explain,
                                                                 //Todo update this testing data
                                                                 maxLines: 2,
                                                                 overflow:
-                                                                TextOverflow.ellipsis,
-                                                                style: const TextStyle(
-                                                                  fontSize: 12.0,
-                                                                  color: Colors.black54,
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                                style:
+                                                                    const TextStyle(
+                                                                  fontSize:
+                                                                      12.0,
+                                                                  color: Colors
+                                                                      .black54,
                                                                 ),
                                                               ),
                                                             ],
@@ -446,23 +481,32 @@ class _CreatorScreenState extends State<CreatorScreen> {
                                                           flex: 1,
                                                           child: Column(
                                                             crossAxisAlignment:
-                                                            CrossAxisAlignment.start,
+                                                                CrossAxisAlignment
+                                                                    .start,
                                                             mainAxisAlignment:
-                                                            MainAxisAlignment.end,
+                                                                MainAxisAlignment
+                                                                    .end,
                                                             children: <Widget>[
                                                               Text(
                                                                 snapshot
-                                                                    .data[index].explain,
-                                                                style: const TextStyle(
-                                                                  fontSize: 12.0,
-                                                                  color: Colors.black87,
+                                                                    .data[index]
+                                                                    .explain,
+                                                                style:
+                                                                    const TextStyle(
+                                                                  fontSize:
+                                                                      12.0,
+                                                                  color: Colors
+                                                                      .black87,
                                                                 ),
                                                               ),
                                                               Text(
                                                                 'Date published · views ★', //Todo update this testing data
-                                                                style: const TextStyle(
-                                                                  fontSize: 12.0,
-                                                                  color: Colors.black54,
+                                                                style:
+                                                                    const TextStyle(
+                                                                  fontSize:
+                                                                      12.0,
+                                                                  color: Colors
+                                                                      .black54,
                                                                 ),
                                                               ),
                                                             ],
@@ -484,13 +528,10 @@ class _CreatorScreenState extends State<CreatorScreen> {
                             ),
                           ],
                         );
-
                   }
 
                   return Text('Result: ${snapshot.data}');
                 },
-
-
               ),
             ),
           ),
