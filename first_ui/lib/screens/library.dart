@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
-
+import 'package:first_ui/models/model_weekly_creator_info.dart';
+import 'package:first_ui/packets/packet_c2s_weekly_creator_info.dart';
 
 class LibraryScreen extends StatefulWidget {
   @override
@@ -9,6 +10,17 @@ class LibraryScreen extends StatefulWidget {
 }
 
 class _LibraryScreenState extends State<LibraryScreen> {
+  PacketC2SWeeklyCreatorInfo c2sWeeklyCreatorInfo =
+      new PacketC2SWeeklyCreatorInfo();
+
+  @override
+  void initState() {
+    super.initState();
+    // generating packet
+
+    c2sWeeklyCreatorInfo.generate();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -39,34 +51,159 @@ class _LibraryScreenState extends State<LibraryScreen> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Padding(padding: EdgeInsets.only(top: ManageDeviceInfo.resolutionHeight * 0.04)),
+                      /* StreamBuilder<List<ModelWeeklyCreatorInfo>>(
+//                        stream: c2sWeeklyCreatorInfo.fetchBytes(),
+                        stream: null,
+                        initialData: 3,
+                        builder: (BuildContext context, snapshot) {
+                          switch (snapshot.connectionState) {
+                            case ConnectionState.none:
+                              return const Text('');
+                            case ConnectionState.active:
+                              return const Center(
+                                child: Text('active'),
+                              );
+                            case ConnectionState.waiting:
+                              return const Center(
+                                child: Text('Waiting'),
+                              );
+                          //
+                            case ConnectionState.done:
+                            //default:
+                              if (snapshot.hasError)
+                                return new Text('Error: ${snapshot.error}');
+                              else
+                                return Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            top: ManageDeviceInfo.resolutionHeight * 0.04)),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                          left: ManageDeviceInfo.resolutionWidth * 0.1),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Flexible(
+                                            flex: 3,
+                                            child: Container(
+                                              child: Image.asset(
+                                                'images/batman.jpg',
+                                                width:
+                                                ManageDeviceInfo.resolutionWidth * 0.22,
+                                                height:
+                                                ManageDeviceInfo.resolutionHeight * 0.2,
+                                                fit: BoxFit.fill,
+                                              ),
+                                            ),
+                                          ),
+                                          Flexible(
+                                            flex: 6,
+                                            child: Container(
+                                                width: ManageDeviceInfo.resolutionWidth * 0.5,
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                                  children: <Widget>[
+                                                    Container(
+                                                      alignment: Alignment.bottomLeft,
+                                                      padding: EdgeInsets.only(
+                                                          left: ManageDeviceInfo
+                                                              .resolutionWidth *
+                                                              0.04),
+                                                      child: Text('제목: 배트맨 포에버',
+                                                          maxLines: 2,
+                                                          overflow: TextOverflow.ellipsis,
+                                                          textAlign: TextAlign.left,
+                                                          style: TextStyle(
+                                                            fontFamily: 'Lato',
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: ManageDeviceInfo
+                                                                .resolutionHeight *
+                                                                0.02,
+                                                            color: Colors.black87,
+                                                          )),
+                                                    ),
+                                                    Container(
+                                                      alignment: Alignment.bottomLeft,
+                                                      padding: EdgeInsets.only(
+                                                          left: ManageDeviceInfo
+                                                              .resolutionWidth *
+                                                              0.04),
+                                                      child: Text('글/그림: 토리야마 아키라',
+                                                          maxLines: 2,
+                                                          overflow: TextOverflow.ellipsis,
+                                                          textAlign: TextAlign.left,
+                                                          style: TextStyle(
+                                                            fontFamily: 'Lato',
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: ManageDeviceInfo
+                                                                .resolutionHeight *
+                                                                0.02,
+                                                            color: Colors.black87,
+                                                          )),
+                                                    ),
+                                                  ],
+                                                )),
+                                          ),
+                                          Flexible(
+                                            flex: 1,
+                                            child: Container(
+                                              child: IconButton(
+                                                icon: Icon(Icons.chevron_right,
+                                                    color: Colors.black54),
+                                                iconSize:
+                                                ManageDeviceInfo.resolutionHeight * 0.06,
+                                                onPressed: () {},
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Divider(),
+                                  ],
+                                );
+                          }
+
+                          return Text('Result: ${snapshot.data}');
+                        },
+                      ),*/
+                      Padding(
+                          padding: EdgeInsets.only(
+                              top: ManageDeviceInfo.resolutionHeight * 0.04)),
                       Container(
-                          padding: EdgeInsets.only(left: ManageDeviceInfo.resolutionWidth * 0.1),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Flexible(
-                                flex: 3,
-                                child: Container(
-                                  child: Image.asset('images/dragonBall.jpg',
-                                    width: ManageDeviceInfo.resolutionWidth * 0.22,
-                                    height: ManageDeviceInfo.resolutionHeight * 0.2,
-                                    fit: BoxFit.fill,
-                                  ),
+                        padding: EdgeInsets.only(
+                            left: ManageDeviceInfo.resolutionWidth * 0.1),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Flexible(
+                              flex: 3,
+                              child: Container(
+                                child: Image.asset(
+                                  'images/dragonBall.jpg',
+                                  width:
+                                      ManageDeviceInfo.resolutionWidth * 0.22,
+                                  height:
+                                      ManageDeviceInfo.resolutionHeight * 0.2,
+                                  fit: BoxFit.fill,
                                 ),
                               ),
-
-                              Flexible(
-                                flex: 6,
-                                child: Container(
+                            ),
+                            Flexible(
+                              flex: 6,
+                              child: Container(
                                   width: ManageDeviceInfo.resolutionWidth * 0.5,
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: <Widget>[
-
                                       Container(
                                         alignment: Alignment.bottomLeft,
-                                        padding: EdgeInsets.only(left: ManageDeviceInfo.resolutionWidth * 0.04),
+                                        padding: EdgeInsets.only(
+                                            left: ManageDeviceInfo
+                                                    .resolutionWidth *
+                                                0.04),
                                         child: Text('제목: 드래곤볼',
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
@@ -74,14 +211,18 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                             style: TextStyle(
                                               fontFamily: 'Lato',
                                               fontWeight: FontWeight.bold,
-                                              fontSize: ManageDeviceInfo.resolutionHeight * 0.02,
+                                              fontSize: ManageDeviceInfo
+                                                      .resolutionHeight *
+                                                  0.02,
                                               color: Colors.black87,
-                                            )
-                                        ),
+                                            )),
                                       ),
                                       Container(
                                         alignment: Alignment.bottomLeft,
-                                        padding: EdgeInsets.only(left: ManageDeviceInfo.resolutionWidth * 0.04),
+                                        padding: EdgeInsets.only(
+                                            left: ManageDeviceInfo
+                                                    .resolutionWidth *
+                                                0.04),
                                         child: Text('글/그림: 토리야마 아키라',
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
@@ -89,32 +230,29 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                             style: TextStyle(
                                               fontFamily: 'Lato',
                                               fontWeight: FontWeight.bold,
-                                              fontSize: ManageDeviceInfo.resolutionHeight * 0.02,
+                                              fontSize: ManageDeviceInfo
+                                                      .resolutionHeight *
+                                                  0.02,
                                               color: Colors.black87,
-                                            )
-                                        ),
+                                            )),
                                       ),
                                     ],
-                                  )
+                                  )),
+                            ),
+                            Flexible(
+                              flex: 1,
+                              child: Container(
+                                child: IconButton(
+                                  icon: Icon(Icons.chevron_right,
+                                      color: Colors.black54),
+                                  iconSize:
+                                      ManageDeviceInfo.resolutionHeight * 0.06,
+                                  onPressed: () {},
                                 ),
                               ),
-                              Flexible(
-                                flex: 1,
-                                child: Container(
-                                  child: IconButton(
-                                    icon: Icon(
-                                      Icons.chevron_right,
-                                      color: Colors.black54
-                                    ),
-                                    iconSize: ManageDeviceInfo.resolutionHeight * 0.06,
-                                    onPressed: (){
-
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
+                        ),
                       ),
                       Divider(),
                     ],
@@ -127,23 +265,28 @@ class _LibraryScreenState extends State<LibraryScreen> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Padding(padding: EdgeInsets.only(top: ManageDeviceInfo.resolutionHeight * 0.04)),
+                      Padding(
+                          padding: EdgeInsets.only(
+                              top: ManageDeviceInfo.resolutionHeight * 0.04)),
                       Container(
-                        padding: EdgeInsets.only(left: ManageDeviceInfo.resolutionWidth * 0.1),
+                        padding: EdgeInsets.only(
+                            left: ManageDeviceInfo.resolutionWidth * 0.1),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Flexible(
                               flex: 3,
                               child: Container(
-                                child: Image.asset('images/batman.jpg',
-                                  width: ManageDeviceInfo.resolutionWidth * 0.22,
-                                  height: ManageDeviceInfo.resolutionHeight * 0.2,
+                                child: Image.asset(
+                                  'images/batman.jpg',
+                                  width:
+                                      ManageDeviceInfo.resolutionWidth * 0.22,
+                                  height:
+                                      ManageDeviceInfo.resolutionHeight * 0.2,
                                   fit: BoxFit.fill,
                                 ),
                               ),
                             ),
-
                             Flexible(
                               flex: 6,
                               child: Container(
@@ -151,10 +294,12 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: <Widget>[
-
                                       Container(
                                         alignment: Alignment.bottomLeft,
-                                        padding: EdgeInsets.only(left: ManageDeviceInfo.resolutionWidth * 0.04),
+                                        padding: EdgeInsets.only(
+                                            left: ManageDeviceInfo
+                                                    .resolutionWidth *
+                                                0.04),
                                         child: Text('제목: 배트맨 포에버',
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
@@ -162,14 +307,18 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                             style: TextStyle(
                                               fontFamily: 'Lato',
                                               fontWeight: FontWeight.bold,
-                                              fontSize: ManageDeviceInfo.resolutionHeight * 0.02,
+                                              fontSize: ManageDeviceInfo
+                                                      .resolutionHeight *
+                                                  0.02,
                                               color: Colors.black87,
-                                            )
-                                        ),
+                                            )),
                                       ),
                                       Container(
                                         alignment: Alignment.bottomLeft,
-                                        padding: EdgeInsets.only(left: ManageDeviceInfo.resolutionWidth * 0.04),
+                                        padding: EdgeInsets.only(
+                                            left: ManageDeviceInfo
+                                                    .resolutionWidth *
+                                                0.04),
                                         child: Text('글/그림: 토리야마 아키라',
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
@@ -177,27 +326,24 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                             style: TextStyle(
                                               fontFamily: 'Lato',
                                               fontWeight: FontWeight.bold,
-                                              fontSize: ManageDeviceInfo.resolutionHeight * 0.02,
+                                              fontSize: ManageDeviceInfo
+                                                      .resolutionHeight *
+                                                  0.02,
                                               color: Colors.black87,
-                                            )
-                                        ),
+                                            )),
                                       ),
                                     ],
-                                  )
-                              ),
+                                  )),
                             ),
                             Flexible(
                               flex: 1,
                               child: Container(
                                 child: IconButton(
-                                  icon: Icon(
-                                      Icons.chevron_right,
-                                      color: Colors.black54
-                                  ),
-                                  iconSize: ManageDeviceInfo.resolutionHeight * 0.06,
-                                  onPressed: (){
-
-                                  },
+                                  icon: Icon(Icons.chevron_right,
+                                      color: Colors.black54),
+                                  iconSize:
+                                      ManageDeviceInfo.resolutionHeight * 0.06,
+                                  onPressed: () {},
                                 ),
                               ),
                             ),
@@ -215,23 +361,28 @@ class _LibraryScreenState extends State<LibraryScreen> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Padding(padding: EdgeInsets.only(top: ManageDeviceInfo.resolutionHeight * 0.04)),
+                      Padding(
+                          padding: EdgeInsets.only(
+                              top: ManageDeviceInfo.resolutionHeight * 0.04)),
                       Container(
-                        padding: EdgeInsets.only(left: ManageDeviceInfo.resolutionWidth * 0.1),
+                        padding: EdgeInsets.only(
+                            left: ManageDeviceInfo.resolutionWidth * 0.1),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Flexible(
                               flex: 3,
                               child: Container(
-                                child: Image.asset('images/batman.jpg',
-                                  width: ManageDeviceInfo.resolutionWidth * 0.22,
-                                  height: ManageDeviceInfo.resolutionHeight * 0.2,
+                                child: Image.asset(
+                                  'images/batman.jpg',
+                                  width:
+                                      ManageDeviceInfo.resolutionWidth * 0.22,
+                                  height:
+                                      ManageDeviceInfo.resolutionHeight * 0.2,
                                   fit: BoxFit.fill,
                                 ),
                               ),
                             ),
-
                             Flexible(
                               flex: 6,
                               child: Container(
@@ -239,10 +390,12 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: <Widget>[
-
                                       Container(
                                         alignment: Alignment.bottomLeft,
-                                        padding: EdgeInsets.only(left: ManageDeviceInfo.resolutionWidth * 0.04),
+                                        padding: EdgeInsets.only(
+                                            left: ManageDeviceInfo
+                                                    .resolutionWidth *
+                                                0.04),
                                         child: Text('제목: 배트맨 포에버',
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
@@ -250,14 +403,18 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                             style: TextStyle(
                                               fontFamily: 'Lato',
                                               fontWeight: FontWeight.bold,
-                                              fontSize: ManageDeviceInfo.resolutionHeight * 0.02,
+                                              fontSize: ManageDeviceInfo
+                                                      .resolutionHeight *
+                                                  0.02,
                                               color: Colors.black87,
-                                            )
-                                        ),
+                                            )),
                                       ),
                                       Container(
                                         alignment: Alignment.bottomLeft,
-                                        padding: EdgeInsets.only(left: ManageDeviceInfo.resolutionWidth * 0.04),
+                                        padding: EdgeInsets.only(
+                                            left: ManageDeviceInfo
+                                                    .resolutionWidth *
+                                                0.04),
                                         child: Text('글/그림: 토리야마 아키라',
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
@@ -265,27 +422,24 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                             style: TextStyle(
                                               fontFamily: 'Lato',
                                               fontWeight: FontWeight.bold,
-                                              fontSize: ManageDeviceInfo.resolutionHeight * 0.02,
+                                              fontSize: ManageDeviceInfo
+                                                      .resolutionHeight *
+                                                  0.02,
                                               color: Colors.black87,
-                                            )
-                                        ),
+                                            )),
                                       ),
                                     ],
-                                  )
-                              ),
+                                  )),
                             ),
                             Flexible(
                               flex: 1,
                               child: Container(
                                 child: IconButton(
-                                  icon: Icon(
-                                      Icons.chevron_right,
-                                      color: Colors.black54
-                                  ),
-                                  iconSize: ManageDeviceInfo.resolutionHeight * 0.06,
-                                  onPressed: (){
-
-                                  },
+                                  icon: Icon(Icons.chevron_right,
+                                      color: Colors.black54),
+                                  iconSize:
+                                      ManageDeviceInfo.resolutionHeight * 0.06,
+                                  onPressed: () {},
                                 ),
                               ),
                             ),
@@ -296,7 +450,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
                     ],
                   ),
                 ),
-              ),/// Owned 내용 보여주는 컨테이너,
+              ),
+
+              /// Owned 내용 보여주는 컨테이너,
               Container(
                 // Continue 내용 보여주는 컨테이너
                 child: SingleChildScrollView(
@@ -331,8 +487,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Container(
-                                child: Image.asset('images/batman.jpg',
-                                    scale: 5),
+                                child:
+                                    Image.asset('images/batman.jpg', scale: 5),
                               ),
                               Container(
                                 child: Text('test'),
