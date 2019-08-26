@@ -88,7 +88,7 @@ class _TrendState extends State<Trend> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            ViewerScreen(i), // link to Actual viewer
+                                            ViewerScreen('000','777','333'), // link to Actual viewer
                                       ),
                                     );
                                   },

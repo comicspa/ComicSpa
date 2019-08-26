@@ -8,22 +8,35 @@ import 'package:first_ui/packets/packet_c2s_today_popular_comic_info.dart';
 import 'package:first_ui/models/model_view_comic.dart';
 import 'package:first_ui/packets/packet_c2s_view_comic.dart';
 import 'package:first_ui/models/model_featured_comic_info.dart';
+import 'package:first_ui/models/model_comic_detail_info.dart';
+import 'package:first_ui/packets/packet_c2s_comic_detail_info.dart';
 
 //Todo make fade-in image loading using "transparent_image package" later
 
 class ViewerScreen extends StatefulWidget {
-  final ModelFeaturedComicInfo modelFeaturedComicInfo;
+  //final ModelFeaturedComicInfo modelFeaturedComicInfo;
+  //final ModelComicDetailInfo modelComicDetailInfo;
   //final String url;
   //ViewerScreen(this.url);
-  ViewerScreen(this.modelFeaturedComicInfo);
+//  ViewerScreen(this.modelFeaturedComicInfo);
+  String userId;
+  String comicId;
+  String episodeId;
+  ViewerScreen(this.userId,this.comicId,this.episodeId);
 
   @override
-  _ViewerScreen createState() => new _ViewerScreen(modelFeaturedComicInfo);
+  _ViewerScreen createState() => new _ViewerScreen(userId,comicId,episodeId);
 }
 
 class _ViewerScreen extends State<ViewerScreen> {
 //  PacketC2STodayPopularComicInfo c2STodayPopularComicInfo = new PacketC2STodayPopularComicInfo(); // use this to handle data
+  String userId;
+  String comicId;
+  String episodeId;
+  _ViewerScreen(this.userId,this.comicId,this.episodeId);
+
   PacketC2SViewComic c2sViewComic = PacketC2SViewComic();
+
 
 //  @override
 //  void initState() {
@@ -44,12 +57,14 @@ class _ViewerScreen extends State<ViewerScreen> {
   }
 
 //  String url;
-  ModelFeaturedComicInfo modelFeaturedComicInfo;
+ // ModelFeaturedComicInfo modelFeaturedComicInfo;
 
+  /*
   _ViewerScreen(ModelFeaturedComicInfo modelFeaturedComicInfo) {
     this.modelFeaturedComicInfo = modelFeaturedComicInfo;
 //    this.url = url;
   }
+   */
 
   @override
   Widget build(BuildContext context) {
