@@ -203,7 +203,18 @@ class ModelTextDetection
        return list;
      }
 
+   static get sizeBoxWidth
+   {
+     if(null == ModelTextDetection.list || 0 == ModelTextDetection.list.length)
+       return ManageDeviceInfo.resolutionWidth;
 
+     return ManageDeviceInfo.resolutionWidth * (ModelTextDetection.list[0].manageImage.width / ManageDeviceInfo.resolutionWidth);
+   }
+
+  static get sizeBoxHeight
+  {
+    return ManageDeviceInfo.resolutionHeight * (ModelTextDetection.imageTotalHeight / ManageDeviceInfo.resolutionHeight);
+  }
 
   static Future<ui.Image> loadImage(List<int> img) async {
     final Completer<ui.Image> completer = new Completer();
