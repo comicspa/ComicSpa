@@ -17,6 +17,7 @@ import 'package:first_ui/packets/packet_c2s_comic_detail_info.dart';
 import 'package:first_ui/packets/packet_c2s_new_creator_info.dart';
 import 'package:first_ui/packets/packet_c2s_weekly_creator_info.dart';
 
+
 import 'package:first_ui/manage/manage_common.dart';
 import 'package:first_ui/manage/manage_firebase_auth.dart';
 import 'package:first_ui/manage/manage_firebase_ml_vision.dart';
@@ -52,6 +53,7 @@ class _PageDevTestState extends State<PageDevTest> {
   PacketC2SWeeklyCreatorInfo c2SWeeklyCreatorInfo = new PacketC2SWeeklyCreatorInfo();
 
 
+
   @override
   void initState() {
     super.initState();
@@ -61,11 +63,11 @@ class _PageDevTestState extends State<PageDevTest> {
     c2STodayPopularComicInfo.generate(0, 0);
     c2SWeeklyPopularComicInfo.generate(0, 0);
     c2SFeaturedComicInfo.generate(0, 0);
-    c2SViewComic.generate();
+    c2SViewComic.generate(/*'000','000','000'*/);
     c2SNewComicInfo.generate(0,0);
     c2SRealTimeTrendInfo.generate(0,0);
     c2SRecommendedComicInfo.generate(0,0);
-    c2SComicDetailInfo.generate();
+    c2SComicDetailInfo.generate('000','000');
     c2SNewCreatorInfo.generate();
     c2SWeeklyCreatorInfo.generate();
 
@@ -150,7 +152,7 @@ class _PageDevTestState extends State<PageDevTest> {
                   break;
               }
 
-              //c2SComicDetailInfo.fetchBytes();
+              c2SComicDetailInfo.fetchBytes();
               //c2SViewComic.fetchBytes();
               //c2SNewCreatorInfo.fetchBytes();
               //c2SWeeklyCreatorInfo.fetchBytes();

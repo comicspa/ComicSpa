@@ -14,14 +14,28 @@ import 'package:first_ui/models/model_comic_detail_info.dart';
 
 class PacketC2SComicDetailInfo extends PacketC2SCommon
 {
+  String _userId;
+  String _comicId;
+
+  set userId(String userId)
+  {
+    _userId = userId;
+  }
+  set comicId(String comicId)
+  {
+    _comicId = comicId;
+  }
 
   PacketC2SComicDetailInfo()
   {
     type = e_packet_type.c2s_comic_detail_info;
   }
 
-  void generate()
-  {}
+  void generate(String userId,String comicId)
+  {
+    _userId = userId;
+    _comicId = comicId;
+  }
 
   Future<ModelComicDetailInfo> fetchBytes() async
   {
