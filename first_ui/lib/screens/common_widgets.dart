@@ -26,3 +26,61 @@ class LoadingIndicator extends StatelessWidget {
     );
   }
 }
+
+class BuildAlertDialog extends StatelessWidget {
+  const BuildAlertDialog({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('About'),
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          new BuildAboutText(),
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Theme.of(context).primaryColor,
+          child: const Text('Okay, got it!'),
+        ),
+      ],
+    );
+  }
+}
+
+class BuildAboutText extends StatelessWidget {
+  const BuildAboutText({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RichText(
+      text: new TextSpan(
+        text: 'This feature is coming soon.\n\n',
+        style: const TextStyle(color: Colors.black87),
+        children: <TextSpan>[
+          const TextSpan(text: ' '),
+          new TextSpan(
+            text: ' ',
+          ),
+          const TextSpan(
+            text: ' ',
+          ),
+          new TextSpan(
+            text: '- by Sparky Toons',
+          ),
+          const TextSpan(text: '.'),
+        ],
+      ),
+    );
+  }
+}
