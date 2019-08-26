@@ -20,19 +20,18 @@ typedef void OnPresetFetchDone();
 
 class ModelPreset
 {
-
-  static String _version = '1.0.0.0';
-  static String _faqURL = 'https://www.google.co.kr';
-  static String _privacyPolicyURL = 'https://www.google.co.kr';
-  static String _termsOfUseURL = 'https://www.google.co.kr';
+  static String __version = '1.0.0.0';
+  static String _faqUrl = 'https://www.google.co.kr';
+  static String _privacyPolicyUrl = 'https://www.google.co.kr';
+  static String _termsOfUseUrl = 'https://www.google.co.kr';
   static final String _comicBaseUrl = 'comics';
   static final String _representationImageFileFullName = '00.jpg';
   static final String _thumbnailImageFileFullName = '0000.jpg';
 
-  static String get version => _version;
-  static String get faqURL => _faqURL;
-  static String get privacyPolicyURL => _privacyPolicyURL;
-  static String get termsOfUseURL => _termsOfUseURL;
+  static String get version => __version;
+  static String get faqUrl => _faqUrl;
+  static String get privacyPolicyUrl => _privacyPolicyUrl;
+  static String get termsOfUseUrl => _termsOfUseUrl;
   static String get comicBaseUrl => _comicBaseUrl;
   static String get representationImageFileFullName => _representationImageFileFullName;
   static String get thumbnailImageFileFullName => _thumbnailImageFileFullName;
@@ -42,18 +41,18 @@ class ModelPreset
     print('preset : '+presetJsonString);
     Map presetMap = jsonDecode(presetJsonString);
 
-    _version = presetMap['version'];
-    print('Version : $_version');
+    __version = presetMap['version'];
+    print('version : $__version');
 
     var linkJson = presetMap['link'];
-    _faqURL = linkJson['faq'];
-    print('faq : $_faqURL');
+    _faqUrl = linkJson['faq'];
+    print('faq : $_faqUrl');
 
-    _privacyPolicyURL = linkJson['privacy_policy'];
-    print('privacy_policy : $_privacyPolicyURL');
+    _privacyPolicyUrl = linkJson['privacy_policy'];
+    print('privacy_policy : $_privacyPolicyUrl');
 
-    _termsOfUseURL = linkJson['terms_of_use'];
-    print('terms_of_use : $_termsOfUseURL');
+    _termsOfUseUrl = linkJson['terms_of_use'];
+    print('terms_of_use : $_termsOfUseUrl');
 
   }
 
@@ -77,9 +76,7 @@ class ModelPreset
 
   static void fetch2(onPresetFetchDone) async
   {
-
     final ref = FirebaseStorage.instance.ref().child('presets/preset.txt');
-
     String url = await ref.getDownloadURL().then((value)
     {
       //value == ModelUserInfo.getInstance()

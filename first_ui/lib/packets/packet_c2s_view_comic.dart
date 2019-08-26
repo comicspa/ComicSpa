@@ -14,6 +14,23 @@ import 'package:first_ui/models/model_view_comic.dart';
 
 class PacketC2SViewComic extends PacketC2SCommon
 {
+  String _userId;
+  String _comicId;
+  String _episodeId;
+
+  set userId(String userId)
+  {
+    _userId = userId;
+  }
+  set comicId(String comicId)
+  {
+    _comicId = comicId;
+  }
+  set episodeId(String episodeId)
+  {
+    _episodeId = episodeId;
+  }
+
 
   PacketC2SViewComic()
   {
@@ -22,6 +39,16 @@ class PacketC2SViewComic extends PacketC2SCommon
 
   void generate()
   {}
+
+  /*
+  void generate(String userId,String comicId,String epsodeId)
+  {
+    _userId = userId;
+    _comicId = comicId;
+    _episodeId = epsodeId;
+  }
+  */
+
 
   Future<List<ModelViewComic>> fetchBytes() async
   {
