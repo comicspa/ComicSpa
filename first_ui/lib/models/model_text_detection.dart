@@ -81,8 +81,6 @@ class ModelTextDetection
   static List<ModelTextDetection> list;
   static List<BoundingBoxInfo> boundingBoxInfoList;
   static int imageTotalHeight = 0;
-  static bool finished = false;
-
 
   static Future<List<ModelTextDetection>> generate(List<String> urlList,bool useCloud) async
   {
@@ -127,7 +125,7 @@ class ModelTextDetection
 
          ModelTextDetection modelTextDetection = new ModelTextDetection();
          modelTextDetection.uint8List = uint8list;
-         modelTextDetection.image = await loadImage(uint8list);
+         modelTextDetection.image = await ManageImage.loadImage(uint8list);
 
          print('imaghe1[$countIndex/${urlList.length}] size - width : ${modelTextDetection.image.width} , height : ${modelTextDetection.image.height}');
 
@@ -199,7 +197,6 @@ class ModelTextDetection
          print('imageTotalHeight[$countIndex/${urlList.length}] : $imageTotalHeight');
        }
 
-    finished = true;
        return list;
      }
 
@@ -216,11 +213,5 @@ class ModelTextDetection
     return ManageDeviceInfo.resolutionHeight * (ModelTextDetection.imageTotalHeight / ManageDeviceInfo.resolutionHeight);
   }
 
-  static Future<ui.Image> loadImage(List<int> img) async {
-    final Completer<ui.Image> completer = new Completer();
-    ui.decodeImageFromList(img, (ui.Image img) {
-      return completer.complete(img);
-    });
-    return completer.future;
-  }
+
 }

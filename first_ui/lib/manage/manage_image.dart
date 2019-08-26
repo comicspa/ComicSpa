@@ -1,4 +1,7 @@
+
+import 'dart:ui' as ui;
 import 'dart:typed_data';
+import 'dart:async';
 
 import 'package:image/image.dart';
 
@@ -20,6 +23,13 @@ class ManageImage
   }
 
 
+  static Future<ui.Image> loadImage(List<int> img) async {
+    final Completer<ui.Image> completer = new Completer();
+    ui.decodeImageFromList(img, (ui.Image img) {
+      return completer.complete(img);
+    });
+    return completer.future;
+  }
 
 
 }

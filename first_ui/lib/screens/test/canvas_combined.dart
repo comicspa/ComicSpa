@@ -50,29 +50,6 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
 
   }
 
-
-
-  Future<ui.Image> loadImage(List<int> img) async {
-    final Completer<ui.Image> completer = new Completer();
-    ui.decodeImageFromList(img, (ui.Image img) {
-      /*
-      setState(() {
-        print('fffffffffffff');
-        ++isImageLoaded;
-      });*/
-
-      ++isImageLoaded;
-      if(2 == isImageLoaded) {
-        setState(() {
-
-        });
-      }
-
-      return completer.complete(img);
-    });
-    return completer.future;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,8 +67,6 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
                   child: _buildImage(),
                 ),
               ),
-              //for(var boundingBoxInfo in boundingBoxInfoList)
-//              if(true == ModelTextDetection.finished)
                 for(var boundingBoxInfo in ModelTextDetection.boundingBoxInfoList)
                   Positioned(
                     left: boundingBoxInfo.left,//ManageDeviceInfo.resolutionWidth / (ModelTextDetection.list[0].manageImage.width / boundingBoxInfo.boundingBox.left),
