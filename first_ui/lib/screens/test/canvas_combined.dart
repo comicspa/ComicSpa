@@ -265,12 +265,8 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
 //              if(true == ModelTextDetection.finished)
                 for(var boundingBoxInfo in ModelTextDetection.boundingBoxInfoList)
                   Positioned(
-                    left: ManageDeviceInfo.resolutionWidth /
-                        //(manageImage1.width / boundingBoxInfo.boundingBox.left),
-                        (ModelTextDetection.list[0].manageImage.width / boundingBoxInfo.boundingBox.left),
-                    top: (boundingBoxInfo.boundingBox.top /
-                        //(manageImage1.width / ManageDeviceInfo.resolutionWidth),
-                        (ModelTextDetection.list[0].manageImage.width / ManageDeviceInfo.resolutionWidth)) + (boundingBoxInfo.previousImageTotalHeight/(ModelTextDetection.list[0].manageImage.width / ManageDeviceInfo.resolutionWidth)),
+                    left: boundingBoxInfo.left,//ManageDeviceInfo.resolutionWidth / (ModelTextDetection.list[0].manageImage.width / boundingBoxInfo.boundingBox.left),
+                    top: boundingBoxInfo.top,//(boundingBoxInfo.boundingBox.top / (ModelTextDetection.list[0].manageImage.width / ManageDeviceInfo.resolutionWidth)) + (boundingBoxInfo.previousImageTotalHeight/(ModelTextDetection.list[0].manageImage.width / ManageDeviceInfo.resolutionWidth)),
                     child: GestureDetector(
                       onTap: () {
 
@@ -285,13 +281,8 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
                         debugPrint("hello");
                       },
                       child: Container(
-                          width: ManageDeviceInfo.resolutionWidth /
-                              //(manageImage1.width / boundingBoxInfo.boundingBox.width),
-                              (ModelTextDetection.list[0].manageImage.width / boundingBoxInfo.boundingBox.width),
-                          height: ManageDeviceInfo.resolutionHeight /
-                              //(totalImageHeight / boundingBoxInfo.boundingBox.height) +
-                              (ModelTextDetection.imageTotalHeight / boundingBoxInfo.boundingBox.height) +
-                              ManageDeviceInfo.statusBarHeight,
+                          width: boundingBoxInfo.width,//ManageDeviceInfo.resolutionWidth / (ModelTextDetection.list[0].manageImage.width / boundingBoxInfo.boundingBox.width),
+                          height: boundingBoxInfo.height,//ManageDeviceInfo.resolutionHeight / (ModelTextDetection.imageTotalHeight / boundingBoxInfo.boundingBox.height) + ManageDeviceInfo.statusBarHeight,
                           decoration: textBoxDecoration(boundingBoxInfo.changed),
                           child: Text(
                             /*textController.text*/boundingBoxInfo.text)

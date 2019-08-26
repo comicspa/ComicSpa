@@ -13,6 +13,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:first_ui/manage/manage_firebase_storage.dart';
 import 'package:first_ui/manage/manage_firebase_ml_vision.dart';
 import 'package:first_ui/manage/manage_image.dart';
+import 'package:first_ui/manage/manage_device_info.dart';
 import 'package:path_provider/path_provider.dart';
 
 
@@ -23,6 +24,30 @@ class BoundingBoxInfo
   String text = '';
   bool changed = false;
   int previousImageTotalHeight = 0;
+  int imageWidth = 0;
+
+  double get left
+  {
+    return ManageDeviceInfo.resolutionWidth / (imageWidth / boundingBox.left);
+  }
+
+  double get top
+  {
+    return (boundingBox.top / (imageWidth / ManageDeviceInfo.resolutionWidth)) + (previousImageTotalHeight/(imageWidth / ManageDeviceInfo.resolutionWidth));
+  }
+
+  double get width
+  {
+    return ManageDeviceInfo.resolutionWidth / (imageWidth / boundingBox.width);
+  }
+
+  double get height
+  {
+    return ManageDeviceInfo.resolutionHeight /
+        (ModelTextDetection.imageTotalHeight / boundingBox.height) +
+        ManageDeviceInfo.statusBarHeight;
+  }
+
 }
 
 
@@ -142,6 +167,7 @@ class ModelTextDetection
              boundingBoxInfo.boundingBox = textBlock.boundingBox;
              boundingBoxInfo.text = '';
              boundingBoxInfo.previousImageTotalHeight = previousImageTotalHeight;
+             boundingBoxInfo.imageWidth = modelTextDetection.image.width;
              boundingBoxInfoList.add(boundingBoxInfo);
 
         //if (null != textBlock.recognizedLanguages)
@@ -168,8 +194,6 @@ class ModelTextDetection
          print('textBlockList Count : ${modelTextDetection.textBlockList.length}');
          modelTextDetection.uint8List = await ModelCommon.getUint8ListFromFile(fileInfo.file);
         */
-
-
 
          imageTotalHeight += modelTextDetection.manageImage.height;
          print('imageTotalHeight[$countIndex/${urlList.length}] : $imageTotalHeight');
