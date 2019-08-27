@@ -8,17 +8,17 @@ import 'package:flutter/services.dart';
 import 'package:first_ui/models/model_common.dart';
 import 'package:first_ui/packets/packet_common.dart';
 import 'package:first_ui/packets/packet_c2s_common.dart';
-import 'package:first_ui/packets/packet_s2c_my_locker_comic_check_out.dart';
-import 'package:first_ui/models/model_my_locker_comic_check_out.dart';
+import 'package:first_ui/packets/packet_s2c_my_locker_comic_view_list.dart';
+import 'package:first_ui/models/model_my_locker_comic_view_list.dart';
 
 
 
-class PacketC2SMyLockerComicCheckout extends PacketC2SCommon
+class PacketC2SMyLockerComicViewList extends PacketC2SCommon
 {
   int _pageCountIndex = 0;
   int _pageViewCount = 0;
 
-  PacketC2SMyLockerComicCheckout()
+  PacketC2SMyLockerComicViewList()
   {
     type = e_packet_type.c2s_my_locker_comic_check_out;
   }
@@ -29,12 +29,12 @@ class PacketC2SMyLockerComicCheckout extends PacketC2SCommon
     //_pageCountIndex = pageCountIndex;
   }
 
-  Future<List<ModelMyLockerComicCheckout>> fetchBytes() async
+  Future<List<ModelMyLockerComicViewList>> fetchBytes() async
   {
-    print('PacketC2SMyLockerComicCheckout : fetchBytes started');
+    print('PacketC2SMyLockerComicViewList : fetchBytes started');
 
-    if(null != ModelMyLockerComicCheckout.list)
-      return ModelMyLockerComicCheckout.list;
+    if(null != ModelMyLockerComicViewList.list)
+      return ModelMyLockerComicViewList.list;
 
     Socket socket = await ModelCommon.createServiceSocket();
     print('connected server');
@@ -59,11 +59,11 @@ class PacketC2SMyLockerComicCheckout extends PacketC2SCommon
       {
         //print('eventList.length == packetSize');
 
-        PacketS2CMyLockerComicCheckout packet = new PacketS2CMyLockerComicCheckout();
+        PacketS2CMyLockerComicViewList packet = new PacketS2CMyLockerComicViewList();
         packet.parseBytes(packetSize,byteData);
       }
 
-      return ModelMyLockerComicCheckout.list;
+      return ModelMyLockerComicViewList.list;
     });
 
     int packetBodySize  = 4 + 4;
@@ -79,7 +79,7 @@ class PacketC2SMyLockerComicCheckout extends PacketC2SCommon
     await Future.delayed(Duration(seconds: 20));
     socket.close();
 
-    return ModelMyLockerComicCheckout.list;
+    return ModelMyLockerComicViewList.list;
   }
 
 

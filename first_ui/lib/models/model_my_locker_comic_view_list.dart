@@ -1,7 +1,7 @@
 
 
 
-class ModelMyLockerComicCheckout
+class ModelMyLockerComicViewList
 {
   int _comicId;
   int _id;
@@ -46,5 +46,5 @@ class ModelMyLockerComicCheckout
     return 'thumbnailUrl : $thumbnailUrl';
   }
 
-  static List<ModelMyLockerComicCheckout> list;
+  static List<ModelMyLockerComicViewList> list;
 }
