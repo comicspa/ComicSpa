@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
 import 'more_submenu_comming_soon.dart';
-//import 'package:first_ui/screens/test/ocr_test.dart';
 import 'package:first_ui/screens/test/canvas_testing2.dart';
 import 'package:first_ui/screens/test/canvas_combined.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'support_submenu.dart';
 
 
 
@@ -156,7 +156,7 @@ class _MoreScreenState extends State<MoreScreen> {
                 Navigator.push<Widget>(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SubMenuComingSoonScreen('Support'),
+                    builder: (context) => SupportSubmenuScreen('Support'),
                   ),
                 );
               },

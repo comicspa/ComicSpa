@@ -6,7 +6,7 @@ import 'package:first_ui/models/model_preset.dart';
 
 class ManageServiceCenterInfo
 {
-  static void launchFaqPage() async
+  static Future<String> launchFaqPage() async
   {
     if (await canLaunch(ModelPreset.faqUrl)) {
       await launch(ModelPreset.faqUrl);
@@ -14,9 +14,11 @@ class ManageServiceCenterInfo
     else {
       throw 'Could not launch ${ModelPreset.faqUrl}';
     }
+
+    return ModelPreset.faqUrl;
   }
 
-  static void launchPrivacyPolicyPage() async
+  static Future<String> launchPrivacyPolicyPage() async
   {
     if (await canLaunch(ModelPreset.privacyPolicyUrl)) {
       await launch(ModelPreset.privacyPolicyUrl);
@@ -24,9 +26,11 @@ class ManageServiceCenterInfo
     else {
       throw 'Could not launch ${ModelPreset.privacyPolicyUrl}';
     }
+
+    return ModelPreset.privacyPolicyUrl;
   }
 
-  static void launchTermsOfUsePage() async
+  static Future<String> launchTermsOfUsePage() async
   {
     if (await canLaunch(ModelPreset.termsOfUseUrl)) {
       await launch(ModelPreset.termsOfUseUrl);
@@ -34,5 +38,7 @@ class ManageServiceCenterInfo
     else {
       throw 'Could not launch ${ModelPreset.termsOfUseUrl}';
     }
+
+    return ModelPreset.termsOfUseUrl;
   }
 }

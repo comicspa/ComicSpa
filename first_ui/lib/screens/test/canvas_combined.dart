@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
 import 'package:cached_network_image/cached_network_image.dart';
-import 'dart:ui' as ui;
-import 'dart:io';
-import 'package:flutter/services.dart' show rootBundle;
-import 'dart:async';
-import 'dart:typed_data';
+
 
 import 'package:first_ui/models/model_common.dart';
 import 'package:first_ui/manage/manage_flutter_cache_manager.dart';
