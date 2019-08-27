@@ -431,7 +431,7 @@ class _DetailPageState extends State<DetailPage> {
                                   height: ManageDeviceInfo.resolutionHeight * 0.3,
                                   fit: BoxFit.cover,
                                 )),
-                            title: Text('${ModelComicDetailInfo.getInstance().modelComicInfoList[index].episode}화',
+                            title: Text('${ModelComicDetailInfo.getInstance().modelComicInfoList[index].episodeId}화',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.center,

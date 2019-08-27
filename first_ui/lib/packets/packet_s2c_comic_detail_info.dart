@@ -41,7 +41,7 @@ class PacketS2CComicDetailInfo extends PacketS2CCommon
     {
       ModelComicInfo modelComicInfo = new ModelComicInfo();
 
-      modelComicInfo.episode = getUint32();
+      modelComicInfo.episodeId = getUint32().toString();
       modelComicInfo.thumbnailImageUrl = readStringToByteBuffer();
       modelComicInfo.subTitleName = readStringToByteBuffer();
       modelComicInfo.collected = getUint32();
