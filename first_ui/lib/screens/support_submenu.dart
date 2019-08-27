@@ -115,11 +115,12 @@ class _SupportSubmenuScreenState extends State<SupportSubmenuScreen> {
               ),
               trailing: Icon(Icons.chevron_right),
               onTap: (){
-                Navigator.push<Widget>(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BuildAlertDialog(),
-                    ));
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return BuildAlertDialog();
+                  },
+                );
               },
             ),
 
