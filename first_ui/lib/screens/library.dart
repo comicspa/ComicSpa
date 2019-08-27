@@ -1,19 +1,18 @@
-import 'package:first_ui/packets/packet_c2s_my_locker_comic_check_out.dart';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:first_ui/screens/common_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
 import 'package:first_ui/models/model_my_locker_comic_recent.dart';
 import 'package:first_ui/packets/packet_c2s_my_locker_comic_recent.dart';
-import 'package:first_ui/models/model_my_locker_comic_check_out.dart';
-import 'package:first_ui/packets/packet_c2s_my_locker_comic_check_out.dart';
+import 'package:first_ui/models/model_my_locker_comic_view_list.dart';
+import 'package:first_ui/packets/packet_c2s_my_locker_comic_view_list.dart';
 import 'package:first_ui/models/model_my_locker_comic_owned.dart';
 import 'package:first_ui/packets/packet_c2s_my_locker_comic_owned.dart';
 import 'package:first_ui/models/model_my_locker_comic_continue.dart';
 import 'package:first_ui/packets/packet_c2s_my_locker_comic_continue.dart';
-import 'package:first_ui/models/model_recommended_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_recommended_comic_info.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 
 class LibraryScreen extends StatefulWidget {
@@ -23,7 +22,7 @@ class LibraryScreen extends StatefulWidget {
 
 class _LibraryScreenState extends State<LibraryScreen> {
   PacketC2SMyLockerComicRecent c2sMyLockerComicRecent = new PacketC2SMyLockerComicRecent();
-  PacketC2SMyLockerComicCheckout c2sMyLockerComicCheckout = new PacketC2SMyLockerComicCheckout();
+  PacketC2SMyLockerComicViewList c2sMyLockerComicViewList = new PacketC2SMyLockerComicViewList();
   PacketC2SMyLockerComicOwned c2sMyLockerComicOwned = new PacketC2SMyLockerComicOwned();
   PacketC2SMyLockerComicContinue c2sMyLockerComicContinue = new PacketC2SMyLockerComicContinue();
   PacketC2SRecommendedComicInfo c2sRecommendedComicInfo = new PacketC2SRecommendedComicInfo();
@@ -34,7 +33,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
     // generating packet
 
     c2sMyLockerComicRecent.generate();
-    c2sMyLockerComicCheckout.generate();
+    c2sMyLockerComicViewList.generate();
     c2sMyLockerComicOwned.generate();
     c2sMyLockerComicContinue.generate();
     c2sRecommendedComicInfo.generate(0,0);
@@ -45,22 +44,24 @@ class _LibraryScreenState extends State<LibraryScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 1,
+      length: 4,
       child: Column(
         children: <Widget>[
           Container(
             constraints: BoxConstraints.expand(height: 50),
             child: TabBar(
-                labelColor: Color(0xFF5986E1),
+                labelColor: Colors.black, //Color(0xFF5986E1),
                 labelStyle:
                     TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
                 indicatorWeight: 3,
                 indicatorSize: TabBarIndicatorSize.label,
+                unselectedLabelColor: Colors.grey,
+                indicatorColor: Colors.redAccent,
                 tabs: [
                   Tab(text: "Recent"),
-//                  Tab(text: "View List"),
-//                  Tab(text: "Owned"),
-//                  Tab(text: "Continue")
+                  Tab(text: "View List"),
+                  Tab(text: "Owned"),
+                  Tab(text: "Continue")
                 ]),
           ),
           //TODO 로그인 여부에 따른 내용 분기 ??? 어떻게 하지?
@@ -109,8 +110,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                             Flexible(
                                               flex: 3,
                                               child: Container(
-                                                child: Image.network(
-                                                  snapshot.data[index].thumbnailUrl,
+                                                child: CachedNetworkImage(
+                                                  imageUrl: snapshot.data[index].thumbnailUrl,
+                                                  placeholder: (context, url) => LoadingIndicator(),
                                                   width:
                                                   ManageDeviceInfo.resolutionWidth * 0.22,
                                                   height:
@@ -167,15 +169,23 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                     ],
                                                   )),
                                             ),
+                                            Spacer(
+                                              flex: 1,
+                                            ),
                                             Flexible(
                                               flex: 1,
                                               child: Container(
                                                 child: IconButton(
-                                                  icon: Icon(Icons.chevron_right,
-                                                      color: Colors.black54),
+                                                  icon: ImageIcon(
+                                                    AssetImage('images/Chevron Right.png',
+                                                      ),
+                                                  ),
+                                                  color: Colors.black54,
                                                   iconSize:
-                                                  ManageDeviceInfo.resolutionHeight * 0.06,
-                                                  onPressed: () {},
+                                                  ManageDeviceInfo.resolutionHeight * 0.02,
+                                                  onPressed: () {
+
+                                                  },
                                                 ),
                                               ),
                                             ),
@@ -195,7 +205,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                   ),
                 ),
               ),
-    /*          Container(
+              Container(
                 // Recent 내용 보여주는 컨테이너
                 child: SingleChildScrollView(
                   child: Column(
@@ -204,8 +214,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
                       Padding(
                           padding: EdgeInsets.only(
                               top: ManageDeviceInfo.resolutionHeight * 0.04)),
-                      FutureBuilder<List<ModelMyLockerComicCheckout>>(
-                        future: c2sMyLockerComicCheckout.fetchBytes(),
+                      FutureBuilder<List<ModelMyLockerComicViewList>>(
+                        future: c2sMyLockerComicViewList.fetchBytes(),
                         builder: (BuildContext context, snapshot) {
                           switch (snapshot.connectionState) {
                             case ConnectionState.none:
@@ -224,7 +234,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                   physics: BouncingScrollPhysics(),
                                   shrinkWrap: true,
                                   scrollDirection: Axis.vertical,
-                                  itemCount: ModelMyLockerComicRecent.list.length,
+                                  itemCount: ModelMyLockerComicViewList.list.length,
                                   itemBuilder: (BuildContext context, int index) => Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: <Widget>[
@@ -238,8 +248,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                             Flexible(
                                               flex: 3,
                                               child: Container(
-                                                child: Image.network(
-                                                  snapshot.data[index].thumbnailUrl,
+                                                child: CachedNetworkImage(
+                                                  imageUrl: snapshot.data[index].thumbnailUrl,
+                                                  placeholder: (context, url) => LoadingIndicator(),
                                                   width:
                                                   ManageDeviceInfo.resolutionWidth * 0.22,
                                                   height:
@@ -296,15 +307,22 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                     ],
                                                   )),
                                             ),
+                                            Spacer(
+                                              flex: 1,
+                                            ),
                                             Flexible(
                                               flex: 1,
                                               child: Container(
                                                 child: IconButton(
-                                                  icon: Icon(Icons.chevron_right,
-                                                      color: Colors.black54),
+                                                  icon: ImageIcon(
+                                                    AssetImage('images/Chevron Right.png',
+                                                    ),),
+                                                  color: Colors.black54,
                                                   iconSize:
-                                                  ManageDeviceInfo.resolutionHeight * 0.06,
-                                                  onPressed: () {},
+                                                  ManageDeviceInfo.resolutionHeight * 0.02,
+                                                  onPressed: () {
+
+                                                  },
                                                 ),
                                               ),
                                             ),
@@ -368,8 +386,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                             Flexible(
                                               flex: 3,
                                               child: Container(
-                                                child: Image.network(
-                                                  snapshot.data[index].thumbnailUrl,
+                                                child: CachedNetworkImage(
+                                                  imageUrl: snapshot.data[index].thumbnailUrl,
+                                                  placeholder: (context, url) => LoadingIndicator(),
                                                   width:
                                                   ManageDeviceInfo.resolutionWidth * 0.22,
                                                   height:
@@ -426,15 +445,22 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                     ],
                                                   )),
                                             ),
+                                            Spacer(
+                                              flex: 1,
+                                            ),
                                             Flexible(
                                               flex: 1,
                                               child: Container(
                                                 child: IconButton(
-                                                  icon: Icon(Icons.chevron_right,
-                                                      color: Colors.black54),
+                                                  icon: ImageIcon(
+                                                    AssetImage('images/Chevron Right.png',
+                                                    ),),
+                                                  color: Colors.black54,
                                                   iconSize:
-                                                  ManageDeviceInfo.resolutionHeight * 0.06,
-                                                  onPressed: () {},
+                                                  ManageDeviceInfo.resolutionHeight * 0.02,
+                                                  onPressed: () {
+
+                                                  },
                                                 ),
                                               ),
                                             ),
@@ -497,8 +523,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                             Flexible(
                                               flex: 3,
                                               child: Container(
-                                                child: Image.network(
-                                                  snapshot.data[index].thumbnailUrl,
+                                                child: CachedNetworkImage(
+                                                  imageUrl: snapshot.data[index].thumbnailUrl,
+                                                  placeholder: (context, url) => LoadingIndicator(),
                                                   width:
                                                   ManageDeviceInfo.resolutionWidth * 0.22,
                                                   height:
@@ -583,7 +610,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                   ),
                 ),
               ),
-*/
+
 
 
             ]),

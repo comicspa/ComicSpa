@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:first_ui/models/today_popular_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_today_popular_comic_info.dart';
 import 'package:first_ui/models/model_featured_comic_info.dart';
@@ -81,8 +82,10 @@ class _TrendState extends State<Trend> {
                                 margin: EdgeInsets.symmetric(horizontal: 0.0),
                                 decoration: BoxDecoration(color: Colors.white),
                                 child: GestureDetector(
-                                  child: Image.network(i.thumbnailUrl,
-                                      fit: BoxFit.fill),
+                                  child: CachedNetworkImage(
+                                      imageUrl: i.thumbnailUrl,
+                                      placeholder: (context, url) => LoadingIndicator(),
+                                      fit: BoxFit.fitWidth),
                                   onTap: () {
                                     Navigator.push<Widget>(
                                       context,
@@ -176,10 +179,11 @@ class _TrendState extends State<Trend> {
                                       child: SizedBox(
                                         height:
                                         ManageDeviceInfo.resolutionHeight * 0.135,
-                                        child: Image.network(
-                                          snapshot.data[index].thumbnailUrl,
-                                          fit: BoxFit.cover, width: double.infinity, scale: 0.01,
-                                        ), //Todo need to change the image link to  "snapshot.data[index].url"
+                                        child: CachedNetworkImage(
+                                          imageUrl: snapshot.data[index].thumbnailUrl,
+                                          placeholder: (context, url) => LoadingIndicator(),
+                                          fit: BoxFit.fitWidth, width: double.infinity,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -366,9 +370,10 @@ class _TrendState extends State<Trend> {
                                       child: SizedBox(
                                         height:
                                         ManageDeviceInfo.resolutionHeight * 0.135,
-                                        child: Image.network(
-                                          snapshot.data[index].thumbnailUrl,
-                                          fit: BoxFit.cover, width: double.infinity, scale: 0.01,
+                                        child: CachedNetworkImage(
+                                          imageUrl: snapshot.data[index].thumbnailUrl,
+                                          placeholder: (context, url) => LoadingIndicator(),
+                                          fit: BoxFit.fitWidth, width: double.infinity,
                                         ), //Todo need to change the image link to  "snapshot.data[index].url"
                                       ),
                                     ),
@@ -544,10 +549,11 @@ class _TrendState extends State<Trend> {
                                       child: SizedBox(
                                         height:
                                         ManageDeviceInfo.resolutionHeight * 0.135,
-                                        child: Image.network(
-                                          snapshot.data[index].thumbnailUrl,
-                                          fit: BoxFit.cover, width: double.infinity, scale: 0.01,
-                                        ), //Todo need to change the image link to  "snapshot.data[index].url"
+                                        child: CachedNetworkImage(
+                                          imageUrl: snapshot.data[index].thumbnailUrl,
+                                          placeholder: (context, url) => LoadingIndicator(),
+                                          fit: BoxFit.fitWidth, width: double.infinity,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -722,10 +728,11 @@ class _TrendState extends State<Trend> {
                                       child: SizedBox(
                                         height:
                                         ManageDeviceInfo.resolutionHeight * 0.135,
-                                        child: Image.network(
-                                          snapshot.data[index].thumbnailUrl,
-                                          fit: BoxFit.cover, width: double.infinity, scale: 0.01,
-                                        ), //Todo need to change the image link to  "snapshot.data[index].url"
+                                        child: CachedNetworkImage(
+                                          imageUrl: snapshot.data[index].thumbnailUrl,
+                                          placeholder: (context, url) => LoadingIndicator(),
+                                          fit: BoxFit.fitWidth, width: double.infinity,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -900,10 +907,11 @@ class _TrendState extends State<Trend> {
                                       child: SizedBox(
                                         height:
                                         ManageDeviceInfo.resolutionHeight * 0.135,
-                                        child: Image.network(
-                                          snapshot.data[index].thumbnailUrl,
-                                          fit: BoxFit.cover, width: double.infinity, scale: 0.01,
-                                        ), //Todo need to change the image link to  "snapshot.data[index].url"
+                                        child: CachedNetworkImage(
+                                          imageUrl: snapshot.data[index].thumbnailUrl,
+                                          placeholder: (context, url) => LoadingIndicator(),
+                                          fit: BoxFit.fitWidth, width: double.infinity,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -1085,7 +1093,8 @@ List<String> countBanner(List<ModelFeaturedComicInfo> countBanner) {
         margin: EdgeInsets.all(5.0),
         child: ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(5.0)),
-          child: Image.network(i.thumbnailUrl,
+          child: CachedNetworkImage(
+              imageUrl: i.thumbnailUrl,
               fit: BoxFit.fill),
         ),
       );

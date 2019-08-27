@@ -105,6 +105,7 @@ class _HomeScreenState extends State<HomeScreen>
 //          labelStyle: TextStyle(fontSize: 5.0, fontWeight: FontWeight.bold),
           indicatorWeight: 2,
           unselectedLabelColor: Colors.grey,
+          indicatorColor: Colors.redAccent,
           controller: controller,
           tabs: <Widget>[
             Tab(
