@@ -37,6 +37,7 @@ dependencies:
   corsac_jwt: ^0.1.2
   image: ^2.1.4
   path_provider: ^1.2.0
+  sprintf: ^4.0.2
 
 dev_dependencies:
   flutter_test:

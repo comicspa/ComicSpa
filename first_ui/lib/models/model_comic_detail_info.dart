@@ -1,13 +1,14 @@
 
 import 'package:first_ui/models/model_comic_info.dart';
 
+import 'package:first_ui/manage/manage_firebase_storage.dart';
 
 class ModelComicDetailInfo
 {
-  String _userId;
-  String _comicId;
+  String _userId; // 1566811525000
+  String _comicId; // 000001
   String _mainTitleName;
-  String _representationImageUrl;
+  String _representationImageUrl; // 000000.jpg
   String _explain;
   String _creatorName;
   double _point;
@@ -54,6 +55,15 @@ class ModelComicDetailInfo
   {
     _modelComicInfoList = modelComicInfoList;
   }
+
+
+  Future<String> getRepresentationImageDownloadUrl() async
+  {
+    _representationImageUrl  = await ManageFirebaseStorage.getDownloadUrl('comics/$_userId/$_comicId/000000.jpg');
+    print('getRepresentationImageDownloadUrl : $_representationImageUrl');
+    return _representationImageUrl;
+  }
+
 
   static ModelComicDetailInfo _instance;
   static ModelComicDetailInfo getInstance() {

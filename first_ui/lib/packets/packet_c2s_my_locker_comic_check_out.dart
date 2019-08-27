@@ -15,8 +15,8 @@ import 'package:first_ui/models/model_my_locker_comic_check_out.dart';
 
 class PacketC2SMyLockerComicCheckout extends PacketC2SCommon
 {
-  int _pageCountIndex;
-  int _pageViewCount;
+  int _pageCountIndex = 0;
+  int _pageViewCount = 0;
 
   PacketC2SMyLockerComicCheckout()
   {

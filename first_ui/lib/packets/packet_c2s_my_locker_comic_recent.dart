@@ -15,8 +15,8 @@ import 'package:first_ui/models/model_my_locker_comic_recent.dart';
 
 class PacketC2SMyLockerComicRecent extends PacketC2SCommon
 {
-  int _pageCountIndex;
-  int _pageViewCount;
+  int _pageCountIndex = 0;
+  int _pageViewCount = 0;
 
   PacketC2SMyLockerComicRecent()
   {
@@ -70,7 +70,6 @@ class PacketC2SMyLockerComicRecent extends PacketC2SCommon
 
     setUint32(_pageCountIndex);
     setUint32(_pageViewCount);
-
 
     socket.add(packet);
 

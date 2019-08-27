@@ -15,8 +15,8 @@ import 'package:first_ui/models/model_my_locker_comic_continue.dart';
 
 class PacketC2SMyLockerComicContinue extends PacketC2SCommon
 {
-  int _pageCountIndex;
-  int _pageViewCount;
+  int _pageCountIndex = 0;
+  int _pageViewCount = 0;
 
   PacketC2SMyLockerComicContinue()
   {
