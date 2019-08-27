@@ -9,9 +9,9 @@ class ModelComicInfo
 {
   String _userId; // 1566811525000
   String _comicId;  // 000001
-  String _partId; //  001
-  String _seasonId; // 001
-  String _episodeId; //  00001
+  String _partId = '001';
+  String _seasonId = '001';
+  String _episodeId = '00001';
   String _thumbnailImageURL;
   String _subTitleName;
   int _collected = 0;

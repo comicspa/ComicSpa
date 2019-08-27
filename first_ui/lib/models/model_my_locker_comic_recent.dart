@@ -44,7 +44,7 @@ class ModelMyLockerComicRecent
   @override
   String toString()
   {
-    return 'thumbnailUrl : $thumbnailUrl';
+    return 'title : $_title , thumbnailUrl : $thumbnailUrl';
   }
 
   static List<ModelMyLockerComicRecent> list;
