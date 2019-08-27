@@ -4,6 +4,8 @@ import 'more_submenu_comming_soon.dart';
 //import 'package:first_ui/screens/test/ocr_test.dart';
 import 'package:first_ui/screens/test/canvas_testing2.dart';
 import 'package:first_ui/screens/test/canvas_combined.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
 
 
 class MoreScreen extends StatefulWidget {

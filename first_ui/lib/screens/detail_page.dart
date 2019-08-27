@@ -7,6 +7,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:first_ui/models/model_comic_detail_info.dart';
 import 'package:first_ui/packets/packet_c2s_comic_detail_info.dart';
 import 'common_widgets.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
 
 class DetailPage extends StatefulWidget {
   final String url;
@@ -222,9 +224,11 @@ class _DetailPageState extends State<DetailPage> {
                 ),
                 GestureDetector(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => new BuildAlertDialog(),
-                      ),
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return BuildAlertDialog();
+                      },
                     );
                   },
                   child: Container(
@@ -246,9 +250,11 @@ class _DetailPageState extends State<DetailPage> {
                 children: <Widget>[
                   GestureDetector(
                     onTap: (){
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => new BuildAlertDialog(),
-                       ),
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return BuildAlertDialog();
+                        },
                       );
                     },
                     child: Column(
@@ -283,9 +289,11 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                   GestureDetector(
                     onTap: (){
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => BuildAlertDialog(),
-                      ),
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return BuildAlertDialog();
+                        },
                       );
                     },
                     child: Column(
@@ -320,9 +328,11 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                   GestureDetector(
                     onTap: (){
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => BuildAlertDialog(),
-                      ),
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return BuildAlertDialog();
+                        },
                       );
                     },
                     child: Column(

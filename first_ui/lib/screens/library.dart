@@ -1,8 +1,20 @@
+import 'package:first_ui/packets/packet_c2s_my_locker_comic_check_out.dart';
+import 'package:first_ui/screens/common_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
-import 'package:first_ui/models/model_weekly_creator_info.dart';
-import 'package:first_ui/packets/packet_c2s_weekly_creator_info.dart';
+import 'package:first_ui/models/model_my_locker_comic_recent.dart';
+import 'package:first_ui/packets/packet_c2s_my_locker_comic_recent.dart';
+import 'package:first_ui/models/model_my_locker_comic_check_out.dart';
+import 'package:first_ui/packets/packet_c2s_my_locker_comic_check_out.dart';
+import 'package:first_ui/models/model_my_locker_comic_owned.dart';
+import 'package:first_ui/packets/packet_c2s_my_locker_comic_owned.dart';
+import 'package:first_ui/models/model_my_locker_comic_continue.dart';
+import 'package:first_ui/packets/packet_c2s_my_locker_comic_continue.dart';
+import 'package:first_ui/models/model_recommended_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_recommended_comic_info.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
 
 class LibraryScreen extends StatefulWidget {
   @override
@@ -10,21 +22,30 @@ class LibraryScreen extends StatefulWidget {
 }
 
 class _LibraryScreenState extends State<LibraryScreen> {
-  PacketC2SWeeklyCreatorInfo c2sWeeklyCreatorInfo =
-      new PacketC2SWeeklyCreatorInfo();
+  PacketC2SMyLockerComicRecent c2sMyLockerComicRecent = new PacketC2SMyLockerComicRecent();
+  PacketC2SMyLockerComicCheckout c2sMyLockerComicCheckout = new PacketC2SMyLockerComicCheckout();
+  PacketC2SMyLockerComicOwned c2sMyLockerComicOwned = new PacketC2SMyLockerComicOwned();
+  PacketC2SMyLockerComicContinue c2sMyLockerComicContinue = new PacketC2SMyLockerComicContinue();
+  PacketC2SRecommendedComicInfo c2sRecommendedComicInfo = new PacketC2SRecommendedComicInfo();
 
   @override
   void initState() {
     super.initState();
     // generating packet
 
-    c2sWeeklyCreatorInfo.generate();
+    c2sMyLockerComicRecent.generate();
+    c2sMyLockerComicCheckout.generate();
+    c2sMyLockerComicOwned.generate();
+    c2sMyLockerComicContinue.generate();
+    c2sRecommendedComicInfo.generate(0,0);
+
+
   }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 1,
       child: Column(
         children: <Widget>[
           Container(
@@ -37,9 +58,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 indicatorSize: TabBarIndicatorSize.label,
                 tabs: [
                   Tab(text: "Recent"),
-                  Tab(text: "View List"),
-                  Tab(text: "Owned"),
-                  Tab(text: "Continue")
+//                  Tab(text: "View List"),
+//                  Tab(text: "Owned"),
+//                  Tab(text: "Continue")
                 ]),
           ),
           //TODO 로그인 여부에 따른 내용 분기 ??? 어떻게 하지?
@@ -51,7 +72,529 @@ class _LibraryScreenState extends State<LibraryScreen> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      /* StreamBuilder<List<ModelWeeklyCreatorInfo>>(
+                      Padding(
+                          padding: EdgeInsets.only(
+                              top: ManageDeviceInfo.resolutionHeight * 0.04)),
+                      FutureBuilder<List<ModelMyLockerComicRecent>>(
+                        future: c2sMyLockerComicRecent.fetchBytes(),
+                        builder: (BuildContext context, snapshot) {
+                          switch (snapshot.connectionState) {
+                            case ConnectionState.none:
+                              return LoadingIndicator();
+                            case ConnectionState.active:
+                              return LoadingIndicator();
+                            case ConnectionState.waiting:
+                              return LoadingIndicator();
+                          //
+                            case ConnectionState.done:
+                            //default:
+                              if (snapshot.hasError)
+                                return new Text('Error: ${snapshot.error}');
+                              else
+                                return ListView.builder(
+                                  physics: BouncingScrollPhysics(),
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: ModelMyLockerComicRecent.list.length,
+                                  itemBuilder: (BuildContext context, int index) => Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+
+                                      Container(
+                                        padding: EdgeInsets.only(
+                                            left: ManageDeviceInfo.resolutionWidth * 0.1),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Flexible(
+                                              flex: 3,
+                                              child: Container(
+                                                child: Image.network(
+                                                  snapshot.data[index].thumbnailUrl,
+                                                  width:
+                                                  ManageDeviceInfo.resolutionWidth * 0.22,
+                                                  height:
+                                                  ManageDeviceInfo.resolutionHeight * 0.17,
+                                                  fit: BoxFit.fill,
+                                                ),
+                                              ),
+                                            ),
+                                            Flexible(
+                                              flex: 6,
+                                              child: Container(
+                                                  width: ManageDeviceInfo.resolutionWidth * 0.5,
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                                    children: <Widget>[
+                                                      Container(
+                                                        alignment: Alignment.bottomLeft,
+                                                        padding: EdgeInsets.only(
+                                                            left: ManageDeviceInfo
+                                                                .resolutionWidth *
+                                                                0.04),
+                                                        child: Text('작품   ${snapshot.data[index].title}',
+                                                            maxLines: 2,
+                                                            overflow: TextOverflow.ellipsis,
+                                                            textAlign: TextAlign.left,
+                                                            style: TextStyle(
+                                                              fontFamily: 'Lato',
+                                                              fontWeight: FontWeight.normal,
+                                                              fontSize: ManageDeviceInfo
+                                                                  .resolutionHeight *
+                                                                  0.016,
+                                                              color: Colors.black87,
+                                                            )),
+                                                      ),
+                                                      Container(
+                                                        alignment: Alignment.bottomLeft,
+                                                        padding: EdgeInsets.only(
+                                                            left: ManageDeviceInfo
+                                                                .resolutionWidth *
+                                                                0.04),
+                                                        child: Text('글/그림   ${snapshot.data[index].title}',
+                                                            maxLines: 2,
+                                                            overflow: TextOverflow.ellipsis,
+                                                            textAlign: TextAlign.left,
+                                                            style: TextStyle(
+                                                              fontFamily: 'Lato',
+                                                              fontWeight: FontWeight.normal,
+                                                              fontSize: ManageDeviceInfo
+                                                                  .resolutionHeight *
+                                                                  0.016,
+                                                              color: Colors.black87,
+                                                            )),
+                                                      ),
+                                                    ],
+                                                  )),
+                                            ),
+                                            Flexible(
+                                              flex: 1,
+                                              child: Container(
+                                                child: IconButton(
+                                                  icon: Icon(Icons.chevron_right,
+                                                      color: Colors.black54),
+                                                  iconSize:
+                                                  ManageDeviceInfo.resolutionHeight * 0.06,
+                                                  onPressed: () {},
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Divider(),
+                                    ],
+                                  ),
+                                );
+                          }
+
+                          return Text('Result: ${snapshot.data}');
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+    /*          Container(
+                // Recent 내용 보여주는 컨테이너
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.only(
+                              top: ManageDeviceInfo.resolutionHeight * 0.04)),
+                      FutureBuilder<List<ModelMyLockerComicCheckout>>(
+                        future: c2sMyLockerComicCheckout.fetchBytes(),
+                        builder: (BuildContext context, snapshot) {
+                          switch (snapshot.connectionState) {
+                            case ConnectionState.none:
+                              return LoadingIndicator();
+                            case ConnectionState.active:
+                              return LoadingIndicator();
+                            case ConnectionState.waiting:
+                              return LoadingIndicator();
+                          //
+                            case ConnectionState.done:
+                            //default:
+                              if (snapshot.hasError)
+                                return new Text('Error: ${snapshot.error}');
+                              else
+                                return ListView.builder(
+                                  physics: BouncingScrollPhysics(),
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: ModelMyLockerComicRecent.list.length,
+                                  itemBuilder: (BuildContext context, int index) => Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+
+                                      Container(
+                                        padding: EdgeInsets.only(
+                                            left: ManageDeviceInfo.resolutionWidth * 0.1),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Flexible(
+                                              flex: 3,
+                                              child: Container(
+                                                child: Image.network(
+                                                  snapshot.data[index].thumbnailUrl,
+                                                  width:
+                                                  ManageDeviceInfo.resolutionWidth * 0.22,
+                                                  height:
+                                                  ManageDeviceInfo.resolutionHeight * 0.17,
+                                                  fit: BoxFit.fill,
+                                                ),
+                                              ),
+                                            ),
+                                            Flexible(
+                                              flex: 6,
+                                              child: Container(
+                                                  width: ManageDeviceInfo.resolutionWidth * 0.5,
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                                    children: <Widget>[
+                                                      Container(
+                                                        alignment: Alignment.bottomLeft,
+                                                        padding: EdgeInsets.only(
+                                                            left: ManageDeviceInfo
+                                                                .resolutionWidth *
+                                                                0.04),
+                                                        child: Text('작품   ${snapshot.data[index].title}',
+                                                            maxLines: 2,
+                                                            overflow: TextOverflow.ellipsis,
+                                                            textAlign: TextAlign.left,
+                                                            style: TextStyle(
+                                                              fontFamily: 'Lato',
+                                                              fontWeight: FontWeight.normal,
+                                                              fontSize: ManageDeviceInfo
+                                                                  .resolutionHeight *
+                                                                  0.016,
+                                                              color: Colors.black87,
+                                                            )),
+                                                      ),
+                                                      Container(
+                                                        alignment: Alignment.bottomLeft,
+                                                        padding: EdgeInsets.only(
+                                                            left: ManageDeviceInfo
+                                                                .resolutionWidth *
+                                                                0.04),
+                                                        child: Text('글/그림   ${snapshot.data[index].title}',
+                                                            maxLines: 2,
+                                                            overflow: TextOverflow.ellipsis,
+                                                            textAlign: TextAlign.left,
+                                                            style: TextStyle(
+                                                              fontFamily: 'Lato',
+                                                              fontWeight: FontWeight.normal,
+                                                              fontSize: ManageDeviceInfo
+                                                                  .resolutionHeight *
+                                                                  0.016,
+                                                              color: Colors.black87,
+                                                            )),
+                                                      ),
+                                                    ],
+                                                  )),
+                                            ),
+                                            Flexible(
+                                              flex: 1,
+                                              child: Container(
+                                                child: IconButton(
+                                                  icon: Icon(Icons.chevron_right,
+                                                      color: Colors.black54),
+                                                  iconSize:
+                                                  ManageDeviceInfo.resolutionHeight * 0.06,
+                                                  onPressed: () {},
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Divider(),
+                                    ],
+                                  ),
+                                );
+                          }
+
+                          return Text('Result: ${snapshot.data}');
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              Container(
+                // Recent 내용 보여주는 컨테이너
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.only(
+                              top: ManageDeviceInfo.resolutionHeight * 0.04)),
+                      FutureBuilder<List<ModelMyLockerComicOwned>>(
+                        future: c2sMyLockerComicOwned.fetchBytes(),
+                        builder: (BuildContext context, snapshot) {
+                          switch (snapshot.connectionState) {
+                            case ConnectionState.none:
+                              return LoadingIndicator();
+                            case ConnectionState.active:
+                              return LoadingIndicator();
+                            case ConnectionState.waiting:
+                              return LoadingIndicator();
+                          //
+                            case ConnectionState.done:
+                            //default:
+                              if (snapshot.hasError)
+                                return new Text('Error: ${snapshot.error}');
+                              else
+                                return ListView.builder(
+                                  physics: BouncingScrollPhysics(),
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: ModelMyLockerComicOwned.list.length,
+                                  itemBuilder: (BuildContext context, int index) => Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+
+                                      Container(
+                                        padding: EdgeInsets.only(
+                                            left: ManageDeviceInfo.resolutionWidth * 0.1),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Flexible(
+                                              flex: 3,
+                                              child: Container(
+                                                child: Image.network(
+                                                  snapshot.data[index].thumbnailUrl,
+                                                  width:
+                                                  ManageDeviceInfo.resolutionWidth * 0.22,
+                                                  height:
+                                                  ManageDeviceInfo.resolutionHeight * 0.17,
+                                                  fit: BoxFit.fill,
+                                                ),
+                                              ),
+                                            ),
+                                            Flexible(
+                                              flex: 6,
+                                              child: Container(
+                                                  width: ManageDeviceInfo.resolutionWidth * 0.5,
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                                    children: <Widget>[
+                                                      Container(
+                                                        alignment: Alignment.bottomLeft,
+                                                        padding: EdgeInsets.only(
+                                                            left: ManageDeviceInfo
+                                                                .resolutionWidth *
+                                                                0.04),
+                                                        child: Text('작품   ${snapshot.data[index].title}',
+                                                            maxLines: 2,
+                                                            overflow: TextOverflow.ellipsis,
+                                                            textAlign: TextAlign.left,
+                                                            style: TextStyle(
+                                                              fontFamily: 'Lato',
+                                                              fontWeight: FontWeight.normal,
+                                                              fontSize: ManageDeviceInfo
+                                                                  .resolutionHeight *
+                                                                  0.016,
+                                                              color: Colors.black87,
+                                                            )),
+                                                      ),
+                                                      Container(
+                                                        alignment: Alignment.bottomLeft,
+                                                        padding: EdgeInsets.only(
+                                                            left: ManageDeviceInfo
+                                                                .resolutionWidth *
+                                                                0.04),
+                                                        child: Text('글/그림   ${snapshot.data[index].title}',
+                                                            maxLines: 2,
+                                                            overflow: TextOverflow.ellipsis,
+                                                            textAlign: TextAlign.left,
+                                                            style: TextStyle(
+                                                              fontFamily: 'Lato',
+                                                              fontWeight: FontWeight.normal,
+                                                              fontSize: ManageDeviceInfo
+                                                                  .resolutionHeight *
+                                                                  0.016,
+                                                              color: Colors.black87,
+                                                            )),
+                                                      ),
+                                                    ],
+                                                  )),
+                                            ),
+                                            Flexible(
+                                              flex: 1,
+                                              child: Container(
+                                                child: IconButton(
+                                                  icon: Icon(Icons.chevron_right,
+                                                      color: Colors.black54),
+                                                  iconSize:
+                                                  ManageDeviceInfo.resolutionHeight * 0.06,
+                                                  onPressed: () {},
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Divider(),
+                                    ],
+                                  ),
+                                );
+                          }
+
+                          return Text('Result: ${snapshot.data}');
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                // Recent 내용 보여주는 컨테이너
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.only(
+                              top: ManageDeviceInfo.resolutionHeight * 0.04)),
+                      FutureBuilder<List<ModelMyLockerComicContinue>>(
+                        future: c2sMyLockerComicContinue.fetchBytes(),
+                        builder: (BuildContext context, snapshot) {
+                          switch (snapshot.connectionState) {
+                            case ConnectionState.none:
+                              return LoadingIndicator();
+                            case ConnectionState.active:
+                              return LoadingIndicator();
+                            case ConnectionState.waiting:
+                              return LoadingIndicator();
+                          //
+                            case ConnectionState.done:
+                            //default:
+                              if (snapshot.hasError)
+                                return new Text('Error: ${snapshot.error}');
+                              else
+                                return ListView.builder(
+                                  physics: BouncingScrollPhysics(),
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: ModelMyLockerComicContinue.list.length,
+                                  itemBuilder: (BuildContext context, int index) => Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+
+                                      Container(
+                                        padding: EdgeInsets.only(
+                                            left: ManageDeviceInfo.resolutionWidth * 0.1),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Flexible(
+                                              flex: 3,
+                                              child: Container(
+                                                child: Image.network(
+                                                  snapshot.data[index].thumbnailUrl,
+                                                  width:
+                                                  ManageDeviceInfo.resolutionWidth * 0.22,
+                                                  height:
+                                                  ManageDeviceInfo.resolutionHeight * 0.17,
+                                                  fit: BoxFit.fill,
+                                                ),
+                                              ),
+                                            ),
+                                            Flexible(
+                                              flex: 6,
+                                              child: Container(
+                                                  width: ManageDeviceInfo.resolutionWidth * 0.5,
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                                    children: <Widget>[
+                                                      Container(
+                                                        alignment: Alignment.bottomLeft,
+                                                        padding: EdgeInsets.only(
+                                                            left: ManageDeviceInfo
+                                                                .resolutionWidth *
+                                                                0.04),
+                                                        child: Text('작품   ${snapshot.data[index].title}',
+                                                            maxLines: 2,
+                                                            overflow: TextOverflow.ellipsis,
+                                                            textAlign: TextAlign.left,
+                                                            style: TextStyle(
+                                                              fontFamily: 'Lato',
+                                                              fontWeight: FontWeight.normal,
+                                                              fontSize: ManageDeviceInfo
+                                                                  .resolutionHeight *
+                                                                  0.016,
+                                                              color: Colors.black87,
+                                                            )),
+                                                      ),
+                                                      Container(
+                                                        alignment: Alignment.bottomLeft,
+                                                        padding: EdgeInsets.only(
+                                                            left: ManageDeviceInfo
+                                                                .resolutionWidth *
+                                                                0.04),
+                                                        child: Text('글/그림   ${snapshot.data[index].title}',
+                                                            maxLines: 2,
+                                                            overflow: TextOverflow.ellipsis,
+                                                            textAlign: TextAlign.left,
+                                                            style: TextStyle(
+                                                              fontFamily: 'Lato',
+                                                              fontWeight: FontWeight.normal,
+                                                              fontSize: ManageDeviceInfo
+                                                                  .resolutionHeight *
+                                                                  0.016,
+                                                              color: Colors.black87,
+                                                            )),
+                                                      ),
+                                                    ],
+                                                  )),
+                                            ),
+                                            Flexible(
+                                              flex: 1,
+                                              child: Container(
+                                                child: IconButton(
+                                                  icon: Icon(Icons.chevron_right,
+                                                      color: Colors.black54),
+                                                  iconSize:
+                                                  ManageDeviceInfo.resolutionHeight * 0.06,
+                                                  onPressed: () {},
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Divider(),
+                                    ],
+                                  ),
+                                );
+                          }
+
+                          return Text('Result: ${snapshot.data}');
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+*/
+
+
+            ]),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+/* StreamBuilder<List<ModelWeeklyCreatorInfo>>(
 //                        stream: c2sWeeklyCreatorInfo.fetchBytes(),
                         stream: null,
                         initialData: 3,
@@ -169,364 +712,3 @@ class _LibraryScreenState extends State<LibraryScreen> {
                           return Text('Result: ${snapshot.data}');
                         },
                       ),*/
-                      Padding(
-                          padding: EdgeInsets.only(
-                              top: ManageDeviceInfo.resolutionHeight * 0.04)),
-                      Container(
-                        padding: EdgeInsets.only(
-                            left: ManageDeviceInfo.resolutionWidth * 0.1),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Flexible(
-                              flex: 3,
-                              child: Container(
-                                child: Image.asset(
-                                  'images/dragonBall.jpg',
-                                  width:
-                                      ManageDeviceInfo.resolutionWidth * 0.22,
-                                  height:
-                                      ManageDeviceInfo.resolutionHeight * 0.2,
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                            ),
-                            Flexible(
-                              flex: 6,
-                              child: Container(
-                                  width: ManageDeviceInfo.resolutionWidth * 0.5,
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: <Widget>[
-                                      Container(
-                                        alignment: Alignment.bottomLeft,
-                                        padding: EdgeInsets.only(
-                                            left: ManageDeviceInfo
-                                                    .resolutionWidth *
-                                                0.04),
-                                        child: Text('제목: 드래곤볼',
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                              fontFamily: 'Lato',
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: ManageDeviceInfo
-                                                      .resolutionHeight *
-                                                  0.02,
-                                              color: Colors.black87,
-                                            )),
-                                      ),
-                                      Container(
-                                        alignment: Alignment.bottomLeft,
-                                        padding: EdgeInsets.only(
-                                            left: ManageDeviceInfo
-                                                    .resolutionWidth *
-                                                0.04),
-                                        child: Text('글/그림: 토리야마 아키라',
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                              fontFamily: 'Lato',
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: ManageDeviceInfo
-                                                      .resolutionHeight *
-                                                  0.02,
-                                              color: Colors.black87,
-                                            )),
-                                      ),
-                                    ],
-                                  )),
-                            ),
-                            Flexible(
-                              flex: 1,
-                              child: Container(
-                                child: IconButton(
-                                  icon: Icon(Icons.chevron_right,
-                                      color: Colors.black54),
-                                  iconSize:
-                                      ManageDeviceInfo.resolutionHeight * 0.06,
-                                  onPressed: () {},
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Divider(),
-                    ],
-                  ),
-                ),
-              ), // Recent 내용 보여주는 컨테이너
-              Container(
-                // Recent 내용 보여주는 컨테이너
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.only(
-                              top: ManageDeviceInfo.resolutionHeight * 0.04)),
-                      Container(
-                        padding: EdgeInsets.only(
-                            left: ManageDeviceInfo.resolutionWidth * 0.1),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Flexible(
-                              flex: 3,
-                              child: Container(
-                                child: Image.asset(
-                                  'images/batman.jpg',
-                                  width:
-                                      ManageDeviceInfo.resolutionWidth * 0.22,
-                                  height:
-                                      ManageDeviceInfo.resolutionHeight * 0.2,
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                            ),
-                            Flexible(
-                              flex: 6,
-                              child: Container(
-                                  width: ManageDeviceInfo.resolutionWidth * 0.5,
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: <Widget>[
-                                      Container(
-                                        alignment: Alignment.bottomLeft,
-                                        padding: EdgeInsets.only(
-                                            left: ManageDeviceInfo
-                                                    .resolutionWidth *
-                                                0.04),
-                                        child: Text('제목: 배트맨 포에버',
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                              fontFamily: 'Lato',
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: ManageDeviceInfo
-                                                      .resolutionHeight *
-                                                  0.02,
-                                              color: Colors.black87,
-                                            )),
-                                      ),
-                                      Container(
-                                        alignment: Alignment.bottomLeft,
-                                        padding: EdgeInsets.only(
-                                            left: ManageDeviceInfo
-                                                    .resolutionWidth *
-                                                0.04),
-                                        child: Text('글/그림: 토리야마 아키라',
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                              fontFamily: 'Lato',
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: ManageDeviceInfo
-                                                      .resolutionHeight *
-                                                  0.02,
-                                              color: Colors.black87,
-                                            )),
-                                      ),
-                                    ],
-                                  )),
-                            ),
-                            Flexible(
-                              flex: 1,
-                              child: Container(
-                                child: IconButton(
-                                  icon: Icon(Icons.chevron_right,
-                                      color: Colors.black54),
-                                  iconSize:
-                                      ManageDeviceInfo.resolutionHeight * 0.06,
-                                  onPressed: () {},
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Divider(),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                // Recent 내용 보여주는 컨테이너
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.only(
-                              top: ManageDeviceInfo.resolutionHeight * 0.04)),
-                      Container(
-                        padding: EdgeInsets.only(
-                            left: ManageDeviceInfo.resolutionWidth * 0.1),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Flexible(
-                              flex: 3,
-                              child: Container(
-                                child: Image.asset(
-                                  'images/batman.jpg',
-                                  width:
-                                      ManageDeviceInfo.resolutionWidth * 0.22,
-                                  height:
-                                      ManageDeviceInfo.resolutionHeight * 0.2,
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                            ),
-                            Flexible(
-                              flex: 6,
-                              child: Container(
-                                  width: ManageDeviceInfo.resolutionWidth * 0.5,
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: <Widget>[
-                                      Container(
-                                        alignment: Alignment.bottomLeft,
-                                        padding: EdgeInsets.only(
-                                            left: ManageDeviceInfo
-                                                    .resolutionWidth *
-                                                0.04),
-                                        child: Text('제목: 배트맨 포에버',
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                              fontFamily: 'Lato',
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: ManageDeviceInfo
-                                                      .resolutionHeight *
-                                                  0.02,
-                                              color: Colors.black87,
-                                            )),
-                                      ),
-                                      Container(
-                                        alignment: Alignment.bottomLeft,
-                                        padding: EdgeInsets.only(
-                                            left: ManageDeviceInfo
-                                                    .resolutionWidth *
-                                                0.04),
-                                        child: Text('글/그림: 토리야마 아키라',
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                              fontFamily: 'Lato',
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: ManageDeviceInfo
-                                                      .resolutionHeight *
-                                                  0.02,
-                                              color: Colors.black87,
-                                            )),
-                                      ),
-                                    ],
-                                  )),
-                            ),
-                            Flexible(
-                              flex: 1,
-                              child: Container(
-                                child: IconButton(
-                                  icon: Icon(Icons.chevron_right,
-                                      color: Colors.black54),
-                                  iconSize:
-                                      ManageDeviceInfo.resolutionHeight * 0.06,
-                                  onPressed: () {},
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Divider(),
-                    ],
-                  ),
-                ),
-              ),
-
-              /// Owned 내용 보여주는 컨테이너,
-              Container(
-                // Continue 내용 보여주는 컨테이너
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Padding(padding: EdgeInsets.only(top: 30.0)),
-                      Container(
-                          padding: EdgeInsets.only(top: 0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Container(
-                                child: Image.asset('images/onepunchman.jpg',
-                                    scale: 5),
-                              ),
-                              Container(
-                                child: Text('test'),
-                              ),
-                              Container(
-                                child: Text('ㅅㄷㄴㅅ'),
-                              ),
-                            ],
-                          )),
-                      Container(
-                          child: Row(children: <Widget>[
-                        Expanded(child: Divider()),
-                      ])),
-                      Container(
-                          padding: EdgeInsets.only(top: 0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Container(
-                                child:
-                                    Image.asset('images/batman.jpg', scale: 5),
-                              ),
-                              Container(
-                                child: Text('test'),
-                              ),
-                              Container(
-                                child: Text('ㅅㄷㄴㅅ'),
-                              ),
-                            ],
-                          )),
-                      Container(
-                          child: Row(children: <Widget>[
-                        Expanded(child: Divider()),
-                      ])),
-                      Container(
-                          padding: EdgeInsets.only(top: 0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Container(
-                                child: Image.asset('images/catHouse.jpg',
-                                    scale: 5),
-                              ),
-                              Container(
-                                child: Text('test'),
-                              ),
-                              Container(
-                                child: Text('ㅅㄷㄴㅅ'),
-                              ),
-                            ],
-                          )),
-                    ],
-                  ),
-                ),
-              ), // Continue 내용 보여주는 컨테이너
-            ]),
-          )
-        ],
-      ),
-    );
-  }
-}
