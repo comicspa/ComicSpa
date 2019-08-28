@@ -114,7 +114,10 @@ class _ViewerScreen extends State<ViewerScreen> {
                 itemCount: snapshot.data[0].imageUrlList.length,
 //                      ModelViewComic.getInstance().comicImageUrlList.length,
                 itemBuilder: (BuildContext context, int index) =>
-                    Image.network(snapshot.data[0].imageUrlList[index]),
+                    CachedNetworkImage(
+                      imageUrl: snapshot.data[0].imageUrlList[index],
+
+                    ),
               );
               }
             },

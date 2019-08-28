@@ -48,7 +48,7 @@ class _MoreScreenState extends State<MoreScreen> {
                   right: ManageDeviceInfo.resolutionWidth / 2.3,
                   child: CircleAvatar(
                     radius: ManageDeviceInfo.resolutionHeight * 0.04,
-                    backgroundImage: AssetImage('images/catHouse.jpg'),
+                    backgroundImage: CachedNetworkImageProvider('images/catHouse.jpg'),
                     child: Icon(Icons.person),
                   ),
                 ),
