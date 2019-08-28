@@ -50,7 +50,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
             ),
           ),
         ),
-        RaisedButton(
+        /*RaisedButton(
           textColor: Colors.white,
           color: Colors.redAccent,
           child: Text(
@@ -66,7 +66,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
         ),
         SizedBox(
           height: 20,
-        ),
+        ),*/
         Row(
           children: <Widget>[
             SizedBox(
@@ -95,7 +95,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Update: Noticfication title and if the title is long then it will provide 3 lines at the max',
+                        '[Update] Noticfication title and if the title is too long, it will provide 2 lines at the max',
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(

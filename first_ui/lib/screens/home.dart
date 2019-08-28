@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'library.dart';
 import 'more.dart';
@@ -30,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen>
 //    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
 //      statusBarColor: Color(0xff202a30),  // Colors.blueGrey //Color(0xFF5986E1),
 //    ));
-    controller = TabController(length: 5, initialIndex: 0, vsync: this);
+    controller = TabController(length: 4, initialIndex: 0, vsync: this);
     controller.addListener(_handleTabSelection);
   }
 
@@ -58,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen>
             IconButton(
               tooltip: 'Profile',
               icon: Icon(
-                Icons.perm_identity,
+                Icons.person,
                 color: Color.fromRGBO(21, 24, 45, 1.0),
               ),
               onPressed: () {
@@ -104,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen>
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           Trend(),
-          CreatorScreen(),
+//          CreatorScreen(),
           LibraryScreen(),
           NotificationScreen(),
           MoreScreen(),
@@ -128,20 +129,20 @@ class _HomeScreenState extends State<HomeScreen>
                   ? Color.fromRGBO(21, 24, 45, 1.0)
                   : Colors.grey,
             )), //Todo replace home with hot(=trending) need to update icon image
-            Tab(
-                icon: Icon(
-                  Icons.palette,
-                  color: controller.index == 1
-                    ? Color.fromRGBO(21, 24, 45, 1.0)
-                    : Colors.grey,
-               )
-              //    controller.index ==1 ? SvgPicture.asset('images/HomeKey_creater_on.svg', height: ManageDeviceInfo.resolutionHeight * 0.031): SvgPicture.asset('images/HomeKey_creater_off.svg', height: ManageDeviceInfo.resolutionHeight * 0.031),
-            ),
+//            Tab(
+//                icon: Icon(
+//                  Icons.palette,
+//                  color: controller.index == 1
+//                    ? Color.fromRGBO(21, 24, 45, 1.0)
+//                    : Colors.grey,
+//               )
+//              //    controller.index ==1 ? SvgPicture.asset('images/HomeKey_creater_on.svg', height: ManageDeviceInfo.resolutionHeight * 0.031): SvgPicture.asset('images/HomeKey_creater_off.svg', height: ManageDeviceInfo.resolutionHeight * 0.031),
+//            ),
 
             Tab(
                 icon: Icon(
               Icons.collections,
-              color: controller.index == 2
+              color: controller.index == 1
                   ? Color.fromRGBO(21, 24, 45, 1.0)
                   : Colors.grey,
             )),
@@ -149,14 +150,14 @@ class _HomeScreenState extends State<HomeScreen>
             Tab(
                 icon: Icon(
               Icons.email,
-              color: controller.index == 3
+              color: controller.index == 2
                   ? Color.fromRGBO(21, 24, 45, 1.0)
                   : Colors.grey,
             )),
             Tab(
                 icon: Icon(
               Icons.menu,
-              color: controller.index == 4
+              color: controller.index == 3
                   ? Color.fromRGBO(21, 24, 45, 1.0)
                   : Colors.grey,
             )),

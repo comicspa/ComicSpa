@@ -101,7 +101,7 @@ class _MoreScreenState extends State<MoreScreen> {
                                 ));
                           },
                           child: Text(
-                            'Top-up Sparky',
+                            'Top-up Comi',
                             style: TextStyle(
                               fontFamily: 'Lato',
                               fontWeight: FontWeight.bold,
@@ -145,7 +145,7 @@ class _MoreScreenState extends State<MoreScreen> {
             ListTile(
               leading: Icon(Icons.info),
               title: Text(
-                'Support',
+                'Service Info',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   fontFamily: 'Lato',
