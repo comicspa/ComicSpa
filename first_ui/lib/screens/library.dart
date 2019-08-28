@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:first_ui/screens/common_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'detail_page.dart';
 import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
 import 'package:first_ui/models/model_my_locker_comic_recent.dart';
 import 'package:first_ui/packets/packet_c2s_my_locker_comic_recent.dart';
@@ -184,7 +185,13 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                   iconSize:
                                                   ManageDeviceInfo.resolutionHeight * 0.02,
                                                   onPressed: () {
-
+                                                    Navigator.push<Widget>(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            DetailPage(snapshot.data[index].thumbnailUrl), // link to Actual viewer
+                                                      ),
+                                                    );
                                                   },
                                                 ),
                                               ),
@@ -321,7 +328,13 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                   iconSize:
                                                   ManageDeviceInfo.resolutionHeight * 0.02,
                                                   onPressed: () {
-
+                                                    Navigator.push<Widget>(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            DetailPage(snapshot.data[index].thumbnailUrl), // link to Actual viewer
+                                                      ),
+                                                    );
                                                   },
                                                 ),
                                               ),
@@ -459,7 +472,13 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                   iconSize:
                                                   ManageDeviceInfo.resolutionHeight * 0.02,
                                                   onPressed: () {
-
+                                                    Navigator.push<Widget>(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            DetailPage(snapshot.data[index].thumbnailUrl), // link to Actual viewer
+                                                      ),
+                                                    );
                                                   },
                                                 ),
                                               ),
@@ -590,7 +609,15 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                       color: Colors.black54),
                                                   iconSize:
                                                   ManageDeviceInfo.resolutionHeight * 0.06,
-                                                  onPressed: () {},
+                                                  onPressed: () {
+                                                    Navigator.push<Widget>(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            DetailPage(snapshot.data[index].thumbnailUrl), // link to Actual viewer
+                                                      ),
+                                                    );
+                                                  },
                                                 ),
                                               ),
                                             ),
