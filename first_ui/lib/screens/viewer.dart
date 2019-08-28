@@ -52,7 +52,7 @@ class _ViewerScreen extends State<ViewerScreen> {
   initState() {
     //    SystemChrome.setEnabledSystemUIOverlays([]);
 
-    c2sViewComic.generate();
+    c2sViewComic.generate('','','');
 
     super.initState();
     _isVisible = true;

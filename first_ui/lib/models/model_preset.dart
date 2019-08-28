@@ -25,16 +25,18 @@ class ModelPreset
   static String _privacyPolicyUrl = 'https://www.google.co.kr';
   static String _termsOfUseUrl = 'https://www.google.co.kr';
   static final String _comicBaseUrl = 'comics';
-  static final String _representationImageFileFullName = '00.jpg';
-  static final String _thumbnailImageFileFullName = '0000.jpg';
+  static final String __representationImageFileFullName = '000000.jpg';
+  static final String __thumbnailImageFileFullName = '00000.jpg';
+  static final String __bannerImageFileFullName = '100000.jpg';
 
   static String get version => __version;
   static String get faqUrl => _faqUrl;
   static String get privacyPolicyUrl => _privacyPolicyUrl;
   static String get termsOfUseUrl => _termsOfUseUrl;
   static String get comicBaseUrl => _comicBaseUrl;
-  static String get representationImageFileFullName => _representationImageFileFullName;
-  static String get thumbnailImageFileFullName => _thumbnailImageFileFullName;
+  static String get representationImageFileFullName => __representationImageFileFullName;
+  static String get thumbnailImageFileFullName => __thumbnailImageFileFullName;
+  static String get bannerImageFileFullName => __bannerImageFileFullName;
 
   static void fromJson(String presetJsonString)
   {
@@ -153,9 +155,29 @@ class ModelPreset
     {
       print('catchError : $error');
     });
+  }
 
 
+  static Future<String> getRepresentationImageDownloadUrl(String userId,String comicId) async
+  {
+    String url  = await ManageFirebaseStorage.getDownloadUrl('$comicBaseUrl/$userId/$comicId/$representationImageFileFullName');
+    print('getRepresentationImageDownloadUrl : $url');
+    return url;
+  }
 
+
+  static Future<String> getBannerImageDownloadUrl(String userId,String comicId) async
+  {
+    String url  = await ManageFirebaseStorage.getDownloadUrl('$comicBaseUrl/$userId/$comicId/$bannerImageFileFullName');
+    print('getBannerImageDownloadUrl : $url');
+    return url;
+  }
+
+  static Future<String> getThumbnailImageDownloadUrl(String userId,String comicId,String partId,String seasonId,String episodeId) async
+  {
+    String url  = await ManageFirebaseStorage.getDownloadUrl('$comicBaseUrl/$userId/$comicId/$partId/$seasonId/$episodeId/$thumbnailImageFileFullName');
+    print('getThumbnailImageDownloadUrl : $url');
+    return url;
   }
 
 

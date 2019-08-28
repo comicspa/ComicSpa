@@ -96,6 +96,8 @@ class PacketCommon
   Uint8List get packet => _packet;
   int get currentOffset => _currentOffset;
 
+  final int _version = 0;
+
   set packet(Uint8List packet)
   {
     _packet = packet;

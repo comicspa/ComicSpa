@@ -7,11 +7,13 @@ import 'package:flutter/cupertino.dart';
 
 class ModelComicInfo
 {
-  String _userId; // 1566811525000
-  String _comicId;  // 000001
+  String _userId = '1111111111111';
+  String _comicId = '000001';
   String _partId = '001';
   String _seasonId = '001';
   String _episodeId = '00001';
+  int _episodeCount = 0;
+  int _hasProloguge = 0;
   String _thumbnailImageURL;
   String _subTitleName;
   int _collected = 0;
@@ -24,7 +26,9 @@ class ModelComicInfo
   String get partId => _partId;
   String get seasonId => _seasonId;
   String get episodeId => _episodeId;
-  String get thumbnailImageUrl => _thumbnailImageURL; //000.jpg
+  int get episodeCount => _episodeCount;
+  int get hasProloguge => _hasProloguge;
+  String get thumbnailImageUrl => _thumbnailImageURL;
   String get subTitleName => _subTitleName;
   int get collected => _collected;
   int get updated => _updated;
@@ -76,13 +80,49 @@ class ModelComicInfo
     _imageCutUrlList = imageCutUrlList;
   }
 
-  Future<String> getThumbnailImageDownloadUrl() async
+
+  String getPrevEpisodeId()
   {
-    _thumbnailImageURL  = await ManageFirebaseStorage.getDownloadUrl('comics/$_userId/$_comicId/$_partId/$_seasonId/$_episodeId/00000.jpg');
-    print('getThumbnailImageDownloadUrl : $_thumbnailImageURL');
-    return _thumbnailImageURL;
+    int episodeNumber = int.parse(_episodeId);
+    -- episodeNumber;
+    if(0 == episodeNumber)
+    {
+      if(0 != _hasProloguge)//true
+      {
+        _episodeId = '00000';
+      }
+    }
+    else
+    {
+      _episodeId = sprintf('%05d', episodeNumber);
+    }
+
+    return _episodeId;
   }
 
+  String getNextEpisodeId()
+  {
+    int episodeNumber = int.parse(_episodeId);
+    ++ episodeNumber;
+
+    if(0 != _hasProloguge)
+    {
+      if(episodeNumber == _episodeCount)
+      {
+        episodeNumber = _episodeCount - 1;
+      }
+    }
+    else
+    {
+      if(episodeNumber > _episodeCount)
+      {
+        episodeNumber = _episodeCount;
+      }
+    }
+
+    _episodeId = sprintf('%05d', episodeNumber);
+    return _episodeId;
+  }
 
   Future<List<String>> getImageCutDownloadUrl() async
   {

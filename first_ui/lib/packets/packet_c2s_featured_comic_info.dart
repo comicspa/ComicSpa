@@ -13,8 +13,8 @@ import 'package:first_ui/models/model_featured_comic_info.dart';
 
 class PacketC2SFeaturedComicInfo extends PacketC2SCommon
 {
-  int _pageCountIndex;
-  int _pageViewCount;
+  int _pageCountIndex = 0;
+  int _pageViewCount = 0;
 
   PacketC2SFeaturedComicInfo()
   {

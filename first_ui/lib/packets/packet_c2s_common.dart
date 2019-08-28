@@ -71,4 +71,20 @@ class PacketC2SCommon extends PacketCommon
   {
     currentOffset = PacketUtility.writeImageToByteBuffer(byteData,imageByteData,currentOffset,PacketCommon.endian);
   }
+
+
+  List<int> readyWriteStringToByteBuffer(String str)
+  {
+    return PacketUtility.readyWriteStringToByteBuffer(str);
+  }
+
+
+
+  int getStringTotalLength(List<int> intList)
+  {
+    return PacketUtility.getStringTotalLength(intList);
+  }
+
+
+
 }

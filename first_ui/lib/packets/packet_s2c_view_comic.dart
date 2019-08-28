@@ -32,7 +32,7 @@ class PacketS2CViewComic extends PacketS2CCommon
       modelViewComic = ModelViewComic.list[0];
 
     modelViewComic.episodeId = getUint32().toString();
-    print('comicEpisodeId : ${modelViewComic.episodeId}');
+    print('episodeId : ${modelViewComic.episodeId}');
 
     modelViewComic.title = readStringToByteBuffer();
     print('comicTitle : ${modelViewComic.title}');

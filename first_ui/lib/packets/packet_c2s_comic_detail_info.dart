@@ -17,15 +17,6 @@ class PacketC2SComicDetailInfo extends PacketC2SCommon
   String _userId;
   String _comicId;
 
-  set userId(String userId)
-  {
-    _userId = userId;
-  }
-  set comicId(String comicId)
-  {
-    _comicId = comicId;
-  }
-
   PacketC2SComicDetailInfo()
   {
     type = e_packet_type.c2s_comic_detail_info;
@@ -71,8 +62,14 @@ class PacketC2SComicDetailInfo extends PacketC2SCommon
     });
 
 
-    int packetBodySize  = 0;
+    List<int> userIdList = readyWriteStringToByteBuffer(_userId);
+    List<int> comicIdList = readyWriteStringToByteBuffer(_comicId);
+
+    int packetBodySize  = getStringTotalLength(userIdList) + getStringTotalLength(comicIdList);
     generateHeader(packetBodySize);
+
+    writeStringToByteBuffer(userIdList);
+    writeStringToByteBuffer(comicIdList);
 
     socket.add(packet);
 

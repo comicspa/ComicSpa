@@ -17,37 +17,20 @@ class PacketC2SViewComic extends PacketC2SCommon
   String _userId;
   String _comicId;
   String _episodeId;
-
-  set userId(String userId)
-  {
-    _userId = userId;
-  }
-  set comicId(String comicId)
-  {
-    _comicId = comicId;
-  }
-  set episodeId(String episodeId)
-  {
-    _episodeId = episodeId;
-  }
-
+  String _partId = '001';
+  String _seasonId = '001';
 
   PacketC2SViewComic()
   {
     type = e_packet_type.c2s_view_comic;
   }
 
-  void generate()
-  {}
-
-  /*
-  void generate(String userId,String comicId,String epsodeId)
+  void generate(String userId,String comicId,String episodeId)
   {
     _userId = userId;
     _comicId = comicId;
-    _episodeId = epsodeId;
+    _episodeId = episodeId;
   }
-  */
 
 
   Future<List<ModelViewComic>> fetchBytes() async
@@ -79,8 +62,22 @@ class PacketC2SViewComic extends PacketC2SCommon
       return null;
     });
 
-    int packetBodySize  = 0;
+    List<int> userIdList = readyWriteStringToByteBuffer(_userId);
+    List<int> comicIdList = readyWriteStringToByteBuffer(_comicId);
+    List<int> episodeIdList = readyWriteStringToByteBuffer(_episodeId);
+    List<int> partIdList = readyWriteStringToByteBuffer(_partId);
+    List<int> seasonIdList = readyWriteStringToByteBuffer(_seasonId);
+
+    int packetBodySize  = getStringTotalLength(userIdList) + getStringTotalLength(comicIdList)+
+        getStringTotalLength(episodeIdList) + getStringTotalLength(partIdList) + getStringTotalLength(seasonIdList);
     generateHeader(packetBodySize);
+
+    writeStringToByteBuffer(userIdList);
+    writeStringToByteBuffer(comicIdList);
+    writeStringToByteBuffer(episodeIdList);
+    writeStringToByteBuffer(partIdList);
+    writeStringToByteBuffer(seasonIdList);
+
 
     socket.add(packet);
 

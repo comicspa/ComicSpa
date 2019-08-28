@@ -70,7 +70,7 @@ class _PageDevTestState extends State<PageDevTest> {
     c2STodayPopularComicInfo.generate(0, 0);
     c2SWeeklyPopularComicInfo.generate(0, 0);
     c2SFeaturedComicInfo.generate(0, 0);
-    c2SViewComic.generate(/*'000','000','000'*/);
+    c2SViewComic.generate('000','000','000');
     c2SNewComicInfo.generate(0,0);
     c2SRealTimeTrendInfo.generate(0,0);
     c2SRecommendedComicInfo.generate(0,0);
