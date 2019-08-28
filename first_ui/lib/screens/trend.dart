@@ -157,7 +157,7 @@ class _TrendState extends State<Trend> {
                   return new LoadingIndicator();
                 {
                   return ListView.builder(
-                    physics: ClampingScrollPhysics(),
+                    physics: BouncingScrollPhysics(),
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemCount: ModelRecommendedComicInfo.list.length,
@@ -321,7 +321,8 @@ class _TrendState extends State<Trend> {
                       child: Stack(
                         children: <Widget>[
                           SizedBox(
-                            width: ManageDeviceInfo.resolutionWidth * 0.5,
+                            width: ManageDeviceInfo.resolutionWidth * 0.45,
+                            height: ManageDeviceInfo.resolutionHeight * 0.5,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: <Widget>[
@@ -464,7 +465,8 @@ class _TrendState extends State<Trend> {
                       child: Stack(
                         children: <Widget>[
                           SizedBox(
-                            width: ManageDeviceInfo.resolutionWidth * 0.5,
+                            width: ManageDeviceInfo.resolutionWidth * 0.45,
+                            height: ManageDeviceInfo.resolutionHeight * 0.5,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: <Widget>[
@@ -607,7 +609,8 @@ class _TrendState extends State<Trend> {
                       child: Stack(
                         children: <Widget>[
                           SizedBox(
-                            width: ManageDeviceInfo.resolutionWidth * 0.5,
+                            width: ManageDeviceInfo.resolutionWidth * 0.45,
+                            height: ManageDeviceInfo.resolutionHeight * 0.5,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: <Widget>[
@@ -750,7 +753,8 @@ class _TrendState extends State<Trend> {
                       child: Stack(
                         children: <Widget>[
                           SizedBox(
-                            width: ManageDeviceInfo.resolutionWidth * 0.5,
+                            width: ManageDeviceInfo.resolutionWidth * 0.45,
+                            height: ManageDeviceInfo.resolutionHeight * 0.5,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: <Widget>[
