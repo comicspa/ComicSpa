@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
 import 'package:cached_network_image/cached_network_image.dart';
+import 'common_widgets.dart';
 
 import 'package:first_ui/screens/more.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -71,6 +72,25 @@ class _ViewerScreen extends State<ViewerScreen> {
   Widget build(BuildContext context) {
     // Todo Currently this screen is used for testing viewer
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(ManageDeviceInfo.resolutionHeight * 0.055),
+        child: Visibility(
+          visible: _isVisible,
+          child: AppBar(
+            elevation: 1,
+            backgroundColor: Colors.white, //Color.fromRGBO(21, 24, 45, 1.0),
+            //Color(0xff202a30), //Colors.black87, // Color(0xFF5986E1),
+            centerTitle: true,
+
+            title: Text('Episode #',
+                style: TextStyle(color: Colors.black) //Todo need to bind the data
+            ),
+
+
+
+          ),
+        ),
+      ),
       body: Center(
         child: GestureDetector(
           onTap: () {
@@ -155,6 +175,15 @@ class _ViewerScreen extends State<ViewerScreen> {
 //        ),
         ),
       ),
+      bottomNavigationBar: Visibility(
+        visible: _isVisible,
+        child: SizedBox(
+          height: ManageDeviceInfo.resolutionHeight * 0.055,
+          child: Container(
+            color: Colors.blue.withOpacity(0.3),
+          )
+        ),
+      ),
       floatingActionButton: Visibility(
         visible: _isVisible,
         child: Row(
@@ -176,7 +205,14 @@ class _ViewerScreen extends State<ViewerScreen> {
               height: 30,
               child: FloatingActionButton.extended(
                 heroTag: 'btn2',
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return BuildAlertDialog();
+                    },
+                  );
+                },
                 label: Text('Pre'),
                 icon: Icon(Icons.arrow_left),
               ),
@@ -188,7 +224,14 @@ class _ViewerScreen extends State<ViewerScreen> {
               height: 30,
               child: FloatingActionButton.extended(
                 heroTag: 'btn3',
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return BuildAlertDialog();
+                    },
+                  );
+                },
                 label: Text('Next'),
                 icon: Icon(Icons.arrow_right),
               ),

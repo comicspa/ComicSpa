@@ -153,11 +153,11 @@ class _DetailPageState extends State<DetailPage> {
               child: OutlineButton(
                 splashColor: Colors.orangeAccent,
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BuildAlertDialog(),
-                    ),
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return BuildAlertDialog();
+                    },
                   );
                 },
                 shape: RoundedRectangleBorder(

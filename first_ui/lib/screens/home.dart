@@ -6,6 +6,7 @@ import 'testhome.dart';
 import 'trend.dart';
 import 'sign_in.dart';
 import 'notification.dart';
+import 'common_widgets.dart';
 import 'coming_soon.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
@@ -61,12 +62,18 @@ class _HomeScreenState extends State<HomeScreen>
                 color: Color.fromRGBO(21, 24, 45, 1.0),
               ),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ComingSoonScreen(),
-                  ),
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return BuildAlertDialog();
+                  },
                 );
+//                Navigator.push(
+//                  context,
+//                  MaterialPageRoute(
+//                    builder: (context) => ComingSoonScreen(),
+//                  ),
+//                );
               },
             ),
             IconButton(
@@ -75,12 +82,18 @@ class _HomeScreenState extends State<HomeScreen>
                   color: Color.fromRGBO(21, 24, 45, 1.0),
               ),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ComingSoonScreen(),
-                  ),
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return BuildAlertDialog();
+                  },
                 );
+//                Navigator.push(
+//                  context,
+//                  MaterialPageRoute(
+//                    builder: (context) => ComingSoonScreen(),
+//                  ),
+//                );
               },
             ),
           ],
@@ -98,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen>
         ],
       ),
       bottomNavigationBar: SizedBox(
-        height: 40,
+        height: ManageDeviceInfo.resolutionHeight * 0.055,
         child: TabBar(
           isScrollable: false,
           labelColor: Color.fromRGBO(21, 24, 45, 1.0),

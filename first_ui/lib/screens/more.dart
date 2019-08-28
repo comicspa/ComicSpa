@@ -1,10 +1,12 @@
+import 'package:first_ui/screens/viewer.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
 import 'more_submenu_comming_soon.dart';
 import 'package:first_ui/screens/test/canvas_testing2.dart';
 import 'package:first_ui/screens/test/canvas_combined.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'support_submenu.dart';
+import 'service_info_submenu.dart';
 
 
 
@@ -95,7 +97,7 @@ class _MoreScreenState extends State<MoreScreen> {
                             Navigator.push<Widget>(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => SubMenuComingSoonScreen('Top-up Sparky'),
+                                  builder: (context) => SubMenuComingSoonScreen('Top-up Comi'),
                                 ));
                           },
                           child: Text(
@@ -141,7 +143,7 @@ class _MoreScreenState extends State<MoreScreen> {
             ),
             Divider(),
             ListTile(
-              leading: Icon(Icons.help_outline),
+              leading: Icon(Icons.info),
               title: Text(
                 'Support',
                 textAlign: TextAlign.left,
@@ -156,7 +158,7 @@ class _MoreScreenState extends State<MoreScreen> {
                 Navigator.push<Widget>(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SupportSubmenuScreen('Support'),
+                    builder: (context) => ServiceInfoSubmenuScreen('Service Info.'),
                   ),
                 );
               },
@@ -200,7 +202,8 @@ class _MoreScreenState extends State<MoreScreen> {
                 Navigator.push<Widget>(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SubMenuComingSoonScreen('About'),
+//                    builder: (context) => SubMenuComingSoonScreen('About'),
+                    builder: (context) => ViewerScreen('','', 'title'),
                   ),
                 );
               },

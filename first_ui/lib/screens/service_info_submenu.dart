@@ -13,17 +13,17 @@ import 'common_widgets.dart';
 
 // Coming soon page for multi-purpose
 
-class SupportSubmenuScreen extends StatefulWidget {
-  SupportSubmenuScreen(this.titleText);
+class ServiceInfoSubmenuScreen extends StatefulWidget {
+  ServiceInfoSubmenuScreen(this.titleText);
   final String titleText;
 
 
   @override
-  _SupportSubmenuScreenState createState() => new _SupportSubmenuScreenState(titleText);
+  _ServiceInfoSubmenuScreenState createState() => new _ServiceInfoSubmenuScreenState(titleText);
 }
 
-class _SupportSubmenuScreenState extends State<SupportSubmenuScreen> {
-  _SupportSubmenuScreenState(this.titleText);
+class _ServiceInfoSubmenuScreenState extends State<ServiceInfoSubmenuScreen> {
+  _ServiceInfoSubmenuScreenState(this.titleText);
   String titleText;
 
   @override

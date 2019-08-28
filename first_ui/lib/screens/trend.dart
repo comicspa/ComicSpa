@@ -166,125 +166,90 @@ class _TrendState extends State<Trend> {
                         children: <Widget>[
                           SizedBox(
                             width: ManageDeviceInfo.resolutionWidth * 0.45,
-                            child: Card(
-                              elevation: 0,
-                              clipBehavior: Clip.antiAlias,
-                              child: Column(
-                                children: <Widget>[
-                                  Container(
-                                    width: ManageDeviceInfo.resolutionWidth * 0.45,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(2.0),
+                            height: ManageDeviceInfo.resolutionHeight * 0.5,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(2.0),
 
-                                      child: SizedBox(
-                                        height:
-                                        ManageDeviceInfo.resolutionHeight * 0.135,
-                                        child: CachedNetworkImage(
-                                          imageUrl: snapshot.data[index].thumbnailUrl,
-                                          placeholder: (context, url) => LoadingIndicator(),
-                                          fit: BoxFit.fitWidth, width: double.infinity,
-                                        ),
-                                      ),
-                                    ),
+                                  child: CachedNetworkImage(
+                                    imageUrl: snapshot.data[index].thumbnailUrl,
+                                    placeholder: (context, url) => LoadingIndicator(),
+                                    fit: BoxFit.fill, height: ManageDeviceInfo.resolutionHeight * 0.15,
                                   ),
-                                  Expanded(
-                                      child: Padding(
-                                          padding: EdgeInsets.all(5.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Container(
-                                                height: ManageDeviceInfo
-                                                    .resolutionHeight *
-                                                    0.040,
-                                                child: Text(
-                                                  'Title of this content is too long so we need to shorten it with ...',
-                                                  maxLines: 2,
-                                                  overflow: TextOverflow.ellipsis,
-                                                  textAlign: TextAlign.left,
-                                                  style: TextStyle(
-                                                    fontFamily: 'Lato',
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: ManageDeviceInfo.resolutionHeight * 0.017,
-                                                  ),
+                                ),
+                                Expanded(
+                                    child: Padding(
+                                        padding: EdgeInsets.all(5.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Container(
+                                              height: ManageDeviceInfo
+                                                  .resolutionHeight *
+                                                  0.048,
+                                              child: Text(
+                                                'Title of this content is too long so we need to shorten it with ...',
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(
+                                                  fontFamily: 'Lato',
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: ManageDeviceInfo.resolutionHeight * 0.019,
                                                 ),
                                               ),
-                                              SizedBox(
-                                                height: ManageDeviceInfo
-                                                    .resolutionHeight *
-                                                    0.004,
-                                              ), // used for spacing purpose
-                                              Expanded(
-                                                child: Container(
+                                            ),
+                                            Spacer(),// used for spacing purpose
+                                            Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: <Widget>[
+                                                SizedBox(
                                                   height: ManageDeviceInfo
                                                       .resolutionHeight *
                                                       0.03,
+                                                  width: ManageDeviceInfo.resolutionWidth * 0.15,
                                                   child: Text(
-                                                    'More description of title with some catch phrase, more text, longer text, and too many of them',
-                                                    maxLines: 2,
+                                                    '이름이 길어도 너무 길어',
+                                                    maxLines: 1,
                                                     overflow: TextOverflow.ellipsis,
                                                     style: TextStyle(
                                                       fontFamily: 'Lato',
-                                                      color: Colors.grey[800],
                                                       fontSize: ManageDeviceInfo.resolutionHeight * 0.016,
+                                                      fontWeight: FontWeight.bold,
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                height: ManageDeviceInfo
-                                                    .resolutionHeight *
-                                                    0.002,
-                                              ), // used for spacing purpose
+                                                SizedBox(width: ManageDeviceInfo.resolutionWidth * 0.1,),
+                                                Expanded(
+                                                  child: SizedBox(
+                                                    height: ManageDeviceInfo
+                                                        .resolutionHeight *
+                                                        0.03,
+                                                    width: ManageDeviceInfo.resolutionWidth * 0.25,
 
-                                              Row(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                                children: <Widget>[
-                                                  SizedBox(
-                                                    height: ManageDeviceInfo
-                                                        .resolutionHeight *
-                                                        0.02,
-                                                    width: ManageDeviceInfo
-                                                        .resolutionWidth *
-                                                        0.1,
                                                     child: Text(
-                                                      'ID',
-                                                      maxLines: 1,
-                                                      style: TextStyle(
-                                                        fontFamily: 'Lato',
-                                                        color: Colors.blueGrey,
-                                                        fontSize: 10,
-                                                        fontWeight: FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: ManageDeviceInfo
-                                                        .resolutionHeight *
-                                                        0.02,
-                                                    width: ManageDeviceInfo
-                                                        .resolutionWidth *
-                                                        0.3,
-                                                    child: Text(
-                                                      'Views: 489,584,219',
+                                                      'Views: 15만',
                                                       maxLines: 1,
                                                       overflow: TextOverflow.ellipsis,
                                                       textAlign: TextAlign.left,
                                                       style: TextStyle(
                                                         fontFamily: 'Lato',
-                                                        color: Colors.grey[700],
-                                                        fontSize: 9,
+                                                        color: Colors.grey[900],
+                                                        fontSize: ManageDeviceInfo.resolutionHeight * 0.018,
                                                       ),
                                                     ),
                                                   ),
-                                                ],
-                                              )
-                                            ],
-                                          )))
-                                ],
-                              ),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        )))
+                              ],
                             ),
                           ),
                           Positioned.fill(
@@ -357,125 +322,89 @@ class _TrendState extends State<Trend> {
                         children: <Widget>[
                           SizedBox(
                             width: ManageDeviceInfo.resolutionWidth * 0.5,
-                            child: Card(
-                              elevation: 0,
-                              clipBehavior: Clip.antiAlias,
-                              child: Column(
-                                children: <Widget>[
-                                  Container(
-                                    width: ManageDeviceInfo.resolutionWidth * 0.45,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(2.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(2.0),
 
-                                      child: SizedBox(
-                                        height:
-                                        ManageDeviceInfo.resolutionHeight * 0.135,
-                                        child: CachedNetworkImage(
-                                          imageUrl: snapshot.data[index].thumbnailUrl,
-                                          placeholder: (context, url) => LoadingIndicator(),
-                                          fit: BoxFit.fitWidth, width: double.infinity,
-                                        ), //Todo need to change the image link to  "snapshot.data[index].url"
-                                      ),
-                                    ),
+                                  child: CachedNetworkImage(
+                                    imageUrl: snapshot.data[index].thumbnailUrl,
+                                    placeholder: (context, url) => LoadingIndicator(),
+                                    fit: BoxFit.fill, height: ManageDeviceInfo.resolutionHeight * 0.15,
                                   ),
-                                  Expanded(
-                                      child: Padding(
-                                          padding: EdgeInsets.all(5.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Container(
-                                                height: ManageDeviceInfo
-                                                    .resolutionHeight *
-                                                    0.040,
-                                                child: Text(
-                                                  'Title of this content is too long so we need to shorten it with ...',
-                                                  maxLines: 2,
-                                                  overflow: TextOverflow.ellipsis,
-                                                  textAlign: TextAlign.left,
-                                                  style: TextStyle(
-                                                    fontFamily: 'Lato',
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 12,
-                                                  ),
+                                ),
+                                Expanded(
+                                    child: Padding(
+                                        padding: EdgeInsets.all(5.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Container(
+                                              height: ManageDeviceInfo
+                                                  .resolutionHeight *
+                                                  0.048,
+                                              child: Text(
+                                                'Title of this content is too long so we need to shorten it with ...',
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(
+                                                  fontFamily: 'Lato',
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: ManageDeviceInfo.resolutionHeight * 0.019,
                                                 ),
                                               ),
-                                              SizedBox(
-                                                height: ManageDeviceInfo
-                                                    .resolutionHeight *
-                                                    0.004,
-                                              ), // used for spacing purpose
-                                              Expanded(
-                                                child: Container(
+                                            ),
+                                            Spacer(),// used for spacing purpose
+                                            Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: <Widget>[
+                                                SizedBox(
                                                   height: ManageDeviceInfo
                                                       .resolutionHeight *
                                                       0.03,
+                                                  width: ManageDeviceInfo.resolutionWidth * 0.15,
                                                   child: Text(
-                                                    'More description of title with some catch phrase, more text, longer text, and too many of them',
-                                                    maxLines: 2,
+                                                    '이름이 길어도 너무 길어',
+                                                    maxLines: 1,
                                                     overflow: TextOverflow.ellipsis,
                                                     style: TextStyle(
                                                       fontFamily: 'Lato',
-                                                      color: Colors.grey[800],
-                                                      fontSize: 11,
+                                                      fontSize: ManageDeviceInfo.resolutionHeight * 0.016,
+                                                      fontWeight: FontWeight.bold,
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                height: ManageDeviceInfo
-                                                    .resolutionHeight *
-                                                    0.002,
-                                              ), // used for spacing purpose
+                                                SizedBox(width: ManageDeviceInfo.resolutionWidth * 0.1,),
+                                                Expanded(
+                                                  child: SizedBox(
+                                                    height: ManageDeviceInfo
+                                                        .resolutionHeight *
+                                                        0.03,
+                                                    width: ManageDeviceInfo.resolutionWidth * 0.25,
 
-                                              Row(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                                children: <Widget>[
-                                                  SizedBox(
-                                                    height: ManageDeviceInfo
-                                                        .resolutionHeight *
-                                                        0.02,
-                                                    width: ManageDeviceInfo
-                                                        .resolutionWidth *
-                                                        0.1,
                                                     child: Text(
-                                                      'ID',
-                                                      maxLines: 1,
-                                                      style: TextStyle(
-                                                        fontFamily: 'Lato',
-                                                        color: Colors.blueGrey,
-                                                        fontSize: 10,
-                                                        fontWeight: FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: ManageDeviceInfo
-                                                        .resolutionHeight *
-                                                        0.02,
-                                                    width: ManageDeviceInfo
-                                                        .resolutionWidth *
-                                                        0.3,
-                                                    child: Text(
-                                                      'Views: 489,584,219',
+                                                      'Views: 15만',
                                                       maxLines: 1,
                                                       overflow: TextOverflow.ellipsis,
                                                       textAlign: TextAlign.left,
                                                       style: TextStyle(
                                                         fontFamily: 'Lato',
-                                                        color: Colors.grey[700],
-                                                        fontSize: 9,
+                                                        color: Colors.grey[900],
+                                                        fontSize: ManageDeviceInfo.resolutionHeight * 0.018,
                                                       ),
                                                     ),
                                                   ),
-                                                ],
-                                              )
-                                            ],
-                                          )))
-                                ],
-                              ),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        )))
+                              ],
                             ),
                           ),
                           Positioned.fill(
@@ -536,125 +465,89 @@ class _TrendState extends State<Trend> {
                         children: <Widget>[
                           SizedBox(
                             width: ManageDeviceInfo.resolutionWidth * 0.5,
-                            child: Card(
-                              elevation: 0,
-                              clipBehavior: Clip.antiAlias,
-                              child: Column(
-                                children: <Widget>[
-                                  Container(
-                                    width: ManageDeviceInfo.resolutionWidth * 0.45,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(2.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(2.0),
 
-                                      child: SizedBox(
-                                        height:
-                                        ManageDeviceInfo.resolutionHeight * 0.135,
-                                        child: CachedNetworkImage(
-                                          imageUrl: snapshot.data[index].thumbnailUrl,
-                                          placeholder: (context, url) => LoadingIndicator(),
-                                          fit: BoxFit.fitWidth, width: double.infinity,
-                                        ),
-                                      ),
-                                    ),
+                                  child: CachedNetworkImage(
+                                    imageUrl: snapshot.data[index].thumbnailUrl,
+                                    placeholder: (context, url) => LoadingIndicator(),
+                                    fit: BoxFit.fill, height: ManageDeviceInfo.resolutionHeight * 0.15,
                                   ),
-                                  Expanded(
-                                      child: Padding(
-                                          padding: EdgeInsets.all(5.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Container(
-                                                height: ManageDeviceInfo
-                                                    .resolutionHeight *
-                                                    0.040,
-                                                child: Text(
-                                                  'Title of this content is too long so we need to shorten it with ...',
-                                                  maxLines: 2,
-                                                  overflow: TextOverflow.ellipsis,
-                                                  textAlign: TextAlign.left,
-                                                  style: TextStyle(
-                                                    fontFamily: 'Lato',
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 12,
-                                                  ),
+                                ),
+                                Expanded(
+                                    child: Padding(
+                                        padding: EdgeInsets.all(5.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Container(
+                                              height: ManageDeviceInfo
+                                                  .resolutionHeight *
+                                                  0.048,
+                                              child: Text(
+                                                'Title of this content is too long so we need to shorten it with ...',
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(
+                                                  fontFamily: 'Lato',
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: ManageDeviceInfo.resolutionHeight * 0.019,
                                                 ),
                                               ),
-                                              SizedBox(
-                                                height: ManageDeviceInfo
-                                                    .resolutionHeight *
-                                                    0.004,
-                                              ), // used for spacing purpose
-                                              Expanded(
-                                                child: Container(
+                                            ),
+                                            Spacer(),// used for spacing purpose
+                                            Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: <Widget>[
+                                                SizedBox(
                                                   height: ManageDeviceInfo
                                                       .resolutionHeight *
                                                       0.03,
+                                                  width: ManageDeviceInfo.resolutionWidth * 0.15,
                                                   child: Text(
-                                                    'More description of title with some catch phrase, more text, longer text, and too many of them',
-                                                    maxLines: 2,
+                                                    '이름이 길어도 너무 길어',
+                                                    maxLines: 1,
                                                     overflow: TextOverflow.ellipsis,
                                                     style: TextStyle(
                                                       fontFamily: 'Lato',
-                                                      color: Colors.grey[800],
-                                                      fontSize: 11,
+                                                      fontSize: ManageDeviceInfo.resolutionHeight * 0.016,
+                                                      fontWeight: FontWeight.bold,
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                height: ManageDeviceInfo
-                                                    .resolutionHeight *
-                                                    0.002,
-                                              ), // used for spacing purpose
+                                                SizedBox(width: ManageDeviceInfo.resolutionWidth * 0.1,),
+                                                Expanded(
+                                                  child: SizedBox(
+                                                    height: ManageDeviceInfo
+                                                        .resolutionHeight *
+                                                        0.03,
+                                                    width: ManageDeviceInfo.resolutionWidth * 0.25,
 
-                                              Row(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                                children: <Widget>[
-                                                  SizedBox(
-                                                    height: ManageDeviceInfo
-                                                        .resolutionHeight *
-                                                        0.02,
-                                                    width: ManageDeviceInfo
-                                                        .resolutionWidth *
-                                                        0.1,
                                                     child: Text(
-                                                      'ID',
-                                                      maxLines: 1,
-                                                      style: TextStyle(
-                                                        fontFamily: 'Lato',
-                                                        color: Colors.blueGrey,
-                                                        fontSize: 10,
-                                                        fontWeight: FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: ManageDeviceInfo
-                                                        .resolutionHeight *
-                                                        0.02,
-                                                    width: ManageDeviceInfo
-                                                        .resolutionWidth *
-                                                        0.3,
-                                                    child: Text(
-                                                      'Views: 489,584,219',
+                                                      'Views: 15만',
                                                       maxLines: 1,
                                                       overflow: TextOverflow.ellipsis,
                                                       textAlign: TextAlign.left,
                                                       style: TextStyle(
                                                         fontFamily: 'Lato',
-                                                        color: Colors.grey[700],
-                                                        fontSize: 9,
+                                                        color: Colors.grey[900],
+                                                        fontSize: ManageDeviceInfo.resolutionHeight * 0.018,
                                                       ),
                                                     ),
                                                   ),
-                                                ],
-                                              )
-                                            ],
-                                          )))
-                                ],
-                              ),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        )))
+                              ],
                             ),
                           ),
                           Positioned.fill(
@@ -715,125 +608,89 @@ class _TrendState extends State<Trend> {
                         children: <Widget>[
                           SizedBox(
                             width: ManageDeviceInfo.resolutionWidth * 0.5,
-                            child: Card(
-                              elevation: 0,
-                              clipBehavior: Clip.antiAlias,
-                              child: Column(
-                                children: <Widget>[
-                                  Container(
-                                    width: ManageDeviceInfo.resolutionWidth * 0.45,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(2.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(2.0),
 
-                                      child: SizedBox(
-                                        height:
-                                        ManageDeviceInfo.resolutionHeight * 0.135,
-                                        child: CachedNetworkImage(
-                                          imageUrl: snapshot.data[index].thumbnailUrl,
-                                          placeholder: (context, url) => LoadingIndicator(),
-                                          fit: BoxFit.fitWidth, width: double.infinity,
-                                        ),
-                                      ),
-                                    ),
+                                  child: CachedNetworkImage(
+                                    imageUrl: snapshot.data[index].thumbnailUrl,
+                                    placeholder: (context, url) => LoadingIndicator(),
+                                    fit: BoxFit.fill, height: ManageDeviceInfo.resolutionHeight * 0.15,
                                   ),
-                                  Expanded(
-                                      child: Padding(
-                                          padding: EdgeInsets.all(5.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Container(
-                                                height: ManageDeviceInfo
-                                                    .resolutionHeight *
-                                                    0.040,
-                                                child: Text(
-                                                  'Title of this content is too long so we need to shorten it with ...',
-                                                  maxLines: 2,
-                                                  overflow: TextOverflow.ellipsis,
-                                                  textAlign: TextAlign.left,
-                                                  style: TextStyle(
-                                                    fontFamily: 'Lato',
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 12,
-                                                  ),
+                                ),
+                                Expanded(
+                                    child: Padding(
+                                        padding: EdgeInsets.all(5.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Container(
+                                              height: ManageDeviceInfo
+                                                  .resolutionHeight *
+                                                  0.048,
+                                              child: Text(
+                                                'Title of this content is too long so we need to shorten it with ...',
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(
+                                                  fontFamily: 'Lato',
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: ManageDeviceInfo.resolutionHeight * 0.019,
                                                 ),
                                               ),
-                                              SizedBox(
-                                                height: ManageDeviceInfo
-                                                    .resolutionHeight *
-                                                    0.004,
-                                              ), // used for spacing purpose
-                                              Expanded(
-                                                child: Container(
+                                            ),
+                                            Spacer(),// used for spacing purpose
+                                            Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: <Widget>[
+                                                SizedBox(
                                                   height: ManageDeviceInfo
                                                       .resolutionHeight *
                                                       0.03,
+                                                  width: ManageDeviceInfo.resolutionWidth * 0.15,
                                                   child: Text(
-                                                    'More description of title with some catch phrase, more text, longer text, and too many of them',
-                                                    maxLines: 2,
+                                                    '이름이 길어도 너무 길어',
+                                                    maxLines: 1,
                                                     overflow: TextOverflow.ellipsis,
                                                     style: TextStyle(
                                                       fontFamily: 'Lato',
-                                                      color: Colors.grey[800],
-                                                      fontSize: 11,
+                                                      fontSize: ManageDeviceInfo.resolutionHeight * 0.016,
+                                                      fontWeight: FontWeight.bold,
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                height: ManageDeviceInfo
-                                                    .resolutionHeight *
-                                                    0.002,
-                                              ), // used for spacing purpose
+                                                SizedBox(width: ManageDeviceInfo.resolutionWidth * 0.1,),
+                                                Expanded(
+                                                  child: SizedBox(
+                                                    height: ManageDeviceInfo
+                                                        .resolutionHeight *
+                                                        0.03,
+                                                    width: ManageDeviceInfo.resolutionWidth * 0.25,
 
-                                              Row(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                                children: <Widget>[
-                                                  SizedBox(
-                                                    height: ManageDeviceInfo
-                                                        .resolutionHeight *
-                                                        0.02,
-                                                    width: ManageDeviceInfo
-                                                        .resolutionWidth *
-                                                        0.1,
                                                     child: Text(
-                                                      'ID',
-                                                      maxLines: 1,
-                                                      style: TextStyle(
-                                                        fontFamily: 'Lato',
-                                                        color: Colors.blueGrey,
-                                                        fontSize: 10,
-                                                        fontWeight: FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: ManageDeviceInfo
-                                                        .resolutionHeight *
-                                                        0.02,
-                                                    width: ManageDeviceInfo
-                                                        .resolutionWidth *
-                                                        0.3,
-                                                    child: Text(
-                                                      'Views: 489,584,219',
+                                                      'Views: 15만',
                                                       maxLines: 1,
                                                       overflow: TextOverflow.ellipsis,
                                                       textAlign: TextAlign.left,
                                                       style: TextStyle(
                                                         fontFamily: 'Lato',
-                                                        color: Colors.grey[700],
-                                                        fontSize: 9,
+                                                        color: Colors.grey[900],
+                                                        fontSize: ManageDeviceInfo.resolutionHeight * 0.018,
                                                       ),
                                                     ),
                                                   ),
-                                                ],
-                                              )
-                                            ],
-                                          )))
-                                ],
-                              ),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        )))
+                              ],
                             ),
                           ),
                           Positioned.fill(
@@ -894,125 +751,89 @@ class _TrendState extends State<Trend> {
                         children: <Widget>[
                           SizedBox(
                             width: ManageDeviceInfo.resolutionWidth * 0.5,
-                            child: Card(
-                              elevation: 0,
-                              clipBehavior: Clip.antiAlias,
-                              child: Column(
-                                children: <Widget>[
-                                  Container(
-                                    width: ManageDeviceInfo.resolutionWidth * 0.45,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(2.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(2.0),
 
-                                      child: SizedBox(
-                                        height:
-                                        ManageDeviceInfo.resolutionHeight * 0.135,
-                                        child: CachedNetworkImage(
-                                          imageUrl: snapshot.data[index].thumbnailUrl,
-                                          placeholder: (context, url) => LoadingIndicator(),
-                                          fit: BoxFit.fitWidth, width: double.infinity,
-                                        ),
-                                      ),
-                                    ),
+                                  child: CachedNetworkImage(
+                                    imageUrl: snapshot.data[index].thumbnailUrl,
+                                    placeholder: (context, url) => LoadingIndicator(),
+                                    fit: BoxFit.fill, height: ManageDeviceInfo.resolutionHeight * 0.15,
                                   ),
-                                  Expanded(
-                                      child: Padding(
-                                          padding: EdgeInsets.all(5.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Container(
-                                                height: ManageDeviceInfo
-                                                    .resolutionHeight *
-                                                    0.040,
-                                                child: Text(
-                                                  'Title of this content is too long so we need to shorten it with ...',
-                                                  maxLines: 2,
-                                                  overflow: TextOverflow.ellipsis,
-                                                  textAlign: TextAlign.left,
-                                                  style: TextStyle(
-                                                    fontFamily: 'Lato',
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 12,
-                                                  ),
+                                ),
+                                Expanded(
+                                    child: Padding(
+                                        padding: EdgeInsets.all(5.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Container(
+                                              height: ManageDeviceInfo
+                                                  .resolutionHeight *
+                                                  0.048,
+                                              child: Text(
+                                                'Title of this content is too long so we need to shorten it with ...',
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(
+                                                  fontFamily: 'Lato',
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: ManageDeviceInfo.resolutionHeight * 0.019,
                                                 ),
                                               ),
-                                              SizedBox(
-                                                height: ManageDeviceInfo
-                                                    .resolutionHeight *
-                                                    0.004,
-                                              ), // used for spacing purpose
-                                              Expanded(
-                                                child: Container(
+                                            ),
+                                            Spacer(),// used for spacing purpose
+                                            Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: <Widget>[
+                                                SizedBox(
                                                   height: ManageDeviceInfo
                                                       .resolutionHeight *
                                                       0.03,
+                                                  width: ManageDeviceInfo.resolutionWidth * 0.15,
                                                   child: Text(
-                                                    'More description of title with some catch phrase, more text, longer text, and too many of them',
-                                                    maxLines: 2,
+                                                    '이름이 길어도 너무 길어',
+                                                    maxLines: 1,
                                                     overflow: TextOverflow.ellipsis,
                                                     style: TextStyle(
                                                       fontFamily: 'Lato',
-                                                      color: Colors.grey[800],
-                                                      fontSize: 11,
+                                                      fontSize: ManageDeviceInfo.resolutionHeight * 0.016,
+                                                      fontWeight: FontWeight.bold,
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                height: ManageDeviceInfo
-                                                    .resolutionHeight *
-                                                    0.002,
-                                              ), // used for spacing purpose
+                                                SizedBox(width: ManageDeviceInfo.resolutionWidth * 0.1,),
+                                                Expanded(
+                                                  child: SizedBox(
+                                                    height: ManageDeviceInfo
+                                                        .resolutionHeight *
+                                                        0.03,
+                                                    width: ManageDeviceInfo.resolutionWidth * 0.25,
 
-                                              Row(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                                children: <Widget>[
-                                                  SizedBox(
-                                                    height: ManageDeviceInfo
-                                                        .resolutionHeight *
-                                                        0.02,
-                                                    width: ManageDeviceInfo
-                                                        .resolutionWidth *
-                                                        0.1,
                                                     child: Text(
-                                                      'ID',
-                                                      maxLines: 1,
-                                                      style: TextStyle(
-                                                        fontFamily: 'Lato',
-                                                        color: Colors.blueGrey,
-                                                        fontSize: 10,
-                                                        fontWeight: FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: ManageDeviceInfo
-                                                        .resolutionHeight *
-                                                        0.02,
-                                                    width: ManageDeviceInfo
-                                                        .resolutionWidth *
-                                                        0.3,
-                                                    child: Text(
-                                                      'Views: 489,584,219',
+                                                      'Views: 15만',
                                                       maxLines: 1,
                                                       overflow: TextOverflow.ellipsis,
                                                       textAlign: TextAlign.left,
                                                       style: TextStyle(
                                                         fontFamily: 'Lato',
-                                                        color: Colors.grey[700],
-                                                        fontSize: 9,
+                                                        color: Colors.grey[900],
+                                                        fontSize: ManageDeviceInfo.resolutionHeight * 0.018,
                                                       ),
                                                     ),
                                                   ),
-                                                ],
-                                              )
-                                            ],
-                                          )))
-                                ],
-                              ),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        )))
+                              ],
                             ),
                           ),
                           Positioned.fill(
