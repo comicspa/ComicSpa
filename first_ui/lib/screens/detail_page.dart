@@ -8,6 +8,7 @@ import 'package:first_ui/models/model_comic_detail_info.dart';
 import 'package:first_ui/packets/packet_c2s_comic_detail_info.dart';
 import 'common_widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:first_ui/models/model_preset.dart';
 
 class DetailPage extends StatefulWidget {
   final String _userId;
@@ -32,7 +33,13 @@ class _DetailPageState extends State<DetailPage> {
     super.initState();
     // generating packet
 
+    init();
+  }
+
+  void init() async
+  {
     c2sComicDetailInfo.generate(_userId, _comicId);
+    await c2sComicDetailInfo.fetchBytes();
   }
 
   @override
@@ -470,7 +477,7 @@ class _DetailPageState extends State<DetailPage> {
                                 builder: (context) => ViewerScreen(
                                     ModelComicDetailInfo.getInstance().userId,
                                     ModelComicDetailInfo.getInstance().comicId,
-                                    '00001'/*$index'*/),
+                                    ModelPreset.convertCountIndex2CutImageId(index)),
                               ),
                             );
                           },
