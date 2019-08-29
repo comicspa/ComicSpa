@@ -187,5 +187,36 @@ class ModelPreset
     return url;
   }
 
+  static String convertCountIndex2CutImageId(int countIndex)
+  {
+    return convertNumber2CutImageId(countIndex + 1);
+  }
+
+  static String convertNumber2CutImageId(int number)
+  {
+    String imageId;
+    if(number < 10)
+    {
+      imageId = '0000$number';
+    }
+    else if(9 < number && number < 100)
+    {
+      imageId = '000$number';
+    }
+    else if(99 < number && number < 1000)
+    {
+      imageId = '00$number';
+    }
+    else if(999 < number && number < 10000)
+    {
+      imageId = '0$number';
+    }
+    else if(9999 < number && number < 100000)
+    {
+      imageId = '$number';
+    }
+
+    return imageId;
+  }
 
 }

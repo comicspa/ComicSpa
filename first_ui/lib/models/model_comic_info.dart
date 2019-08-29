@@ -1,4 +1,5 @@
 
+import 'package:first_ui/models/model_preset.dart';
 import 'package:sprintf/sprintf.dart';
 
 import 'package:first_ui/manage/manage_firebase_storage.dart';
@@ -13,7 +14,6 @@ class ModelComicInfo
   String _seasonId = '001';
   String _episodeId = '00001';
   int _episodeCount = 0;
-  int _hasProloguge = 0;
   String _thumbnailImageURL;
   String _subTitleName;
   int _collected = 0;
@@ -27,7 +27,6 @@ class ModelComicInfo
   String get seasonId => _seasonId;
   String get episodeId => _episodeId;
   int get episodeCount => _episodeCount;
-  int get hasProloguge => _hasProloguge;
   String get thumbnailImageUrl => _thumbnailImageURL;
   String get subTitleName => _subTitleName;
   int get collected => _collected;
@@ -85,18 +84,8 @@ class ModelComicInfo
   {
     int episodeNumber = int.parse(_episodeId);
     -- episodeNumber;
-    if(0 == episodeNumber)
-    {
-      if(0 != _hasProloguge)//true
-      {
-        _episodeId = '00000';
-      }
-    }
-    else
-    {
-      _episodeId = sprintf('%05d', episodeNumber);
-    }
-
+    if(0 < episodeNumber)
+      _episodeId = ModelPreset.convertNumber2CutImageId(episodeNumber);
     return _episodeId;
   }
 
@@ -105,24 +94,11 @@ class ModelComicInfo
     int episodeNumber = int.parse(_episodeId);
     ++ episodeNumber;
 
-    if(0 != _hasProloguge)
-    {
-      if(episodeNumber == _episodeCount)
-      {
-        episodeNumber = _episodeCount - 1;
-      }
-    }
-    else
-    {
-      if(episodeNumber > _episodeCount)
-      {
-        episodeNumber = _episodeCount;
-      }
-    }
-
-    _episodeId = sprintf('%05d', episodeNumber);
+    if(episodeNumber < _episodeCount + 1)
+      _episodeId = ModelPreset.convertNumber2CutImageId(episodeNumber);
     return _episodeId;
   }
+
 
   Future<List<String>> getImageCutDownloadUrl() async
   {
