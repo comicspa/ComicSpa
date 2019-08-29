@@ -2,26 +2,26 @@
 
 class ModelRecommendedCreatorInfo
 {
-  int _comicId;
-  int _id;
+  String _comicId;
+  String _userId;
   String _title;
   String _url;
   String _thumbnailUrl;
 
-  int get comicId => _comicId;
-  int get id => _id;
+  String get comicId => _comicId;
+  String get userId => _userId;
   String get title => _title;
   String get url => _url;
   String get thumbnailUrl => _thumbnailUrl;
 
-  set comicId(int comicId)
+  set comicId(String comicId)
   {
     _comicId = comicId;
   }
 
-  set id(int id)
+  set userId(String userId)
   {
-    _id = id;
+    _userId = userId;
   }
 
   set title(String title)
@@ -42,7 +42,7 @@ class ModelRecommendedCreatorInfo
   @override
   String toString()
   {
-    return 'thumbnailUrl : $thumbnailUrl';
+    return 'userId : $_userId , comicId : $_comicId , title : $_title , thumbnailUrl : $thumbnailUrl';
   }
 
   static List<ModelRecommendedCreatorInfo> list;

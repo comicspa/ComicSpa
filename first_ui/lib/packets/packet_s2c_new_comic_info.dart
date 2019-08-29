@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:first_ui/packets/packet_common.dart';
 import 'package:first_ui/packets/packet_s2c_common.dart';
 import 'package:first_ui/models/model_new_comic_info.dart';
+import 'package:first_ui/models/model_preset.dart';
 
 
 
@@ -13,6 +14,38 @@ class PacketS2CNewComicInfo extends PacketS2CCommon
     type = e_packet_type.s2c_new_comic_info;
   }
 
+  Future<void> parseBytes(int packetSize,ByteData byteDataExceptionSize) async
+  {
+    parseHeaderChecked(packetSize,byteDataExceptionSize);
+
+    systemErrorCode = getUint32();
+    serviceErrorCode = getUint32();
+
+    print('PackSize : $size , PacketType : $type , systemErrorCode : $systemErrorCode , serviceErrorCode : $serviceErrorCode');
+
+    int modelNewComicInfoCount = getUint32();
+    print('modelNewComicInfoCount : $modelNewComicInfoCount');
+    for(int countIndex=0; countIndex<modelNewComicInfoCount; ++countIndex)
+    {
+      ModelNewComicInfo modelFeaturedComicInfo = new ModelNewComicInfo();
+
+      modelFeaturedComicInfo.userId = readStringToByteBuffer();
+      modelFeaturedComicInfo.comicId = readStringToByteBuffer();
+      modelFeaturedComicInfo.title = readStringToByteBuffer();
+
+      String url = await ModelPreset.getBannerImageDownloadUrl(modelFeaturedComicInfo.userId, modelFeaturedComicInfo.comicId);
+      modelFeaturedComicInfo.url = url;
+      modelFeaturedComicInfo.thumbnailUrl = url;
+
+      print(modelFeaturedComicInfo.toString());
+
+      if(null == ModelNewComicInfo.list)
+        ModelNewComicInfo.list = new List<ModelNewComicInfo>();
+      ModelNewComicInfo.list.add(modelFeaturedComicInfo);
+    }
+  }
+
+  /*
   void parseBytes(int packetSize,ByteData byteDataExceptionSize)
   {
     parseHeaderChecked(packetSize,byteDataExceptionSize);
@@ -42,6 +75,10 @@ class PacketS2CNewComicInfo extends PacketS2CCommon
         ModelNewComicInfo.list = new List<ModelNewComicInfo>();
       ModelNewComicInfo.list.add(modelNewComicInfo);
     }
+
+
   }
+
+   */
 
 }

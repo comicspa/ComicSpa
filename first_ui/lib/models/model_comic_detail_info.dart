@@ -5,7 +5,7 @@ import 'package:first_ui/manage/manage_firebase_storage.dart';
 
 class ModelComicDetailInfo
 {
-  String _userId = '1111111511111';
+  String _userId = '1111111111111';
   String _comicId = '000001';
   String _mainTitleName;
   String _representationImageUrl;

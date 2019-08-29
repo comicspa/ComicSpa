@@ -180,5 +180,12 @@ class ModelPreset
     return url;
   }
 
+  static Future<String> getCutImageDownloadUrl(String userId,String comicId,String partId,String seasonId,String episodeId,String imageId) async
+  {
+    String url  = await ManageFirebaseStorage.getDownloadUrl('$comicBaseUrl/$userId/$comicId/$partId/$seasonId/$episodeId/$imageId.jpg');
+    print('getCutImageDownloadUrl : $url');
+    return url;
+  }
+
 
 }

@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigationPage() {
-    int switchPage = 0;
+    int switchPage = 1;
     switch(switchPage)
     {
       case 0:

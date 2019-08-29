@@ -70,11 +70,11 @@ class _PageDevTestState extends State<PageDevTest> {
     c2STodayPopularComicInfo.generate(0, 0);
     c2SWeeklyPopularComicInfo.generate(0, 0);
     c2SFeaturedComicInfo.generate(0, 0);
-    c2SViewComic.generate('000','000','000');
+    c2SViewComic.generate('1566811403000','000001','00001');
     c2SNewComicInfo.generate(0,0);
     c2SRealTimeTrendInfo.generate(0,0);
     c2SRecommendedComicInfo.generate(0,0);
-    c2SComicDetailInfo.generate('000','000');
+    c2SComicDetailInfo.generate('1566811403000','000001');
     c2SNewCreatorInfo.generate();
     c2SWeeklyCreatorInfo.generate();
 
@@ -160,10 +160,10 @@ class _PageDevTestState extends State<PageDevTest> {
               }
 
               //c2SComicDetailInfo.fetchBytes();
-              //c2SViewComic.fetchBytes();
+              c2SViewComic.fetchBytes();
               //c2SNewCreatorInfo.fetchBytes();
               //c2SWeeklyCreatorInfo.fetchBytes();
-              //c2SMyLockerComicCheckout.fetchBytes();
+              //c2SMyLockerComicViewList.fetchBytes();
               //c2SMyLockerComicContinue.fetchBytes();
               //c2SMyLockerComicOwned.fetchBytes();
               //c2SMyLockerComicRecent.fetchBytes();

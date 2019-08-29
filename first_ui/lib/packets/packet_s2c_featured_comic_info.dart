@@ -34,27 +34,6 @@ class PacketS2CFeaturedComicInfo extends PacketS2CCommon
       modelFeaturedComicInfo.comicId = readStringToByteBuffer();
       modelFeaturedComicInfo.title = readStringToByteBuffer();
 
-      /*
-      String getDownloadBaseUrl = ''
-          '${ModelPreset.comicBaseUrl}/${modelFeaturedComicInfo.userId}/${modelFeaturedComicInfo.comicId}/${ModelPreset.thumbnailImageFileFullName}';
-      ManageFirebaseStorage.getDownloadUrl(getDownloadBaseUrl).then((value)
-      {
-        //value == String
-        modelFeaturedComicInfo.url = value;
-        modelFeaturedComicInfo.thumbnailUrl = value;
-
-        print(value.toString());
-        print('getDownloadUrl success');
-      },
-          onError: (error)
-          {
-            print('getDownloadUrl error : $error');
-          }).catchError( (error)
-      {
-        print('getDownloadUrl catchError : $error');
-      });
-       */
-
       String url = await ModelPreset.getBannerImageDownloadUrl(modelFeaturedComicInfo.userId, modelFeaturedComicInfo.comicId);
       modelFeaturedComicInfo.url = url;
       modelFeaturedComicInfo.thumbnailUrl = url;

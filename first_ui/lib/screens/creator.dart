@@ -439,7 +439,7 @@ class _CreatorScreenState extends State<CreatorScreen> {
                                                               Text(
                                                                 snapshot
                                                                     .data[index]
-                                                                    .id,
+                                                                    .userId,
                                                                 //Todo update this testing data
                                                                 maxLines: 2,
                                                                 overflow:

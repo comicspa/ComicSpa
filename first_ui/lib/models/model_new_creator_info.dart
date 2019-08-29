@@ -1,22 +1,31 @@
 
 class ModelNewCreatorInfo
 {
-  String _id;
-  String _explain;
+  String _comicId;
+  String _userId;
+  String _title;
   String _url;
+  String _thumbnailUrl;
 
-  String get id => _id;
-  String get explain => _explain;
+  String get comicId => _comicId;
+  String get userId => _userId;
+  String get title => _title;
   String get url => _url;
+  String get thumbnailUrl => _thumbnailUrl;
 
-  set id(String id)
+  set comicId(String comicId)
   {
-    _id = id;
+    _comicId = comicId;
   }
 
-  set explain(String explain)
+  set userId(String userId)
   {
-    _explain = explain;
+    _userId = userId;
+  }
+
+  set title(String title)
+  {
+    _title = title;
   }
 
   set url(String url)
@@ -24,11 +33,15 @@ class ModelNewCreatorInfo
     _url = url;
   }
 
+  set thumbnailUrl(String thumbnailUrl)
+  {
+    _thumbnailUrl = thumbnailUrl;
+  }
 
   @override
   String toString()
   {
-    return 'Url : $url';
+    return 'userId : $_userId , comicId : $_comicId , title : $_title , thumbnailUrl : $thumbnailUrl';
   }
 
   static List<ModelNewCreatorInfo> list;
