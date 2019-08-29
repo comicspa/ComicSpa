@@ -19,6 +19,7 @@ class PacketC2SViewComic extends PacketC2SCommon
   String _episodeId;
   String _partId = '001';
   String _seasonId = '001';
+  int _fetchStatus = 0;
 
   PacketC2SViewComic()
   {
@@ -36,8 +37,10 @@ class PacketC2SViewComic extends PacketC2SCommon
   Future<List<ModelViewComic>> fetchBytes() async
   {
     print('PacketC2SViewComic : fetchBytes started');
-    if(null != ModelViewComic.list)
-      return ModelViewComic.list;
+    //if(null != ModelViewComic.list)
+    //  return ModelViewComic.list;
+    if(0 != _fetchStatus)
+      return  ModelViewComic.list;
 
     Socket socket = await ModelCommon.createServiceSocket();
     print('connected server');
@@ -56,6 +59,7 @@ class PacketC2SViewComic extends PacketC2SCommon
         PacketS2CViewComic packet = new PacketS2CViewComic();
         packet.parseBytes(packetSize,byteData);
 
+        _fetchStatus = 2;
         //return ModelViewComic.getInstance();
         return ModelViewComic.list;
       }
@@ -85,7 +89,7 @@ class PacketC2SViewComic extends PacketC2SCommon
     await Future.delayed(Duration(seconds: 10));
     socket.close();
 
-    //return null;
+    _fetchStatus = 1;
     return ModelViewComic.list;
   }
 
