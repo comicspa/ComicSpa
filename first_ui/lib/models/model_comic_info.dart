@@ -1,4 +1,6 @@
 
+import 'dart:ui' as ui;
+
 import 'package:first_ui/models/model_preset.dart';
 import 'package:sprintf/sprintf.dart';
 
@@ -20,6 +22,8 @@ class ModelComicInfo
   int _updated = 0;
   int _imageCutCount = 0;
   List<String> _imageCutUrlList;
+  String _episode = '1';
+  List<ui.Image> _imageCutList;
 
   String get userId => _userId;
   String get comicId => _comicId;
@@ -33,6 +37,9 @@ class ModelComicInfo
   int get updated => _updated;
   int get imageCutCount => _imageCutCount;
   List<String> get imageCutUrlList => _imageCutUrlList;
+  String get episode => _episode;
+  List<ui.Image> get imageCutList => _imageCutList;
+
 
   set userId(String userId)
   {
@@ -53,6 +60,7 @@ class ModelComicInfo
   set episodeId(String episodeId)
   {
     _episodeId = episodeId;
+    _episode = (int.parse(_episodeId)).toString();
   }
   set thumbnailImageUrl(String thumbnailImageUrl)
   {
@@ -78,7 +86,10 @@ class ModelComicInfo
   {
     _imageCutUrlList = imageCutUrlList;
   }
-
+  set imageCutList(List<ui.Image> imageCutList)
+  {
+    _imageCutList = imageCutList;
+  }
 
   String getPrevEpisodeId()
   {

@@ -1,4 +1,6 @@
 
+import 'dart:ui' as ui;
+
 import 'package:first_ui/manage/manage_firebase_storage.dart';
 
 
@@ -9,12 +11,14 @@ class ModelFeaturedComicInfo
   String _title;
   String _url;
   String _thumbnailUrl;
+  ui.Image _image;
 
   String get comicId => _comicId;
   String get userId => _userId;
   String get title => _title;
   String get url => _url;
   String get thumbnailUrl => _thumbnailUrl;
+  ui.Image get image => _image;
 
   set comicId(String comicId)
   {
@@ -41,10 +45,16 @@ class ModelFeaturedComicInfo
     _thumbnailUrl = thumbnailUrl;
   }
 
+  set image(ui.Image image)
+  {
+    _image = image;
+  }
+
+
   @override
   String toString()
   {
-    return 'thumbnailUrl : $thumbnailUrl';
+    return 'userId : $_userId , comicId : $_comicId , title : $_title , thumbnailUrl : $thumbnailUrl';
   }
 
   static List<ModelFeaturedComicInfo> list;

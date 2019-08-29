@@ -1,5 +1,5 @@
 
-
+import 'dart:ui' as ui;
 
 
 class TodayPopularComicInfo
@@ -9,12 +9,14 @@ class TodayPopularComicInfo
   String _title;
   String _url;
   String _thumbnailUrl;
+  ui.Image _image;
 
   String get comicId => _comicId;
   String get userId => _userId;
   String get title => _title;
   String get url => _url;
   String get thumbnailUrl => _thumbnailUrl;
+  ui.Image get image => _image;
 
   set comicId(String comicId)
   {
@@ -39,6 +41,11 @@ class TodayPopularComicInfo
   set thumbnailUrl(String thumbnailUrl)
   {
     _thumbnailUrl = thumbnailUrl;
+  }
+
+  set image(ui.Image image)
+  {
+    _image = image;
   }
 
   @override

@@ -1,4 +1,6 @@
 
+import 'dart:ui' as ui;
+
 import 'package:first_ui/models/model_comic_info.dart';
 
 import 'package:first_ui/manage/manage_firebase_storage.dart';
@@ -13,6 +15,7 @@ class ModelComicDetailInfo
   String _creatorName;
   double _point;
   List<ModelComicInfo> _modelComicInfoList;
+  ui.Image _representationImage;
 
   String get userId => _userId;
   String get comicId => _comicId;
@@ -22,6 +25,7 @@ class ModelComicDetailInfo
   String get creatorName => _creatorName;
   double get point => _point;
   List<ModelComicInfo> get modelComicInfoList => _modelComicInfoList;
+  ui.Image get representationImage => _representationImage;
 
   set userId(String userId)
   {
@@ -54,6 +58,10 @@ class ModelComicDetailInfo
   set modelComicInfoList(List<ModelComicInfo> modelComicInfoList)
   {
     _modelComicInfoList = modelComicInfoList;
+  }
+  set representationImage(ui.Image representationImage)
+  {
+    _representationImage = representationImage;
   }
 
 
