@@ -3,8 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
 import 'more_submenu_comming_soon.dart';
-import 'package:first_ui/screens/test/canvas_testing2.dart';
-import 'package:first_ui/screens/test/canvas_combined.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'service_info_submenu.dart';
 
@@ -203,8 +201,7 @@ class _MoreScreenState extends State<MoreScreen> {
                 Navigator.push<Widget>(
                   context,
                   MaterialPageRoute(
-//                    builder: (context) => SubMenuComingSoonScreen('About'),
-                    builder: (context) => ViewerScreen('','', 'title'),
+                    builder: (context) => SubMenuComingSoonScreen('Settings'),
                   ),
                 );
               },
@@ -224,10 +221,10 @@ class _MoreScreenState extends State<MoreScreen> {
               padding: EdgeInsets.all(20.0),
               onPressed: (){
                 Navigator.push<Widget>(
-                    context,
-                    MaterialPageRoute(
-                    builder: (context) => ImageLoading2Canvas(),
-                    ),
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SubMenuComingSoonScreen('Settings'),
+                  ),
                 );
               },
               child: Row(
@@ -252,10 +249,11 @@ class _MoreScreenState extends State<MoreScreen> {
               color: Colors.redAccent,
               onPressed: () {
                 Navigator.push<Widget>(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DrawRectAndImage(),
-                    ));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SubMenuComingSoonScreen('Settings'),
+                  ),
+                );
               },
               child: Text(
                 "Sign-in   or   Sign-up",

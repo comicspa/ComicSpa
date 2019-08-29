@@ -414,15 +414,15 @@ class _TrendState extends State<Trend> {
                               color: Colors.transparent,
                               child: InkWell(
                                 highlightColor: Colors.transparent,
-                                  onTap: () {
-                                    Navigator.push<Widget>(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            DetailPage(snapshot.data[index].userId,snapshot.data[index].comicId), // link to Actual viewer
-                                      ),
-                                    );
-                                  },
+                                onTap: () {
+                                  Navigator.push<Widget>(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          DetailPage(snapshot.data[index].userId,snapshot.data[index].comicId), // link to Actual viewer
+                                    ),
+                                  );
+                                },
                               ),
                             ),
                           ),
@@ -460,7 +460,7 @@ class _TrendState extends State<Trend> {
                     physics: BouncingScrollPhysics(),
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    itemCount: ModelNewComicInfo.list.length,
+                    itemCount: ModelRecommendedComicInfo.list.length,
                     itemBuilder: (BuildContext context, int index) => Card(
                       child: Stack(
                         children: <Widget>[
@@ -604,7 +604,7 @@ class _TrendState extends State<Trend> {
                     physics: BouncingScrollPhysics(),
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    itemCount: ModelNewComicInfo.list.length,
+                    itemCount: ModelRecommendedComicInfo.list.length,
                     itemBuilder: (BuildContext context, int index) => Card(
                       child: Stack(
                         children: <Widget>[
@@ -748,7 +748,7 @@ class _TrendState extends State<Trend> {
                     physics: BouncingScrollPhysics(),
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    itemCount: ModelWeeklyPopularComicInfo.list.length,
+                    itemCount: ModelRecommendedComicInfo.list.length,
                     itemBuilder: (BuildContext context, int index) => Card(
                       child: Stack(
                         children: <Widget>[
