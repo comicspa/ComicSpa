@@ -91,7 +91,7 @@ class ModelTextDetection
     int previousImageTotalHeight = 0;
     for(int countIndex=0; countIndex<urlList.length; ++countIndex)
        {
-         String url  = await ManageFirebaseStorage.getDownloadUrl('comics/${urlList[countIndex]}');
+         String url  = urlList[countIndex];//await ManageFirebaseStorage.getDownloadUrl('comics/${urlList[countIndex]}');
          print('url[$countIndex/${urlList.length}] : $url');
 
          /*

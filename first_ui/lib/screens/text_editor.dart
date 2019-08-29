@@ -3,16 +3,14 @@ import 'package:first_ui/manage/manage_device_info.dart'; // use this to make al
 import 'package:cached_network_image/cached_network_image.dart';
 
 
-import 'package:first_ui/models/model_common.dart';
-import 'package:first_ui/manage/manage_flutter_cache_manager.dart';
-import 'package:firebase_ml_vision/firebase_ml_vision.dart';
-import 'package:first_ui/manage/manage_firebase_ml_vision.dart';
-import 'package:first_ui/manage/manage_image.dart';
+
 import 'package:first_ui/models/model_text_detection.dart';
 import 'package:first_ui/screens/common_widgets.dart';
+import 'package:first_ui/models/model_view_comic.dart';
 
 class DrawRectAndImage extends StatefulWidget {
-  String episodeId;
+
+  DrawRectAndImage();
 
   @override
   _DrawRectAndImageState createState() => _DrawRectAndImageState();
@@ -21,12 +19,13 @@ class DrawRectAndImage extends StatefulWidget {
 
 
 class _DrawRectAndImageState extends State<DrawRectAndImage> {
+
   final _formKey = GlobalKey<FormState>();
   final textController = TextEditingController();
   int isImageLoaded = 0;
   int tappedCountIndex = -1;
   bool useCloud = true;
-  List<String> urlList = new List<String>();
+  //List<String> urlList = new List<String>();
 
   @override
   void dispose() {
@@ -43,8 +42,9 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
 
   init() async
   {
-    urlList.add('01.jpg');
-    urlList.add('04.jpg');
+
+    //urlList.add('01.jpg');
+    //urlList.add('04.jpg');
 
   }
 
@@ -55,7 +55,7 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
           scrollDirection: Axis.vertical,
           physics: BouncingScrollPhysics(),
           child: FutureBuilder<List<ModelTextDetection>>(
-              future:  ModelTextDetection.generate(urlList,useCloud),
+              future:  ModelTextDetection.generate(ModelViewComic.list[0].imageUrlList,useCloud),
               builder: (context, snapshot) {
                 return Stack(
                     children: <Widget>[

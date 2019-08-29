@@ -514,7 +514,7 @@ class _DetailPageState extends State<DetailPage> {
                             );
                           },
                           child: Text(
-                            '${ModelComicDetailInfo.getInstance().modelComicInfoList[index].episodeId}화',
+                            '${ModelComicDetailInfo.getInstance().modelComicInfoList[index].episode}화',
 
 //                              '${int.parse(ModelComicDetailInfo.getInstance().modelComicInfoList[index].episodeId).toString()}화',
                             maxLines: 1,
