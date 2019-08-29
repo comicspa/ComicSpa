@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
 import 'package:cached_network_image/cached_network_image.dart';
 import 'common_widgets.dart';
+import 'text_editor.dart';
 
 import 'package:first_ui/screens/more.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -197,7 +198,14 @@ class _ViewerScreen extends State<ViewerScreen> {
               child: FloatingActionButton(
                 heroTag: 'btn1',
                 backgroundColor: Colors.brown,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push<Widget>(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DrawRectAndImage(),
+                      ));
+
+                },
                 child: Icon(Icons.translate),
               ),
             ),
