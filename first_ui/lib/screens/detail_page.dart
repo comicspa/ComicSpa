@@ -64,7 +64,17 @@ class _DetailPageState extends State<DetailPage> {
             child: SizedBox(
               width: ManageDeviceInfo.resolutionWidth * 0.7,
               child: ModelComicDetailInfo.getInstance().mainTitleName == null
-              ? Text('Loading...')
+              ? Text('Loading...',
+                maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Lato',
+                    fontWeight: FontWeight.bold,
+                    fontSize: ManageDeviceInfo.resolutionHeight * 0.025,
+                    color: Colors.black87,
+                  ),
+              )
               : Text(
                 ModelComicDetailInfo.getInstance().mainTitleName,
                 maxLines: 1,

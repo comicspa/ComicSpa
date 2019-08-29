@@ -57,43 +57,55 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
           child: FutureBuilder<List<ModelTextDetection>>(
               future:  ModelTextDetection.generate(ModelViewComic.list[0].imageUrlList,useCloud),
               builder: (context, snapshot) {
-                return Stack(
-                    children: <Widget>[
-                      FittedBox(
-                        child: SizedBox(
-                          width: ModelTextDetection.sizeBoxWidth,// ManageDeviceInfo.resolutionWidth * (ModelTextDetection.list[0].manageImage.width / ManageDeviceInfo.resolutionWidth),
-                          height: ModelTextDetection.sizeBoxHeight,//ManageDeviceInfo.resolutionHeight * (ModelTextDetection.imageTotalHeight / ManageDeviceInfo.resolutionHeight),
-                          child: _buildImage(),
-                        ),
-                      ),
-                      for(var boundingBoxInfo in ModelTextDetection.boundingBoxInfoList)
-                        Positioned(
-                          left: boundingBoxInfo.left,//ManageDeviceInfo.resolutionWidth / (ModelTextDetection.list[0].manageImage.width / boundingBoxInfo.boundingBox.left),
-                          top: boundingBoxInfo.top,//(boundingBoxInfo.boundingBox.top / (ModelTextDetection.list[0].manageImage.width / ManageDeviceInfo.resolutionWidth)) + (boundingBoxInfo.previousImageTotalHeight/(ModelTextDetection.list[0].manageImage.width / ManageDeviceInfo.resolutionWidth)),
-                          child: GestureDetector(
-                            onTap: () {
-
-                              tappedCountIndex = boundingBoxInfo.countIndex;
-
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return buildTranslatePopUp(context);
-                                },
-                              );
-                              debugPrint("hello");
-                            },
-                            child: Container(
-                                width: boundingBoxInfo.width,//ManageDeviceInfo.resolutionWidth / (ModelTextDetection.list[0].manageImage.width / boundingBoxInfo.boundingBox.width),
-                                height: boundingBoxInfo.height,//ManageDeviceInfo.resolutionHeight / (ModelTextDetection.imageTotalHeight / boundingBoxInfo.boundingBox.height) + ManageDeviceInfo.statusBarHeight,
-                                decoration: textBoxDecoration(boundingBoxInfo.changed),
-                                child: Text(
-                                  /*textController.text*/boundingBoxInfo.text)
-                            ),
+                if (!snapshot.hasData)
+                  return Center(child: new LoadingIndicator());
+                {
+                  return Stack(
+                      children: <Widget>[
+                        FittedBox(
+                          child: SizedBox(
+                            width: ModelTextDetection.sizeBoxWidth,
+                            // ManageDeviceInfo.resolutionWidth * (ModelTextDetection.list[0].manageImage.width / ManageDeviceInfo.resolutionWidth),
+                            height: ModelTextDetection.sizeBoxHeight,
+                            //ManageDeviceInfo.resolutionHeight * (ModelTextDetection.imageTotalHeight / ManageDeviceInfo.resolutionHeight),
+                            child: _buildImage(),
                           ),
                         ),
-                    ]
-                );
+                        for(var boundingBoxInfo in ModelTextDetection
+                            .boundingBoxInfoList)
+                          Positioned(
+                            left: boundingBoxInfo.left,
+                            //ManageDeviceInfo.resolutionWidth / (ModelTextDetection.list[0].manageImage.width / boundingBoxInfo.boundingBox.left),
+                            top: boundingBoxInfo.top,
+                            //(boundingBoxInfo.boundingBox.top / (ModelTextDetection.list[0].manageImage.width / ManageDeviceInfo.resolutionWidth)) + (boundingBoxInfo.previousImageTotalHeight/(ModelTextDetection.list[0].manageImage.width / ManageDeviceInfo.resolutionWidth)),
+                            child: GestureDetector(
+                              onTap: () {
+                                tappedCountIndex = boundingBoxInfo.countIndex;
+
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return buildTranslatePopUp(context);
+                                  },
+                                );
+                                debugPrint("hello");
+                              },
+                              child: Container(
+                                  width: boundingBoxInfo.width,
+                                  //ManageDeviceInfo.resolutionWidth / (ModelTextDetection.list[0].manageImage.width / boundingBoxInfo.boundingBox.width),
+                                  height: boundingBoxInfo.height,
+                                  //ManageDeviceInfo.resolutionHeight / (ModelTextDetection.imageTotalHeight / boundingBoxInfo.boundingBox.height) + ManageDeviceInfo.statusBarHeight,
+                                  decoration: textBoxDecoration(boundingBoxInfo
+                                      .changed),
+                                  child: Text(
+                                    /*textController.text*/
+                                      boundingBoxInfo.text)
+                              ),
+                            ),
+                          ),
+                      ]
+                  );
+                }
               }
           )
 

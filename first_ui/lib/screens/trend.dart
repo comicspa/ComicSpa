@@ -69,7 +69,7 @@ class _TrendState extends State<Trend> {
                 future: c2sFeaturedComicInfo.fetchBytes(),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData)
-                    return LoadingIndicator();
+                    return Center(child: LoadingIndicator());
 
                   {
                     return Column(
@@ -92,7 +92,7 @@ class _TrendState extends State<Trend> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            ViewerScreen('000','777','333'), // link to Actual viewer
+                                            DetailPage(i.userId, i.comicId), // link to Actual viewer
                                       ),
                                     );
                                   },
@@ -264,7 +264,7 @@ class _TrendState extends State<Trend> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          DetailPage(snapshot.data[index].userId,snapshot.data[index].comicId), // link to Actual viewer
+                                          DetailPage(snapshot.data[index].userId, snapshot.data[index].comicId), // link to Actual viewer
                                     ),
                                   );
                                 },
