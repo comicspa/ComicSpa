@@ -189,7 +189,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) =>
-                                                            DetailPage(snapshot.data[index].thumbnailUrl), // link to Actual viewer
+                                                            DetailPage(snapshot.data[index].userId,snapshot.data[index].comicId), // link to Actual viewer
                                                       ),
                                                     );
                                                   },
@@ -332,7 +332,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) =>
-                                                            DetailPage(snapshot.data[index].thumbnailUrl), // link to Actual viewer
+                                                            DetailPage(snapshot.data[index].userId,snapshot.data[index].comicId), // link to Actual viewer
                                                       ),
                                                     );
                                                   },
@@ -476,7 +476,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) =>
-                                                            DetailPage(snapshot.data[index].thumbnailUrl), // link to Actual viewer
+                                                            DetailPage(snapshot.data[index].userId,snapshot.data[index].comicId), // link to Actual viewer
                                                       ),
                                                     );
                                                   },
@@ -614,7 +614,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) =>
-                                                            DetailPage(snapshot.data[index].thumbnailUrl), // link to Actual viewer
+                                                            DetailPage(snapshot.data[index].userId,snapshot.data[index].comicId), // link to Actual viewer
                                                       ),
                                                     );
                                                   },

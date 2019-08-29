@@ -10,14 +10,21 @@ import 'common_widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class DetailPage extends StatefulWidget {
-  final String url;
-  DetailPage(this.url);
+  final String _userId;
+  final String _comicId;
+  DetailPage(this._userId,this._comicId);
 
   @override
-  _DetailPageState createState() => _DetailPageState();
+  _DetailPageState createState() => _DetailPageState(_userId,_comicId);
 }
 
 class _DetailPageState extends State<DetailPage> {
+
+  final String _userId;
+  final String _comicId;
+
+  _DetailPageState(this._userId,this._comicId);
+
   PacketC2SComicDetailInfo c2sComicDetailInfo = new PacketC2SComicDetailInfo();
 
   @override
@@ -25,7 +32,7 @@ class _DetailPageState extends State<DetailPage> {
     super.initState();
     // generating packet
 
-    c2sComicDetailInfo.generate('', '');
+    c2sComicDetailInfo.generate(_userId, _comicId);
   }
 
   @override
@@ -462,8 +469,8 @@ class _DetailPageState extends State<DetailPage> {
                               MaterialPageRoute(
                                 builder: (context) => ViewerScreen(
                                     ModelComicDetailInfo.getInstance().userId,
-                                    '001',
-                                    '$index'),
+                                    ModelComicDetailInfo.getInstance().comicId,
+                                    '00001'/*$index'*/),
                               ),
                             );
                           },

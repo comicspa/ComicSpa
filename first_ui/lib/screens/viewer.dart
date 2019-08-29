@@ -52,7 +52,7 @@ class _ViewerScreen extends State<ViewerScreen> {
   initState() {
     //    SystemChrome.setEnabledSystemUIOverlays([]);
 
-    c2sViewComic.generate('','','');
+    c2sViewComic.generate(this.userId,this.comicId,this.episodeId);
 
     super.initState();
     _isVisible = true;
@@ -93,10 +93,12 @@ class _ViewerScreen extends State<ViewerScreen> {
       ),
       body: Center(
         child: GestureDetector(
+          //Todo add onVerticalDrag and onHorizontalDrag to update visibility
           onTap: () {
             setState(() {
               _isVisible = !_isVisible;
             });
+
           },
           child: FutureBuilder<List<ModelViewComic>>(
             future: c2sViewComic.fetchBytes(),
@@ -139,6 +141,7 @@ class _ViewerScreen extends State<ViewerScreen> {
 
                     ),
               );
+              //Todo use pageview.builder to view horizontal style image like 만화 (참고: https://medium.com/flutter-community/a-deep-dive-into-pageview-in-flutter-with-custom-transitions-581d9ea6dded)
               }
             },
           ),

@@ -34,7 +34,7 @@ class _SignInPageState extends State<SignInPage> {
               GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => DetailPage('testurl')
+                      builder: (context) => DetailPage('','')
                   ));
                 },
                 child: Container(
