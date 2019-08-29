@@ -56,6 +56,7 @@ class _TrendState extends State<Trend> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
