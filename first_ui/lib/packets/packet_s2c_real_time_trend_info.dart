@@ -24,6 +24,13 @@ class PacketS2CRealTimeTrendInfo extends PacketS2CCommon
 
     int modelRealTimeTrendInfoCount = getUint32();
     print('modelRealTimeTrendInfoCount : $modelRealTimeTrendInfoCount');
+
+
+    if(null == ModelRealTimeTrendInfo.list)
+      ModelRealTimeTrendInfo.list = new List<ModelRealTimeTrendInfo>();
+    else
+      ModelRealTimeTrendInfo.list.clear();
+
     for(int countIndex=0; countIndex<modelRealTimeTrendInfoCount; ++countIndex)
     {
       ModelRealTimeTrendInfo modelFeaturedComicInfo = new ModelRealTimeTrendInfo();
@@ -38,8 +45,6 @@ class PacketS2CRealTimeTrendInfo extends PacketS2CCommon
 
       print(modelFeaturedComicInfo.toString());
 
-      if(null == ModelRealTimeTrendInfo.list)
-        ModelRealTimeTrendInfo.list = new List<ModelRealTimeTrendInfo>();
       ModelRealTimeTrendInfo.list.add(modelFeaturedComicInfo);
     }
   }

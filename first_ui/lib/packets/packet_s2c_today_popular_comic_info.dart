@@ -24,6 +24,12 @@ class PacketS2CTodayPopularComicInfo extends PacketS2CCommon
 
     int todayPopularComicInfoCount = getUint32();
     print('todayPopularComicInfoCount : $todayPopularComicInfoCount');
+
+    if(null == TodayPopularComicInfo.list)
+      TodayPopularComicInfo.list = new List<TodayPopularComicInfo>();
+    else
+      TodayPopularComicInfo.list.clear();
+
     for(int countIndex=0; countIndex<todayPopularComicInfoCount; ++countIndex)
     {
       TodayPopularComicInfo modelFeaturedComicInfo = new TodayPopularComicInfo();
@@ -38,8 +44,6 @@ class PacketS2CTodayPopularComicInfo extends PacketS2CCommon
 
       print(modelFeaturedComicInfo.toString());
 
-      if(null == TodayPopularComicInfo.list)
-        TodayPopularComicInfo.list = new List<TodayPopularComicInfo>();
       TodayPopularComicInfo.list.add(modelFeaturedComicInfo);
     }
   }

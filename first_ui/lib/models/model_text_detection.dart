@@ -82,11 +82,22 @@ class ModelTextDetection
   static List<BoundingBoxInfo> boundingBoxInfoList;
   static int imageTotalHeight = 0;
 
+  static void reset()
+  {
+    imageTotalHeight = 0;
+    if(null != list) {
+      list.clear();
+      list = null;
+    }
+
+    if(null != boundingBoxInfoList) {
+      boundingBoxInfoList.clear();
+      boundingBoxInfoList = null;
+    }
+  }
+
   static Future<List<ModelTextDetection>> generate(List<String> urlList,bool useCloud) async
   {
-    if(null != list)
-      return list;
-
     int boundingBoxCountIndex = 0;
     int previousImageTotalHeight = 0;
     for(int countIndex=0; countIndex<urlList.length; ++countIndex)
@@ -141,6 +152,7 @@ class ModelTextDetection
 
          if(null == list)
            list = new List<ModelTextDetection>();
+
          list.add(modelTextDetection);
 
 
@@ -149,16 +161,11 @@ class ModelTextDetection
          print('previousImageTotalHeight[$countIndex/${urlList.length}] : $previousImageTotalHeight');
          modelTextDetection.previousImageTotalHeight = previousImageTotalHeight;
 
-
-
          if (null != visionText.blocks) {
            for (int i = 0; i < visionText.blocks.length; ++i) {
              TextBlock textBlock = visionText.blocks[i];
 
              modelTextDetection.textBlockList.add(textBlock);
-
-             if(null == boundingBoxInfoList)
-               boundingBoxInfoList = new List<BoundingBoxInfo>();
 
              BoundingBoxInfo boundingBoxInfo = new BoundingBoxInfo();
              boundingBoxInfo.countIndex = boundingBoxCountIndex ++;
@@ -166,6 +173,9 @@ class ModelTextDetection
              boundingBoxInfo.text = '';
              boundingBoxInfo.previousImageTotalHeight = previousImageTotalHeight;
              boundingBoxInfo.imageWidth = modelTextDetection.image.width;
+
+             if(null == boundingBoxInfoList)
+               boundingBoxInfoList = new List<BoundingBoxInfo>();
              boundingBoxInfoList.add(boundingBoxInfo);
 
         //if (null != textBlock.recognizedLanguages)

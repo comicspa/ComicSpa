@@ -25,6 +25,12 @@ class PacketS2CNewComicInfo extends PacketS2CCommon
 
     int modelNewComicInfoCount = getUint32();
     print('modelNewComicInfoCount : $modelNewComicInfoCount');
+
+    if(null == ModelNewComicInfo.list)
+      ModelNewComicInfo.list = new List<ModelNewComicInfo>();
+    else
+      ModelNewComicInfo.list.clear();
+
     for(int countIndex=0; countIndex<modelNewComicInfoCount; ++countIndex)
     {
       ModelNewComicInfo modelFeaturedComicInfo = new ModelNewComicInfo();
@@ -39,8 +45,6 @@ class PacketS2CNewComicInfo extends PacketS2CCommon
 
       print(modelFeaturedComicInfo.toString());
 
-      if(null == ModelNewComicInfo.list)
-        ModelNewComicInfo.list = new List<ModelNewComicInfo>();
       ModelNewComicInfo.list.add(modelFeaturedComicInfo);
     }
   }

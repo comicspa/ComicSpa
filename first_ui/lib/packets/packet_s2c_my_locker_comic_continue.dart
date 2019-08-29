@@ -25,6 +25,13 @@ class PacketS2CMyLockerComicContinue extends PacketS2CCommon
 
     int modelMyLockerComicContinueCount = getUint32();
     print('modelMyLockerComicContinueCount : $modelMyLockerComicContinueCount');
+
+    if(null == ModelMyLockerComicContinue.list)
+      ModelMyLockerComicContinue.list = new List<ModelMyLockerComicContinue>();
+    else
+      ModelMyLockerComicContinue.list.clear();
+
+
     for(int countIndex=0; countIndex<modelMyLockerComicContinueCount; ++countIndex)
     {
       ModelMyLockerComicContinue modelFeaturedComicInfo = new ModelMyLockerComicContinue();
@@ -39,9 +46,8 @@ class PacketS2CMyLockerComicContinue extends PacketS2CCommon
 
       print(modelFeaturedComicInfo.toString());
 
-      if(null == ModelMyLockerComicContinue.list)
-        ModelMyLockerComicContinue.list = new List<ModelMyLockerComicContinue>();
       ModelMyLockerComicContinue.list.add(modelFeaturedComicInfo);
+
     }
   }
 
