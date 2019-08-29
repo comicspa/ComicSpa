@@ -1,4 +1,7 @@
 
+import 'dart:ui' as ui;
+
+
 class ModelWeeklyCreatorInfo
 {
   String _comicId;
@@ -7,6 +10,7 @@ class ModelWeeklyCreatorInfo
   String _url;
   String _thumbnailUrl;
   String _explain = 'explain';
+  ui.Image _image;
 
   String get comicId => _comicId;
   String get userId => _userId;
@@ -14,6 +18,7 @@ class ModelWeeklyCreatorInfo
   String get url => _url;
   String get thumbnailUrl => _thumbnailUrl;
   String get explain => _explain;
+  ui.Image get image => _image;
 
   set comicId(String comicId)
   {
@@ -38,6 +43,11 @@ class ModelWeeklyCreatorInfo
   set thumbnailUrl(String thumbnailUrl)
   {
     _thumbnailUrl = thumbnailUrl;
+  }
+
+  set image(ui.Image image)
+  {
+    _image = image;
   }
 
   @override
