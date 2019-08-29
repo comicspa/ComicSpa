@@ -206,7 +206,7 @@ class _ViewerScreen extends State<ViewerScreen> {
                   Navigator.push<Widget>(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DrawRectAndImage(), //Todo need parameter
+                        builder: (context) => DrawRectAndImage(),
                       ));
 
                 },
