@@ -13,6 +13,7 @@ import 'package:first_ui/packets/packet_c2s_view_comic.dart';
 import 'package:first_ui/models/model_featured_comic_info.dart';
 import 'package:first_ui/models/model_comic_detail_info.dart';
 import 'package:first_ui/packets/packet_c2s_comic_detail_info.dart';
+import 'package:first_ui/models/model_text_detection.dart';
 
 //Todo make fade-in image loading using "transparent_image package" later
 
@@ -199,6 +200,9 @@ class _ViewerScreen extends State<ViewerScreen> {
                 heroTag: 'btn1',
                 backgroundColor: Colors.brown,
                 onPressed: () {
+
+                  ModelTextDetection.reset();
+
                   Navigator.push<Widget>(
                       context,
                       MaterialPageRoute(
