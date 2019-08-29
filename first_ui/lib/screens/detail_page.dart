@@ -63,7 +63,9 @@ class _DetailPageState extends State<DetailPage> {
             fit: BoxFit.fitWidth,
             child: SizedBox(
               width: ManageDeviceInfo.resolutionWidth * 0.7,
-              child: Text(
+              child: ModelComicDetailInfo.getInstance().mainTitleName == null
+              ? Text('Loading...')
+              : Text(
                 ModelComicDetailInfo.getInstance().mainTitleName,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -87,7 +89,9 @@ class _DetailPageState extends State<DetailPage> {
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
-        child: Column(
+        child: ModelComicDetailInfo.getInstance().representationImageUrl == null
+          ? LoadingIndicator()
+          : Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Container(
