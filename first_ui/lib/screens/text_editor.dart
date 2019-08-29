@@ -12,6 +12,8 @@ import 'package:first_ui/models/model_text_detection.dart';
 import 'package:first_ui/screens/common_widgets.dart';
 
 class DrawRectAndImage extends StatefulWidget {
+  String episodeId;
+
   @override
   _DrawRectAndImageState createState() => _DrawRectAndImageState();
 }
@@ -51,6 +53,7 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
     return Scaffold(
       body: SingleChildScrollView(  // Todo add loading indicator here
           scrollDirection: Axis.vertical,
+          physics: BouncingScrollPhysics(),
           child: FutureBuilder<List<ModelTextDetection>>(
               future:  ModelTextDetection.generate(urlList,useCloud),
               builder: (context, snapshot) {

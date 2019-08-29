@@ -179,7 +179,7 @@ class _ViewerScreen extends State<ViewerScreen> {
 //        ),
         ),
       ),
-      bottomNavigationBar: Visibility(
+      /*bottomNavigationBar: Visibility(
         visible: _isVisible,
         child: SizedBox(
           height: ManageDeviceInfo.resolutionHeight * 0.055,
@@ -187,7 +187,7 @@ class _ViewerScreen extends State<ViewerScreen> {
             color: Colors.blue.withOpacity(0.3),
           )
         ),
-      ),
+      ),*/
       floatingActionButton: Visibility(
         visible: _isVisible,
         child: Row(
@@ -202,7 +202,7 @@ class _ViewerScreen extends State<ViewerScreen> {
                   Navigator.push<Widget>(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DrawRectAndImage(),
+                        builder: (context) => DrawRectAndImage(), //Todo need parameter
                       ));
 
                 },

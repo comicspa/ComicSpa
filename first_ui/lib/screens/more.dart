@@ -35,7 +35,7 @@ class _MoreScreenState extends State<MoreScreen> {
     return ListView(
       children: <Widget>[
         Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Stack(
@@ -56,12 +56,13 @@ class _MoreScreenState extends State<MoreScreen> {
                 ),
                 Positioned(
                   bottom: ManageDeviceInfo.resolutionHeight * 0.03,
-                  left: ManageDeviceInfo.resolutionWidth * 0.17,
+                  left: ManageDeviceInfo.resolutionWidth * 0.23,
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       SizedBox(
                         height: ManageDeviceInfo.resolutionHeight * 0.05,
-                        width: ManageDeviceInfo.resolutionWidth * 0.3,
+                        width: ManageDeviceInfo.resolutionWidth * 0.25,
                         child: OutlineButton(
                           highlightedBorderColor: Colors.redAccent,
                           shape: StadiumBorder(),
@@ -88,7 +89,7 @@ class _MoreScreenState extends State<MoreScreen> {
                       ),
                       SizedBox(
                         height: ManageDeviceInfo.resolutionHeight * 0.05,
-                        width: ManageDeviceInfo.resolutionWidth * 0.3,
+                        width: ManageDeviceInfo.resolutionWidth * 0.25,
                         child: OutlineButton(
                           highlightedBorderColor: Colors.redAccent,
                           shape: StadiumBorder(),
@@ -101,7 +102,7 @@ class _MoreScreenState extends State<MoreScreen> {
                                 ));
                           },
                           child: Text(
-                            'Top-up Comi',
+                            'Shop',
                             style: TextStyle(
                               fontFamily: 'Lato',
                               fontWeight: FontWeight.bold,
