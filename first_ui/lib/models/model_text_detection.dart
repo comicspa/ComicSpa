@@ -113,7 +113,7 @@ class ModelTextDetection
                }
            );
          });
-          */
+         */
 
          FileInfo fileInfo = await ManageFlutterCacheManager.downloadFile(url);
          int fileLength = await fileInfo.file.length();
