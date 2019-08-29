@@ -24,6 +24,13 @@ class PacketS2CRecommendedCreatorInfo extends PacketS2CCommon
 
     int modelRecommendedCreatorInfoCount = getUint32();
     print('modelRecommendedCreatorInfoCount : $modelRecommendedCreatorInfoCount');
+
+    if(null == ModelRecommendedCreatorInfo.list)
+      ModelRecommendedCreatorInfo.list = new List<ModelRecommendedCreatorInfo>();
+    else
+      ModelRecommendedCreatorInfo.list.clear();
+
+
     for(int countIndex=0; countIndex<modelRecommendedCreatorInfoCount; ++countIndex)
     {
       ModelRecommendedCreatorInfo modelFeaturedComicInfo = new ModelRecommendedCreatorInfo();
@@ -38,8 +45,6 @@ class PacketS2CRecommendedCreatorInfo extends PacketS2CCommon
 
       print(modelFeaturedComicInfo.toString());
 
-      if(null == ModelRecommendedCreatorInfo.list)
-        ModelRecommendedCreatorInfo.list = new List<ModelRecommendedCreatorInfo>();
       ModelRecommendedCreatorInfo.list.add(modelFeaturedComicInfo);
     }
   }

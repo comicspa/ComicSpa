@@ -24,6 +24,12 @@ class PacketS2CWeeklyCreatorInfo extends PacketS2CCommon
 
     int modelWeeklyCreatorInfoCount = getUint32();
     print('modelWeeklyCreatorInfoCount : $modelWeeklyCreatorInfoCount');
+
+    if(null == ModelWeeklyCreatorInfo.list)
+      ModelWeeklyCreatorInfo.list = new List<ModelWeeklyCreatorInfo>();
+    else
+      ModelWeeklyCreatorInfo.list.clear();
+
     for(int countIndex=0; countIndex<modelWeeklyCreatorInfoCount; ++countIndex)
     {
       ModelWeeklyCreatorInfo modelFeaturedComicInfo = new ModelWeeklyCreatorInfo();
@@ -38,8 +44,6 @@ class PacketS2CWeeklyCreatorInfo extends PacketS2CCommon
 
       print(modelFeaturedComicInfo.toString());
 
-      if(null == ModelWeeklyCreatorInfo.list)
-        ModelWeeklyCreatorInfo.list = new List<ModelWeeklyCreatorInfo>();
       ModelWeeklyCreatorInfo.list.add(modelFeaturedComicInfo);
     }
   }
