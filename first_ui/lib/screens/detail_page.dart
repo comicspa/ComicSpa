@@ -49,48 +49,40 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(40.0),
+        preferredSize: Size.fromHeight(ManageDeviceInfo.resolutionHeight * 0.055),
         child: AppBar(
           elevation: 1,
+          iconTheme: IconThemeData(
+            color: Colors.black, //change your color here
+          ),
           backgroundColor: Colors.white, //Color.fromRGBO(21, 24, 45, 1.0),
           //Color(0xff202a30), //Colors.black87, // Color(0xFF5986E1),
           centerTitle: true,
 
-          title: SvgPicture.asset(
+          title: FittedBox(
+            fit: BoxFit.fitWidth,
+            child: SizedBox(
+              width: ManageDeviceInfo.resolutionWidth * 0.7,
+              child: Text(
+                ModelComicDetailInfo.getInstance().mainTitleName,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: 'Lato',
+                  fontWeight: FontWeight.bold,
+                  fontSize: ManageDeviceInfo.resolutionHeight * 0.025,
+                  color: Colors.black87,
+                ),
+              ),
+            ),
+          ),
+          /*SvgPicture.asset(
             'images/sparky_logo.svg',
             width: ManageDeviceInfo.resolutionWidth * 0.045,
             height: ManageDeviceInfo.resolutionHeight * 0.025,
-          ),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.perm_identity,
-                color: Color.fromRGBO(21, 24, 45, 1.0),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ComingSoonScreen(),
-                  ),
-                );
-              },
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.search,
-                color: Color.fromRGBO(21, 24, 45, 1.0),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ComingSoonScreen(),
-                  ),
-                );
-              },
-            ),
-          ],
+          ),*/
+
         ),
       ),
       body: SingleChildScrollView(
@@ -98,6 +90,22 @@ class _DetailPageState extends State<DetailPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
+            Container(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(
+                    0,
+                    ManageDeviceInfo.resolutionHeight * 0.0,
+                    0,
+                    ManageDeviceInfo.resolutionHeight * 0.01),
+                child: CachedNetworkImage(
+                  imageUrl: ModelComicDetailInfo.getInstance().representationImageUrl,
+                  width: ManageDeviceInfo.resolutionWidth * 0.325,
+                  height: ManageDeviceInfo.resolutionHeight * 0.275,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
             Container(
               alignment: Alignment.center,
               child: Padding(
@@ -120,22 +128,6 @@ class _DetailPageState extends State<DetailPage> {
                       color: Colors.black87,
                     ),
                   ),
-                ),
-              ),
-            ),
-            Container(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(
-                    0,
-                    ManageDeviceInfo.resolutionHeight * 0.0,
-                    0,
-                    ManageDeviceInfo.resolutionHeight * 0.01),
-                child: CachedNetworkImage(
-                  imageUrl: ModelComicDetailInfo.getInstance().representationImageUrl,
-                  width: ManageDeviceInfo.resolutionWidth * 0.325,
-                  height: ManageDeviceInfo.resolutionHeight * 0.275,
-                  fit: BoxFit.cover,
                 ),
               ),
             ),
@@ -579,7 +571,7 @@ class _DetailPageState extends State<DetailPage> {
                           },
                         ),
                         contentPadding: EdgeInsets.symmetric(
-                            vertical: ManageDeviceInfo.resolutionHeight * 0.013, horizontal: ManageDeviceInfo.resolutionWidth * 0.01),
+                            vertical: ManageDeviceInfo.resolutionHeight * 0.013, horizontal: ManageDeviceInfo.resolutionWidth * 0.025),
                       );
                     },
                   );

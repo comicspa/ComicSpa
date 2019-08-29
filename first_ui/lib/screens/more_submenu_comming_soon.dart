@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
 
 
 // Coming soon page for multi-purpose
@@ -30,7 +31,7 @@ class _SubMenuComingSoonScreenState extends State<SubMenuComingSoonScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(40.0),
+        preferredSize: Size.fromHeight(ManageDeviceInfo.resolutionHeight * 0.055),
         child: AppBar(
           iconTheme: IconThemeData(
             color: Colors.black, //change your color here

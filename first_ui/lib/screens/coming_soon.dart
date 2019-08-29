@@ -26,7 +26,7 @@ class _ComingSoonScreenState extends State<ComingSoonScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(40.0),
+        preferredSize: Size.fromHeight(ManageDeviceInfo.resolutionHeight * 0.055),
         child: AppBar(
           iconTheme: IconThemeData(
             color: Colors.black, //change your color here
