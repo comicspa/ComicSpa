@@ -37,6 +37,8 @@ class PacketS2CComicDetailInfo extends PacketS2CCommon
 
     if(null == ModelComicDetailInfo.getInstance().modelComicInfoList)
       ModelComicDetailInfo.getInstance().modelComicInfoList = new List<ModelComicInfo>();
+    else
+      ModelComicDetailInfo.getInstance().modelComicInfoList.clear();
 
     int comicInfoCount = getUint32();
     print('comicInfoCount : $comicInfoCount');

@@ -16,6 +16,7 @@ class PacketC2SComicDetailInfo extends PacketC2SCommon
 {
   String _userId;
   String _comicId;
+  int _fetchStatus = 0;
 
   PacketC2SComicDetailInfo()
   {
@@ -31,6 +32,8 @@ class PacketC2SComicDetailInfo extends PacketC2SCommon
   Future<ModelComicDetailInfo> fetchBytes() async
   {
     print('PacketC2SComicDetailInfo : fetchBytes started');
+    if(0 != _fetchStatus)
+      return ModelComicDetailInfo.getInstance();
 
     Socket socket = await ModelCommon.createServiceSocket();
     print('connected server');
@@ -56,9 +59,11 @@ class PacketC2SComicDetailInfo extends PacketC2SCommon
 
         PacketS2CComicDetailInfo packet = new PacketS2CComicDetailInfo();
         packet.parseBytes(packetSize,byteData);
+
+        _fetchStatus = 2;
       }
 
-      return ModelComicDetailInfo.getInstance();;
+      return ModelComicDetailInfo.getInstance();
     });
 
 
@@ -77,6 +82,7 @@ class PacketC2SComicDetailInfo extends PacketC2SCommon
     await Future.delayed(Duration(seconds: 10));
     socket.close();
 
+    _fetchStatus = 1;
     return ModelComicDetailInfo.getInstance();
   }
 
