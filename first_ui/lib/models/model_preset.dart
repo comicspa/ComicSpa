@@ -25,7 +25,8 @@ class ModelPreset
   static String _privacyPolicyUrl = 'https://www.google.co.kr';
   static String _termsOfUseUrl = 'https://www.google.co.kr';
   static final String _comicBaseUrl = 'comics';
-  static final String __representationImageFileFullName = '000000.jpg';
+  static final String __representationVerticalImageFileFullName = '000000.jpg';
+  static final String __representationHorizontalImageFileFullName = '000001.jpg';
   static final String __thumbnailImageFileFullName = '00000.jpg';
   static final String __bannerImageFileFullName = '100000.jpg';
 
@@ -34,7 +35,8 @@ class ModelPreset
   static String get privacyPolicyUrl => _privacyPolicyUrl;
   static String get termsOfUseUrl => _termsOfUseUrl;
   static String get comicBaseUrl => _comicBaseUrl;
-  static String get representationImageFileFullName => __representationImageFileFullName;
+  static String get representationVerticalImageFileFullName => __representationVerticalImageFileFullName;
+  static String get representationHorizontalImageFileFullName => __representationHorizontalImageFileFullName;
   static String get thumbnailImageFileFullName => __thumbnailImageFileFullName;
   static String get bannerImageFileFullName => __bannerImageFileFullName;
 
@@ -158,10 +160,17 @@ class ModelPreset
   }
 
 
-  static Future<String> getRepresentationImageDownloadUrl(String userId,String comicId) async
+  static Future<String> getRepresentationVerticalImageDownloadUrl(String userId,String comicId) async
   {
-    String url  = await ManageFirebaseStorage.getDownloadUrl('$comicBaseUrl/$userId/$comicId/$representationImageFileFullName');
-    print('getRepresentationImageDownloadUrl : $url');
+    String url  = await ManageFirebaseStorage.getDownloadUrl('$comicBaseUrl/$userId/$comicId/$representationVerticalImageFileFullName');
+    print('getRepresentationVerticalImageDownloadUrl : $url');
+    return url;
+  }
+
+  static Future<String> getRepresentationHorizontalImageDownloadUrl(String userId,String comicId) async
+  {
+    String url  = await ManageFirebaseStorage.getDownloadUrl('$comicBaseUrl/$userId/$comicId/$representationHorizontalImageFileFullName');
+    print('getRepresentationHorizontalImageDownloadUrl : $url');
     return url;
   }
 

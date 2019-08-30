@@ -98,6 +98,9 @@ class ModelTextDetection
 
   static Future<List<ModelTextDetection>> generate(List<String> urlList,bool useCloud) async
   {
+    if(null!= list)
+      return list;
+
     int boundingBoxCountIndex = 0;
     int previousImageTotalHeight = 0;
     for(int countIndex=0; countIndex<urlList.length; ++countIndex)
@@ -149,13 +152,6 @@ class ModelTextDetection
            print('imaghe2[$countIndex/${urlList.length}] size - width : ${modelTextDetection.manageImage.width} , height : ${modelTextDetection.manageImage.height}');
          }
 
-
-         if(null == list)
-           list = new List<ModelTextDetection>();
-
-         list.add(modelTextDetection);
-
-
          if(0 < countIndex)
            previousImageTotalHeight += list[countIndex-1].manageImage.height;
          print('previousImageTotalHeight[$countIndex/${urlList.length}] : $previousImageTotalHeight');
@@ -198,6 +194,9 @@ class ModelTextDetection
            }
          }
 
+
+
+
          /*
          print('textBlockList Count : ${modelTextDetection.textBlockList.length}');
          modelTextDetection.uint8List = await ModelCommon.getUint8ListFromFile(fileInfo.file);
@@ -205,6 +204,13 @@ class ModelTextDetection
 
          imageTotalHeight += modelTextDetection.manageImage.height;
          print('imageTotalHeight[$countIndex/${urlList.length}] : $imageTotalHeight');
+
+
+         if(null == list)
+           list = new List<ModelTextDetection>();
+
+         list.add(modelTextDetection);
+
        }
 
        return list;

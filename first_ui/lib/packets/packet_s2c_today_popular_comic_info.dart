@@ -38,7 +38,7 @@ class PacketS2CTodayPopularComicInfo extends PacketS2CCommon
       modelFeaturedComicInfo.comicId = readStringToByteBuffer();
       modelFeaturedComicInfo.title = readStringToByteBuffer();
 
-      String url = await ModelPreset.getBannerImageDownloadUrl(modelFeaturedComicInfo.userId, modelFeaturedComicInfo.comicId);
+      String url = await ModelPreset.getRepresentationHorizontalImageDownloadUrl(modelFeaturedComicInfo.userId, modelFeaturedComicInfo.comicId);
       modelFeaturedComicInfo.url = url;
       modelFeaturedComicInfo.thumbnailUrl = url;
 

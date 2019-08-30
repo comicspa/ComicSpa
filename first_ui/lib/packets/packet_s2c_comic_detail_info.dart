@@ -15,6 +15,7 @@ class PacketS2CComicDetailInfo extends PacketS2CCommon
     type = e_packet_type.s2c_comic_detail_info;
   }
 
+
   Future<void> parseBytes(int packetSize,ByteData byteDataExceptionSize) async
   {
     parseHeaderChecked(packetSize,byteDataExceptionSize);
@@ -33,7 +34,7 @@ class PacketS2CComicDetailInfo extends PacketS2CCommon
     ModelComicDetailInfo.getInstance().point = getDouble();
 
     ModelComicDetailInfo.getInstance().representationImageUrl =
-      await ModelPreset.getRepresentationImageDownloadUrl(ModelComicDetailInfo.getInstance().userId, ModelComicDetailInfo.getInstance().comicId );
+      await ModelPreset.getRepresentationVerticalImageDownloadUrl(ModelComicDetailInfo.getInstance().userId, ModelComicDetailInfo.getInstance().comicId );
 
     if(null == ModelComicDetailInfo.getInstance().modelComicInfoList)
       ModelComicDetailInfo.getInstance().modelComicInfoList = new List<ModelComicInfo>();
@@ -55,8 +56,10 @@ class PacketS2CComicDetailInfo extends PacketS2CCommon
       modelComicInfo.comicId = ModelComicDetailInfo.getInstance().comicId;
 
       modelComicInfo.thumbnailImageUrl =
-      await ModelPreset.getThumbnailImageDownloadUrl(ModelComicDetailInfo.getInstance().userId,
-          ModelComicDetailInfo.getInstance().comicId,'001','001','00001');
+      //await ModelPreset.getThumbnailImageDownloadUrl(ModelComicDetailInfo.getInstance().userId,
+       //   ModelComicDetailInfo.getInstance().comicId,'001','001','00001');
+
+      await ModelPreset.getRepresentationHorizontalImageDownloadUrl(ModelComicDetailInfo.getInstance().userId, ModelComicDetailInfo.getInstance().comicId);
 
       print('comicInfo_thumbnailImageURL[$countIndex] : ${modelComicInfo.thumbnailImageUrl}');
 
