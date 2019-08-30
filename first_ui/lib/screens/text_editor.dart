@@ -91,15 +91,15 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
                                 debugPrint("hello");
                               },
                               child: Container(
-                                  width: boundingBoxInfo.width,
-                                  //ManageDeviceInfo.resolutionWidth / (ModelTextDetection.list[0].manageImage.width / boundingBoxInfo.boundingBox.width),
-                                  height: boundingBoxInfo.height,
-                                  //ManageDeviceInfo.resolutionHeight / (ModelTextDetection.imageTotalHeight / boundingBoxInfo.boundingBox.height) + ManageDeviceInfo.statusBarHeight,
-                                  decoration: textBoxDecoration(boundingBoxInfo
-                                      .changed),
-                                  child: Text(
-                                    /*textController.text*/
-                                      boundingBoxInfo.text)
+                                width: boundingBoxInfo.width,
+                                //ManageDeviceInfo.resolutionWidth / (ModelTextDetection.list[0].manageImage.width / boundingBoxInfo.boundingBox.width),
+                                height: boundingBoxInfo.height,
+                                //ManageDeviceInfo.resolutionHeight / (ModelTextDetection.imageTotalHeight / boundingBoxInfo.boundingBox.height) + ManageDeviceInfo.statusBarHeight,
+                                decoration: textBoxDecoration(boundingBoxInfo
+                                    .changed),
+                                child: Text(
+                                  /*textController.text*/
+                                    boundingBoxInfo.text)
                               ),
                             ),
                           ),
@@ -272,14 +272,7 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
                       child: RaisedButton(
                         shape: StadiumBorder(),
                         onPressed: () {
-                          // Validate will return true if the form is valid, or false if
-                          // the form is invalid.
-                          textController.text = '';
-                          setState(() {
-
-                          });
-
-                          Navigator.of(null).pop();
+                          Navigator.of(context).pop();
                         },
                         child: Text('Cancel'),
                       ),
@@ -348,7 +341,7 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
 
   BoxDecoration textBoxDecoration(bool changed) {
     return BoxDecoration(
-      color: changed? Colors.white.withOpacity(1.0):Colors.amberAccent.withOpacity(0.5),
+      color: changed? Colors.white.withOpacity(1.0):Colors.amberAccent.withOpacity(0.1),
       border: Border.all(color: changed? Colors.white.withOpacity(1.0):Colors.blueAccent, width: 1.0),
 
       borderRadius: BorderRadius.all(Radius.circular(5.0)
