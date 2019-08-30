@@ -7,6 +7,7 @@ import 'dart:async';
 
 import 'package:first_ui/models/model_preset.dart';
 import 'package:first_ui/manage/manage_device_info.dart';
+import 'package:first_ui/manage/manage_message.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 
@@ -18,17 +19,23 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
+
+  @override
+  void initState() {
+    super.initState();
+
+    init();
+  }
+
   void _presetFetchDone()
   {
     navigationPage();
   }
 
-  startTime() async {
-    //var _duration = new Duration(seconds: 2);
-    //return new Timer(_duration, navigationPage);
-    //ModelPreset.test();
+  void init() async
+  {
+    //ManageMessage.generate();
     ModelPreset.fetch2(_presetFetchDone);
-    //navigationPage();
   }
 
   void navigationPage() {
@@ -49,17 +56,6 @@ class _SplashScreenState extends State<SplashScreen> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-    startTime();
-  }
-
-//  void initState() {
-//
-//    super.initState();
-//    Timer(Duration(seconds: 3), () => HomeScreen());
-//  }
 
   @override
   Widget build(BuildContext context) {

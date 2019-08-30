@@ -48,38 +48,4 @@ class PacketS2CMyLockerComicOwned extends PacketS2CCommon
       ModelMyLockerComicOwned.list.add(modelFeaturedComicInfo);
     }
   }
-
-  /*
-  void parseBytes(int packetSize,ByteData byteDataExceptionSize)
-  {
-    parseHeaderChecked(packetSize,byteDataExceptionSize);
-
-    systemErrorCode = getUint32();
-    serviceErrorCode = getUint32();
-
-    print('PackSize : $size , PacketType : $type , systemErrorCode : $systemErrorCode , serviceErrorCode : $serviceErrorCode');
-
-
-    int modelMyLockerComicOwnedCount = getUint32();
-    print('modelMyLockerComicOwnedCount : $modelMyLockerComicOwnedCount');
-
-    for(int countIndex=0; countIndex<modelMyLockerComicOwnedCount; ++countIndex)
-    {
-      ModelMyLockerComicOwned modelMyLockerComicOwned = new ModelMyLockerComicOwned();
-
-      modelMyLockerComicOwned.comicId = getUint32();
-      modelMyLockerComicOwned.id = getUint32();
-      modelMyLockerComicOwned.title = readStringToByteBuffer();
-      modelMyLockerComicOwned.url = readStringToByteBuffer();
-      modelMyLockerComicOwned.thumbnailUrl = readStringToByteBuffer();
-
-      print(modelMyLockerComicOwned.toString());
-
-      if(null == ModelMyLockerComicOwned.list)
-        ModelMyLockerComicOwned.list = new List<ModelMyLockerComicOwned>();
-      ModelMyLockerComicOwned.list.add(modelMyLockerComicOwned);
-    }
-  }
-   */
-
 }

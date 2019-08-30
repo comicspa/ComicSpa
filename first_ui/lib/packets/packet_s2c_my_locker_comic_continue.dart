@@ -51,37 +51,4 @@ class PacketS2CMyLockerComicContinue extends PacketS2CCommon
     }
   }
 
-  /*
-  void parseBytes(int packetSize,ByteData byteDataExceptionSize)
-  {
-    parseHeaderChecked(packetSize,byteDataExceptionSize);
-
-    systemErrorCode = getUint32();
-    serviceErrorCode = getUint32();
-
-    print('PackSize : $size , PacketType : $type , systemErrorCode : $systemErrorCode , serviceErrorCode : $serviceErrorCode');
-
-    int modelMyLockerComicContinueCount = getUint32();
-    print('modelMyLockerComicContinueCount : $modelMyLockerComicContinueCount');
-
-    for(int countIndex=0; countIndex<modelMyLockerComicContinueCount; ++countIndex)
-    {
-      ModelMyLockerComicContinue modelMyLockerComicContinue = new ModelMyLockerComicContinue();
-
-      modelMyLockerComicContinue.comicId = getUint32();
-      modelMyLockerComicContinue.id = getUint32();
-      modelMyLockerComicContinue.title = readStringToByteBuffer();
-      modelMyLockerComicContinue.url = readStringToByteBuffer();
-      modelMyLockerComicContinue.thumbnailUrl = readStringToByteBuffer();
-
-      print(modelMyLockerComicContinue.toString());
-
-
-      if(null == ModelMyLockerComicContinue.list)
-        ModelMyLockerComicContinue.list = new List<ModelMyLockerComicContinue>();
-      ModelMyLockerComicContinue.list.add(modelMyLockerComicContinue);
-    }
-  }
-   */
-
 }
