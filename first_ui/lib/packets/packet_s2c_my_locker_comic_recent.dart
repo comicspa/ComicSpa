@@ -26,6 +26,43 @@ class PacketS2CMyLockerComicRecent extends PacketS2CCommon
     int modelMyLockerComicRecentCount = getUint32();
     print('modelMyLockerComicRecentCount : $modelMyLockerComicRecentCount');
 
+
+    List<ModelMyLockerComicRecent> list = new List<ModelMyLockerComicRecent>();
+
+    for(int countIndex=0; countIndex<modelMyLockerComicRecentCount; ++countIndex)
+    {
+      ModelMyLockerComicRecent modelFeaturedComicInfo = new ModelMyLockerComicRecent();
+
+      modelFeaturedComicInfo.userId = readStringToByteBuffer();
+      modelFeaturedComicInfo.comicId = readStringToByteBuffer();
+      modelFeaturedComicInfo.title = readStringToByteBuffer();
+
+      String url = await ModelPreset.getRepresentationVerticalImageDownloadUrl(modelFeaturedComicInfo.userId, modelFeaturedComicInfo.comicId);
+      modelFeaturedComicInfo.url = url;
+      modelFeaturedComicInfo.thumbnailUrl = url;
+
+      print(modelFeaturedComicInfo.toString());
+
+      list.add(modelFeaturedComicInfo);
+    }
+
+    ModelMyLockerComicRecent.list = list;
+
+  }
+
+  /*
+  Future<void> parseBytes(int packetSize,ByteData byteDataExceptionSize) async
+  {
+    parseHeaderChecked(packetSize,byteDataExceptionSize);
+
+    systemErrorCode = getUint32();
+    serviceErrorCode = getUint32();
+
+    print('PackSize : $size , PacketType : $type , systemErrorCode : $systemErrorCode , serviceErrorCode : $serviceErrorCode');
+
+    int modelMyLockerComicRecentCount = getUint32();
+    print('modelMyLockerComicRecentCount : $modelMyLockerComicRecentCount');
+
     if(null == ModelMyLockerComicRecent.list)
       ModelMyLockerComicRecent.list = new List<ModelMyLockerComicRecent>();
     else
@@ -49,5 +86,7 @@ class PacketS2CMyLockerComicRecent extends PacketS2CCommon
       ModelMyLockerComicRecent.list.add(modelFeaturedComicInfo);
     }
   }
+
+   */
 
 }

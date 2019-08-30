@@ -25,6 +25,41 @@ class PacketS2CRecommendedCreatorInfo extends PacketS2CCommon
     int modelRecommendedCreatorInfoCount = getUint32();
     print('modelRecommendedCreatorInfoCount : $modelRecommendedCreatorInfoCount');
 
+
+    List<ModelRecommendedCreatorInfo> list = new List<ModelRecommendedCreatorInfo>();
+    for(int countIndex=0; countIndex<modelRecommendedCreatorInfoCount; ++countIndex)
+    {
+      ModelRecommendedCreatorInfo modelFeaturedComicInfo = new ModelRecommendedCreatorInfo();
+
+      modelFeaturedComicInfo.userId = readStringToByteBuffer();
+      modelFeaturedComicInfo.comicId = readStringToByteBuffer();
+      modelFeaturedComicInfo.title = readStringToByteBuffer();
+
+      String url = await ModelPreset.getRepresentationHorizontalImageDownloadUrl(modelFeaturedComicInfo.userId, modelFeaturedComicInfo.comicId);
+      modelFeaturedComicInfo.url = url;
+      modelFeaturedComicInfo.thumbnailUrl = url;
+
+      print(modelFeaturedComicInfo.toString());
+
+      list.add(modelFeaturedComicInfo);
+    }
+
+    ModelRecommendedCreatorInfo.list = list;
+  }
+
+  /*
+  Future<void> parseBytes(int packetSize,ByteData byteDataExceptionSize) async
+  {
+    parseHeaderChecked(packetSize,byteDataExceptionSize);
+
+    systemErrorCode = getUint32();
+    serviceErrorCode = getUint32();
+
+    print('PackSize : $size , PacketType : $type , systemErrorCode : $systemErrorCode , serviceErrorCode : $serviceErrorCode');
+
+    int modelRecommendedCreatorInfoCount = getUint32();
+    print('modelRecommendedCreatorInfoCount : $modelRecommendedCreatorInfoCount');
+
     if(null == ModelRecommendedCreatorInfo.list)
       ModelRecommendedCreatorInfo.list = new List<ModelRecommendedCreatorInfo>();
     else
@@ -49,37 +84,6 @@ class PacketS2CRecommendedCreatorInfo extends PacketS2CCommon
     }
   }
 
-  /*
-  void parseBytes(int packetSize,ByteData byteDataExceptionSize)
-  {
-    parseHeaderChecked(packetSize,byteDataExceptionSize);
-
-    systemErrorCode = getUint32();
-    serviceErrorCode = getUint32();
-
-    print('PackSize : $size , PacketType : $type , systemErrorCode : $systemErrorCode , serviceErrorCode : $serviceErrorCode');
-
-
-    int modelRecommendedCreatorInfoCount = getUint32();
-    print('modelRecommendedCreatorInfoCount : $modelRecommendedCreatorInfoCount');
-
-    for(int countIndex=0; countIndex<modelRecommendedCreatorInfoCount; ++countIndex)
-    {
-      ModelRecommendedCreatorInfo modelRecommendedCreatorInfo = new ModelRecommendedCreatorInfo();
-
-      modelRecommendedCreatorInfo.comicId = getUint32();
-      modelRecommendedCreatorInfo.id = getUint32();
-      modelRecommendedCreatorInfo.title = readStringToByteBuffer();
-      modelRecommendedCreatorInfo.url = readStringToByteBuffer();
-      modelRecommendedCreatorInfo.thumbnailUrl = readStringToByteBuffer();
-
-      print(modelRecommendedCreatorInfo.toString());
-
-      if(null == ModelRecommendedCreatorInfo.list)
-        ModelRecommendedCreatorInfo.list = new List<ModelRecommendedCreatorInfo>();
-      ModelRecommendedCreatorInfo.list.add(modelRecommendedCreatorInfo);
-    }
-  }
-  */
+   */
 
 }

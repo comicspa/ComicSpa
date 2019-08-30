@@ -25,6 +25,42 @@ class PacketS2CWeeklyCreatorInfo extends PacketS2CCommon
     int modelWeeklyCreatorInfoCount = getUint32();
     print('modelWeeklyCreatorInfoCount : $modelWeeklyCreatorInfoCount');
 
+
+    List<ModelWeeklyCreatorInfo> list = new List<ModelWeeklyCreatorInfo>();
+    for(int countIndex=0; countIndex<modelWeeklyCreatorInfoCount; ++countIndex)
+    {
+      ModelWeeklyCreatorInfo modelFeaturedComicInfo = new ModelWeeklyCreatorInfo();
+
+      modelFeaturedComicInfo.userId = readStringToByteBuffer();
+      modelFeaturedComicInfo.comicId = readStringToByteBuffer();
+      modelFeaturedComicInfo.title = readStringToByteBuffer();
+
+      String url = await ModelPreset.getRepresentationHorizontalImageDownloadUrl(modelFeaturedComicInfo.userId, modelFeaturedComicInfo.comicId);
+      modelFeaturedComicInfo.url = url;
+      modelFeaturedComicInfo.thumbnailUrl = url;
+
+      print(modelFeaturedComicInfo.toString());
+
+      list.add(modelFeaturedComicInfo);
+    }
+
+    ModelWeeklyCreatorInfo.list = list;
+  }
+
+
+  /*
+  Future<void> parseBytes(int packetSize,ByteData byteDataExceptionSize) async
+  {
+    parseHeaderChecked(packetSize,byteDataExceptionSize);
+
+    systemErrorCode = getUint32();
+    serviceErrorCode = getUint32();
+
+    print('PackSize : $size , PacketType : $type , systemErrorCode : $systemErrorCode , serviceErrorCode : $serviceErrorCode');
+
+    int modelWeeklyCreatorInfoCount = getUint32();
+    print('modelWeeklyCreatorInfoCount : $modelWeeklyCreatorInfoCount');
+
     if(null == ModelWeeklyCreatorInfo.list)
       ModelWeeklyCreatorInfo.list = new List<ModelWeeklyCreatorInfo>();
     else
@@ -48,36 +84,8 @@ class PacketS2CWeeklyCreatorInfo extends PacketS2CCommon
     }
   }
 
-  /*
-  void parseBytes(int packetSize,ByteData byteDataExceptionSize)
-  {
-    parseHeaderChecked(packetSize,byteDataExceptionSize);
+   */
 
-    systemErrorCode = getUint32();
-    serviceErrorCode = getUint32();
-
-    print('PackSize : $size , PacketType : $type , systemErrorCode : $systemErrorCode , serviceErrorCode : $serviceErrorCode');
-
-    int modelWeeklyCreatorInfoCount = getUint32();
-    print('modelWeeklyCreatorInfoCount : $modelWeeklyCreatorInfoCount');
-
-    for(int countIndex=0; countIndex<modelWeeklyCreatorInfoCount; ++countIndex)
-    {
-      ModelWeeklyCreatorInfo modelWeeklyCreatorInfo = new ModelWeeklyCreatorInfo();
-
-      modelWeeklyCreatorInfo.id = readStringToByteBuffer();
-      modelWeeklyCreatorInfo.explain = readStringToByteBuffer();
-      modelWeeklyCreatorInfo.url = readStringToByteBuffer();
-
-      print(modelWeeklyCreatorInfo.toString());
-
-      if(null == ModelWeeklyCreatorInfo.list)
-        ModelWeeklyCreatorInfo.list = new List<ModelWeeklyCreatorInfo>();
-      ModelWeeklyCreatorInfo.list.add(modelWeeklyCreatorInfo);
-
-    }
-  }
-  */
 
 
 }

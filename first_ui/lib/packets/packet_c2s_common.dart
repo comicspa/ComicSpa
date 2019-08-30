@@ -9,8 +9,11 @@ import 'package:first_ui/packets/packet_utility.dart';
 class PacketC2SCommon extends PacketCommon
 {
 
-  bool generateHeader(int packetBodySize)
+  int generateHeader(int packetBodySize)
   {
+    if(null != packet)
+      return 1;
+
     this.size += packetBodySize;
     print('packetSize : ${this.size} , packetType : ${this.type}');
 
@@ -20,7 +23,7 @@ class PacketC2SCommon extends PacketCommon
     setUint32(this.size);
     setUint16(this.type.index);
 
-    return true;
+    return 0;
   }
 
 

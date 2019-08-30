@@ -65,13 +65,14 @@ class PacketC2SMyLockerComicRecent extends PacketC2SCommon
       return ModelMyLockerComicRecent.list;
     });
 
+
     int packetBodySize  = 4 + 4;
-    generateHeader(packetBodySize);
+    if(0 == generateHeader(packetBodySize)) {
+      setUint32(_pageCountIndex);
+      setUint32(_pageViewCount);
 
-    setUint32(_pageCountIndex);
-    setUint32(_pageViewCount);
-
-    socket.add(packet);
+      socket.add(packet);
+    }
 
     // wait 5 seconds
     await Future.delayed(Duration(seconds: 20));

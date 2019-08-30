@@ -15,7 +15,6 @@ class PacketC2SFeaturedComicInfo extends PacketC2SCommon
 {
   int _pageCountIndex = 0;
   int _pageViewCount = 0;
-  int _fetchStatus = 0;
 
   PacketC2SFeaturedComicInfo()
   {
@@ -32,8 +31,7 @@ class PacketC2SFeaturedComicInfo extends PacketC2SCommon
   {
     print('PacketC2SFeaturedComicInfo : fetchBytes started');
 
-    if(0 != _fetchStatus)
-    //if(null != ModelFeaturedComicInfo.list)
+    if(null != ModelFeaturedComicInfo.list)
        return ModelFeaturedComicInfo.list;
 
     Socket socket = await ModelCommon.createServiceSocket();
@@ -61,8 +59,6 @@ class PacketC2SFeaturedComicInfo extends PacketC2SCommon
 
         PacketS2CFeaturedComicInfo packet = new PacketS2CFeaturedComicInfo();
         packet.parseBytes(packetSize,byteData);
-
-        _fetchStatus = 2;
       }
 
       return ModelFeaturedComicInfo.list;
@@ -81,7 +77,6 @@ class PacketC2SFeaturedComicInfo extends PacketC2SCommon
     await Future.delayed(Duration(seconds: 20));
     socket.close();
 
-    _fetchStatus = 1;
     return ModelFeaturedComicInfo.list;
   }
 

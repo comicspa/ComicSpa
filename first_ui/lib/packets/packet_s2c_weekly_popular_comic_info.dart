@@ -25,6 +25,41 @@ class PacketS2CWeeklyPopularComicInfo extends PacketS2CCommon
     int weeklyPopularComicInfoCount = getUint32();
     print('weeklyPopularComicInfoCount : $weeklyPopularComicInfoCount');
 
+
+    List<ModelWeeklyPopularComicInfo> list = new List<ModelWeeklyPopularComicInfo>();
+    for(int countIndex=0; countIndex<weeklyPopularComicInfoCount; ++countIndex)
+    {
+      ModelWeeklyPopularComicInfo modelFeaturedComicInfo = new ModelWeeklyPopularComicInfo();
+
+      modelFeaturedComicInfo.userId = readStringToByteBuffer();
+      modelFeaturedComicInfo.comicId = readStringToByteBuffer();
+      modelFeaturedComicInfo.title = readStringToByteBuffer();
+
+      String url = await ModelPreset.getRepresentationHorizontalImageDownloadUrl(modelFeaturedComicInfo.userId, modelFeaturedComicInfo.comicId);
+      modelFeaturedComicInfo.url = url;
+      modelFeaturedComicInfo.thumbnailUrl = url;
+
+      print(modelFeaturedComicInfo.toString());
+
+      list.add(modelFeaturedComicInfo);
+    }
+
+    ModelWeeklyPopularComicInfo.list = list;
+  }
+
+  /*
+  Future<void> parseBytes(int packetSize,ByteData byteDataExceptionSize) async
+  {
+    parseHeaderChecked(packetSize,byteDataExceptionSize);
+
+    systemErrorCode = getUint32();
+    serviceErrorCode = getUint32();
+
+    print('PackSize : $size , PacketType : $type , systemErrorCode : $systemErrorCode , serviceErrorCode : $serviceErrorCode');
+
+    int weeklyPopularComicInfoCount = getUint32();
+    print('weeklyPopularComicInfoCount : $weeklyPopularComicInfoCount');
+
     if(null == ModelWeeklyPopularComicInfo.list)
       ModelWeeklyPopularComicInfo.list = new List<ModelWeeklyPopularComicInfo>();
     else
@@ -46,37 +81,6 @@ class PacketS2CWeeklyPopularComicInfo extends PacketS2CCommon
       print(modelFeaturedComicInfo.toString());
 
       ModelWeeklyPopularComicInfo.list.add(modelFeaturedComicInfo);
-    }
-  }
-
-  /*
-  void parseBytes(int packetSize,ByteData byteDataExceptionSize)
-  {
-    parseHeaderChecked(packetSize,byteDataExceptionSize);
-
-    systemErrorCode = getUint32();
-    serviceErrorCode = getUint32();
-
-    print('PackSize : $size , PacketType : $type , systemErrorCode : $systemErrorCode , serviceErrorCode : $serviceErrorCode');
-
-    int weeklyPopularComicInfoCount = getUint32();
-    print('weeklyPopularComicInfoCount : $weeklyPopularComicInfoCount');
-
-    for(int countIndex=0; countIndex<weeklyPopularComicInfoCount; ++countIndex)
-    {
-      ModelWeeklyPopularComicInfo modelWeeklyPopularComicInfo = new ModelWeeklyPopularComicInfo();
-
-      modelWeeklyPopularComicInfo.comicId = getUint32();
-      modelWeeklyPopularComicInfo.id = getUint32();
-      modelWeeklyPopularComicInfo.title = readStringToByteBuffer();
-      modelWeeklyPopularComicInfo.url = readStringToByteBuffer();
-      modelWeeklyPopularComicInfo.thumbnailUrl = readStringToByteBuffer();
-
-      print(modelWeeklyPopularComicInfo.toString());
-
-      if(null == ModelWeeklyPopularComicInfo.list)
-        ModelWeeklyPopularComicInfo.list = new List<ModelWeeklyPopularComicInfo>();
-      ModelWeeklyPopularComicInfo.list.add(modelWeeklyPopularComicInfo);
     }
   }
 

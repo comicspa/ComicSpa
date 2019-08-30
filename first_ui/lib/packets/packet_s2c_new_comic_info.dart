@@ -26,6 +26,40 @@ class PacketS2CNewComicInfo extends PacketS2CCommon
     int modelNewComicInfoCount = getUint32();
     print('modelNewComicInfoCount : $modelNewComicInfoCount');
 
+    List<ModelNewComicInfo> list = new List<ModelNewComicInfo>();
+    for(int countIndex=0; countIndex<modelNewComicInfoCount; ++countIndex)
+    {
+      ModelNewComicInfo modelFeaturedComicInfo = new ModelNewComicInfo();
+
+      modelFeaturedComicInfo.userId = readStringToByteBuffer();
+      modelFeaturedComicInfo.comicId = readStringToByteBuffer();
+      modelFeaturedComicInfo.title = readStringToByteBuffer();
+
+      String url = await ModelPreset.getRepresentationHorizontalImageDownloadUrl(modelFeaturedComicInfo.userId, modelFeaturedComicInfo.comicId);
+      modelFeaturedComicInfo.url = url;
+      modelFeaturedComicInfo.thumbnailUrl = url;
+
+      print(modelFeaturedComicInfo.toString());
+
+      list.add(modelFeaturedComicInfo);
+    }
+
+    ModelNewComicInfo.list = list;
+  }
+
+  /*
+  Future<void> parseBytes(int packetSize,ByteData byteDataExceptionSize) async
+  {
+    parseHeaderChecked(packetSize,byteDataExceptionSize);
+
+    systemErrorCode = getUint32();
+    serviceErrorCode = getUint32();
+
+    print('PackSize : $size , PacketType : $type , systemErrorCode : $systemErrorCode , serviceErrorCode : $serviceErrorCode');
+
+    int modelNewComicInfoCount = getUint32();
+    print('modelNewComicInfoCount : $modelNewComicInfoCount');
+
     if(null == ModelNewComicInfo.list)
       ModelNewComicInfo.list = new List<ModelNewComicInfo>();
     else
@@ -49,40 +83,8 @@ class PacketS2CNewComicInfo extends PacketS2CCommon
     }
   }
 
-  /*
-  void parseBytes(int packetSize,ByteData byteDataExceptionSize)
-  {
-    parseHeaderChecked(packetSize,byteDataExceptionSize);
-
-    systemErrorCode = getUint32();
-    serviceErrorCode = getUint32();
-
-    print('PackSize : $size , PacketType : $type , systemErrorCode : $systemErrorCode , serviceErrorCode : $serviceErrorCode');
-
-
-    int modelComicInfoCount = getUint32();
-    print('modelNewComicInfoCount : $modelComicInfoCount');
-
-    for(int countIndex=0; countIndex<modelComicInfoCount; ++countIndex)
-    {
-      ModelNewComicInfo modelNewComicInfo = new ModelNewComicInfo();
-
-      modelNewComicInfo.comicId = getUint32();
-      modelNewComicInfo.id = getUint32();
-      modelNewComicInfo.title = readStringToByteBuffer();
-      modelNewComicInfo.url = readStringToByteBuffer();
-      modelNewComicInfo.thumbnailUrl = readStringToByteBuffer();
-
-      print(modelNewComicInfo.toString());
-
-      if(null == ModelNewComicInfo.list)
-        ModelNewComicInfo.list = new List<ModelNewComicInfo>();
-      ModelNewComicInfo.list.add(modelNewComicInfo);
-    }
-
-
-  }
-
    */
+
+
 
 }
