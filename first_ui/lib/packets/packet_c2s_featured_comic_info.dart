@@ -65,13 +65,12 @@ class PacketC2SFeaturedComicInfo extends PacketC2SCommon
     });
 
     int packetBodySize  = 4 + 4;
-    generateHeader(packetBodySize);
 
-    setUint32(_pageCountIndex);
-    setUint32(_pageViewCount);
-
-
-    socket.add(packet);
+    if(0 == generateHeader(packetBodySize)) {
+      setUint32(_pageCountIndex);
+      setUint32(_pageViewCount);
+      socket.add(packet);
+    }
 
     // wait 5 seconds
     await Future.delayed(Duration(seconds: 20));

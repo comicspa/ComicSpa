@@ -71,12 +71,13 @@ class PacketC2SComicDetailInfo extends PacketC2SCommon
     List<int> comicIdList = readyWriteStringToByteBuffer(_comicId);
 
     int packetBodySize  = getStringTotalLength(userIdList) + getStringTotalLength(comicIdList);
-    generateHeader(packetBodySize);
 
-    writeStringToByteBuffer(userIdList);
-    writeStringToByteBuffer(comicIdList);
+    if(0 == generateHeader(packetBodySize)) {
+      writeStringToByteBuffer(userIdList);
+      writeStringToByteBuffer(comicIdList);
 
-    socket.add(packet);
+      socket.add(packet);
+    }
 
     // wait 5 seconds
     await Future.delayed(Duration(seconds: 10));
