@@ -104,6 +104,9 @@ class _DetailPageState extends State<DetailPage> {
           : Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
+            SizedBox(
+              height: ManageDeviceInfo.resolutionHeight * 0.04,
+            ),
             Container(
               alignment: Alignment.center,
               child: Padding(
@@ -114,8 +117,8 @@ class _DetailPageState extends State<DetailPage> {
                     ManageDeviceInfo.resolutionHeight * 0.01),
                 child: CachedNetworkImage(
                   imageUrl: ModelComicDetailInfo.getInstance().representationImageUrl,
-                  width: ManageDeviceInfo.resolutionWidth * 0.325,
-                  height: ManageDeviceInfo.resolutionHeight * 0.275,
+                  width: ManageDeviceInfo.resolutionWidth * 0.355,
+                  height: ManageDeviceInfo.resolutionHeight * 0.225,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -510,7 +513,7 @@ class _DetailPageState extends State<DetailPage> {
                                 width:
                                     ManageDeviceInfo.resolutionWidth * 0.27,
                                 height:
-                                    ManageDeviceInfo.resolutionHeight * 0.32,
+                                    ManageDeviceInfo.resolutionHeight * 0.22,
                                 fit: BoxFit.cover,
                               )),
                         ),

@@ -117,9 +117,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                     imageUrl: snapshot.data[index].thumbnailUrl,
                                                     placeholder: (context, url) => LoadingIndicator(),
                                                     width:
-                                                    ManageDeviceInfo.resolutionWidth * 0.22,
+                                                    ManageDeviceInfo.resolutionWidth * 0.28,
                                                     height:
-                                                    ManageDeviceInfo.resolutionHeight * 0.17,
+                                                    ManageDeviceInfo.resolutionHeight * 0.16,
                                                     fit: BoxFit.fill,
                                                   ),
                                                 ),
@@ -263,9 +263,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                     imageUrl: snapshot.data[index].thumbnailUrl,
                                                     placeholder: (context, url) => LoadingIndicator(),
                                                     width:
-                                                    ManageDeviceInfo.resolutionWidth * 0.22,
+                                                    ManageDeviceInfo.resolutionWidth * 0.28,
                                                     height:
-                                                    ManageDeviceInfo.resolutionHeight * 0.17,
+                                                    ManageDeviceInfo.resolutionHeight * 0.16,
                                                     fit: BoxFit.fill,
                                                   ),
                                                 ),
@@ -409,9 +409,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                     imageUrl: snapshot.data[index].thumbnailUrl,
                                                     placeholder: (context, url) => LoadingIndicator(),
                                                     width:
-                                                    ManageDeviceInfo.resolutionWidth * 0.22,
+                                                    ManageDeviceInfo.resolutionWidth * 0.28,
                                                     height:
-                                                    ManageDeviceInfo.resolutionHeight * 0.17,
+                                                    ManageDeviceInfo.resolutionHeight * 0.16,
                                                     fit: BoxFit.fill,
                                                   ),
                                                 ),
@@ -554,9 +554,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                     imageUrl: snapshot.data[index].thumbnailUrl,
                                                     placeholder: (context, url) => LoadingIndicator(),
                                                     width:
-                                                    ManageDeviceInfo.resolutionWidth * 0.22,
+                                                    ManageDeviceInfo.resolutionWidth * 0.28,
                                                     height:
-                                                    ManageDeviceInfo.resolutionHeight * 0.17,
+                                                    ManageDeviceInfo.resolutionHeight * 0.16,
                                                     fit: BoxFit.fill,
                                                   ),
                                                 ),
