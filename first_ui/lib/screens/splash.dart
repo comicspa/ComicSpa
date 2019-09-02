@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'dart:convert';
+import 'dart:async';
 
 import 'package:first_ui/models/model_preset.dart';
 import 'package:first_ui/packets/packet_c2s_common.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
 
 import 'package:first_ui/manage/manage_device_info.dart';
 import 'package:first_ui/manage/manage_message.dart';
@@ -19,15 +19,31 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => new _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen> with WidgetsBindingObserver
+{
 
   List<PacketC2SCommon> _packetList;
 
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
 
     init();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state)
+  {
+    print('state = $state');
+
+
   }
 
   void _presetFetchDone()
