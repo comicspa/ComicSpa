@@ -4,7 +4,7 @@ import 'package:first_ui/packets/packet_common.dart';
 import 'package:first_ui/packets/packet_s2c_common.dart';
 import 'package:first_ui/models/model_new_comic_info.dart';
 import 'package:first_ui/models/model_preset.dart';
-
+import 'package:first_ui/manage/manage_resource.dart';
 
 
 class PacketS2CNewComicInfo extends PacketS2CCommon
@@ -29,62 +29,23 @@ class PacketS2CNewComicInfo extends PacketS2CCommon
     List<ModelNewComicInfo> list = new List<ModelNewComicInfo>();
     for(int countIndex=0; countIndex<modelNewComicInfoCount; ++countIndex)
     {
-      ModelNewComicInfo modelFeaturedComicInfo = new ModelNewComicInfo();
+      ModelNewComicInfo modelNewComicInfo = new ModelNewComicInfo();
 
-      modelFeaturedComicInfo.userId = readStringToByteBuffer();
-      modelFeaturedComicInfo.comicId = readStringToByteBuffer();
-      modelFeaturedComicInfo.title = readStringToByteBuffer();
+      modelNewComicInfo.userId = readStringToByteBuffer();
+      modelNewComicInfo.comicId = readStringToByteBuffer();
+      modelNewComicInfo.title = readStringToByteBuffer();
 
-      String url = await ModelPreset.getRepresentationHorizontalImageDownloadUrl(modelFeaturedComicInfo.userId, modelFeaturedComicInfo.comicId);
-      modelFeaturedComicInfo.url = url;
-      modelFeaturedComicInfo.thumbnailUrl = url;
+      String url = await ModelPreset.getRepresentationHorizontalImageDownloadUrl(modelNewComicInfo.userId, modelNewComicInfo.comicId);
+      modelNewComicInfo.url = url;
+      modelNewComicInfo.thumbnailUrl = url;
 
-      print(modelFeaturedComicInfo.toString());
+      modelNewComicInfo.image = await ManageResource.fetchImage(url);
 
-      list.add(modelFeaturedComicInfo);
+      print(modelNewComicInfo.toString());
+
+      list.add(modelNewComicInfo);
     }
 
     ModelNewComicInfo.list = list;
   }
-
-  /*
-  Future<void> parseBytes(int packetSize,ByteData byteDataExceptionSize) async
-  {
-    parseHeaderChecked(packetSize,byteDataExceptionSize);
-
-    systemErrorCode = getUint32();
-    serviceErrorCode = getUint32();
-
-    print('PackSize : $size , PacketType : $type , systemErrorCode : $systemErrorCode , serviceErrorCode : $serviceErrorCode');
-
-    int modelNewComicInfoCount = getUint32();
-    print('modelNewComicInfoCount : $modelNewComicInfoCount');
-
-    if(null == ModelNewComicInfo.list)
-      ModelNewComicInfo.list = new List<ModelNewComicInfo>();
-    else
-      ModelNewComicInfo.list.clear();
-
-    for(int countIndex=0; countIndex<modelNewComicInfoCount; ++countIndex)
-    {
-      ModelNewComicInfo modelFeaturedComicInfo = new ModelNewComicInfo();
-
-      modelFeaturedComicInfo.userId = readStringToByteBuffer();
-      modelFeaturedComicInfo.comicId = readStringToByteBuffer();
-      modelFeaturedComicInfo.title = readStringToByteBuffer();
-
-      String url = await ModelPreset.getRepresentationHorizontalImageDownloadUrl(modelFeaturedComicInfo.userId, modelFeaturedComicInfo.comicId);
-      modelFeaturedComicInfo.url = url;
-      modelFeaturedComicInfo.thumbnailUrl = url;
-
-      print(modelFeaturedComicInfo.toString());
-
-      ModelNewComicInfo.list.add(modelFeaturedComicInfo);
-    }
-  }
-
-   */
-
-
-
 }

@@ -49,7 +49,7 @@ class PacketC2SWithdrawal extends PacketC2SCommon
     socket.add(packet);
 
     // wait 5 seconds
-    await Future.delayed(Duration(seconds: 20));
+    await Future.delayed(Duration(seconds: 5));
     socket.close();
 
   }

@@ -73,7 +73,7 @@ class PacketC2STodayPopularComicInfo extends PacketC2SCommon
     }
 
     // wait 5 seconds
-    await Future.delayed(Duration(seconds: 20));
+    await Future.delayed(Duration(seconds: 5));
     socket.close();
 
     return TodayPopularComicInfo.list;

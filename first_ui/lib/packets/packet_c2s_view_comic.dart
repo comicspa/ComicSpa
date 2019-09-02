@@ -86,7 +86,7 @@ class PacketC2SViewComic extends PacketC2SCommon
     socket.add(packet);
 
     // wait 5 seconds
-    await Future.delayed(Duration(seconds: 10));
+    await Future.delayed(Duration(seconds: 5));
     socket.close();
 
     _fetchStatus = 1;

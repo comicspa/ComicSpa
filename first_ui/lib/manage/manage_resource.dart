@@ -18,6 +18,7 @@ class ManageResource
     return __imageMap;
   }
 
+  /*
   static Future<ui.Image> generateAddImage(String realImageUrl) async
   {
     if(imageMap.containsKey(realImageUrl))
@@ -30,5 +31,19 @@ class ManageResource
 
     return image;
   }
+   */
+
+
+  static Future<ui.Image> fetchImage(String realImageUrl) async
+  {
+    if(imageMap.containsKey(realImageUrl))
+      return imageMap[realImageUrl];
+
+    ui.Image image = await ManageImage.fetchImage(realImageUrl);
+    imageMap[realImageUrl] = image;
+
+    return image;
+  }
+
 
 }

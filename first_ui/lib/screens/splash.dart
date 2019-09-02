@@ -1,14 +1,16 @@
 import 'dart:io';
 import 'dart:convert';
 
-import 'package:first_ui/models/model_preset.dart' as prefix0;
+import 'package:first_ui/models/model_preset.dart';
+import 'package:first_ui/packets/packet_c2s_common.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:first_ui/models/model_preset.dart';
 import 'package:first_ui/manage/manage_device_info.dart';
 import 'package:first_ui/manage/manage_message.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:first_ui/packets/packet_c2s_featured_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_recommended_comic_info.dart';
 
 
 
@@ -19,6 +21,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
+  List<PacketC2SCommon> _packetList;
 
   @override
   void initState() {
@@ -34,7 +37,43 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void init() async
   {
-    //ManageMessage.generate();
+    /*
+    ManageMessage.generate();
+    ManageMessage.streamController.stream.listen((data)
+    {
+      print("DataReceived1: " + data.toString());
+
+      _packetList.removeAt(0);
+      if(_packetList.length > 0)
+        ManageMessage.add(_packetList[0]);
+
+
+      }, onDone: () {
+      print("Task Done1");
+    }, onError: (error) {
+      print("Some Error1");
+    });
+
+    PacketC2SFeaturedComicInfo packet = new PacketC2SFeaturedComicInfo();
+    packet.generate(0, 0);
+    //ManageMessage.add(packet);
+    //ManageMessage.dispatch(packet);
+
+    PacketC2SRecommendedComicInfo packet2 = new PacketC2SRecommendedComicInfo();
+    packet2.generate(0, 0);
+    //ManageMessage.add(packet2);
+    //ManageMessage.dispatch(packet2);
+
+    if(null == _packetList)
+      _packetList = new List<PacketC2SCommon>();
+    _packetList.add(packet);
+    _packetList.add(packet2);
+
+    ManageMessage.add(_packetList[0]);
+
+     */
+
+
     ModelPreset.fetch2(_presetFetchDone);
   }
 

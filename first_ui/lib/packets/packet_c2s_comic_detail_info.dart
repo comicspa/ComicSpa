@@ -80,7 +80,7 @@ class PacketC2SComicDetailInfo extends PacketC2SCommon
     }
 
     // wait 5 seconds
-    await Future.delayed(Duration(seconds: 10));
+    await Future.delayed(Duration(seconds: 5));
     socket.close();
 
     _fetchStatus = 1;

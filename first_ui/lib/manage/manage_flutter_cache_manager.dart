@@ -7,7 +7,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 class ManageFlutterCacheManager
 {
 
-  static Future<File> getSingleFileFromCache(String url) async
+  static Future<File> getSingleFile(String url) async
   {
     File file =  await DefaultCacheManager().getSingleFile(url);
     return file;
