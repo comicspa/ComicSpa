@@ -39,6 +39,7 @@ dependencies:
   path_provider: ^1.2.0
   sprintf: ^4.0.2
   webview_flutter: ^0.3.13
+  auto_size_text: ^2.1.0
 
 
 dev_dependencies:

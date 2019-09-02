@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+
 
 
 
@@ -91,15 +93,25 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
                                 debugPrint("hello");
                               },
                               child: Container(
+                                alignment: Alignment.center,
                                 width: boundingBoxInfo.width,
                                 //ManageDeviceInfo.resolutionWidth / (ModelTextDetection.list[0].manageImage.width / boundingBoxInfo.boundingBox.width),
                                 height: boundingBoxInfo.height,
                                 //ManageDeviceInfo.resolutionHeight / (ModelTextDetection.imageTotalHeight / boundingBoxInfo.boundingBox.height) + ManageDeviceInfo.statusBarHeight,
                                 decoration: textBoxDecoration(boundingBoxInfo
                                     .changed),
-                                child: Text(
-                                  /*textController.text*/
-                                    boundingBoxInfo.text)
+                                child: SizedBox(
+                                  width: boundingBoxInfo.width,
+                                  height: boundingBoxInfo.height,
+                                  child: AutoSizeText(
+                                    /*textController.text*/
+                                      boundingBoxInfo.text,
+                                    style: TextStyle(fontSize: ManageDeviceInfo.resolutionHeight * 0.03),
+                                    textAlign: TextAlign.center,
+                                    maxLines: boundingBoxInfo.textLineCount,
+                                    minFontSize: 4,
+                                  ),
+                                )
                               ),
                             ),
                           ),

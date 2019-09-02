@@ -25,6 +25,7 @@ class BoundingBoxInfo
   bool changed = false;
   int previousImageTotalHeight = 0;
   int imageWidth = 0;
+  int textLineCount = 0;
 
   double get left
   {
@@ -170,9 +171,7 @@ class ModelTextDetection
              boundingBoxInfo.previousImageTotalHeight = previousImageTotalHeight;
              boundingBoxInfo.imageWidth = modelTextDetection.image.width;
 
-             if(null == boundingBoxInfoList)
-               boundingBoxInfoList = new List<BoundingBoxInfo>();
-             boundingBoxInfoList.add(boundingBoxInfo);
+
 
         //if (null != textBlock.recognizedLanguages)
         //{
@@ -186,11 +185,21 @@ class ModelTextDetection
              // print('boundingBox[$i] : ${textBlock.boundingBox.toString()}');
              //print('cornerPoints[$i] : ${textBlock.cornerPoints.toString()}');
 
-             if (null != textBlock.lines) {
+             if (null != textBlock.lines)
+             {
+               boundingBoxInfo.textLineCount = textBlock.lines.length;
+
                for (int j = 0; j < textBlock.lines.length; ++j) {
                  // print('linetext[$i][$j] : ${textBlock.lines[j].text}');
                }
              }
+
+             if(null == boundingBoxInfoList)
+               boundingBoxInfoList = new List<BoundingBoxInfo>();
+             boundingBoxInfoList.add(boundingBoxInfo);
+
+
+
            }
          }
 
