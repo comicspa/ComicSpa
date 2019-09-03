@@ -28,7 +28,8 @@ class LoadingIndicator extends StatelessWidget {
   }
 }
 
-class BuildAlertDialog extends StatelessWidget {
+class BuildAlertDialog extends StatelessWidget
+{
   const BuildAlertDialog({
     Key key,
   }) : super(key: key);

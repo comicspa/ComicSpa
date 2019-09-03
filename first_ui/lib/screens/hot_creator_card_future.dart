@@ -50,7 +50,7 @@ class FutureBuildHotCreators extends StatefulWidget {
   _FutureBuildHotCreatorsState createState() => _FutureBuildHotCreatorsState();
 }
 
-class _FutureBuildHotCreatorsState extends State<FutureBuildHotCreators> {
+class _FutureBuildHotCreatorsState extends State<FutureBuildHotCreators> with WidgetsBindingObserver{
   /*
   @override
   void initState() async {
@@ -64,6 +64,26 @@ class _FutureBuildHotCreatorsState extends State<FutureBuildHotCreators> {
 //  void getList() async {
 //    this.data = (await fetchHotCreators(http.Client()));
 //  }
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    super.initState();
+
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state)
+  {
+    print('state = $state');
+  }
+
 
   @override
   Widget build(BuildContext context) {

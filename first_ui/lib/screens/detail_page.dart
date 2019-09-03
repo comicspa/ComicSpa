@@ -19,7 +19,8 @@ class DetailPage extends StatefulWidget {
   _DetailPageState createState() => _DetailPageState(_userId, _comicId);
 }
 
-class _DetailPageState extends State<DetailPage> {
+class _DetailPageState extends State<DetailPage>  with WidgetsBindingObserver
+{
   final String _userId;
   final String _comicId;
 
@@ -29,10 +30,23 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
     // generating packet
 
     init();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state)
+  {
+    print('state = $state');
   }
 
   void init() async {

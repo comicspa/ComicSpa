@@ -21,11 +21,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   TabController controller;
 
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
 
 //    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
@@ -34,6 +35,19 @@ class _HomeScreenState extends State<HomeScreen>
     controller = TabController(length: 4, initialIndex: 0, vsync: this);
     controller.addListener(_handleTabSelection);
   }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state)
+  {
+    print('state = $state');
+  }
+
 
   void _handleTabSelection() {
     setState(() {});

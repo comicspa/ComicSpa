@@ -13,19 +13,34 @@ class SubMenuComingSoonScreen extends StatefulWidget {
   _SubMenuComingSoonScreenState createState() => new _SubMenuComingSoonScreenState(titleText);
 }
 
-class _SubMenuComingSoonScreenState extends State<SubMenuComingSoonScreen> {
+class _SubMenuComingSoonScreenState extends State<SubMenuComingSoonScreen>  with WidgetsBindingObserver{
   _SubMenuComingSoonScreenState(this.titleText);
    String titleText;
 
    @override
    void initState()
    {
+     WidgetsBinding.instance.addObserver(this);
      super.initState();
 
      print('titleText : $titleText');
 
 
    }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state)
+  {
+    print('state = $state');
+  }
+
+
 
   @override
   Widget build(BuildContext context) {

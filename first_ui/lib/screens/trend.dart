@@ -24,7 +24,7 @@ class Trend extends StatefulWidget {
   _TrendState createState() => new _TrendState();
 }
 
-class _TrendState extends State<Trend> {
+class _TrendState extends State<Trend>  with WidgetsBindingObserver{
   PacketC2STodayPopularComicInfo c2STodayPopularComicInfo =
       new PacketC2STodayPopularComicInfo(); // use this to handle data
   PacketC2SFeaturedComicInfo c2sFeaturedComicInfo =
@@ -39,6 +39,7 @@ class _TrendState extends State<Trend> {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
     // generating packet
 
@@ -50,6 +51,20 @@ class _TrendState extends State<Trend> {
     c2sWeeklyPopularComicInfo.generate(0, 0);
 
   }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state)
+  {
+    print('state = $state');
+  }
+
+
 
   int _current = 0; // this is for indicator handler
 

@@ -32,7 +32,7 @@ class ViewerScreen extends StatefulWidget {
   _ViewerScreen createState() => new _ViewerScreen(userId,comicId,episodeId);
 }
 
-class _ViewerScreen extends State<ViewerScreen> {
+class _ViewerScreen extends State<ViewerScreen>  with WidgetsBindingObserver{
 //  PacketC2STodayPopularComicInfo c2STodayPopularComicInfo = new PacketC2STodayPopularComicInfo(); // use this to handle data
   String userId;
   String comicId;
@@ -55,10 +55,23 @@ class _ViewerScreen extends State<ViewerScreen> {
     //    SystemChrome.setEnabledSystemUIOverlays([]);
 
     c2sViewComic.generate(this.userId,this.comicId,this.episodeId);
-
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
     _isVisible = true;
   }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state)
+  {
+    print('state = $state');
+  }
+
 
 //  String url;
  // ModelFeaturedComicInfo modelFeaturedComicInfo;

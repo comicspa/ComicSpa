@@ -20,7 +20,7 @@ class DrawRectAndImage extends StatefulWidget {
 
 
 
-class _DrawRectAndImageState extends State<DrawRectAndImage> {
+class _DrawRectAndImageState extends State<DrawRectAndImage>  with WidgetsBindingObserver{
 
   final _formKey = GlobalKey<FormState>();
   final textController = TextEditingController();
@@ -33,13 +33,22 @@ class _DrawRectAndImageState extends State<DrawRectAndImage> {
   void dispose() {
     // Clean up the controller when the text widget is disposed.
     textController.dispose();
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
     init();
   }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state)
+  {
+    print('state = $state');
+  }
+
 
 
   init() async

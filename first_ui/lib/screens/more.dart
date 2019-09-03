@@ -13,7 +13,7 @@ class MoreScreen extends StatefulWidget {
   _MoreScreenState createState() => new _MoreScreenState();
 }
 
-class _MoreScreenState extends State<MoreScreen> {
+class _MoreScreenState extends State<MoreScreen>  with WidgetsBindingObserver{
 //  PacketC2STodayPopularComicInfo c2STodayPopularComicInfo =
 //      new PacketC2STodayPopularComicInfo(); // use this to handle data
 
@@ -22,10 +22,24 @@ class _MoreScreenState extends State<MoreScreen> {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
 //    c2STodayPopularComicInfo.generate(0, 0);   // generating packet
 //    c2SViewComic.generate();
   }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state)
+  {
+    print('state = $state');
+  }
+
 
   @override
   Widget build(BuildContext context) {

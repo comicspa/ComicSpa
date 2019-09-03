@@ -16,10 +16,29 @@ class ComingSoonScreen extends StatefulWidget {
   _ComingSoonScreenState createState() => new _ComingSoonScreenState();
 }
 
-class _ComingSoonScreenState extends State<ComingSoonScreen> {
+class _ComingSoonScreenState extends State<ComingSoonScreen> with WidgetsBindingObserver
+{
 //  final String titleText;
 //  _ComingSoonScreenState(this.titleText);
 
+  @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    super.initState();
+
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state)
+  {
+    print('state = $state');
+  }
 
 
   @override

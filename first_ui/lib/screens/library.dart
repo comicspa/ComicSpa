@@ -19,7 +19,7 @@ class LibraryScreen extends StatefulWidget {
   _LibraryScreenState createState() => new _LibraryScreenState();
 }
 
-class _LibraryScreenState extends State<LibraryScreen> {
+class _LibraryScreenState extends State<LibraryScreen>  with WidgetsBindingObserver{
   PacketC2SMyLockerComicRecent c2sMyLockerComicRecent =
       new PacketC2SMyLockerComicRecent();
   PacketC2SMyLockerComicViewList c2sMyLockerComicViewList =
@@ -33,6 +33,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
     // generating packet
 
@@ -42,6 +43,19 @@ class _LibraryScreenState extends State<LibraryScreen> {
     c2sMyLockerComicContinue.generate();
     c2sRecommendedComicInfo.generate(0, 0);
   }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state)
+  {
+    print('state = $state');
+  }
+
 
   @override
   Widget build(BuildContext context) {

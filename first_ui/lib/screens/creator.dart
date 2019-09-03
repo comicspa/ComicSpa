@@ -12,7 +12,8 @@ class CreatorScreen extends StatefulWidget {
   _CreatorScreenState createState() => new _CreatorScreenState();
 }
 
-class _CreatorScreenState extends State<CreatorScreen> {
+class _CreatorScreenState extends State<CreatorScreen> with WidgetsBindingObserver
+{
   PacketC2SWeeklyCreatorInfo c2sWeeklyCreatorInfo =
       new PacketC2SWeeklyCreatorInfo();
   PacketC2SWeeklyCreatorInfo c2sWeeklyCreatorInfo2 =
@@ -21,12 +22,25 @@ class _CreatorScreenState extends State<CreatorScreen> {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
     // generating packet
 
     c2sWeeklyCreatorInfo.generate();
     c2sWeeklyCreatorInfo2.generate();
     c2sNewCreatorInfo.generate();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state)
+  {
+    print('state = $state');
   }
 
   @override

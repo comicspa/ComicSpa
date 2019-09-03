@@ -22,19 +22,33 @@ class ServiceInfoSubmenuScreen extends StatefulWidget {
   _ServiceInfoSubmenuScreenState createState() => new _ServiceInfoSubmenuScreenState(titleText);
 }
 
-class _ServiceInfoSubmenuScreenState extends State<ServiceInfoSubmenuScreen> {
+class _ServiceInfoSubmenuScreenState extends State<ServiceInfoSubmenuScreen> with WidgetsBindingObserver {
   _ServiceInfoSubmenuScreenState(this.titleText);
   String titleText;
 
   @override
   void initState()
   {
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
 
     print('titleText : $titleText');
 
 
   }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state)
+  {
+    print('state = $state');
+  }
+
 
   @override
   Widget build(BuildContext context) {
