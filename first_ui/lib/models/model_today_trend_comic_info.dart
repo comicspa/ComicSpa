@@ -2,7 +2,7 @@
 import 'dart:ui' as ui;
 
 
-class TodayPopularComicInfo
+class ModelTodayTrendComicInfo
 {
   String _comicId;
   String _userId;
@@ -54,6 +54,6 @@ class TodayPopularComicInfo
     return 'userId : $_userId , comicId : $_comicId , title : $_title , thumbnailUrl : $thumbnailUrl';
   }
 
-  static List<TodayPopularComicInfo> list;
+  static List<ModelTodayTrendComicInfo> list;
 
 }

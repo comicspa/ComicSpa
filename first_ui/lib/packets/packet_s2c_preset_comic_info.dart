@@ -9,7 +9,7 @@ import 'package:first_ui/models/model_featured_comic_info.dart';
 import 'package:first_ui/models/model_recommended_comic_info.dart';
 import 'package:first_ui/models/model_real_time_trend_info.dart';
 import 'package:first_ui/models/model_new_comic_info.dart';
-import 'package:first_ui/models/today_popular_comic_info.dart';
+import 'package:first_ui/models/model_today_trend_comic_info.dart';
 import 'package:first_ui/models/model_weekly_popular_comic_info.dart';
 import 'package:first_ui/manage/manage_resource.dart';
 
@@ -150,27 +150,27 @@ class PacketS2CPresetComicInfo extends PacketS2CCommon
     print('todayPopularComicInfoCount : $todayPopularComicInfoCount');
 
 
-    List<TodayPopularComicInfo> list5 = new List<TodayPopularComicInfo>();
+    List<ModelTodayTrendComicInfo> list5 = new List<ModelTodayTrendComicInfo>();
     for(int countIndex=0; countIndex<todayPopularComicInfoCount; ++countIndex)
     {
-      TodayPopularComicInfo modelTodayPopularComicInfo = new TodayPopularComicInfo();
+      ModelTodayTrendComicInfo modelTodayTrendComicInfo = new ModelTodayTrendComicInfo();
 
-      modelTodayPopularComicInfo.userId = readStringToByteBuffer();
-      modelTodayPopularComicInfo.comicId = readStringToByteBuffer();
-      modelTodayPopularComicInfo.title = readStringToByteBuffer();
+      modelTodayTrendComicInfo.userId = readStringToByteBuffer();
+      modelTodayTrendComicInfo.comicId = readStringToByteBuffer();
+      modelTodayTrendComicInfo.title = readStringToByteBuffer();
 
-      String url = await ModelPreset.getRepresentationHorizontalImageDownloadUrl(modelTodayPopularComicInfo.userId, modelTodayPopularComicInfo.comicId);
-      modelTodayPopularComicInfo.url = url;
-      modelTodayPopularComicInfo.thumbnailUrl = url;
+      String url = await ModelPreset.getRepresentationHorizontalImageDownloadUrl(modelTodayTrendComicInfo.userId, modelTodayTrendComicInfo.comicId);
+      modelTodayTrendComicInfo.url = url;
+      modelTodayTrendComicInfo.thumbnailUrl = url;
 
-      modelTodayPopularComicInfo.image = await ManageResource.fetchImage(url);
+      modelTodayTrendComicInfo.image = await ManageResource.fetchImage(url);
 
-      print(modelTodayPopularComicInfo.toString());
+      print(modelTodayTrendComicInfo.toString());
 
-      list5.add(modelTodayPopularComicInfo);
+      list5.add(modelTodayTrendComicInfo);
     }
 
-    TodayPopularComicInfo.list = list5;
+    ModelTodayTrendComicInfo.list = list5;
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

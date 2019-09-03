@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:first_ui/models/today_popular_comic_info.dart';
-import 'package:first_ui/packets/packet_c2s_today_popular_comic_info.dart';
+import 'package:first_ui/models/model_today_trend_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_today_trend_comic_info.dart';
 import 'package:first_ui/models/model_featured_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_featured_comic_info.dart';
 import 'package:first_ui/models/model_recommended_comic_info.dart';
@@ -25,8 +25,8 @@ class Trend extends StatefulWidget {
 }
 
 class _TrendState extends State<Trend>  with WidgetsBindingObserver{
-  PacketC2STodayPopularComicInfo c2STodayPopularComicInfo =
-      new PacketC2STodayPopularComicInfo(); // use this to handle data
+  PacketC2STodayTrendComicInfo c2STodayTrendComicInfo =
+      new PacketC2STodayTrendComicInfo(); // use this to handle data
   PacketC2SFeaturedComicInfo c2sFeaturedComicInfo =
       new PacketC2SFeaturedComicInfo(); // use this to handle data
   PacketC2SRecommendedComicInfo c2sRecommendedComicInfo =
@@ -43,7 +43,7 @@ class _TrendState extends State<Trend>  with WidgetsBindingObserver{
     super.initState();
     // generating packet
 
-    c2STodayPopularComicInfo.generate(0, 0);
+    c2STodayTrendComicInfo.generate(0, 0);
     c2sFeaturedComicInfo.generate(0, 0);
     c2sRecommendedComicInfo.generate(0, 0);
     c2sNewComicInfo.generate(0, 0);
@@ -610,8 +610,8 @@ class _TrendState extends State<Trend>  with WidgetsBindingObserver{
           Container(
             padding: EdgeInsets.all(0),
             height: ManageDeviceInfo.resolutionHeight * 0.28,
-            child: FutureBuilder<List<TodayPopularComicInfo>>(
-              future: c2STodayPopularComicInfo.fetchBytes(),
+            child: FutureBuilder<List<ModelTodayTrendComicInfo>>(
+              future: c2STodayTrendComicInfo.fetchBytes(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData)
                   return LoadingIndicator();

@@ -5,8 +5,8 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
-import 'package:first_ui/models/today_popular_comic_info.dart';
-import 'package:first_ui/packets/packet_c2s_today_popular_comic_info.dart';
+import 'package:first_ui/models/model_today_trend_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_today_trend_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_view_comic.dart';
 import 'package:first_ui/packets/packet_c2s_featured_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_new_comic_info.dart';
@@ -45,7 +45,7 @@ class _PageDevTestState extends State<PageDevTest> {
   int selectedCountIndex = -1;
   AsyncSnapshot snapshot;
 
-  PacketC2STodayPopularComicInfo c2STodayPopularComicInfo = new PacketC2STodayPopularComicInfo();
+  PacketC2STodayTrendComicInfo c2STodayPopularComicInfo = new PacketC2STodayTrendComicInfo();
   PacketC2SWeeklyPopularComicInfo c2SWeeklyPopularComicInfo = new PacketC2SWeeklyPopularComicInfo();
   PacketC2SFeaturedComicInfo c2SFeaturedComicInfo = new PacketC2SFeaturedComicInfo();
   PacketC2SViewComic c2SViewComic = new PacketC2SViewComic();

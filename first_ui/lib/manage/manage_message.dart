@@ -9,7 +9,7 @@ import 'package:first_ui/models/model_my_locker_comic_recent.dart';
 import 'package:first_ui/models/model_new_comic_info.dart';
 import 'package:first_ui/models/model_real_time_trend_info.dart';
 import 'package:first_ui/models/model_weekly_popular_comic_info.dart';
-import 'package:first_ui/models/today_popular_comic_info.dart';
+import 'package:first_ui/models/model_today_trend_comic_info.dart';
 
 import 'package:first_ui/packets/packet_common.dart';
 import "package:first_ui/packets/packet_c2s_common.dart";
@@ -17,7 +17,7 @@ import 'package:first_ui/packets/packet_c2s_recommended_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_featured_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_real_time_trend_info.dart';
 import 'package:first_ui/packets/packet_c2s_new_comic_info.dart';
-import 'package:first_ui/packets/packet_c2s_today_popular_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_today_trend_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_weekly_popular_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_my_locker_comic_recent.dart';
 import 'package:first_ui/packets/packet_c2s_my_locker_comic_view_list.dart';
@@ -171,12 +171,12 @@ class ManageMessage
         break;
 
 
-      case e_packet_type.c2s_today_popular_comic_info:
+      case e_packet_type.c2s_today_trend_comic_info:
         {
-          PacketC2STodayPopularComicInfo packet = packetC2SCommon as PacketC2STodayPopularComicInfo;
+          PacketC2STodayTrendComicInfo packet = packetC2SCommon as PacketC2STodayTrendComicInfo;
 
           print("Creating a stream...");
-          Stream<List<TodayPopularComicInfo>> stream = new Stream.fromFuture(packet.fetchBytes());
+          Stream<List<ModelTodayTrendComicInfo>> stream = new Stream.fromFuture(packet.fetchBytes());
           print("Created the stream");
 
           stream.listen((data) {
@@ -439,12 +439,12 @@ class ManageMessage
                 break;
 
 
-              case e_packet_type.c2s_today_popular_comic_info:
+              case e_packet_type.c2s_today_trend_comic_info:
                 {
-                  PacketC2STodayPopularComicInfo packet = packetC2SCommon as PacketC2STodayPopularComicInfo;
+                  PacketC2STodayTrendComicInfo packet = packetC2SCommon as PacketC2STodayTrendComicInfo;
 
                   print("Creating a stream...");
-                  Stream<List<TodayPopularComicInfo>> stream = new Stream.fromFuture(packet.fetchBytes());
+                  Stream<List<ModelTodayTrendComicInfo>> stream = new Stream.fromFuture(packet.fetchBytes());
                   print("Created the stream");
 
                   stream.listen((data) {

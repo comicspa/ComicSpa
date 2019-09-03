@@ -29,8 +29,8 @@ enum e_packet_type
   c2s_unregister_creator,
   s2c_unregister_creator,
 
-  c2s_today_popular_comic_info,
-  s2c_today_popular_comic_info,
+  c2s_today_trend_comic_info,
+  s2c_today_trend_comic_info,
 
   c2s_view_comic,
   s2c_view_comic,
