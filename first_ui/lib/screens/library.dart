@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:first_ui/models/model_library_continue_comic_info.dart';
 import 'package:first_ui/screens/common_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ import 'package:first_ui/packets/packet_c2s_my_locker_comic_view_list.dart';
 import 'package:first_ui/models/model_my_locker_comic_owned.dart';
 import 'package:first_ui/packets/packet_c2s_my_locker_comic_owned.dart';
 import 'package:first_ui/models/model_my_locker_comic_continue.dart';
-import 'package:first_ui/packets/packet_c2s_my_locker_comic_continue.dart';
+import 'package:first_ui/packets/packet_c2s_library_continue_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_recommended_comic_info.dart';
 
 class LibraryScreen extends StatefulWidget {
@@ -26,8 +27,8 @@ class _LibraryScreenState extends State<LibraryScreen>  with WidgetsBindingObser
       new PacketC2SMyLockerComicViewList();
   PacketC2SMyLockerComicOwned c2sMyLockerComicOwned =
       new PacketC2SMyLockerComicOwned();
-  PacketC2SMyLockerComicContinue c2sMyLockerComicContinue =
-      new PacketC2SMyLockerComicContinue();
+  PacketC2SLibraryContinueComicInfo c2SLibraryContinueComicInfo =
+      new PacketC2SLibraryContinueComicInfo();
   PacketC2SRecommendedComicInfo c2sRecommendedComicInfo =
       new PacketC2SRecommendedComicInfo();
 
@@ -40,7 +41,7 @@ class _LibraryScreenState extends State<LibraryScreen>  with WidgetsBindingObser
     c2sMyLockerComicRecent.generate();
     c2sMyLockerComicViewList.generate();
     c2sMyLockerComicOwned.generate();
-    c2sMyLockerComicContinue.generate();
+    c2SLibraryContinueComicInfo.generate();
     c2sRecommendedComicInfo.generate(0, 0);
   }
 
@@ -674,7 +675,7 @@ class _LibraryScreenState extends State<LibraryScreen>  with WidgetsBindingObser
               Container(
                 // Recent 내용 보여주는 컨테이너
                 child: SingleChildScrollView(
-                  child: c2sMyLockerComicContinue.fetchBytes() == null
+                  child: c2SLibraryContinueComicInfo.fetchBytes() == null
                       ? Center(child: LoadingIndicator())
                       : Column(
                           mainAxisSize: MainAxisSize.min,
@@ -683,8 +684,8 @@ class _LibraryScreenState extends State<LibraryScreen>  with WidgetsBindingObser
                                 padding: EdgeInsets.only(
                                     top: ManageDeviceInfo.resolutionHeight *
                                         0.04)),
-                            FutureBuilder<List<ModelMyLockerComicContinue>>(
-                              future: c2sMyLockerComicContinue.fetchBytes(),
+                            FutureBuilder<List<ModelLibraryContinueComicInfo>>(
+                              future: c2SLibraryContinueComicInfo.fetchBytes(),
                               builder: (BuildContext context, snapshot) {
                                 switch (snapshot.connectionState) {
                                   case ConnectionState.none:

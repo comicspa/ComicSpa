@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:first_ui/models/model_featured_comic_info.dart';
+import 'package:first_ui/models/model_library_continue_comic_info.dart';
 import 'package:first_ui/models/model_recommended_comic_info.dart';
 import 'package:first_ui/models/model_my_locker_comic_owned.dart';
 import 'package:first_ui/models/model_my_locker_comic_view_list.dart';
@@ -22,7 +23,7 @@ import 'package:first_ui/packets/packet_c2s_weekly_trend_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_my_locker_comic_recent.dart';
 import 'package:first_ui/packets/packet_c2s_my_locker_comic_view_list.dart';
 import 'package:first_ui/packets/packet_c2s_my_locker_comic_owned.dart';
-import 'package:first_ui/packets/packet_c2s_my_locker_comic_continue.dart';
+import 'package:first_ui/packets/packet_c2s_library_continue_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_preset_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_preset_library_info.dart';
 
@@ -295,12 +296,12 @@ class ManageMessage
         break;
 
 
-      case e_packet_type.c2s_my_locker_comic_continue:
+      case e_packet_type.c2s_library_continue_comic_info:
         {
-          PacketC2SMyLockerComicContinue packet = packetC2SCommon as PacketC2SMyLockerComicContinue;
+          PacketC2SLibraryContinueComicInfo packet = packetC2SCommon as PacketC2SLibraryContinueComicInfo;
 
           print("Creating a stream...");
-          Stream<List<ModelMyLockerComicContinue>> stream = new Stream.fromFuture(packet.fetchBytes());
+          Stream<List<ModelLibraryContinueComicInfo>> stream = new Stream.fromFuture(packet.fetchBytes());
           print("Created the stream");
 
           stream.listen((data) {
@@ -573,12 +574,12 @@ class ManageMessage
                 break;
 
 
-              case e_packet_type.c2s_my_locker_comic_continue:
+              case e_packet_type.c2s_library_continue_comic_info:
                 {
-                  PacketC2SMyLockerComicContinue packet = packetC2SCommon as PacketC2SMyLockerComicContinue;
+                  PacketC2SLibraryContinueComicInfo packet = packetC2SCommon as PacketC2SLibraryContinueComicInfo;
 
                   print("Creating a stream...");
-                  Stream<List<ModelMyLockerComicContinue>> stream = new Stream.fromFuture(packet.fetchBytes());
+                  Stream<List<ModelLibraryContinueComicInfo>> stream = new Stream.fromFuture(packet.fetchBytes());
                   print("Created the stream");
 
                   stream.listen((data) {
