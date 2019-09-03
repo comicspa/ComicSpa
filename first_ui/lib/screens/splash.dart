@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:convert';
 import 'dart:async';
+import 'package:flutter/services.dart';
 
 import 'package:first_ui/models/model_preset.dart';
 import 'package:first_ui/packets/packet_c2s_common.dart';
@@ -22,14 +23,14 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen>
     with WidgetsBindingObserver {
   List<PacketC2SCommon> _packetList;
-  bool _checkAppVersion = false;
+  bool _enableAppVersion = false;
 
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
     super.initState();
 
-    init();
+    ModelPreset.fetch2(_presetFetchDone);
   }
 
   @override
@@ -43,41 +44,43 @@ class _SplashScreenState extends State<SplashScreen>
     print('state = $state');
   }
 
-  void _presetFetchDone(bool result) {
-    _checkAppVersion = result;
+  void _presetFetchDone(bool result)
+  {
+    _enableAppVersion = result;
 
-    if (true == result) navigationPage();
-  }
+    if (true == result)
+      {
+        ManageMessage.generate();
+        ManageMessage.streamController.stream.listen((data) {
+          print("DataReceived1: " + data.toString());
 
-  void init() async {
-    ManageMessage.generate();
-    ManageMessage.streamController.stream.listen((data) {
-      print("DataReceived1: " + data.toString());
+          _packetList.removeAt(0);
+          if (_packetList.length > 0) ManageMessage.add(_packetList[0]);
 
-      _packetList.removeAt(0);
-      if (_packetList.length > 0) ManageMessage.add(_packetList[0]);
+          if (data == e_packet_type.c2s_preset_library_info)
+            navigationPage();
+        }, onDone: () {
+          print("Task Done1");
+        }, onError: (error) {
+          print("Some Error1");
+        });
 
-      if (data == e_packet_type.c2s_preset_library_info)
-        ModelPreset.fetch2(_presetFetchDone);
-    }, onDone: () {
-      print("Task Done1");
-    }, onError: (error) {
-      print("Some Error1");
-    });
-
-    PacketC2SPresetComicInfo packetC2SPresetComicInfo =
+        PacketC2SPresetComicInfo packetC2SPresetComicInfo =
         new PacketC2SPresetComicInfo();
-    packetC2SPresetComicInfo.generate();
+        packetC2SPresetComicInfo.generate();
 
-    PacketC2SPresetLibraryInfo packetC2SPresetLibraryInfo =
+        PacketC2SPresetLibraryInfo packetC2SPresetLibraryInfo =
         new PacketC2SPresetLibraryInfo();
-    packetC2SPresetLibraryInfo.generate();
+        packetC2SPresetLibraryInfo.generate();
 
-    if (null == _packetList) _packetList = new List<PacketC2SCommon>();
-    _packetList.add(packetC2SPresetComicInfo);
-    _packetList.add(packetC2SPresetLibraryInfo);
+        if (null == _packetList) _packetList = new List<PacketC2SCommon>();
+        _packetList.add(packetC2SPresetComicInfo);
+        _packetList.add(packetC2SPresetLibraryInfo);
 
-    ManageMessage.add(_packetList[0]);
+        ManageMessage.add(_packetList[0]);
+
+
+      }
   }
 
   void navigationPage() {
@@ -97,12 +100,26 @@ class _SplashScreenState extends State<SplashScreen>
     }
   }
 
+  void applicationQuit()
+  {
+    if(Platform.isAndroid)
+      {
+        SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+        //SystemNavigator.pop();
+      }
+    else if(Platform.isIOS)
+      {
+        exit(0);
+      }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     ManageDeviceInfo.firstInitialize(context);
 
     return Scaffold(
-      body: _checkAppVersion == false
+      body: _enableAppVersion == false
           ? BuildVersionConflictDialog()
           : Stack(
               fit: StackFit.expand,
