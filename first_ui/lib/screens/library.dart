@@ -130,10 +130,10 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                             LoadingIndicator(),
                                                         width: ManageDeviceInfo
                                                                 .resolutionWidth *
-                                                            0.22,
+                                                            0.25,
                                                         height: ManageDeviceInfo
                                                                 .resolutionHeight *
-                                                            0.17,
+                                                            0.16,
                                                         fit: BoxFit.fill,
                                                       ),
                                                     ),
@@ -325,10 +325,10 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                             LoadingIndicator(),
                                                         width: ManageDeviceInfo
                                                                 .resolutionWidth *
-                                                            0.22,
+                                                            0.25,
                                                         height: ManageDeviceInfo
                                                                 .resolutionHeight *
-                                                            0.17,
+                                                            0.16,
                                                         fit: BoxFit.fill,
                                                       ),
                                                     ),
@@ -520,10 +520,10 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                             LoadingIndicator(),
                                                         width: ManageDeviceInfo
                                                                 .resolutionWidth *
-                                                            0.22,
+                                                            0.25,
                                                         height: ManageDeviceInfo
                                                                 .resolutionHeight *
-                                                            0.17,
+                                                            0.16,
                                                         fit: BoxFit.fill,
                                                       ),
                                                     ),
@@ -715,10 +715,10 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                             LoadingIndicator(),
                                                         width: ManageDeviceInfo
                                                                 .resolutionWidth *
-                                                            0.22,
+                                                            0.25,
                                                         height: ManageDeviceInfo
                                                                 .resolutionHeight *
-                                                            0.17,
+                                                            0.16,
                                                         fit: BoxFit.fill,
                                                       ),
                                                     ),
