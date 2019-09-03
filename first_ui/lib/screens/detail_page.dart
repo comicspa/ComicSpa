@@ -573,60 +573,59 @@ class _DetailPageState extends State<DetailPage> with WidgetsBindingObserver {
                                         ),
                                       );
                                     },
-                                    child: Container(
-                                        width:
-                                            ManageDeviceInfo.resolutionWidth *
-                                                0.5,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: <Widget>[
-                                            Container(
-                                              alignment: Alignment.bottomLeft,
-                                              padding: EdgeInsets.only(
-                                                  left: ManageDeviceInfo
-                                                          .resolutionWidth *
-                                                      0.04),
-                                              child: Text(
-                                                  '${ModelComicDetailInfo.getInstance().modelComicInfoList[index].episode}화',
-                                                  maxLines: 2,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  textAlign: TextAlign.left,
-                                                  style: TextStyle(
-                                                    fontFamily: 'Lato',
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                    fontSize: ManageDeviceInfo
-                                                            .resolutionHeight *
-                                                        0.025,
-                                                    color: Colors.black87,
-                                                  )),
-                                            ),
-                                            Container(
-                                              alignment: Alignment.bottomLeft,
-                                              padding: EdgeInsets.only(
-                                                  left: ManageDeviceInfo
-                                                          .resolutionWidth *
-                                                      0.04),
-                                              child: Text(
-                                                  '${ModelComicDetailInfo.getInstance().modelComicInfoList[index].subTitleName}',
-                                                  maxLines: 2,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  textAlign: TextAlign.left,
-                                                  style: TextStyle(
-                                                    fontFamily: 'Lato',
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                    fontSize: ManageDeviceInfo
-                                                            .resolutionHeight *
-                                                        0.02,
-                                                    color: Colors.black87,
-                                                  )),
-                                            ),
-                                          ],
-                                        )),
+                                    child: SizedBox(
+                                      width: ManageDeviceInfo.resolutionWidth *
+                                          0.5,
+                                      height:
+                                          ManageDeviceInfo.resolutionHeight *
+                                              0.16,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Container(
+                                            alignment: Alignment.bottomLeft,
+                                            padding: EdgeInsets.only(
+                                                left: ManageDeviceInfo
+                                                        .resolutionWidth *
+                                                    0.04),
+                                            child: Text(
+                                                '${ModelComicDetailInfo.getInstance().modelComicInfoList[index].episode}화',
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(
+                                                  fontFamily: 'Lato',
+                                                  fontWeight: FontWeight.normal,
+                                                  fontSize: ManageDeviceInfo
+                                                          .resolutionHeight *
+                                                      0.025,
+                                                  color: Colors.black87,
+                                                )),
+                                          ),
+                                          Container(
+                                            alignment: Alignment.bottomLeft,
+                                            padding: EdgeInsets.only(
+                                                left: ManageDeviceInfo
+                                                        .resolutionWidth *
+                                                    0.04),
+                                            child: Text(
+                                                '${ModelComicDetailInfo.getInstance().modelComicInfoList[index].subTitleName}',
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(
+                                                  fontFamily: 'Lato',
+                                                  fontWeight: FontWeight.normal,
+                                                  fontSize: ManageDeviceInfo
+                                                          .resolutionHeight *
+                                                      0.02,
+                                                  color: Colors.black87,
+                                                )),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 Spacer(
