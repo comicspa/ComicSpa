@@ -15,7 +15,7 @@ enum e_comic_genre
 
 
 
-typedef void OnPresetFetchDone();
+typedef void OnPresetFetchDone(bool result);
 
 
 class ModelPreset
@@ -40,13 +40,17 @@ class ModelPreset
   static String get thumbnailImageFileFullName => __thumbnailImageFileFullName;
   static String get bannerImageFileFullName => __bannerImageFileFullName;
 
-  static void fromJson(String presetJsonString)
+  static bool fromJson(String presetJsonString)
   {
     print('preset : '+presetJsonString);
     Map presetMap = jsonDecode(presetJsonString);
 
-    __version = presetMap['version'];
-    print('version : $__version');
+    String version = presetMap['version'];
+    print('current version : $version , app version : $__version');
+
+    if(0 != version.compareTo(__version))
+      return false;
+
 
     var linkJson = presetMap['link'];
     _faqUrl = linkJson['faq'];
@@ -57,6 +61,8 @@ class ModelPreset
 
     _termsOfUseUrl = linkJson['terms_of_use'];
     print('terms_of_use : $_termsOfUseUrl');
+
+    return true;
 
   }
 
@@ -69,8 +75,8 @@ class ModelPreset
     }).then((HttpClientResponse response) {
       response.transform(utf8.decoder).listen((contents) {
 
-        fromJson(contents);
-        onPresetFetchDone();
+        bool result = fromJson(contents);
+        onPresetFetchDone(result);
 
       });
     });
@@ -94,8 +100,8 @@ class ModelPreset
       }).then((HttpClientResponse response) {
         response.transform(utf8.decoder).listen((contents) {
 
-          fromJson(contents);
-          onPresetFetchDone();
+          bool result = fromJson(contents);
+          onPresetFetchDone(result);
         });
       });
     },

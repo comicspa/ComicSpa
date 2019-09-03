@@ -42,8 +42,10 @@ class _SplashScreenState extends State<SplashScreen>
     print('state = $state');
   }
 
-  void _presetFetchDone() {
-    navigationPage();
+  void _presetFetchDone(bool result) {
+
+    if(true == result)
+      navigationPage();
   }
 
   void init() async {
