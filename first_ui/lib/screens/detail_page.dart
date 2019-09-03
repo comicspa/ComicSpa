@@ -110,12 +110,15 @@ class _DetailPageState extends State<DetailPage> {
                           ManageDeviceInfo.resolutionHeight * 0.0,
                           0,
                           ManageDeviceInfo.resolutionHeight * 0.01),
-                      child: CachedNetworkImage(
-                        imageUrl: ModelComicDetailInfo.getInstance()
-                            .representationImageUrl,
-                        width: ManageDeviceInfo.resolutionWidth * 0.375,
-                        height: ManageDeviceInfo.resolutionHeight * 0.245,
-                        fit: BoxFit.fill,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(4.0),
+                        child: CachedNetworkImage(
+                          imageUrl: ModelComicDetailInfo.getInstance()
+                              .representationImageUrl,
+                          width: ManageDeviceInfo.resolutionWidth * 0.375,
+                          height: ManageDeviceInfo.resolutionHeight * 0.245,
+                          fit: BoxFit.fill,
+                        ),
                       ),
                     ),
                   ),
@@ -538,20 +541,23 @@ class _DetailPageState extends State<DetailPage> {
                                               ),
                                             );
                                           },
-                                          child: CachedNetworkImage(
-                                            imageUrl: ModelComicDetailInfo
-                                                    .getInstance()
-                                                .modelComicInfoList[index]
-                                                .thumbnailImageUrl,
-                                            placeholder: (context, url) =>
-                                                LoadingIndicator(),
-                                            width: ManageDeviceInfo
-                                                    .resolutionWidth *
-                                                0.26,
-                                            height: ManageDeviceInfo
-                                                    .resolutionHeight *
-                                                0.16,
-                                            fit: BoxFit.fill,
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(4.0),
+                                            child: CachedNetworkImage(
+                                              imageUrl: ModelComicDetailInfo
+                                                      .getInstance()
+                                                  .modelComicInfoList[index]
+                                                  .thumbnailImageUrl,
+                                              placeholder: (context, url) =>
+                                                  LoadingIndicator(),
+                                              width: ManageDeviceInfo
+                                                      .resolutionWidth *
+                                                  0.26,
+                                              height: ManageDeviceInfo
+                                                      .resolutionHeight *
+                                                  0.16,
+                                              fit: BoxFit.fill,
+                                            ),
                                           ),
                                         ),
                                       ),

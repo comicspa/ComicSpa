@@ -120,7 +120,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                 children: [
                                                   Flexible(
                                                     flex: 3,
-                                                    child: Container(
+                                                    child: ClipRRect(
+                                                      borderRadius: BorderRadius.circular(3.0),
                                                       child: CachedNetworkImage(
                                                         imageUrl: snapshot
                                                             .data[index]
@@ -315,7 +316,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                 children: [
                                                   Flexible(
                                                     flex: 3,
-                                                    child: Container(
+                                                    child: ClipRRect(
+                                                      borderRadius: BorderRadius.circular(3.0),
                                                       child: CachedNetworkImage(
                                                         imageUrl: snapshot
                                                             .data[index]
@@ -510,7 +512,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                 children: [
                                                   Flexible(
                                                     flex: 3,
-                                                    child: Container(
+                                                    child: ClipRRect(
+                                                      borderRadius: BorderRadius.circular(3.0),
                                                       child: CachedNetworkImage(
                                                         imageUrl: snapshot
                                                             .data[index]
@@ -705,7 +708,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                 children: [
                                                   Flexible(
                                                     flex: 3,
-                                                    child: Container(
+                                                    child: ClipRRect(
+                                                      borderRadius: BorderRadius.circular(3.0),
                                                       child: CachedNetworkImage(
                                                         imageUrl: snapshot
                                                             .data[index]
