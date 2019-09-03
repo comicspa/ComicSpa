@@ -19,8 +19,7 @@ class DetailPage extends StatefulWidget {
   _DetailPageState createState() => _DetailPageState(_userId, _comicId);
 }
 
-class _DetailPageState extends State<DetailPage>  with WidgetsBindingObserver
-{
+class _DetailPageState extends State<DetailPage> with WidgetsBindingObserver {
   final String _userId;
   final String _comicId;
 
@@ -44,8 +43,7 @@ class _DetailPageState extends State<DetailPage>  with WidgetsBindingObserver
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state)
-  {
+  void didChangeAppLifecycleState(AppLifecycleState state) {
     print('state = $state');
   }
 
@@ -115,7 +113,9 @@ class _DetailPageState extends State<DetailPage>  with WidgetsBindingObserver
             : Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  SizedBox(height: ManageDeviceInfo.resolutionHeight * 0.02,),
+                  SizedBox(
+                    height: ManageDeviceInfo.resolutionHeight * 0.02,
+                  ),
                   Container(
                     alignment: Alignment.center,
                     child: Padding(
@@ -494,7 +494,9 @@ class _DetailPageState extends State<DetailPage>  with WidgetsBindingObserver
                       ),
                     ),
                   ),
-                  SizedBox(height: ManageDeviceInfo.resolutionHeight * 0.02,),
+                  SizedBox(
+                    height: ManageDeviceInfo.resolutionHeight * 0.02,
+                  ),
                   FutureBuilder<ModelComicDetailInfo>(
                     future: c2sComicDetailInfo.fetchBytes(),
                     builder: (context, snapshot) {
@@ -556,7 +558,8 @@ class _DetailPageState extends State<DetailPage>  with WidgetsBindingObserver
                                             );
                                           },
                                           child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(4.0),
+                                            borderRadius:
+                                                BorderRadius.circular(4.0),
                                             child: CachedNetworkImage(
                                               imageUrl: ModelComicDetailInfo
                                                       .getInstance()

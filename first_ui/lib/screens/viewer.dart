@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'common_widgets.dart';
 import 'text_editor.dart';
 
@@ -26,21 +27,20 @@ class ViewerScreen extends StatefulWidget {
   String userId;
   String comicId;
   String episodeId;
-  ViewerScreen(this.userId,this.comicId,this.episodeId);
+  ViewerScreen(this.userId, this.comicId, this.episodeId);
 
   @override
-  _ViewerScreen createState() => new _ViewerScreen(userId,comicId,episodeId);
+  _ViewerScreen createState() => new _ViewerScreen(userId, comicId, episodeId);
 }
 
-class _ViewerScreen extends State<ViewerScreen>  with WidgetsBindingObserver{
+class _ViewerScreen extends State<ViewerScreen> with WidgetsBindingObserver {
 //  PacketC2STodayPopularComicInfo c2STodayPopularComicInfo = new PacketC2STodayPopularComicInfo(); // use this to handle data
   String userId;
   String comicId;
   String episodeId;
-  _ViewerScreen(this.userId,this.comicId,this.episodeId);
+  _ViewerScreen(this.userId, this.comicId, this.episodeId);
 
   PacketC2SViewComic c2sViewComic = PacketC2SViewComic();
-
 
 //  @override
 //  void initState() {
@@ -54,7 +54,7 @@ class _ViewerScreen extends State<ViewerScreen>  with WidgetsBindingObserver{
   initState() {
     //    SystemChrome.setEnabledSystemUIOverlays([]);
 
-    c2sViewComic.generate(this.userId,this.comicId,this.episodeId);
+    c2sViewComic.generate(this.userId, this.comicId, this.episodeId);
     WidgetsBinding.instance.addObserver(this);
     super.initState();
     _isVisible = true;
@@ -67,14 +67,12 @@ class _ViewerScreen extends State<ViewerScreen>  with WidgetsBindingObserver{
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state)
-  {
+  void didChangeAppLifecycleState(AppLifecycleState state) {
     print('state = $state');
   }
 
-
 //  String url;
- // ModelFeaturedComicInfo modelFeaturedComicInfo;
+  // ModelFeaturedComicInfo modelFeaturedComicInfo;
 
   /*
   _ViewerScreen(ModelFeaturedComicInfo modelFeaturedComicInfo) {
@@ -88,7 +86,8 @@ class _ViewerScreen extends State<ViewerScreen>  with WidgetsBindingObserver{
     // Todo Currently this screen is used for testing viewer
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(ManageDeviceInfo.resolutionHeight * 0.055),
+        preferredSize:
+            Size.fromHeight(ManageDeviceInfo.resolutionHeight * 0.055),
         child: Visibility(
           visible: _isVisible,
           child: AppBar(
@@ -98,11 +97,9 @@ class _ViewerScreen extends State<ViewerScreen>  with WidgetsBindingObserver{
             centerTitle: true,
 
             title: Text('Episode #',
-                style: TextStyle(color: Colors.black) //Todo need to bind the data
-            ),
-
-
-
+                style:
+                    TextStyle(color: Colors.black) //Todo need to bind the data
+                ),
           ),
         ),
       ),
@@ -113,7 +110,6 @@ class _ViewerScreen extends State<ViewerScreen>  with WidgetsBindingObserver{
             setState(() {
               _isVisible = !_isVisible;
             });
-
           },
           child: FutureBuilder<List<ModelViewComic>>(
             future: c2sViewComic.fetchBytes(),
@@ -125,7 +121,22 @@ class _ViewerScreen extends State<ViewerScreen>  with WidgetsBindingObserver{
                     children: <Widget>[
                       SizedBox(
                         height: ManageDeviceInfo.resolutionHeight * .3,
-                        child: Center(child: CircularProgressIndicator()),
+                        child: Center(
+                          child: CircularPercentIndicator(
+                            radius: 40.0,
+                            lineWidth: 4.0,
+                            animation: true,
+                            animationDuration: 2700,
+                            percent: 0.75,
+                            footer: new Text(
+                              "Loading images...",
+                              style: new TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 17.0),
+                            ),
+                            circularStrokeCap: CircularStrokeCap.round,
+                            progressColor: Colors.redAccent,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -144,19 +155,18 @@ class _ViewerScreen extends State<ViewerScreen>  with WidgetsBindingObserver{
 //                    );
 //                  }),
 //                );
-              return ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                physics: BouncingScrollPhysics(),
-                itemCount: snapshot.data[0].imageUrlList.length,
+                return ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  physics: BouncingScrollPhysics(),
+                  itemCount: snapshot.data[0].imageUrlList.length,
 //                      ModelViewComic.getInstance().comicImageUrlList.length,
-                itemBuilder: (BuildContext context, int index) =>
-                    CachedNetworkImage(
-                      imageUrl: snapshot.data[0].imageUrlList[index],
-
-                    ),
-              );
-              //Todo use pageview.builder to view horizontal style image like 만화 (참고: https://medium.com/flutter-community/a-deep-dive-into-pageview-in-flutter-with-custom-transitions-581d9ea6dded)
+                  itemBuilder: (BuildContext context, int index) =>
+                      CachedNetworkImage(
+                    imageUrl: snapshot.data[0].imageUrlList[index],
+                  ),
+                );
+                //Todo use pageview.builder to view horizontal style image like 만화 (참고: https://medium.com/flutter-community/a-deep-dive-into-pageview-in-flutter-with-custom-transitions-581d9ea6dded)
               }
             },
           ),
@@ -213,7 +223,6 @@ class _ViewerScreen extends State<ViewerScreen>  with WidgetsBindingObserver{
                 heroTag: 'btn1',
                 backgroundColor: Colors.brown,
                 onPressed: () {
-
                   ModelTextDetection.reset();
 
                   Navigator.push<Widget>(
@@ -221,7 +230,6 @@ class _ViewerScreen extends State<ViewerScreen>  with WidgetsBindingObserver{
                       MaterialPageRoute(
                         builder: (context) => DrawRectAndImage(),
                       ));
-
                 },
                 child: Icon(Icons.translate),
               ),
