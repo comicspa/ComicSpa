@@ -10,7 +10,7 @@ import 'package:first_ui/packets/packet_c2s_today_trend_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_view_comic.dart';
 import 'package:first_ui/packets/packet_c2s_featured_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_new_comic_info.dart';
-import 'package:first_ui/packets/packet_c2s_weekly_popular_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_weekly_trend_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_real_time_trend_info.dart';
 import 'package:first_ui/packets/packet_c2s_recommended_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_comic_detail_info.dart';
@@ -45,8 +45,8 @@ class _PageDevTestState extends State<PageDevTest> {
   int selectedCountIndex = -1;
   AsyncSnapshot snapshot;
 
-  PacketC2STodayTrendComicInfo c2STodayPopularComicInfo = new PacketC2STodayTrendComicInfo();
-  PacketC2SWeeklyPopularComicInfo c2SWeeklyPopularComicInfo = new PacketC2SWeeklyPopularComicInfo();
+  PacketC2STodayTrendComicInfo c2STodayTrendComicInfo = new PacketC2STodayTrendComicInfo();
+  PacketC2SWeeklyTrendComicInfo c2SWeeklyTrendComicInfo = new PacketC2SWeeklyTrendComicInfo();
   PacketC2SFeaturedComicInfo c2SFeaturedComicInfo = new PacketC2SFeaturedComicInfo();
   PacketC2SViewComic c2SViewComic = new PacketC2SViewComic();
   PacketC2SNewComicInfo c2SNewComicInfo = new PacketC2SNewComicInfo();
@@ -67,8 +67,8 @@ class _PageDevTestState extends State<PageDevTest> {
 
     //checkPermissionGetMultiFilePath();
 
-    c2STodayPopularComicInfo.generate(0, 0);
-    c2SWeeklyPopularComicInfo.generate(0, 0);
+    c2STodayTrendComicInfo.generate(0, 0);
+    c2SWeeklyTrendComicInfo.generate(0, 0);
     c2SFeaturedComicInfo.generate(0, 0);
     c2SViewComic.generate('1566811403000','000001','00001');
     c2SNewComicInfo.generate(0,0);
@@ -212,7 +212,7 @@ class _PageDevTestState extends State<PageDevTest> {
       body: Row(children: [
         Expanded(
           child: FutureBuilder(
-              future:c2STodayPopularComicInfo.fetchBytes(),
+              future:c2STodayTrendComicInfo.fetchBytes(),
               //future:c2SFeaturedComicInfo.fetchBytes(),
               //future:c2SNewComicInfo.fetchBytes(),
               //future:c2SViewComic.fetchBytes(),

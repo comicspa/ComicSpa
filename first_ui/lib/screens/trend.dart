@@ -12,8 +12,8 @@ import 'package:first_ui/models/model_new_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_new_comic_info.dart';
 import 'package:first_ui/models/model_real_time_trend_info.dart';
 import 'package:first_ui/packets/packet_c2s_real_time_trend_info.dart';
-import 'package:first_ui/models/model_weekly_popular_comic_info.dart';
-import 'package:first_ui/packets/packet_c2s_weekly_popular_comic_info.dart';
+import 'package:first_ui/models/model_weekly_trend_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_weekly_trend_comic_info.dart';
 import 'detail_page.dart';
 import 'viewer.dart';
 import 'common_widgets.dart';
@@ -34,8 +34,8 @@ class _TrendState extends State<Trend>  with WidgetsBindingObserver{
   PacketC2SNewComicInfo c2sNewComicInfo = new PacketC2SNewComicInfo();
   PacketC2SRealTimeTrendInfo c2sRealTimeTrendInfo =
       new PacketC2SRealTimeTrendInfo();
-  PacketC2SWeeklyPopularComicInfo c2sWeeklyPopularComicInfo =
-      new PacketC2SWeeklyPopularComicInfo();
+  PacketC2SWeeklyTrendComicInfo c2sWeeklyTrendComicInfo =
+      new PacketC2SWeeklyTrendComicInfo();
 
   @override
   void initState() {
@@ -48,7 +48,7 @@ class _TrendState extends State<Trend>  with WidgetsBindingObserver{
     c2sRecommendedComicInfo.generate(0, 0);
     c2sNewComicInfo.generate(0, 0);
     c2sRealTimeTrendInfo.generate(0, 0);
-    c2sWeeklyPopularComicInfo.generate(0, 0);
+    c2sWeeklyTrendComicInfo.generate(0, 0);
 
   }
 
@@ -754,8 +754,8 @@ class _TrendState extends State<Trend>  with WidgetsBindingObserver{
           Container(
             padding: EdgeInsets.all(0),
             height: ManageDeviceInfo.resolutionHeight * 0.28,
-            child: FutureBuilder<List<ModelWeeklyPopularComicInfo>>(
-              future: c2sWeeklyPopularComicInfo.fetchBytes(),
+            child: FutureBuilder<List<ModelWeeklyTrendComicInfo>>(
+              future: c2sWeeklyTrendComicInfo.fetchBytes(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData)
                   return LoadingIndicator();

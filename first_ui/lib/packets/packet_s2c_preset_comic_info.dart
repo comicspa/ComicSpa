@@ -10,7 +10,7 @@ import 'package:first_ui/models/model_recommended_comic_info.dart';
 import 'package:first_ui/models/model_real_time_trend_info.dart';
 import 'package:first_ui/models/model_new_comic_info.dart';
 import 'package:first_ui/models/model_today_trend_comic_info.dart';
-import 'package:first_ui/models/model_weekly_popular_comic_info.dart';
+import 'package:first_ui/models/model_weekly_trend_comic_info.dart';
 import 'package:first_ui/manage/manage_resource.dart';
 
 
@@ -178,27 +178,27 @@ class PacketS2CPresetComicInfo extends PacketS2CCommon
     print('weeklyPopularComicInfoCount : $weeklyPopularComicInfoCount');
 
 
-    List<ModelWeeklyPopularComicInfo> list6 = new List<ModelWeeklyPopularComicInfo>();
+    List<ModelWeeklyTrendComicInfo> list6 = new List<ModelWeeklyTrendComicInfo>();
     for(int countIndex=0; countIndex<weeklyPopularComicInfoCount; ++countIndex)
     {
-      ModelWeeklyPopularComicInfo modelWeeklyPopularComicInfo = new ModelWeeklyPopularComicInfo();
+      ModelWeeklyTrendComicInfo modelWeeklyTrendComicInfo = new ModelWeeklyTrendComicInfo();
 
-      modelWeeklyPopularComicInfo.userId = readStringToByteBuffer();
-      modelWeeklyPopularComicInfo.comicId = readStringToByteBuffer();
-      modelWeeklyPopularComicInfo.title = readStringToByteBuffer();
+      modelWeeklyTrendComicInfo.userId = readStringToByteBuffer();
+      modelWeeklyTrendComicInfo.comicId = readStringToByteBuffer();
+      modelWeeklyTrendComicInfo.title = readStringToByteBuffer();
 
-      String url = await ModelPreset.getRepresentationHorizontalImageDownloadUrl(modelWeeklyPopularComicInfo.userId, modelWeeklyPopularComicInfo.comicId);
-      modelWeeklyPopularComicInfo.url = url;
-      modelWeeklyPopularComicInfo.thumbnailUrl = url;
+      String url = await ModelPreset.getRepresentationHorizontalImageDownloadUrl(modelWeeklyTrendComicInfo.userId, modelWeeklyTrendComicInfo.comicId);
+      modelWeeklyTrendComicInfo.url = url;
+      modelWeeklyTrendComicInfo.thumbnailUrl = url;
 
-      modelWeeklyPopularComicInfo.image = await ManageResource.fetchImage(url);
+      modelWeeklyTrendComicInfo.image = await ManageResource.fetchImage(url);
 
-      print(modelWeeklyPopularComicInfo.toString());
+      print(modelWeeklyTrendComicInfo.toString());
 
-      list6.add(modelWeeklyPopularComicInfo);
+      list6.add(modelWeeklyTrendComicInfo);
     }
 
-    ModelWeeklyPopularComicInfo.list = list6;
+    ModelWeeklyTrendComicInfo.list = list6;
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

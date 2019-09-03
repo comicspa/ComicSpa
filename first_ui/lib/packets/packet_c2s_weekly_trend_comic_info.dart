@@ -6,19 +6,19 @@ import 'package:flutter/services.dart';
 import 'package:first_ui/models/model_common.dart';
 import 'package:first_ui/packets/packet_common.dart';
 import 'package:first_ui/packets/packet_c2s_common.dart';
-import 'package:first_ui/packets/packet_s2c_weekly_popular_comic_info.dart';
-import 'package:first_ui/models/model_weekly_popular_comic_info.dart';
+import 'package:first_ui/packets/packet_s2c_weekly_trend_comic_info.dart';
+import 'package:first_ui/models/model_weekly_trend_comic_info.dart';
 
 
 
-class PacketC2SWeeklyPopularComicInfo extends PacketC2SCommon
+class PacketC2SWeeklyTrendComicInfo extends PacketC2SCommon
 {
   int _pageCountIndex = 0;
   int _pageViewCount = 0;
 
-  PacketC2SWeeklyPopularComicInfo()
+  PacketC2SWeeklyTrendComicInfo()
   {
-    type = e_packet_type.c2s_weekly_popular_comic_info;
+    type = e_packet_type.c2s_weekly_trend_comic_info;
   }
 
   void generate(int pageViewCount,int pageCountIndex)
@@ -27,12 +27,12 @@ class PacketC2SWeeklyPopularComicInfo extends PacketC2SCommon
     _pageCountIndex = pageCountIndex;
   }
 
-  Future<List<ModelWeeklyPopularComicInfo>> fetchBytes() async
+  Future<List<ModelWeeklyTrendComicInfo>> fetchBytes() async
   {
     print('PacketC2SWeeklyPopularComicInfo : fetchBytes started');
 
-    if(null != ModelWeeklyPopularComicInfo.list)
-      return ModelWeeklyPopularComicInfo.list;
+    if(null != ModelWeeklyTrendComicInfo.list)
+      return ModelWeeklyTrendComicInfo.list;
 
     Socket socket = await ModelCommon.createServiceSocket();
     print('connected server');
@@ -57,11 +57,11 @@ class PacketC2SWeeklyPopularComicInfo extends PacketC2SCommon
       {
         //print('eventList.length == packetSize');
 
-        PacketS2CWeeklyPopularComicInfo packet = new PacketS2CWeeklyPopularComicInfo();
+        PacketS2CWeeklyTrendComicInfo packet = new PacketS2CWeeklyTrendComicInfo();
         packet.parseBytes(packetSize,byteData);
       }
 
-      return ModelWeeklyPopularComicInfo.list;
+      return ModelWeeklyTrendComicInfo.list;
     });
 
     int packetBodySize  = 4 + 4;
@@ -76,7 +76,7 @@ class PacketC2SWeeklyPopularComicInfo extends PacketC2SCommon
     await Future.delayed(Duration(seconds: 5));
     socket.close();
 
-    return ModelWeeklyPopularComicInfo.list;
+    return ModelWeeklyTrendComicInfo.list;
   }
 
 
