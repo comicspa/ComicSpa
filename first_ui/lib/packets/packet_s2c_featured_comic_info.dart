@@ -28,9 +28,7 @@ class PacketS2CFeaturedComicInfo extends PacketS2CCommon
     int modelFeaturedComicInfoCount = getUint32();
     print('modelFeaturedComicInfoCount : $modelFeaturedComicInfoCount');
 
-
     List<ModelFeaturedComicInfo>  list = new List<ModelFeaturedComicInfo>();
-
 
     for(int countIndex=0; countIndex<modelFeaturedComicInfoCount; ++countIndex)
     {

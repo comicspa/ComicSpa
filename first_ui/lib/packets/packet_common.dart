@@ -74,6 +74,12 @@ enum e_packet_type
   c2s_my_locker_comic_recent,
   s2c_my_locker_comic_recent,
 
+  c2s_preset_comic_info,
+  s2c_preset_comic_info,
+
+  c2s_preset_library_info,
+  s2c_preset_library_info,
+
 }
 
 

@@ -23,7 +23,8 @@ import 'package:first_ui/packets/packet_c2s_my_locker_comic_recent.dart';
 import 'package:first_ui/packets/packet_c2s_my_locker_comic_view_list.dart';
 import 'package:first_ui/packets/packet_c2s_my_locker_comic_owned.dart';
 import 'package:first_ui/packets/packet_c2s_my_locker_comic_continue.dart';
-
+import 'package:first_ui/packets/packet_c2s_preset_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_preset_library_info.dart';
 
 class ManageMessage
 {
@@ -578,6 +579,56 @@ class ManageMessage
 
                   print("Creating a stream...");
                   Stream<List<ModelMyLockerComicContinue>> stream = new Stream.fromFuture(packet.fetchBytes());
+                  print("Created the stream");
+
+                  stream.listen((data) {
+                    //print('DataReceived - size :  ${data.size}');
+                    print('DataReceived');
+                  }, onDone: () {
+                    print("Task Done");
+
+                    __streamController.add(packetC2SCommon.type);
+
+                  }, onError: (error) {
+                    print("Some Error");
+
+                  });
+
+                  __messageList.removeAt(0);
+                }
+                break;
+
+              case e_packet_type.c2s_preset_comic_info:
+                {
+                  PacketC2SPresetComicInfo packet = packetC2SCommon as PacketC2SPresetComicInfo;
+
+                  print("Creating a stream...");
+                  Stream<void> stream = new Stream.fromFuture(packet.fetchBytes());
+                  print("Created the stream");
+
+                  stream.listen((data) {
+                    //print('DataReceived - size :  ${data.size}');
+                    print('DataReceived');
+                  }, onDone: () {
+                    print("Task Done");
+
+                    __streamController.add(packetC2SCommon.type);
+
+                  }, onError: (error) {
+                    print("Some Error");
+
+                  });
+
+                  __messageList.removeAt(0);
+                }
+                break;
+
+              case e_packet_type.c2s_preset_library_info:
+                {
+                  PacketC2SPresetLibraryInfo packet = packetC2SCommon as PacketC2SPresetLibraryInfo;
+
+                  print("Creating a stream...");
+                  Stream<void> stream = new Stream.fromFuture(packet.fetchBytes());
                   print("Created the stream");
 
                   stream.listen((data) {
