@@ -128,7 +128,7 @@ class _SplashScreenState extends State<SplashScreen>
               'Bring Joys to Everyone',
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: ManageDeviceInfo.resolutionHeight * 0.02),
+                  fontSize: ManageDeviceInfo.resolutionHeight * 0.024),
             ),
             Padding(
               padding: EdgeInsets.only(
