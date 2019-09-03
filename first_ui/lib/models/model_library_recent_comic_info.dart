@@ -2,7 +2,7 @@ import 'dart:ui' as ui;
 
 
 
-class ModelMyLockerComicOwned
+class ModelLibraryRecentComicInfo
 {
   String _comicId;
   String _userId;
@@ -54,5 +54,5 @@ class ModelMyLockerComicOwned
     return 'userId : $_userId , comicId : $_comicId , title : $_title , thumbnailUrl : $thumbnailUrl';
   }
 
-  static List<ModelMyLockerComicOwned> list;
+  static List<ModelLibraryRecentComicInfo> list;
 }

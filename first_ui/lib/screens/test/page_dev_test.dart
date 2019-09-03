@@ -16,10 +16,10 @@ import 'package:first_ui/packets/packet_c2s_recommended_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_comic_detail_info.dart';
 import 'package:first_ui/packets/packet_c2s_new_creator_info.dart';
 import 'package:first_ui/packets/packet_c2s_weekly_creator_info.dart';
-import 'package:first_ui/packets/packet_c2s_my_locker_comic_view_list.dart';
+import 'package:first_ui/packets/packet_c2s_library_view_list_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_library_continue_comic_info.dart';
-import 'package:first_ui/packets/packet_c2s_my_locker_comic_owned.dart';
-import 'package:first_ui/packets/packet_c2s_my_locker_comic_recent.dart';
+import 'package:first_ui/packets/packet_c2s_library_owned_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_library_recent_comic_info.dart';
 
 
 import 'package:first_ui/manage/manage_common.dart';
@@ -55,10 +55,10 @@ class _PageDevTestState extends State<PageDevTest> {
   PacketC2SComicDetailInfo c2SComicDetailInfo = new PacketC2SComicDetailInfo();
   PacketC2SNewCreatorInfo c2SNewCreatorInfo = new PacketC2SNewCreatorInfo();
   PacketC2SWeeklyCreatorInfo c2SWeeklyCreatorInfo = new PacketC2SWeeklyCreatorInfo();
-  PacketC2SMyLockerComicViewList c2SMyLockerComicViewList = new PacketC2SMyLockerComicViewList();
+  PacketC2SLibraryViewListComicInfo c2SLibraryViewListComicInfo = new PacketC2SLibraryViewListComicInfo();
   PacketC2SLibraryContinueComicInfo c2SLibraryContinueComicInfo = new PacketC2SLibraryContinueComicInfo();
-  PacketC2SMyLockerComicOwned c2SMyLockerComicOwned = new PacketC2SMyLockerComicOwned();
-  PacketC2SMyLockerComicRecent c2SMyLockerComicRecent = new PacketC2SMyLockerComicRecent();
+  PacketC2SLibraryOwnedComicInfo c2SLibraryOwnedComicInfo = new PacketC2SLibraryOwnedComicInfo();
+  PacketC2SLibraryRecentComicInfo c2SLibraryRecentComicInfo = new PacketC2SLibraryRecentComicInfo();
 
 
   @override

@@ -1,7 +1,7 @@
 import 'dart:ui' as ui;
 
 
-class ModelMyLockerComicViewList
+class ModelLibraryViewListComicInfo
 {
   String _comicId;
   String _userId;
@@ -53,5 +53,5 @@ class ModelMyLockerComicViewList
     return 'userId : $_userId , comicId : $_comicId , title : $_title , thumbnailUrl : $thumbnailUrl';
   }
 
-  static List<ModelMyLockerComicViewList> list;
+  static List<ModelLibraryViewListComicInfo> list;
 }

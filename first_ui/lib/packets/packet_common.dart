@@ -62,17 +62,17 @@ enum e_packet_type
   c2s_recommended_creator_info,
   s2c_recommended_creator_info,
 
-  c2s_my_locker_comic_check_out,
-  s2c_my_locker_comic_check_out,
+  c2s_library_view_list_comic_info,
+  s2c_library_view_list_comic_info,
 
   c2s_library_continue_comic_info,
   s2c_library_continue_comic_info,
 
-  c2s_my_locker_comic_owned,
-  s2c_my_locker_comic_owned,
+  c2s_library_owned_comic_info,
+  s2c_library_owned_comic_info,
 
-  c2s_my_locker_comic_recent,
-  s2c_my_locker_comic_recent,
+  c2s_library_recent_comic_info,
+  s2c_library_recent_comic_info,
 
   c2s_preset_comic_info,
   s2c_preset_comic_info,

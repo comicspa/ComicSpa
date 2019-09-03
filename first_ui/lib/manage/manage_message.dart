@@ -2,11 +2,10 @@ import 'dart:async';
 
 import 'package:first_ui/models/model_featured_comic_info.dart';
 import 'package:first_ui/models/model_library_continue_comic_info.dart';
+import 'package:first_ui/models/model_library_owned_comic_info.dart';
+import 'package:first_ui/models/model_library_recent_comic_info.dart';
+import 'package:first_ui/models/model_library_view_list_comic_info.dart';
 import 'package:first_ui/models/model_recommended_comic_info.dart';
-import 'package:first_ui/models/model_my_locker_comic_owned.dart';
-import 'package:first_ui/models/model_my_locker_comic_view_list.dart';
-import 'package:first_ui/models/model_my_locker_comic_continue.dart';
-import 'package:first_ui/models/model_my_locker_comic_recent.dart';
 import 'package:first_ui/models/model_new_comic_info.dart';
 import 'package:first_ui/models/model_real_time_trend_info.dart';
 import 'package:first_ui/models/model_weekly_trend_comic_info.dart';
@@ -20,9 +19,9 @@ import 'package:first_ui/packets/packet_c2s_real_time_trend_info.dart';
 import 'package:first_ui/packets/packet_c2s_new_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_today_trend_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_weekly_trend_comic_info.dart';
-import 'package:first_ui/packets/packet_c2s_my_locker_comic_recent.dart';
-import 'package:first_ui/packets/packet_c2s_my_locker_comic_view_list.dart';
-import 'package:first_ui/packets/packet_c2s_my_locker_comic_owned.dart';
+import 'package:first_ui/packets/packet_c2s_library_recent_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_library_view_list_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_library_owned_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_library_continue_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_preset_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_preset_library_info.dart';
@@ -222,12 +221,12 @@ class ManageMessage
         break;
 
 
-      case e_packet_type.c2s_my_locker_comic_recent:
+      case e_packet_type.c2s_library_recent_comic_info:
         {
-          PacketC2SMyLockerComicRecent packet = packetC2SCommon as PacketC2SMyLockerComicRecent;
+          PacketC2SLibraryRecentComicInfo packet = packetC2SCommon as PacketC2SLibraryRecentComicInfo;
 
           print("Creating a stream...");
-          Stream<List<ModelMyLockerComicRecent>> stream = new Stream.fromFuture(packet.fetchBytes());
+          Stream<List<ModelLibraryRecentComicInfo>> stream = new Stream.fromFuture(packet.fetchBytes());
           print("Created the stream");
 
           stream.listen((data) {
@@ -247,12 +246,12 @@ class ManageMessage
         break;
 
 
-      case e_packet_type.c2s_my_locker_comic_check_out:
+      case e_packet_type.c2s_library_view_list_comic_info:
         {
-          PacketC2SMyLockerComicViewList packet = packetC2SCommon as PacketC2SMyLockerComicViewList;
+          PacketC2SLibraryViewListComicInfo packet = packetC2SCommon as PacketC2SLibraryViewListComicInfo;
 
           print("Creating a stream...");
-          Stream<List<ModelMyLockerComicViewList>> stream = new Stream.fromFuture(packet.fetchBytes());
+          Stream<List<ModelLibraryViewListComicInfo>> stream = new Stream.fromFuture(packet.fetchBytes());
           print("Created the stream");
 
           stream.listen((data) {
@@ -271,12 +270,12 @@ class ManageMessage
         }
         break;
 
-      case e_packet_type.c2s_my_locker_comic_owned:
+      case e_packet_type.c2s_library_owned_comic_info:
         {
-          PacketC2SMyLockerComicOwned packet = packetC2SCommon as PacketC2SMyLockerComicOwned;
+          PacketC2SLibraryOwnedComicInfo packet = packetC2SCommon as PacketC2SLibraryOwnedComicInfo;
 
           print("Creating a stream...");
-          Stream<List<ModelMyLockerComicOwned>> stream = new Stream.fromFuture(packet.fetchBytes());
+          Stream<List<ModelLibraryOwnedComicInfo>> stream = new Stream.fromFuture(packet.fetchBytes());
           print("Created the stream");
 
           stream.listen((data) {
@@ -494,12 +493,12 @@ class ManageMessage
                 break;
 
 
-              case e_packet_type.c2s_my_locker_comic_recent:
+              case e_packet_type.c2s_library_recent_comic_info:
                 {
-                  PacketC2SMyLockerComicRecent packet = packetC2SCommon as PacketC2SMyLockerComicRecent;
+                  PacketC2SLibraryRecentComicInfo packet = packetC2SCommon as PacketC2SLibraryRecentComicInfo;
 
                   print("Creating a stream...");
-                  Stream<List<ModelMyLockerComicRecent>> stream = new Stream.fromFuture(packet.fetchBytes());
+                  Stream<List<ModelLibraryRecentComicInfo>> stream = new Stream.fromFuture(packet.fetchBytes());
                   print("Created the stream");
 
                   stream.listen((data) {
@@ -521,12 +520,12 @@ class ManageMessage
                 break;
 
 
-              case e_packet_type.c2s_my_locker_comic_check_out:
+              case e_packet_type.c2s_library_view_list_comic_info:
                 {
-                  PacketC2SMyLockerComicViewList packet = packetC2SCommon as PacketC2SMyLockerComicViewList;
+                  PacketC2SLibraryViewListComicInfo packet = packetC2SCommon as PacketC2SLibraryViewListComicInfo;
 
                   print("Creating a stream...");
-                  Stream<List<ModelMyLockerComicViewList>> stream = new Stream.fromFuture(packet.fetchBytes());
+                  Stream<List<ModelLibraryViewListComicInfo>> stream = new Stream.fromFuture(packet.fetchBytes());
                   print("Created the stream");
 
                   stream.listen((data) {
@@ -547,12 +546,12 @@ class ManageMessage
                 }
                 break;
 
-              case e_packet_type.c2s_my_locker_comic_owned:
+              case e_packet_type.c2s_library_owned_comic_info:
                 {
-                  PacketC2SMyLockerComicOwned packet = packetC2SCommon as PacketC2SMyLockerComicOwned;
+                  PacketC2SLibraryOwnedComicInfo packet = packetC2SCommon as PacketC2SLibraryOwnedComicInfo;
 
                   print("Creating a stream...");
-                  Stream<List<ModelMyLockerComicOwned>> stream = new Stream.fromFuture(packet.fetchBytes());
+                  Stream<List<ModelLibraryOwnedComicInfo>> stream = new Stream.fromFuture(packet.fetchBytes());
                   print("Created the stream");
 
                   stream.listen((data) {

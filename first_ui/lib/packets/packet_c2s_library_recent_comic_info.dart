@@ -8,17 +8,19 @@ import 'package:flutter/services.dart';
 import 'package:first_ui/models/model_common.dart';
 import 'package:first_ui/packets/packet_common.dart';
 import 'package:first_ui/packets/packet_c2s_common.dart';
-import 'package:first_ui/packets/packet_s2c_my_locker_comic_owned.dart';
-import 'package:first_ui/models/model_my_locker_comic_owned.dart';
+import 'package:first_ui/packets/packet_s2c_library_recent_comic_info.dart';
+import 'package:first_ui/models/model_library_recent_comic_info.dart';
 
-class PacketC2SMyLockerComicOwned extends PacketC2SCommon
+
+
+class PacketC2SLibraryRecentComicInfo extends PacketC2SCommon
 {
   int _pageCountIndex = 0;
   int _pageViewCount = 0;
 
-  PacketC2SMyLockerComicOwned()
+  PacketC2SLibraryRecentComicInfo()
   {
-    type = e_packet_type.c2s_my_locker_comic_owned;
+    type = e_packet_type.c2s_library_recent_comic_info;
   }
 
   void generate()
@@ -27,16 +29,15 @@ class PacketC2SMyLockerComicOwned extends PacketC2SCommon
     //_pageCountIndex = pageCountIndex;
   }
 
-  Future<List<ModelMyLockerComicOwned>> fetchBytes() async
+  Future<List<ModelLibraryRecentComicInfo>> fetchBytes() async
   {
-    print('PacketC2SMyLockerComicOwned : fetchBytes started');
+    print('PacketC2SMyLockerComicRecent : fetchBytes started');
 
-    if(null != ModelMyLockerComicOwned.list)
-      return ModelMyLockerComicOwned.list;
+    if(null != ModelLibraryRecentComicInfo.list)
+      return ModelLibraryRecentComicInfo.list;
 
     Socket socket = await ModelCommon.createServiceSocket();
     print('connected server');
-
 
     final List<int> eventList = new List<int>();
     // listen to the received data event stream
@@ -57,12 +58,13 @@ class PacketC2SMyLockerComicOwned extends PacketC2SCommon
       {
         //print('eventList.length == packetSize');
 
-        PacketS2CMyLockerComicOwned packet = new PacketS2CMyLockerComicOwned();
+        PacketS2CLibraryRecentComicInfo packet = new PacketS2CLibraryRecentComicInfo();
         packet.parseBytes(packetSize,byteData);
       }
 
-      return ModelMyLockerComicOwned.list;
+      return ModelLibraryRecentComicInfo.list;
     });
+
 
     int packetBodySize  = 4 + 4;
     if(0 == generateHeader(packetBodySize)) {
@@ -76,7 +78,7 @@ class PacketC2SMyLockerComicOwned extends PacketC2SCommon
     await Future.delayed(Duration(seconds: 5));
     socket.close();
 
-    return ModelMyLockerComicOwned.list;
+    return ModelLibraryRecentComicInfo.list;
   }
 
 

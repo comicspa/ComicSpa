@@ -5,10 +5,10 @@ import 'dart:typed_data';
 import 'package:first_ui/packets/packet_common.dart';
 import 'package:first_ui/packets/packet_s2c_common.dart';
 import 'package:first_ui/models/model_preset.dart';
-import 'package:first_ui/models/model_my_locker_comic_recent.dart';
-import 'package:first_ui/models/model_my_locker_comic_continue.dart';
-import 'package:first_ui/models/model_my_locker_comic_owned.dart';
-import 'package:first_ui/models/model_my_locker_comic_view_list.dart';
+import 'package:first_ui/models/model_library_recent_comic_info.dart';
+import 'package:first_ui/models/model_library_continue_comic_info.dart';
+import 'package:first_ui/models/model_library_owned_comic_info.dart';
+import 'package:first_ui/models/model_library_view_list_comic_info.dart';
 import 'package:first_ui/manage/manage_resource.dart';
 
 
@@ -37,28 +37,28 @@ class PacketS2CPresetLibraryInfo extends PacketS2CCommon
     print('modelMyLockerComicRecentCount : $modelMyLockerComicRecentCount');
 
 
-    List<ModelMyLockerComicRecent> list1 = new List<ModelMyLockerComicRecent>();
+    List<ModelLibraryRecentComicInfo> list1 = new List<ModelLibraryRecentComicInfo>();
 
     for(int countIndex=0; countIndex<modelMyLockerComicRecentCount; ++countIndex)
     {
-      ModelMyLockerComicRecent modelMyLockerComicRecent = new ModelMyLockerComicRecent();
+      ModelLibraryRecentComicInfo modelLibraryRecentComicInfo = new ModelLibraryRecentComicInfo();
 
-      modelMyLockerComicRecent.userId = readStringToByteBuffer();
-      modelMyLockerComicRecent.comicId = readStringToByteBuffer();
-      modelMyLockerComicRecent.title = readStringToByteBuffer();
+      modelLibraryRecentComicInfo.userId = readStringToByteBuffer();
+      modelLibraryRecentComicInfo.comicId = readStringToByteBuffer();
+      modelLibraryRecentComicInfo.title = readStringToByteBuffer();
 
-      String url = await ModelPreset.getRepresentationVerticalImageDownloadUrl(modelMyLockerComicRecent.userId, modelMyLockerComicRecent.comicId);
-      modelMyLockerComicRecent.url = url;
-      modelMyLockerComicRecent.thumbnailUrl = url;
+      String url = await ModelPreset.getRepresentationVerticalImageDownloadUrl(modelLibraryRecentComicInfo.userId, modelLibraryRecentComicInfo.comicId);
+      modelLibraryRecentComicInfo.url = url;
+      modelLibraryRecentComicInfo.thumbnailUrl = url;
 
-      modelMyLockerComicRecent.image = await ManageResource.fetchImage(url);
+      modelLibraryRecentComicInfo.image = await ManageResource.fetchImage(url);
 
-      print(modelMyLockerComicRecent.toString());
+      print(modelLibraryRecentComicInfo.toString());
 
-      list1.add(modelMyLockerComicRecent);
+      list1.add(modelLibraryRecentComicInfo);
     }
 
-    ModelMyLockerComicRecent.list = list1;
+    ModelLibraryRecentComicInfo.list = list1;
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -66,28 +66,28 @@ class PacketS2CPresetLibraryInfo extends PacketS2CCommon
     print('modelMyLockerComicViewListCount : $modelMyLockerComicViewListCount');
 
 
-    List<ModelMyLockerComicViewList> list2 = new List<ModelMyLockerComicViewList>();
+    List<ModelLibraryViewListComicInfo> list2 = new List<ModelLibraryViewListComicInfo>();
 
     for(int countIndex=0; countIndex<modelMyLockerComicViewListCount; ++countIndex)
     {
-      ModelMyLockerComicViewList modelFeaturedComicInfo = new ModelMyLockerComicViewList();
+      ModelLibraryViewListComicInfo modelLibraryViewListComicInfo = new ModelLibraryViewListComicInfo();
 
-      modelFeaturedComicInfo.userId = readStringToByteBuffer();
-      modelFeaturedComicInfo.comicId = readStringToByteBuffer();
-      modelFeaturedComicInfo.title = readStringToByteBuffer();
+      modelLibraryViewListComicInfo.userId = readStringToByteBuffer();
+      modelLibraryViewListComicInfo.comicId = readStringToByteBuffer();
+      modelLibraryViewListComicInfo.title = readStringToByteBuffer();
 
-      String url = await ModelPreset.getRepresentationVerticalImageDownloadUrl(modelFeaturedComicInfo.userId, modelFeaturedComicInfo.comicId);
-      modelFeaturedComicInfo.url = url;
-      modelFeaturedComicInfo.thumbnailUrl = url;
+      String url = await ModelPreset.getRepresentationVerticalImageDownloadUrl(modelLibraryViewListComicInfo.userId, modelLibraryViewListComicInfo.comicId);
+      modelLibraryViewListComicInfo.url = url;
+      modelLibraryViewListComicInfo.thumbnailUrl = url;
 
-      modelFeaturedComicInfo.image = await ManageResource.fetchImage(url);
+      modelLibraryViewListComicInfo.image = await ManageResource.fetchImage(url);
 
-      print(modelFeaturedComicInfo.toString());
+      print(modelLibraryViewListComicInfo.toString());
 
-      list2.add(modelFeaturedComicInfo);
+      list2.add(modelLibraryViewListComicInfo);
     }
 
-    ModelMyLockerComicViewList.list = list2;
+    ModelLibraryViewListComicInfo.list = list2;
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -95,28 +95,28 @@ class PacketS2CPresetLibraryInfo extends PacketS2CCommon
     print('modelMyLockerComicOwnedCount : $modelMyLockerComicOwnedCount');
 
 
-    List<ModelMyLockerComicOwned> list3 = new List<ModelMyLockerComicOwned>();
+    List<ModelLibraryOwnedComicInfo> list3 = new List<ModelLibraryOwnedComicInfo>();
 
     for(int countIndex=0; countIndex<modelMyLockerComicOwnedCount; ++countIndex)
     {
-      ModelMyLockerComicOwned modelMyLockerComicOwned = new ModelMyLockerComicOwned();
+      ModelLibraryOwnedComicInfo modelLibraryOwnedComicInfo = new ModelLibraryOwnedComicInfo();
 
-      modelMyLockerComicOwned.userId = readStringToByteBuffer();
-      modelMyLockerComicOwned.comicId = readStringToByteBuffer();
-      modelMyLockerComicOwned.title = readStringToByteBuffer();
+      modelLibraryOwnedComicInfo.userId = readStringToByteBuffer();
+      modelLibraryOwnedComicInfo.comicId = readStringToByteBuffer();
+      modelLibraryOwnedComicInfo.title = readStringToByteBuffer();
 
-      String url = await ModelPreset.getRepresentationVerticalImageDownloadUrl(modelMyLockerComicOwned.userId, modelMyLockerComicOwned.comicId);
-      modelMyLockerComicOwned.url = url;
-      modelMyLockerComicOwned.thumbnailUrl = url;
+      String url = await ModelPreset.getRepresentationVerticalImageDownloadUrl(modelLibraryOwnedComicInfo.userId, modelLibraryOwnedComicInfo.comicId);
+      modelLibraryOwnedComicInfo.url = url;
+      modelLibraryOwnedComicInfo.thumbnailUrl = url;
 
-      modelMyLockerComicOwned.image = await ManageResource.fetchImage(url);
+      modelLibraryOwnedComicInfo.image = await ManageResource.fetchImage(url);
 
-      print(modelMyLockerComicOwned.toString());
+      print(modelLibraryOwnedComicInfo.toString());
 
-      list3.add(modelMyLockerComicOwned);
+      list3.add(modelLibraryOwnedComicInfo);
     }
 
-    ModelMyLockerComicOwned.list = list3;
+    ModelLibraryOwnedComicInfo.list = list3;
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -124,28 +124,28 @@ class PacketS2CPresetLibraryInfo extends PacketS2CCommon
     print('modelMyLockerComicContinueCount : $modelMyLockerComicContinueCount');
 
 
-    List<ModelMyLockerComicContinue> list4 = new List<ModelMyLockerComicContinue>();
+    List<ModelLibraryContinueComicInfo> list4 = new List<ModelLibraryContinueComicInfo>();
     for(int countIndex=0; countIndex<modelMyLockerComicContinueCount; ++countIndex)
     {
-      ModelMyLockerComicContinue modelMyLockerComicContinue = new ModelMyLockerComicContinue();
+      ModelLibraryContinueComicInfo modelLibraryContinueComicInfo = new ModelLibraryContinueComicInfo();
 
-      modelMyLockerComicContinue.userId = readStringToByteBuffer();
-      modelMyLockerComicContinue.comicId = readStringToByteBuffer();
-      modelMyLockerComicContinue.title = readStringToByteBuffer();
+      modelLibraryContinueComicInfo.userId = readStringToByteBuffer();
+      modelLibraryContinueComicInfo.comicId = readStringToByteBuffer();
+      modelLibraryContinueComicInfo.title = readStringToByteBuffer();
 
-      String url = await ModelPreset.getRepresentationVerticalImageDownloadUrl(modelMyLockerComicContinue.userId, modelMyLockerComicContinue.comicId);
-      modelMyLockerComicContinue.url = url;
-      modelMyLockerComicContinue.thumbnailUrl = url;
+      String url = await ModelPreset.getRepresentationVerticalImageDownloadUrl(modelLibraryContinueComicInfo.userId, modelLibraryContinueComicInfo.comicId);
+      modelLibraryContinueComicInfo.url = url;
+      modelLibraryContinueComicInfo.thumbnailUrl = url;
 
-      modelMyLockerComicContinue.image = await ManageResource.fetchImage(url);
+      modelLibraryContinueComicInfo.image = await ManageResource.fetchImage(url);
 
-      print(modelMyLockerComicContinue.toString());
+      print(modelLibraryContinueComicInfo.toString());
 
-      list4.add(modelMyLockerComicContinue);
+      list4.add(modelLibraryContinueComicInfo);
 
     }
 
-    ModelMyLockerComicContinue.list = list4;
+    ModelLibraryContinueComicInfo.list = list4;
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
