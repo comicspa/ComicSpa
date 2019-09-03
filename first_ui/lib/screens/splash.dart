@@ -12,15 +12,15 @@ import 'package:first_ui/manage/manage_message.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:first_ui/packets/packet_c2s_preset_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_preset_library_info.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => new _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with WidgetsBindingObserver
-{
-
+class _SplashScreenState extends State<SplashScreen>
+    with WidgetsBindingObserver {
   List<PacketC2SCommon> _packetList;
 
   @override
@@ -38,58 +38,48 @@ class _SplashScreenState extends State<SplashScreen> with WidgetsBindingObserver
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state)
-  {
+  void didChangeAppLifecycleState(AppLifecycleState state) {
     print('state = $state');
   }
 
-  void _presetFetchDone()
-  {
+  void _presetFetchDone() {
     navigationPage();
   }
 
-  void init() async
-  {
-
+  void init() async {
     ManageMessage.generate();
-    ManageMessage.streamController.stream.listen((data)
-    {
+    ManageMessage.streamController.stream.listen((data) {
       print("DataReceived1: " + data.toString());
 
       _packetList.removeAt(0);
-      if(_packetList.length > 0)
-        ManageMessage.add(_packetList[0]);
+      if (_packetList.length > 0) ManageMessage.add(_packetList[0]);
 
-      if(data == e_packet_type.c2s_preset_library_info)
+      if (data == e_packet_type.c2s_preset_library_info)
         ModelPreset.fetch2(_presetFetchDone);
-
-
-      }, onDone: () {
+    }, onDone: () {
       print("Task Done1");
     }, onError: (error) {
       print("Some Error1");
     });
 
-    PacketC2SPresetComicInfo packetC2SPresetComicInfo = new PacketC2SPresetComicInfo();
+    PacketC2SPresetComicInfo packetC2SPresetComicInfo =
+        new PacketC2SPresetComicInfo();
     packetC2SPresetComicInfo.generate();
 
-    PacketC2SPresetLibraryInfo packetC2SPresetLibraryInfo = new PacketC2SPresetLibraryInfo();
+    PacketC2SPresetLibraryInfo packetC2SPresetLibraryInfo =
+        new PacketC2SPresetLibraryInfo();
     packetC2SPresetLibraryInfo.generate();
 
-
-    if(null == _packetList)
-      _packetList = new List<PacketC2SCommon>();
+    if (null == _packetList) _packetList = new List<PacketC2SCommon>();
     _packetList.add(packetC2SPresetComicInfo);
     _packetList.add(packetC2SPresetLibraryInfo);
 
     ManageMessage.add(_packetList[0]);
-
   }
 
   void navigationPage() {
     int switchPage = 0;
-    switch(switchPage)
-    {
+    switch (switchPage) {
       case 0:
         Navigator.of(context).pushReplacementNamed('/HomeScreen');
         break;
@@ -104,53 +94,61 @@ class _SplashScreenState extends State<SplashScreen> with WidgetsBindingObserver
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
-
     ManageDeviceInfo.firstInitialize(context);
 
     return Scaffold(
         body: Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                //Color(0xff7c94b6),
+      fit: StackFit.expand,
+      children: <Widget>[
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            //Color(0xff7c94b6),
 //                gradient: LinearGradient(
 //                  colors: [new Color(0xff7c94e6), new Color(0xff5c94b1)],
 //                  begin: Alignment.centerRight,
 //                  end: Alignment.bottomLeft,
 //                ),
+          ),
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SvgPicture.asset(
+              'images/sparky_logo.svg',
+              width: ManageDeviceInfo.resolutionWidth * 0.075,
+              height: ManageDeviceInfo.resolutionHeight * 0.035,
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 10.0),
+            ),
+            Text(
+              'Bring Joys to Everyone',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: ManageDeviceInfo.resolutionHeight * 0.02),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  top: ManageDeviceInfo.resolutionHeight * 0.04),
+            ),
+            Padding(
+              padding: EdgeInsets.all(15.0),
+              child: new LinearPercentIndicator(
+                width: MediaQuery.of(context).size.width - 50,
+                animation: true,
+                lineHeight: 5.0,
+                animationDuration: 2500,
+                percent: 0.8,
+                linearStrokeCap: LinearStrokeCap.roundAll,
+                progressColor: Colors.redAccent,
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SvgPicture.asset(
-                  'images/sparky_logo.svg',
-                  width: ManageDeviceInfo.resolutionWidth * 0.075,
-                  height: ManageDeviceInfo.resolutionHeight * 0.035,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 10.0),
-                ),
-                Text(
-                  'Bring Joys to Everyone',
-                  style: TextStyle(color: Colors.black, fontSize: 18.0),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 20.0),
-                ),
-                CircularProgressIndicator(
-                  valueColor: new AlwaysStoppedAnimation(Color(0xFF7C94B6)),
-                  backgroundColor: Colors.blueGrey,
-                  strokeWidth: 1,
-                ),
-              ],
-            )
           ],
-        ));
+        )
+      ],
+    ));
   }
 }
