@@ -36,7 +36,7 @@ class _ImageLoading2CanvasState extends State<ImageLoading2Canvas> {
 //    final ByteData data = await rootBundle.load('http://221.165.42.119/ComicSpa/creator/100000/1000001/04.jpg');
     // final ByteData data = await rootBundle.load('images/04.jpg');
 
-    File file = await ManageFlutterCacheManager.getSingleFileFromCache(
+    File file = await ManageFlutterCacheManager.getSingleFile(
         'http://221.165.42.119/ComicSpa/creator/100000/1000001/04.jpg');
     if (!file.existsSync()) {
       print('!file.existsSync()');

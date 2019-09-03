@@ -73,7 +73,7 @@ class PacketC2SMyLockerComicOwned extends PacketC2SCommon
     }
 
     // wait 5 seconds
-    await Future.delayed(Duration(seconds: 20));
+    await Future.delayed(Duration(seconds: 5));
     socket.close();
 
     return ModelMyLockerComicOwned.list;

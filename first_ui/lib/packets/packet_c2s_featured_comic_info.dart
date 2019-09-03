@@ -31,6 +31,7 @@ class PacketC2SFeaturedComicInfo extends PacketC2SCommon
   {
     print('PacketC2SFeaturedComicInfo : fetchBytes started');
 
+    try {
     if(null != ModelFeaturedComicInfo.list)
        return ModelFeaturedComicInfo.list;
 
@@ -59,9 +60,10 @@ class PacketC2SFeaturedComicInfo extends PacketC2SCommon
 
         PacketS2CFeaturedComicInfo packet = new PacketS2CFeaturedComicInfo();
         packet.parseBytes(packetSize,byteData);
+        return ModelFeaturedComicInfo.list;
       }
 
-      return ModelFeaturedComicInfo.list;
+      return null;
     });
 
     int packetBodySize  = 4 + 4;
@@ -73,11 +75,12 @@ class PacketC2SFeaturedComicInfo extends PacketC2SCommon
     }
 
     // wait 5 seconds
-    await Future.delayed(Duration(seconds: 20));
+    await Future.delayed(Duration(seconds: 5));
     socket.close();
+    } catch(exception, stackTrace) {
+      print(exception);
+    }
 
-    return ModelFeaturedComicInfo.list;
+    return null;
   }
-
-
 }

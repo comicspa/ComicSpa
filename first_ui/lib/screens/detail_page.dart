@@ -13,18 +13,17 @@ import 'package:first_ui/models/model_preset.dart';
 class DetailPage extends StatefulWidget {
   final String _userId;
   final String _comicId;
-  DetailPage(this._userId,this._comicId);
+  DetailPage(this._userId, this._comicId);
 
   @override
-  _DetailPageState createState() => _DetailPageState(_userId,_comicId);
+  _DetailPageState createState() => _DetailPageState(_userId, _comicId);
 }
 
 class _DetailPageState extends State<DetailPage> {
-
   final String _userId;
   final String _comicId;
 
-  _DetailPageState(this._userId,this._comicId);
+  _DetailPageState(this._userId, this._comicId);
 
   PacketC2SComicDetailInfo c2sComicDetailInfo = new PacketC2SComicDetailInfo();
 
@@ -36,20 +35,18 @@ class _DetailPageState extends State<DetailPage> {
     init();
   }
 
-  void init() async
-  {
+  void init() async {
     c2sComicDetailInfo.generate(_userId, _comicId);
     await c2sComicDetailInfo.fetchBytes();
-    setState(() {
-
-    });
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(ManageDeviceInfo.resolutionHeight * 0.055),
+        preferredSize:
+            Size.fromHeight(ManageDeviceInfo.resolutionHeight * 0.055),
         child: AppBar(
           elevation: 1,
           iconTheme: IconThemeData(
@@ -64,29 +61,30 @@ class _DetailPageState extends State<DetailPage> {
             child: SizedBox(
               width: ManageDeviceInfo.resolutionWidth * 0.7,
               child: ModelComicDetailInfo.getInstance().mainTitleName == null
-              ? Text('Loading...',
-                maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: 'Lato',
-                    fontWeight: FontWeight.bold,
-                    fontSize: ManageDeviceInfo.resolutionHeight * 0.025,
-                    color: Colors.black87,
-                  ),
-              )
-              : Text(
-                ModelComicDetailInfo.getInstance().mainTitleName,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: 'Lato',
-                  fontWeight: FontWeight.bold,
-                  fontSize: ManageDeviceInfo.resolutionHeight * 0.025,
-                  color: Colors.black87,
-                ),
-              ),
+                  ? Text(
+                      'Loading...',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Lato',
+                        fontWeight: FontWeight.bold,
+                        fontSize: ManageDeviceInfo.resolutionHeight * 0.025,
+                        color: Colors.black87,
+                      ),
+                    )
+                  : Text(
+                      ModelComicDetailInfo.getInstance().mainTitleName,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Lato',
+                        fontWeight: FontWeight.bold,
+                        fontSize: ManageDeviceInfo.resolutionHeight * 0.025,
+                        color: Colors.black87,
+                      ),
+                    ),
             ),
           ),
           /*SvgPicture.asset(
@@ -94,403 +92,591 @@ class _DetailPageState extends State<DetailPage> {
             width: ManageDeviceInfo.resolutionWidth * 0.045,
             height: ManageDeviceInfo.resolutionHeight * 0.025,
           ),*/
-
         ),
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: ModelComicDetailInfo.getInstance().representationImageUrl == null
-          ? LoadingIndicator()
-          : Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            SizedBox(
-              height: ManageDeviceInfo.resolutionHeight * 0.04,
-            ),
-            Container(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(
-                    0,
-                    ManageDeviceInfo.resolutionHeight * 0.0,
-                    0,
-                    ManageDeviceInfo.resolutionHeight * 0.01),
-                child: CachedNetworkImage(
-                  imageUrl: ModelComicDetailInfo.getInstance().representationImageUrl,
-                  width: ManageDeviceInfo.resolutionWidth * 0.355,
-                  height: ManageDeviceInfo.resolutionHeight * 0.225,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            Container(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(
-                    0,
-                    ManageDeviceInfo.resolutionHeight * 0.015,
-                    0,
-                    ManageDeviceInfo.resolutionHeight * 0.003),
-                child: SizedBox(
-                  width: ManageDeviceInfo.resolutionWidth * 0.6,
-                  child: Text(
-                    ModelComicDetailInfo.getInstance().mainTitleName,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: 'Lato',
-                      fontWeight: FontWeight.bold,
-                      fontSize: ManageDeviceInfo.resolutionHeight * 0.025,
-                      color: Colors.black87,
+            ? LoadingIndicator()
+            : Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Container(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(
+                          0,
+                          ManageDeviceInfo.resolutionHeight * 0.0,
+                          0,
+                          ManageDeviceInfo.resolutionHeight * 0.01),
+                      child: CachedNetworkImage(
+                        imageUrl: ModelComicDetailInfo.getInstance()
+                            .representationImageUrl,
+                        width: ManageDeviceInfo.resolutionWidth * 0.325,
+                        height: ManageDeviceInfo.resolutionHeight * 0.275,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                ),
-              ),
-            ),
-            Container(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(
-                    0,
-                    ManageDeviceInfo.resolutionHeight * 0.005,
-                    0,
-                    ManageDeviceInfo.resolutionHeight * 0.01),
-                child: SizedBox(
-                  width: ManageDeviceInfo.resolutionWidth * 0.6,
-                  child: Text(
-                    'By: ${ModelComicDetailInfo.getInstance().creatorName}',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: 'Lato',
-                      fontWeight: FontWeight.bold,
-                      fontSize: ManageDeviceInfo.resolutionHeight * 0.02,
-                      color: Colors.black87,
+                  Container(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(
+                          0,
+                          ManageDeviceInfo.resolutionHeight * 0.015,
+                          0,
+                          ManageDeviceInfo.resolutionHeight * 0.003),
+                      child: SizedBox(
+                        width: ManageDeviceInfo.resolutionWidth * 0.6,
+                        child: Text(
+                          ModelComicDetailInfo.getInstance().mainTitleName,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'Lato',
+                            fontWeight: FontWeight.bold,
+                            fontSize: ManageDeviceInfo.resolutionHeight * 0.025,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-            ),
-            Divider(),
-            Container(
-              height: ManageDeviceInfo.resolutionHeight * 0.05,
-              width: ManageDeviceInfo.resolutionWidth * 0.8,
-              child: OutlineButton(
-                splashColor: Colors.orangeAccent,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ViewerScreen(
-                          ModelComicDetailInfo.getInstance().userId,
-                          ModelComicDetailInfo.getInstance().comicId,
-                          ModelPreset.convertCountIndex2CutImageId(0)),
+                  Container(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(
+                          0,
+                          ManageDeviceInfo.resolutionHeight * 0.005,
+                          0,
+                          ManageDeviceInfo.resolutionHeight * 0.01),
+                      child: SizedBox(
+                        width: ManageDeviceInfo.resolutionWidth * 0.6,
+                        child: Text(
+                          'By: ${ModelComicDetailInfo.getInstance().creatorName}',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'Lato',
+                            fontWeight: FontWeight.bold,
+                            fontSize: ManageDeviceInfo.resolutionHeight * 0.02,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      ),
                     ),
-                  );
-                },
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5)),
-                highlightElevation: 1,
-                borderSide: BorderSide(color: Colors.orangeAccent),
-                child: Container(
-                  alignment: Alignment.center,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  ),
+                  Divider(),
+                  Container(
+                    height: ManageDeviceInfo.resolutionHeight * 0.05,
+                    width: ManageDeviceInfo.resolutionWidth * 0.8,
+                    child: OutlineButton(
+                      splashColor: Colors.orangeAccent,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ViewerScreen(
+                                ModelComicDetailInfo.getInstance().userId,
+                                ModelComicDetailInfo.getInstance().comicId,
+                                ModelPreset.convertCountIndex2CutImageId(0)),
+                          ),
+                        );
+                      },
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5)),
+                      highlightElevation: 1,
+                      borderSide: BorderSide(color: Colors.orangeAccent),
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(
+                              CupertinoIcons.book,
+                              color: Colors.deepOrangeAccent,
+                            ),
+                            SizedBox(
+                              width: ManageDeviceInfo.resolutionWidth * 0.02,
+                            ),
+                            Text(
+                              '처음부터 보기 ',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: 'Lato',
+                                fontWeight: FontWeight.bold,
+                                fontSize:
+                                    ManageDeviceInfo.resolutionHeight * 0.02,
+                                color: Colors.black87,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Divider(),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(
+                          ManageDeviceInfo.resolutionWidth * 0.02,
+                          0.0,
+                          0.0,
+                          0.0),
+                      child: SizedBox(
+                        width: ManageDeviceInfo.resolutionWidth * 0.8,
+                        child: Text(
+                          '줄거리',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontFamily: 'Lato',
+                            fontWeight: FontWeight.bold,
+                            fontSize: ManageDeviceInfo.resolutionHeight * 0.021,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                      Icon(
-                        CupertinoIcons.book,
-                        color: Colors.deepOrangeAccent,
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(
+                              0,
+                              ManageDeviceInfo.resolutionHeight * 0.010,
+                              0,
+                              ManageDeviceInfo.resolutionHeight * 0.015),
+                          child: SizedBox(
+                            width: ManageDeviceInfo.resolutionWidth * 0.8,
+                            child: Text(
+                              ModelComicDetailInfo.getInstance().explain,
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontFamily: 'Lato',
+                                fontWeight: FontWeight.normal,
+                                fontSize:
+                                    ManageDeviceInfo.resolutionHeight * 0.02,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
-                      SizedBox(
-                        width: ManageDeviceInfo.resolutionWidth * 0.02,
-                      ),
-                      Text(
-                        '처음부터 보기 ',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'Lato',
-                          fontWeight: FontWeight.bold,
-                          fontSize: ManageDeviceInfo.resolutionHeight * 0.02,
-                          color: Colors.black87,
+                      GestureDetector(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return BuildAlertDialog();
+                            },
+                          );
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Icon(
+                            CupertinoIcons.info,
+                            color: Colors.deepOrangeAccent,
+                          ),
                         ),
                       ),
                     ],
                   ),
-                ),
-              ),
-            ),
-            Divider(),
-            Container(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(
-                    ManageDeviceInfo.resolutionWidth * 0.02, 0.0, 0.0, 0.0),
-                child: SizedBox(
-                  width: ManageDeviceInfo.resolutionWidth * 0.8,
-                  child: Text(
-                    '줄거리',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontFamily: 'Lato',
-                      fontWeight: FontWeight.bold,
-                      fontSize: ManageDeviceInfo.resolutionHeight * 0.021,
-                      color: Colors.black87,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Container(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        0,
-                        ManageDeviceInfo.resolutionHeight * 0.010,
-                        0,
-                        ManageDeviceInfo.resolutionHeight * 0.015),
-                    child: SizedBox(
-                      width: ManageDeviceInfo.resolutionWidth * 0.8,
-                      child: Text(
-                        ModelComicDetailInfo.getInstance().explain,
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontFamily: 'Lato',
-                          fontWeight: FontWeight.normal,
-                          fontSize: ManageDeviceInfo.resolutionHeight * 0.02,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return BuildAlertDialog();
-                      },
-                    );
-                  },
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: Icon(
-                      CupertinoIcons.info,
-                      color: Colors.deepOrangeAccent,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Divider(),
-            Padding(
-              padding: EdgeInsets.only(top: ManageDeviceInfo.resolutionHeight * 0.00),
+                  Divider(),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: ManageDeviceInfo.resolutionHeight * 0.00),
 //              height: ManageDeviceInfo.resolutionHeight * 0.09,
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return BuildAlertDialog();
-                          },
-                        );
-                      },
-                      child: Column(
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          Container(
-                            alignment: Alignment.center,
-                            child: Icon(
-                              Icons.star_border,
-                              color: Colors.deepOrangeAccent,
+                          GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return BuildAlertDialog();
+                                },
+                              );
+                            },
+                            child: Column(
+                              children: <Widget>[
+                                Container(
+                                  alignment: Alignment.center,
+                                  child: Icon(
+                                    Icons.star_border,
+                                    color: Colors.deepOrangeAccent,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width:
+                                      ManageDeviceInfo.resolutionWidth * 0.015,
+                                ),
+                                Container(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    '평가하기',
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontFamily: 'Lato',
+                                      fontWeight: FontWeight.normal,
+                                      fontSize:
+                                          ManageDeviceInfo.resolutionHeight *
+                                              0.017,
+                                      color: Colors.black87,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          SizedBox(
-                            width: ManageDeviceInfo.resolutionWidth * 0.015,
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            child: Text(
-                              '평가하기',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: 'Lato',
-                                fontWeight: FontWeight.normal,
-                                fontSize:
-                                    ManageDeviceInfo.resolutionHeight * 0.017,
-                                color: Colors.black87,
-                              ),
+                          GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return BuildAlertDialog();
+                                },
+                              );
+                            },
+                            child: Column(
+                              children: <Widget>[
+                                Container(
+                                  alignment: Alignment.center,
+                                  child: Icon(
+                                    CupertinoIcons.add_circled,
+                                    color: Colors.deepOrangeAccent,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width:
+                                      ManageDeviceInfo.resolutionWidth * 0.015,
+                                ),
+                                Container(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    '나중에 보기',
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontFamily: 'Lato',
+                                      fontWeight: FontWeight.normal,
+                                      fontSize:
+                                          ManageDeviceInfo.resolutionHeight *
+                                              0.017,
+                                      color: Colors.black87,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return BuildAlertDialog();
-                          },
-                        );
-                      },
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            alignment: Alignment.center,
-                            child: Icon(
-                              CupertinoIcons.add_circled,
-                              color: Colors.deepOrangeAccent,
+                          GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return BuildAlertDialog();
+                                },
+                              );
+                            },
+                            child: Column(
+                              children: <Widget>[
+                                Container(
+                                  alignment: Alignment.center,
+                                  child: Icon(
+                                    CupertinoIcons.share,
+                                    color: Colors.deepOrangeAccent,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width:
+                                      ManageDeviceInfo.resolutionWidth * 0.015,
+                                ),
+                                Container(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    '공유하기',
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontFamily: 'Lato',
+                                      fontWeight: FontWeight.normal,
+                                      fontSize:
+                                          ManageDeviceInfo.resolutionHeight *
+                                              0.017,
+                                      color: Colors.black87,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          SizedBox(
-                            width: ManageDeviceInfo.resolutionWidth * 0.015,
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            child: Text(
-                              '나중에 보기',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: 'Lato',
-                                fontWeight: FontWeight.normal,
-                                fontSize:
-                                    ManageDeviceInfo.resolutionHeight * 0.017,
-                                color: Colors.black87,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return BuildAlertDialog();
-                          },
-                        );
-                      },
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            alignment: Alignment.center,
-                            child: Icon(
-                              CupertinoIcons.share,
-                              color: Colors.deepOrangeAccent,
-                            ),
-                          ),
-                          SizedBox(
-                            width: ManageDeviceInfo.resolutionWidth * 0.015,
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            child: Text(
-                              '공유하기',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: 'Lato',
-                                fontWeight: FontWeight.normal,
-                                fontSize:
-                                    ManageDeviceInfo.resolutionHeight * 0.017,
-                                color: Colors.black87,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ]),
-            ),
-            Divider(
-            ),
+                        ]),
+                  ),
+                  Divider(),
 
 //            SizedBox(
 //              height: ManageDeviceInfo.resolutionHeight * 0.005,
 //            ),
-            Container(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(
-                    ManageDeviceInfo.resolutionWidth * 0.02, 0.0, 0.0, 0.0),
-                child: SizedBox(
-                  width: ManageDeviceInfo.resolutionWidth * 0.8,
-                  child: ModelComicDetailInfo.getInstance()
-                              .modelComicInfoList ==
-                          null
-                      ? Text(
-                          'Episodes( 0 )',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontFamily: 'Lato',
-                            fontWeight: FontWeight.bold,
-                            fontSize: ManageDeviceInfo.resolutionHeight * 0.021,
-                            color: Colors.black87,
-                          ),
-                        )
-                      : Text(
-                          'Episodes( ${ModelComicDetailInfo.getInstance().modelComicInfoList.length} )',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontFamily: 'Lato',
-                            fontWeight: FontWeight.bold,
-                            fontSize: ManageDeviceInfo.resolutionHeight * 0.021,
-                            color: Colors.black87,
-                          ),
-                        ),
-                ),
-              ),
-            ),
-            FutureBuilder<ModelComicDetailInfo>(
-              future: c2sComicDetailInfo.fetchBytes(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData)
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(
-                          height: ManageDeviceInfo.resolutionHeight * .25,
-                          child: Center(child: LoadingIndicator()),
-                        ),
-                      ],
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(
+                          ManageDeviceInfo.resolutionWidth * 0.02,
+                          0.0,
+                          0.0,
+                          0.0),
+                      child: SizedBox(
+                        width: ManageDeviceInfo.resolutionWidth * 0.8,
+                        child: ModelComicDetailInfo.getInstance()
+                                    .modelComicInfoList ==
+                                null
+                            ? Text(
+                                'Episodes( 0 )',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontFamily: 'Lato',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize:
+                                      ManageDeviceInfo.resolutionHeight * 0.021,
+                                  color: Colors.black87,
+                                ),
+                              )
+                            : Text(
+                                'Episodes( ${ModelComicDetailInfo.getInstance().modelComicInfoList.length} )',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontFamily: 'Lato',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize:
+                                      ManageDeviceInfo.resolutionHeight * 0.021,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                      ),
                     ),
-                  );
-                {
-                  return ListView.separated(
-                    separatorBuilder: (BuildContext context, index) => Divider(height: ManageDeviceInfo.resolutionHeight * 0.001,),
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    physics: BouncingScrollPhysics(),
-                    itemCount: ModelComicDetailInfo.getInstance()
-                        .modelComicInfoList
-                        .length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
+                  ),
+                  FutureBuilder<ModelComicDetailInfo>(
+                    future: c2sComicDetailInfo.fetchBytes(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData)
+                        return Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              SizedBox(
+                                height: ManageDeviceInfo.resolutionHeight * .25,
+                                child: Center(child: LoadingIndicator()),
+                              ),
+                            ],
+                          ),
+                        );
+                      {
+                        return ListView.separated(
+                          separatorBuilder: (BuildContext context, index) =>
+                              Divider(
+                            height: ManageDeviceInfo.resolutionHeight * 0.001,
+                          ),
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          physics: BouncingScrollPhysics(),
+                          itemCount: ModelComicDetailInfo.getInstance()
+                              .modelComicInfoList
+                              .length,
+                          itemBuilder: (context, index) {
+                            return Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Container(
+                                  padding: EdgeInsets.only(
+                                      left: ManageDeviceInfo.resolutionWidth *
+                                          0.1),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Flexible(
+                                        flex: 3,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ViewerScreen(
+                                                  ModelComicDetailInfo
+                                                          .getInstance()
+                                                      .userId,
+                                                  ModelComicDetailInfo
+                                                          .getInstance()
+                                                      .comicId,
+                                                  ModelPreset
+                                                      .convertCountIndex2CutImageId(
+                                                          index),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          child: CachedNetworkImage(
+                                            imageUrl: ModelComicDetailInfo
+                                                    .getInstance()
+                                                .modelComicInfoList[index]
+                                                .thumbnailImageUrl,
+                                            placeholder: (context, url) =>
+                                                LoadingIndicator(),
+                                            width: ManageDeviceInfo
+                                                    .resolutionWidth *
+                                                0.22,
+                                            height: ManageDeviceInfo
+                                                    .resolutionHeight *
+                                                0.17,
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ),
+                                      ),
+                                      Flexible(
+                                        flex: 6,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ViewerScreen(
+                                                  ModelComicDetailInfo
+                                                          .getInstance()
+                                                      .userId,
+                                                  ModelComicDetailInfo
+                                                          .getInstance()
+                                                      .comicId,
+                                                  ModelPreset
+                                                      .convertCountIndex2CutImageId(
+                                                          index),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          child: Container(
+                                              width: ManageDeviceInfo
+                                                      .resolutionWidth *
+                                                  0.5,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.end,
+                                                children: <Widget>[
+                                                  Container(
+                                                    alignment:
+                                                        Alignment.bottomLeft,
+                                                    padding: EdgeInsets.only(
+                                                        left: ManageDeviceInfo
+                                                                .resolutionWidth *
+                                                            0.04),
+                                                    child: Text(
+                                                        '${ModelComicDetailInfo.getInstance().modelComicInfoList[index].episode}화',
+                                                        maxLines: 2,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        style: TextStyle(
+                                                          fontFamily: 'Lato',
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          fontSize: ManageDeviceInfo
+                                                                  .resolutionHeight *
+                                                              0.016,
+                                                          color: Colors.black87,
+                                                        )),
+                                                  ),
+                                                  Container(
+                                                    alignment:
+                                                        Alignment.bottomLeft,
+                                                    padding: EdgeInsets.only(
+                                                        left: ManageDeviceInfo
+                                                                .resolutionWidth *
+                                                            0.04),
+                                                    child: Text(
+                                                        '${ModelComicDetailInfo.getInstance().modelComicInfoList[index].subTitleName}',
+                                                        maxLines: 2,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        style: TextStyle(
+                                                          fontFamily: 'Lato',
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          fontSize: ManageDeviceInfo
+                                                                  .resolutionHeight *
+                                                              0.016,
+                                                          color: Colors.black87,
+                                                        )),
+                                                  ),
+                                                ],
+                                              )),
+                                        ),
+                                      ),
+                                      Spacer(
+                                        flex: 1,
+                                      ),
+                                      Flexible(
+                                        flex: 1,
+                                        child: Container(
+                                          child: IconButton(
+                                            icon: Icon(
+                                              Icons.file_download,
+                                              color: Colors.black54,
+                                            ),
+                                            onPressed: () {
+                                              showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return BuildAlertDialog();
+                                                },
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Divider(),
+                              ],
+                            );
+                          },
+                        );
+                      }
+                    },
+                  ),
+                ],
+              ),
+      ),
+    );
+  }
+}
+
+/*ListTile(
                         leading: GestureDetector(
                           onTap: () {
                             Navigator.push(
@@ -589,15 +775,4 @@ class _DetailPageState extends State<DetailPage> {
                         ),
                         contentPadding: EdgeInsets.symmetric(
                             vertical: ManageDeviceInfo.resolutionHeight * 0.013, horizontal: ManageDeviceInfo.resolutionWidth * 0.025),
-                      );
-                    },
-                  );
-                }
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+                      );*/
