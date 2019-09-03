@@ -131,7 +131,9 @@ class _ViewerScreen extends State<ViewerScreen> with WidgetsBindingObserver {
                             footer: new Text(
                               "Loading images...",
                               style: new TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 17.0),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize:
+                                      ManageDeviceInfo.resolutionHeight * 0.02),
                             ),
                             circularStrokeCap: CircularStrokeCap.round,
                             progressColor: Colors.redAccent,
