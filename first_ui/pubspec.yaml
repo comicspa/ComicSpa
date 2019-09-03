@@ -41,7 +41,7 @@ dependencies:
   webview_flutter: ^0.3.13
   auto_size_text: ^2.1.0
   percent_indicator: ^2.1.1+1
-
+  package_info: ^0.4.0+6
 
 dev_dependencies:
   flutter_test:

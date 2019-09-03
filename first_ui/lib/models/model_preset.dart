@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:package_info/package_info.dart';
 
 import 'package:first_ui/models/model_common.dart';
 import 'package:first_ui/manage/manage_firebase_storage.dart';
@@ -48,6 +49,15 @@ class ModelPreset
     String version = presetMap['version'];
     print('current version : $version , app version : $__version');
 
+    PackageInfo.fromPlatform().then((PackageInfo packageInfo)
+    {
+      String appName = packageInfo.appName;
+      String packageName = packageInfo.packageName;
+      String version = packageInfo.version;
+      String buildNumber = packageInfo.buildNumber;
+
+      print('package version : $version , package buildNumber : $buildNumber');
+    });
     if(0 != version.compareTo(__version))
       return false;
 
