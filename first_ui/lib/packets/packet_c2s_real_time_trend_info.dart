@@ -34,6 +34,7 @@ class PacketC2SRealTimeTrendInfo extends PacketC2SCommon
     if(null != ModelRealTimeTrendInfo.list)
       return ModelRealTimeTrendInfo.list;
 
+    try {
     Socket socket = await ModelCommon.createServiceSocket();
     print('connected server');
 
@@ -59,9 +60,10 @@ class PacketC2SRealTimeTrendInfo extends PacketC2SCommon
 
         PacketS2CRealTimeTrendInfo packet = new PacketS2CRealTimeTrendInfo();
         packet.parseBytes(packetSize,byteData);
+        return ModelRealTimeTrendInfo.list;
       }
 
-      return ModelRealTimeTrendInfo.list;
+      return null;
     });
 
     int packetBodySize  = 4 + 4;
@@ -75,8 +77,11 @@ class PacketC2SRealTimeTrendInfo extends PacketC2SCommon
     // wait 5 seconds
     await Future.delayed(Duration(seconds: 5));
     socket.close();
+    } catch(exception, stackTrace) {
+      print(exception);
+    }
 
-    return ModelRealTimeTrendInfo.list;
+    return null;
   }
 
 

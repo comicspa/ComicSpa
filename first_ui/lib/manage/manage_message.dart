@@ -1,14 +1,28 @@
 import 'dart:async';
 
+import 'package:first_ui/models/model_featured_comic_info.dart';
+import 'package:first_ui/models/model_recommended_comic_info.dart';
+import 'package:first_ui/models/model_my_locker_comic_owned.dart';
+import 'package:first_ui/models/model_my_locker_comic_view_list.dart';
+import 'package:first_ui/models/model_my_locker_comic_continue.dart';
+import 'package:first_ui/models/model_my_locker_comic_recent.dart';
+import 'package:first_ui/models/model_new_comic_info.dart';
+import 'package:first_ui/models/model_real_time_trend_info.dart';
+import 'package:first_ui/models/model_weekly_popular_comic_info.dart';
+import 'package:first_ui/models/today_popular_comic_info.dart';
+
 import 'package:first_ui/packets/packet_common.dart';
 import "package:first_ui/packets/packet_c2s_common.dart";
 import 'package:first_ui/packets/packet_c2s_recommended_comic_info.dart';
-import 'package:first_ui/packets/packet_s2c_recommended_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_featured_comic_info.dart';
-import 'package:first_ui/packets/packet_s2c_featured_comic_info.dart';
-
-import 'package:first_ui/models/model_featured_comic_info.dart';
-import 'package:first_ui/models/model_recommended_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_real_time_trend_info.dart';
+import 'package:first_ui/packets/packet_c2s_new_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_today_popular_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_weekly_popular_comic_info.dart';
+import 'package:first_ui/packets/packet_c2s_my_locker_comic_recent.dart';
+import 'package:first_ui/packets/packet_c2s_my_locker_comic_view_list.dart';
+import 'package:first_ui/packets/packet_c2s_my_locker_comic_owned.dart';
+import 'package:first_ui/packets/packet_c2s_my_locker_comic_continue.dart';
 
 
 class ManageMessage
@@ -31,6 +45,16 @@ class ManageMessage
     const duration = const Duration(seconds:__LOOP_SECOND);
     if(null == __timer)
       __timer = new Timer.periodic(duration, update);
+  }
+
+  static void dispose()
+  {
+    if(null != __streamController)
+    {
+      if(false == __streamController.isClosed)
+        __streamController.close();
+      __streamController = null;
+    }
   }
 
   static void add(PacketC2SCommon packetC2SCommon)
@@ -58,7 +82,7 @@ class ManageMessage
             print('Task Done');
             //print('Task Done - size :  ${ModelFeaturedComicInfo.list.length}');
 
-            //__streamController.add(e_packet_type.c2s_featured_comic_info);
+            __streamController.add(packetC2SCommon.type);
 
           }, onError: (error) {
             print("Some Error");
@@ -84,6 +108,7 @@ class ManageMessage
           }, onDone: () {
             print("Task Done");
 
+            __streamController.add(packetC2SCommon.type);
 
           }, onError: (error) {
             print("Some Error");
@@ -95,6 +120,203 @@ class ManageMessage
         }
         break;
 
+      case e_packet_type.c2s_real_time_trend_info:
+        {
+          PacketC2SRealTimeTrendInfo packet = packetC2SCommon as PacketC2SRealTimeTrendInfo;
+
+          print("Creating a stream...");
+          Stream<List<ModelRealTimeTrendInfo>> stream = new Stream.fromFuture(packet.fetchBytes());
+          print("Created the stream");
+
+          stream.listen((data) {
+            //print('DataReceived - size :  ${data.size}');
+            print('DataReceived');
+          }, onDone: () {
+            print("Task Done");
+
+            __streamController.add(packetC2SCommon.type);
+
+          }, onError: (error) {
+            print("Some Error");
+
+
+          });
+        }
+        break;
+
+
+      case e_packet_type.c2s_new_comic_info:
+        {
+          PacketC2SNewComicInfo packet = packetC2SCommon as PacketC2SNewComicInfo;
+
+          print("Creating a stream...");
+          Stream<List<ModelNewComicInfo>> stream = new Stream.fromFuture(packet.fetchBytes());
+          print("Created the stream");
+
+          stream.listen((data) {
+            //print('DataReceived - size :  ${data.size}');
+            print('DataReceived');
+          }, onDone: () {
+            print("Task Done");
+
+            __streamController.add(packetC2SCommon.type);
+
+          }, onError: (error) {
+            print("Some Error");
+
+
+          });
+        }
+        break;
+
+
+      case e_packet_type.c2s_today_popular_comic_info:
+        {
+          PacketC2STodayPopularComicInfo packet = packetC2SCommon as PacketC2STodayPopularComicInfo;
+
+          print("Creating a stream...");
+          Stream<List<TodayPopularComicInfo>> stream = new Stream.fromFuture(packet.fetchBytes());
+          print("Created the stream");
+
+          stream.listen((data) {
+            //print('DataReceived - size :  ${data.size}');
+            print('DataReceived');
+          }, onDone: () {
+            print("Task Done");
+
+            __streamController.add(packetC2SCommon.type);
+
+          }, onError: (error) {
+            print("Some Error");
+
+
+          });
+        }
+        break;
+
+
+      case e_packet_type.c2s_weekly_popular_comic_info:
+        {
+          PacketC2SWeeklyPopularComicInfo packet = packetC2SCommon as PacketC2SWeeklyPopularComicInfo;
+
+          print("Creating a stream...");
+          Stream<List<ModelWeeklyPopularComicInfo>> stream = new Stream.fromFuture(packet.fetchBytes());
+          print("Created the stream");
+
+          stream.listen((data) {
+            //print('DataReceived - size :  ${data.size}');
+            print('DataReceived');
+          }, onDone: () {
+            print("Task Done");
+
+            __streamController.add(packetC2SCommon.type);
+
+          }, onError: (error) {
+            print("Some Error");
+
+
+          });
+        }
+        break;
+
+
+      case e_packet_type.c2s_my_locker_comic_recent:
+        {
+          PacketC2SMyLockerComicRecent packet = packetC2SCommon as PacketC2SMyLockerComicRecent;
+
+          print("Creating a stream...");
+          Stream<List<ModelMyLockerComicRecent>> stream = new Stream.fromFuture(packet.fetchBytes());
+          print("Created the stream");
+
+          stream.listen((data) {
+            //print('DataReceived - size :  ${data.size}');
+            print('DataReceived');
+          }, onDone: () {
+            print("Task Done");
+
+            __streamController.add(packetC2SCommon.type);
+
+          }, onError: (error) {
+            print("Some Error");
+
+
+          });
+        }
+        break;
+
+
+      case e_packet_type.c2s_my_locker_comic_check_out:
+        {
+          PacketC2SMyLockerComicViewList packet = packetC2SCommon as PacketC2SMyLockerComicViewList;
+
+          print("Creating a stream...");
+          Stream<List<ModelMyLockerComicViewList>> stream = new Stream.fromFuture(packet.fetchBytes());
+          print("Created the stream");
+
+          stream.listen((data) {
+            //print('DataReceived - size :  ${data.size}');
+            print('DataReceived');
+          }, onDone: () {
+            print("Task Done");
+
+            __streamController.add(packetC2SCommon.type);
+
+          }, onError: (error) {
+            print("Some Error");
+
+
+          });
+        }
+        break;
+
+      case e_packet_type.c2s_my_locker_comic_owned:
+        {
+          PacketC2SMyLockerComicOwned packet = packetC2SCommon as PacketC2SMyLockerComicOwned;
+
+          print("Creating a stream...");
+          Stream<List<ModelMyLockerComicOwned>> stream = new Stream.fromFuture(packet.fetchBytes());
+          print("Created the stream");
+
+          stream.listen((data) {
+            //print('DataReceived - size :  ${data.size}');
+            print('DataReceived');
+          }, onDone: () {
+            print("Task Done");
+
+            __streamController.add(packetC2SCommon.type);
+
+          }, onError: (error) {
+            print("Some Error");
+
+
+          });
+        }
+        break;
+
+
+      case e_packet_type.c2s_my_locker_comic_continue:
+        {
+          PacketC2SMyLockerComicContinue packet = packetC2SCommon as PacketC2SMyLockerComicContinue;
+
+          print("Creating a stream...");
+          Stream<List<ModelMyLockerComicContinue>> stream = new Stream.fromFuture(packet.fetchBytes());
+          print("Created the stream");
+
+          stream.listen((data) {
+            //print('DataReceived - size :  ${data.size}');
+            print('DataReceived');
+          }, onDone: () {
+            print("Task Done");
+
+            __streamController.add(packetC2SCommon.type);
+
+          }, onError: (error) {
+            print("Some Error");
+
+
+          });
+        }
+        break;
 
       default:
         break;
@@ -129,7 +351,7 @@ class ManageMessage
                     print('DataReceived');
                   }, onDone: () {
                     print("Task Done");
-                    __streamController.add(e_packet_type.c2s_featured_comic_info);
+                    __streamController.add(packetC2SCommon.type);
 
                   }, onError: (error) {
                     print("Some Error");
@@ -152,7 +374,7 @@ class ManageMessage
                     print('DataReceived');
                   }, onDone: () {
                     print("Task Done");
-                    __streamController.add(e_packet_type.c2s_recommended_comic_info);
+                    __streamController.add(packetC2SCommon.type);
 
                   }, onError: (error) {
                     print("Some Error");
@@ -162,6 +384,218 @@ class ManageMessage
                 }
                 break;
 
+              case e_packet_type.c2s_real_time_trend_info:
+                {
+                  PacketC2SRealTimeTrendInfo packet = packetC2SCommon as PacketC2SRealTimeTrendInfo;
+
+                  print("Creating a stream...");
+                  Stream<List<ModelRealTimeTrendInfo>> stream = new Stream.fromFuture(packet.fetchBytes());
+                  print("Created the stream");
+
+                  stream.listen((data) {
+                    //print('DataReceived - size :  ${data.size}');
+                    print('DataReceived');
+                  }, onDone: () {
+                    print("Task Done");
+
+                    __streamController.add(packetC2SCommon.type);
+
+                  }, onError: (error) {
+                    print("Some Error");
+
+
+                  });
+
+                  __messageList.removeAt(0);
+                }
+                break;
+
+
+              case e_packet_type.c2s_new_comic_info:
+                {
+                  PacketC2SNewComicInfo packet = packetC2SCommon as PacketC2SNewComicInfo;
+
+                  print("Creating a stream...");
+                  Stream<List<ModelNewComicInfo>> stream = new Stream.fromFuture(packet.fetchBytes());
+                  print("Created the stream");
+
+                  stream.listen((data) {
+                    //print('DataReceived - size :  ${data.size}');
+                    print('DataReceived');
+                  }, onDone: () {
+                    print("Task Done");
+
+                    __streamController.add(packetC2SCommon.type);
+
+                  }, onError: (error) {
+                    print("Some Error");
+
+
+                  });
+
+                  __messageList.removeAt(0);
+                }
+                break;
+
+
+              case e_packet_type.c2s_today_popular_comic_info:
+                {
+                  PacketC2STodayPopularComicInfo packet = packetC2SCommon as PacketC2STodayPopularComicInfo;
+
+                  print("Creating a stream...");
+                  Stream<List<TodayPopularComicInfo>> stream = new Stream.fromFuture(packet.fetchBytes());
+                  print("Created the stream");
+
+                  stream.listen((data) {
+                    //print('DataReceived - size :  ${data.size}');
+                    print('DataReceived');
+                  }, onDone: () {
+                    print("Task Done");
+
+                    __streamController.add(packetC2SCommon.type);
+
+                  }, onError: (error) {
+                    print("Some Error");
+
+
+                  });
+
+                  __messageList.removeAt(0);
+                }
+                break;
+
+
+              case e_packet_type.c2s_weekly_popular_comic_info:
+                {
+                  PacketC2SWeeklyPopularComicInfo packet = packetC2SCommon as PacketC2SWeeklyPopularComicInfo;
+
+                  print("Creating a stream...");
+                  Stream<List<ModelWeeklyPopularComicInfo>> stream = new Stream.fromFuture(packet.fetchBytes());
+                  print("Created the stream");
+
+                  stream.listen((data) {
+                    //print('DataReceived - size :  ${data.size}');
+                    print('DataReceived');
+                  }, onDone: () {
+                    print("Task Done");
+
+                    __streamController.add(packetC2SCommon.type);
+
+                  }, onError: (error) {
+                    print("Some Error");
+
+
+                  });
+
+                  __messageList.removeAt(0);
+                }
+                break;
+
+
+              case e_packet_type.c2s_my_locker_comic_recent:
+                {
+                  PacketC2SMyLockerComicRecent packet = packetC2SCommon as PacketC2SMyLockerComicRecent;
+
+                  print("Creating a stream...");
+                  Stream<List<ModelMyLockerComicRecent>> stream = new Stream.fromFuture(packet.fetchBytes());
+                  print("Created the stream");
+
+                  stream.listen((data) {
+                    //print('DataReceived - size :  ${data.size}');
+                    print('DataReceived');
+                  }, onDone: () {
+                    print("Task Done");
+
+                    __streamController.add(packetC2SCommon.type);
+
+                  }, onError: (error) {
+                    print("Some Error");
+
+
+                  });
+
+                  __messageList.removeAt(0);
+                }
+                break;
+
+
+              case e_packet_type.c2s_my_locker_comic_check_out:
+                {
+                  PacketC2SMyLockerComicViewList packet = packetC2SCommon as PacketC2SMyLockerComicViewList;
+
+                  print("Creating a stream...");
+                  Stream<List<ModelMyLockerComicViewList>> stream = new Stream.fromFuture(packet.fetchBytes());
+                  print("Created the stream");
+
+                  stream.listen((data) {
+                    //print('DataReceived - size :  ${data.size}');
+                    print('DataReceived');
+                  }, onDone: () {
+                    print("Task Done");
+
+                    __streamController.add(packetC2SCommon.type);
+
+                  }, onError: (error) {
+                    print("Some Error");
+
+
+                  });
+
+                  __messageList.removeAt(0);
+                }
+                break;
+
+              case e_packet_type.c2s_my_locker_comic_owned:
+                {
+                  PacketC2SMyLockerComicOwned packet = packetC2SCommon as PacketC2SMyLockerComicOwned;
+
+                  print("Creating a stream...");
+                  Stream<List<ModelMyLockerComicOwned>> stream = new Stream.fromFuture(packet.fetchBytes());
+                  print("Created the stream");
+
+                  stream.listen((data) {
+                    //print('DataReceived - size :  ${data.size}');
+                    print('DataReceived');
+                  }, onDone: () {
+                    print("Task Done");
+
+                    __streamController.add(packetC2SCommon.type);
+
+                  }, onError: (error) {
+                    print("Some Error");
+
+
+                  });
+
+                  __messageList.removeAt(0);
+                }
+                break;
+
+
+              case e_packet_type.c2s_my_locker_comic_continue:
+                {
+                  PacketC2SMyLockerComicContinue packet = packetC2SCommon as PacketC2SMyLockerComicContinue;
+
+                  print("Creating a stream...");
+                  Stream<List<ModelMyLockerComicContinue>> stream = new Stream.fromFuture(packet.fetchBytes());
+                  print("Created the stream");
+
+                  stream.listen((data) {
+                    //print('DataReceived - size :  ${data.size}');
+                    print('DataReceived');
+                  }, onDone: () {
+                    print("Task Done");
+
+                    __streamController.add(packetC2SCommon.type);
+
+                  }, onError: (error) {
+                    print("Some Error");
+
+                  });
+
+                  __messageList.removeAt(0);
+                }
+                break;
 
               default:
                 break;
@@ -174,7 +608,7 @@ class ManageMessage
       }
 
 
-    print('finish current time : ${timer.tick}');
+    //print('finish current time : ${timer.tick}');
 
   }
 

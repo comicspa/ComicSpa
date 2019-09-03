@@ -31,10 +31,10 @@ class PacketC2SFeaturedComicInfo extends PacketC2SCommon
   {
     print('PacketC2SFeaturedComicInfo : fetchBytes started');
 
-    try {
     if(null != ModelFeaturedComicInfo.list)
        return ModelFeaturedComicInfo.list;
 
+    try {
     Socket socket = await ModelCommon.createServiceSocket();
     print('connected server');
 

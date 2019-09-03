@@ -34,6 +34,7 @@ class PacketC2SRecommendedComicInfo extends PacketC2SCommon
     if(null != ModelRecommendedComicInfo.list)
       return ModelRecommendedComicInfo.list;
 
+    try {
     Socket socket = await ModelCommon.createServiceSocket();
     print('connected server');
 
@@ -59,9 +60,10 @@ class PacketC2SRecommendedComicInfo extends PacketC2SCommon
 
         PacketS2CRecommendedComicInfo packet = new PacketS2CRecommendedComicInfo();
         packet.parseBytes(packetSize,byteData);
+        return ModelRecommendedComicInfo.list;
       }
 
-      return ModelRecommendedComicInfo.list;
+      return null;
     });
 
     int packetBodySize  = 4 + 4;
@@ -75,8 +77,11 @@ class PacketC2SRecommendedComicInfo extends PacketC2SCommon
     // wait 5 seconds
     await Future.delayed(Duration(seconds: 5));
     socket.close();
+    } catch(exception, stackTrace) {
+      print(exception);
+    }
 
-    return ModelRecommendedComicInfo.list;
+    return null;
   }
 
 
