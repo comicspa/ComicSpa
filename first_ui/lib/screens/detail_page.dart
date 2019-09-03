@@ -101,6 +101,7 @@ class _DetailPageState extends State<DetailPage> {
             : Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
+                  SizedBox(height: ManageDeviceInfo.resolutionHeight * 0.02,),
                   Container(
                     alignment: Alignment.center,
                     child: Padding(
@@ -112,9 +113,9 @@ class _DetailPageState extends State<DetailPage> {
                       child: CachedNetworkImage(
                         imageUrl: ModelComicDetailInfo.getInstance()
                             .representationImageUrl,
-                        width: ManageDeviceInfo.resolutionWidth * 0.325,
-                        height: ManageDeviceInfo.resolutionHeight * 0.275,
-                        fit: BoxFit.cover,
+                        width: ManageDeviceInfo.resolutionWidth * 0.375,
+                        height: ManageDeviceInfo.resolutionHeight * 0.245,
+                        fit: BoxFit.fill,
                       ),
                     ),
                   ),
@@ -123,9 +124,9 @@ class _DetailPageState extends State<DetailPage> {
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(
                           0,
-                          ManageDeviceInfo.resolutionHeight * 0.015,
+                          ManageDeviceInfo.resolutionHeight * 0.004,
                           0,
-                          ManageDeviceInfo.resolutionHeight * 0.003),
+                          ManageDeviceInfo.resolutionHeight * 0.002),
                       child: SizedBox(
                         width: ManageDeviceInfo.resolutionWidth * 0.6,
                         child: Text(
@@ -136,7 +137,7 @@ class _DetailPageState extends State<DetailPage> {
                           style: TextStyle(
                             fontFamily: 'Lato',
                             fontWeight: FontWeight.bold,
-                            fontSize: ManageDeviceInfo.resolutionHeight * 0.025,
+                            fontSize: ManageDeviceInfo.resolutionHeight * 0.024,
                             color: Colors.black87,
                           ),
                         ),
@@ -161,7 +162,7 @@ class _DetailPageState extends State<DetailPage> {
                           style: TextStyle(
                             fontFamily: 'Lato',
                             fontWeight: FontWeight.bold,
-                            fontSize: ManageDeviceInfo.resolutionHeight * 0.02,
+                            fontSize: ManageDeviceInfo.resolutionHeight * 0.020,
                             color: Colors.black87,
                           ),
                         ),
@@ -476,6 +477,7 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ),
                   ),
+                  SizedBox(height: ManageDeviceInfo.resolutionHeight * 0.02,),
                   FutureBuilder<ModelComicDetailInfo>(
                     future: c2sComicDetailInfo.fetchBytes(),
                     builder: (context, snapshot) {
@@ -495,7 +497,7 @@ class _DetailPageState extends State<DetailPage> {
                         return ListView.separated(
                           separatorBuilder: (BuildContext context, index) =>
                               Divider(
-                            height: ManageDeviceInfo.resolutionHeight * 0.001,
+                            height: ManageDeviceInfo.resolutionHeight * 0.004,
                           ),
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
@@ -510,12 +512,12 @@ class _DetailPageState extends State<DetailPage> {
                                 Container(
                                   padding: EdgeInsets.only(
                                       left: ManageDeviceInfo.resolutionWidth *
-                                          0.1),
+                                          0.05),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Flexible(
-                                        flex: 3,
+                                        flex: 4,
                                         child: GestureDetector(
                                           onTap: () {
                                             Navigator.push(
@@ -545,10 +547,10 @@ class _DetailPageState extends State<DetailPage> {
                                                 LoadingIndicator(),
                                             width: ManageDeviceInfo
                                                     .resolutionWidth *
-                                                0.22,
+                                                0.26,
                                             height: ManageDeviceInfo
                                                     .resolutionHeight *
-                                                0.17,
+                                                0.16,
                                             fit: BoxFit.fill,
                                           ),
                                         ),
@@ -603,7 +605,7 @@ class _DetailPageState extends State<DetailPage> {
                                                               FontWeight.normal,
                                                           fontSize: ManageDeviceInfo
                                                                   .resolutionHeight *
-                                                              0.016,
+                                                              0.025,
                                                           color: Colors.black87,
                                                         )),
                                                   ),
@@ -627,7 +629,7 @@ class _DetailPageState extends State<DetailPage> {
                                                               FontWeight.normal,
                                                           fontSize: ManageDeviceInfo
                                                                   .resolutionHeight *
-                                                              0.016,
+                                                              0.02,
                                                           color: Colors.black87,
                                                         )),
                                                   ),
@@ -639,7 +641,7 @@ class _DetailPageState extends State<DetailPage> {
                                         flex: 1,
                                       ),
                                       Flexible(
-                                        flex: 1,
+                                        flex: 2,
                                         child: Container(
                                           child: IconButton(
                                             icon: Icon(
@@ -661,7 +663,6 @@ class _DetailPageState extends State<DetailPage> {
                                     ],
                                   ),
                                 ),
-                                Divider(),
                               ],
                             );
                           },
