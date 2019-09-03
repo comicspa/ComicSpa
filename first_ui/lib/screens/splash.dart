@@ -22,6 +22,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen>
     with WidgetsBindingObserver {
   List<PacketC2SCommon> _packetList;
+  bool _checkAppVersion = false;
 
   @override
   void initState() {
@@ -43,9 +44,9 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   void _presetFetchDone(bool result) {
+    _checkAppVersion = result;
 
-    if(true == result)
-      navigationPage();
+    if (true == result) navigationPage();
   }
 
   void init() async {
@@ -101,56 +102,117 @@ class _SplashScreenState extends State<SplashScreen>
     ManageDeviceInfo.firstInitialize(context);
 
     return Scaffold(
-        body: Stack(
-      fit: StackFit.expand,
-      children: <Widget>[
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            //Color(0xff7c94b6),
-//                gradient: LinearGradient(
-//                  colors: [new Color(0xff7c94e6), new Color(0xff5c94b1)],
-//                  begin: Alignment.centerRight,
-//                  end: Alignment.bottomLeft,
-//                ),
-          ),
+      body: _checkAppVersion == false
+          ? BuildVersionConflictDialog()
+          : Stack(
+              fit: StackFit.expand,
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    //Color(0xff7c94b6),
+                    //                gradient: LinearGradient(
+                    //                  colors: [new Color(0xff7c94e6), new Color(0xff5c94b1)],
+                    //                  begin: Alignment.centerRight,
+                    //                  end: Alignment.bottomLeft,
+                    //                ),
+                  ),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SvgPicture.asset(
+                      'images/sparky_logo.svg',
+                      width: ManageDeviceInfo.resolutionWidth * 0.075,
+                      height: ManageDeviceInfo.resolutionHeight * 0.035,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.0),
+                    ),
+                    Text(
+                      'Bring Joys to Everyone',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: ManageDeviceInfo.resolutionHeight * 0.024),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          top: ManageDeviceInfo.resolutionHeight * 0.04),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: new LinearPercentIndicator(
+                        width: MediaQuery.of(context).size.width - 50,
+                        animation: true,
+                        lineHeight: 5.0,
+                        animationDuration: 2500,
+                        percent: 0.8,
+                        linearStrokeCap: LinearStrokeCap.roundAll,
+                        progressColor: Colors.redAccent,
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+    );
+  }
+}
+
+class BuildVersionConflictDialog extends StatelessWidget {
+  const BuildVersionConflictDialog({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('About'),
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          new BuildVersionText(),
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Theme.of(context).primaryColor,
+          child: const Text('Okay, got it!'),
         ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SvgPicture.asset(
-              'images/sparky_logo.svg',
-              width: ManageDeviceInfo.resolutionWidth * 0.075,
-              height: ManageDeviceInfo.resolutionHeight * 0.035,
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 10.0),
-            ),
-            Text(
-              'Bring Joys to Everyone',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: ManageDeviceInfo.resolutionHeight * 0.024),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                  top: ManageDeviceInfo.resolutionHeight * 0.04),
-            ),
-            Padding(
-              padding: EdgeInsets.all(15.0),
-              child: new LinearPercentIndicator(
-                width: MediaQuery.of(context).size.width - 50,
-                animation: true,
-                lineHeight: 5.0,
-                animationDuration: 2500,
-                percent: 0.8,
-                linearStrokeCap: LinearStrokeCap.roundAll,
-                progressColor: Colors.redAccent,
-              ),
-            ),
-          ],
-        )
       ],
-    ));
+    );
+  }
+}
+
+class BuildVersionText extends StatelessWidget {
+  const BuildVersionText({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RichText(
+      text: new TextSpan(
+        text: 'Current app is old version.\n\n',
+        style: const TextStyle(color: Colors.black87),
+        children: <TextSpan>[
+          const TextSpan(text: 'Please Update!'),
+          new TextSpan(
+            text: ' ',
+          ),
+          const TextSpan(
+            text: ' ',
+          ),
+          new TextSpan(
+            text: '- by Sparky Toons',
+          ),
+          const TextSpan(text: '.'),
+        ],
+      ),
+    );
   }
 }

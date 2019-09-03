@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
 import 'package:cached_network_image/cached_network_image.dart';
 
-
-
-
 class LoadingIndicator extends StatelessWidget {
   const LoadingIndicator({
     Key key,
@@ -18,9 +15,7 @@ class LoadingIndicator extends StatelessWidget {
         children: <Widget>[
           SizedBox(
             height: ManageDeviceInfo.resolutionHeight * .25,
-            child:  Center(
-                child: CircularProgressIndicator()
-            ),
+            child: Center(child: CircularProgressIndicator()),
           ),
         ],
       ),
@@ -28,8 +23,7 @@ class LoadingIndicator extends StatelessWidget {
   }
 }
 
-class BuildAlertDialog extends StatelessWidget
-{
+class BuildAlertDialog extends StatelessWidget {
   const BuildAlertDialog({
     Key key,
   }) : super(key: key);

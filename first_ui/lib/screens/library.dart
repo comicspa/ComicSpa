@@ -4,7 +4,7 @@ import 'package:first_ui/screens/common_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'detail_page.dart';
-import 'package:first_ui/manage/manage_device_info.dart'; // use this to make all the widget size responsive to the device size.
+import 'package:first_ui/manage/manage_device_info.dart'; // usegirt this to make all the widget size responsive to the device size.
 import 'package:first_ui/models/model_library_recent_comic_info.dart';
 import 'package:first_ui/packets/packet_c2s_library_recent_comic_info.dart';
 import 'package:first_ui/models/model_library_view_list_comic_info.dart';
@@ -20,7 +20,8 @@ class LibraryScreen extends StatefulWidget {
   _LibraryScreenState createState() => new _LibraryScreenState();
 }
 
-class _LibraryScreenState extends State<LibraryScreen>  with WidgetsBindingObserver{
+class _LibraryScreenState extends State<LibraryScreen>
+    with WidgetsBindingObserver {
   PacketC2SLibraryRecentComicInfo c2sLibraryRecentComicInfo =
       new PacketC2SLibraryRecentComicInfo();
   PacketC2SLibraryViewListComicInfo c2sMyLibraryViewListComicInfo =
@@ -52,11 +53,9 @@ class _LibraryScreenState extends State<LibraryScreen>  with WidgetsBindingObser
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state)
-  {
+  void didChangeAppLifecycleState(AppLifecycleState state) {
     print('state = $state');
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +135,9 @@ class _LibraryScreenState extends State<LibraryScreen>  with WidgetsBindingObser
                                                   Flexible(
                                                     flex: 3,
                                                     child: ClipRRect(
-                                                      borderRadius: BorderRadius.circular(3.0),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              3.0),
                                                       child: CachedNetworkImage(
                                                         imageUrl: snapshot
                                                             .data[index]
@@ -293,7 +294,8 @@ class _LibraryScreenState extends State<LibraryScreen>  with WidgetsBindingObser
                                     top: ManageDeviceInfo.resolutionHeight *
                                         0.04)),
                             FutureBuilder<List<ModelLibraryViewListComicInfo>>(
-                              future: c2sMyLibraryViewListComicInfo.fetchBytes(),
+                              future:
+                                  c2sMyLibraryViewListComicInfo.fetchBytes(),
                               builder: (BuildContext context, snapshot) {
                                 switch (snapshot.connectionState) {
                                   case ConnectionState.none:
@@ -332,7 +334,9 @@ class _LibraryScreenState extends State<LibraryScreen>  with WidgetsBindingObser
                                                   Flexible(
                                                     flex: 3,
                                                     child: ClipRRect(
-                                                      borderRadius: BorderRadius.circular(3.0),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              3.0),
                                                       child: CachedNetworkImage(
                                                         imageUrl: snapshot
                                                             .data[index]
@@ -509,8 +513,8 @@ class _LibraryScreenState extends State<LibraryScreen>  with WidgetsBindingObser
                                         physics: BouncingScrollPhysics(),
                                         shrinkWrap: true,
                                         scrollDirection: Axis.vertical,
-                                        itemCount:
-                                            ModelLibraryOwnedComicInfo.list.length,
+                                        itemCount: ModelLibraryOwnedComicInfo
+                                            .list.length,
                                         itemBuilder:
                                             (BuildContext context, int index) =>
                                                 Column(
@@ -528,7 +532,9 @@ class _LibraryScreenState extends State<LibraryScreen>  with WidgetsBindingObser
                                                   Flexible(
                                                     flex: 3,
                                                     child: ClipRRect(
-                                                      borderRadius: BorderRadius.circular(3.0),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              3.0),
                                                       child: CachedNetworkImage(
                                                         imageUrl: snapshot
                                                             .data[index]
@@ -724,7 +730,9 @@ class _LibraryScreenState extends State<LibraryScreen>  with WidgetsBindingObser
                                                   Flexible(
                                                     flex: 3,
                                                     child: ClipRRect(
-                                                      borderRadius: BorderRadius.circular(3.0),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              3.0),
                                                       child: CachedNetworkImage(
                                                         imageUrl: snapshot
                                                             .data[index]
