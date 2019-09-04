@@ -109,7 +109,7 @@ class _SplashScreenState extends State<SplashScreen>
     ManageDeviceInfo.firstInitialize(context);
 
     return Scaffold(
-      body: _enableAppVersion == false
+      body: _enableAppVersion == true
           ? BuildVersionConflictDialog()
           : Stack(
               fit: StackFit.expand,
