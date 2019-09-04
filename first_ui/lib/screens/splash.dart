@@ -23,7 +23,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen>
     with WidgetsBindingObserver {
   List<PacketC2SCommon> _packetList;
-  bool _enableAppVersion = false;
+  bool _enableAppVersion = true;
 
   @override
   void initState() {
@@ -109,7 +109,7 @@ class _SplashScreenState extends State<SplashScreen>
     ManageDeviceInfo.firstInitialize(context);
 
     return Scaffold(
-      body: _enableAppVersion == true
+      body: _enableAppVersion == false
           ? BuildVersionConflictDialog()
           : Stack(
               fit: StackFit.expand,
