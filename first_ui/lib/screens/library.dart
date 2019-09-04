@@ -66,7 +66,8 @@ class _LibraryScreenState extends State<LibraryScreen>
           Container(
             constraints: BoxConstraints.expand(height: 50),
             child: TabBar(
-                labelColor: Colors.black, //Color(0xFF5986E1),
+                labelColor: Colors.black,
+                //Color(0xFF5986E1),
                 labelStyle:
                     TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
                 indicatorWeight: 3,
@@ -149,8 +150,8 @@ class _LibraryScreenState extends State<LibraryScreen>
                                                                 .resolutionWidth *
                                                             0.25,
                                                         height: ManageDeviceInfo
-                                                                .resolutionHeight *
-                                                            0.16,
+                                                                .resolutionWidth *
+                                                            0.25,
                                                         fit: BoxFit.fill,
                                                       ),
                                                     ),
@@ -348,8 +349,8 @@ class _LibraryScreenState extends State<LibraryScreen>
                                                                 .resolutionWidth *
                                                             0.25,
                                                         height: ManageDeviceInfo
-                                                                .resolutionHeight *
-                                                            0.16,
+                                                                .resolutionWidth *
+                                                            0.25,
                                                         fit: BoxFit.fill,
                                                       ),
                                                     ),
@@ -546,8 +547,8 @@ class _LibraryScreenState extends State<LibraryScreen>
                                                                 .resolutionWidth *
                                                             0.25,
                                                         height: ManageDeviceInfo
-                                                                .resolutionHeight *
-                                                            0.16,
+                                                                .resolutionWidth *
+                                                            0.25,
                                                         fit: BoxFit.fill,
                                                       ),
                                                     ),
@@ -744,8 +745,8 @@ class _LibraryScreenState extends State<LibraryScreen>
                                                                 .resolutionWidth *
                                                             0.25,
                                                         height: ManageDeviceInfo
-                                                                .resolutionHeight *
-                                                            0.16,
+                                                                .resolutionWidth *
+                                                            0.25,
                                                         fit: BoxFit.fill,
                                                       ),
                                                     ),

@@ -44,43 +44,38 @@ class _SplashScreenState extends State<SplashScreen>
     print('state = $state');
   }
 
-  void _presetFetchDone(bool result)
-  {
+  void _presetFetchDone(bool result) {
     _enableAppVersion = result;
 
-    if (true == result)
-      {
-        ManageMessage.generate();
-        ManageMessage.streamController.stream.listen((data) {
-          print("DataReceived1: " + data.toString());
+    if (true == result) {
+      ManageMessage.generate();
+      ManageMessage.streamController.stream.listen((data) {
+        print("DataReceived1: " + data.toString());
 
-          _packetList.removeAt(0);
-          if (_packetList.length > 0) ManageMessage.add(_packetList[0]);
+        _packetList.removeAt(0);
+        if (_packetList.length > 0) ManageMessage.add(_packetList[0]);
 
-          if (data == e_packet_type.c2s_preset_library_info)
-            navigationPage();
-        }, onDone: () {
-          print("Task Done1");
-        }, onError: (error) {
-          print("Some Error1");
-        });
+        if (data == e_packet_type.c2s_preset_library_info) navigationPage();
+      }, onDone: () {
+        print("Task Done1");
+      }, onError: (error) {
+        print("Some Error1");
+      });
 
-        PacketC2SPresetComicInfo packetC2SPresetComicInfo =
-        new PacketC2SPresetComicInfo();
-        packetC2SPresetComicInfo.generate();
+      PacketC2SPresetComicInfo packetC2SPresetComicInfo =
+          new PacketC2SPresetComicInfo();
+      packetC2SPresetComicInfo.generate();
 
-        PacketC2SPresetLibraryInfo packetC2SPresetLibraryInfo =
-        new PacketC2SPresetLibraryInfo();
-        packetC2SPresetLibraryInfo.generate();
+      PacketC2SPresetLibraryInfo packetC2SPresetLibraryInfo =
+          new PacketC2SPresetLibraryInfo();
+      packetC2SPresetLibraryInfo.generate();
 
-        if (null == _packetList) _packetList = new List<PacketC2SCommon>();
-        _packetList.add(packetC2SPresetComicInfo);
-        _packetList.add(packetC2SPresetLibraryInfo);
+      if (null == _packetList) _packetList = new List<PacketC2SCommon>();
+      _packetList.add(packetC2SPresetComicInfo);
+      _packetList.add(packetC2SPresetLibraryInfo);
 
-        ManageMessage.add(_packetList[0]);
-
-
-      }
+      ManageMessage.add(_packetList[0]);
+    }
   }
 
   void navigationPage() {
@@ -100,18 +95,13 @@ class _SplashScreenState extends State<SplashScreen>
     }
   }
 
-  void applicationQuit()
-  {
-    if(Platform.isAndroid)
-      {
-        SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-        //SystemNavigator.pop();
-      }
-    else if(Platform.isIOS)
-      {
-        exit(0);
-      }
-
+  void applicationQuit() {
+    if (Platform.isAndroid) {
+      SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+      //SystemNavigator.pop();
+    } else if (Platform.isIOS) {
+      exit(0);
+    }
   }
 
   @override
